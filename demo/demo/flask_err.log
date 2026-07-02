@@ -1,0 +1,272 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.19.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [01/Jul/2026 23:05:18] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [01/Jul/2026 23:05:18] "GET /api/match_history?limit=30 HTTP/1.1" 500 -
+127.0.0.1 - - [01/Jul/2026 23:05:18] "GET /api/synonym_history?limit=20 HTTP/1.1" 500 -
+127.0.0.1 - - [01/Jul/2026 23:05:18] "GET /api/expansion_history?limit=20 HTTP/1.1" 500 -
+127.0.0.1 - - [01/Jul/2026 23:05:22] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:22] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:22] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:22] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+父节点不存在: category_id=2737, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2738, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2739, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2742, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2745, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2749, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=2752, parent_id=2736, 将作为根节点处理
+父节点不存在: category_id=5062, parent_id=5061, 将作为根节点处理
+父节点不存在: category_id=5063, parent_id=5061, 将作为根节点处理
+父节点不存在: category_id=5969, parent_id=5968, 将作为根节点处理
+父节点不存在: category_id=5970, parent_id=5968, 将作为根节点处理
+父节点不存在: category_id=7036, parent_id=7035, 将作为根节点处理
+父节点不存在: category_id=7037, parent_id=7035, 将作为根节点处理
+父节点不存在: category_id=7038, parent_id=7035, 将作为根节点处理
+父节点不存在: category_id=7180, parent_id=7179, 将作为根节点处理
+父节点不存在: category_id=7208, parent_id=7179, 将作为根节点处理
+父节点不存在: category_id=7213, parent_id=7179, 将作为根节点处理
+父节点不存在: category_id=7222, parent_id=7179, 将作为根节点处理
+父节点不存在: category_id=8902, parent_id=8901, 将作为根节点处理
+父节点不存在: category_id=8903, parent_id=8901, 将作为根节点处理
+父节点不存在: category_id=8904, parent_id=8901, 将作为根节点处理
+父节点不存在: category_id=8905, parent_id=8901, 将作为根节点处理
+父节点不存在: category_id=8906, parent_id=8901, 将作为根节点处理
+父节点不存在: category_id=8980, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8981, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8982, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8983, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8984, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8985, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8986, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8987, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8988, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8989, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8990, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=8991, parent_id=8979, 将作为根节点处理
+父节点不存在: category_id=12770, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12775, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12782, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12788, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12794, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12795, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12796, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=12799, parent_id=12769, 将作为根节点处理
+父节点不存在: category_id=14319, parent_id=14316, 将作为根节点处理
+127.0.0.1 - - [01/Jul/2026 23:05:24] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:24] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:26] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:27] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:27] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:27] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:27] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:30] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:30] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:30] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:30] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:30] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:35] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:35] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:35] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:35] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:35] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:51] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:52] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:52] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:52] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:05:52] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:01] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:02] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:02] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:02] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:02] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:08] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:08] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:08] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:08] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:09] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:11] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:11] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:11] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:11] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:11] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:24] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:24] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:24] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:24] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Jul/2026 23:06:24] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:21] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:21] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:21] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:21] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:21] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:35] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:36] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:36] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:36] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:55:36] "GET /api/stats HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 09:57:05] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:57:06] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:57:06] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:57:06] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:57:06] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 09:58:27] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:58:29] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:58:29] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:58:29] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 09:58:30] "GET /api/stats HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+192.168.206.231 - - [02/Jul/2026 09:58:56] "GET / HTTP/1.1" 200 -
+192.168.206.231 - - [02/Jul/2026 09:58:56] "GET /api/stats HTTP/1.1" 200 -
+192.168.206.231 - - [02/Jul/2026 09:58:56] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+192.168.206.231 - - [02/Jul/2026 09:58:56] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+192.168.206.231 - - [02/Jul/2026 09:58:56] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+192.168.206.231 - - [02/Jul/2026 09:58:58] "GET /favicon.ico HTTP/1.1" 404 -
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:00:02] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:02:46] "POST /api/match HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 10:02:47] "GET /api/match_history?limit=30 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 10:02:47] "GET /api/expansion_history?limit=20 HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 10:02:47] "GET /api/stats HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 10:02:47] "GET /api/synonym_history?limit=20 HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:03:58] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:05:15] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+127.0.0.1 - - [02/Jul/2026 10:06:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jul/2026 10:06:05] "GET /api/stats HTTP/1.1" 200 -
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:06:32] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:07:48] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:09:16] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:10:32] "POST /api/match HTTP/1.1" 200 -
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第1次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第2次): LLM调用3次均失败: Connection error.
+LLM调用失败(第1次): Connection error.
+LLM调用失败(第2次): Connection error.
+LLM调用失败(第3次): Connection error.
+多候选语义打分失败(第3次): LLM调用3次均失败: Connection error.
+127.0.0.1 - - [02/Jul/2026 10:11:55] "POST /api/match HTTP/1.1" 200 -

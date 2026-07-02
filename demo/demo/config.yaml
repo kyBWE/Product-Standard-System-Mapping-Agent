@@ -1,0 +1,45 @@
+database:
+  host: localhost
+  port: 5432
+  database: product_standard_mapping
+  user: postgres
+  password: ''
+  pool_size: 10
+llm:
+  api_key: sk-b7574e6edae94f088ecb3e8728ffee3c
+  base_url: https://api.deepseek.com/v1
+  model: deepseek-v4-flash
+  embedding_model: onnx
+  embedding_dimension: 512
+  max_retries: 3
+  timeout: 30
+  thinking_enabled: false
+match:
+  vector_weight: 0.6
+  trgm_weight: 0.4
+  coarse_weight: 0.4
+  llm_weight: 0.6
+  coarse_top_k: 10
+  trgm_threshold: 0.2
+  syn_confidence_threshold: 0.95
+  syn_trgm_threshold: 0.3
+  expand_confidence_threshold: 0.3
+  low_confidence_threshold: 0.5
+  enable_llm: true
+  page_index_force_llm_layers: false
+  enable_rerank: true
+  rerank_weight: 0.6
+data:
+  standard_system_file: 产品标准体系.xlsx
+  company_product_file: temp_company_product_0522_1.xlsx
+  output_dir: ./output
+logging:
+  level: INFO
+  log_dir: ./logs
+rerank:
+  api_key: sk-3c3345cfa6bc4ca093724db842fbe350
+  model: qwen3-rerank
+  top_n: 10
+  max_retries: 2
+  timeout: 30
+  instruct: 给定企业产品名称，判断其与标准分类名称及同义词的语义相关程度，用于产品到标准分类体系节点的精确映射匹配。

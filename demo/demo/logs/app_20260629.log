@@ -1,0 +1,19 @@
+[2026-06-29 20:45:39] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-29 20:45:41] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-29 20:46:22] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-29 20:46:22] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-29 20:46:52] [ERROR] [logger] [LoadData] 向量索引构建失败: couldn't get a connection after 30.00 sec
+[2026-06-29 20:47:22] [ERROR] [logger] [LoadData] 文本索引构建失败: couldn't get a connection after 30.00 sec
+[2026-06-29 20:47:22] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=False, page_index_status=True, skipped_rows=0, errors=["向量索引构建失败: couldn't get a connection after 30.00 sec", "文本索引构建失败: couldn't get a connection after 30.00 sec"])
+[2026-06-29 20:48:15] [ERROR] [logger] [LoadData] 数据库连接失败: 
+[2026-06-29 20:49:11] [ERROR] [logger] [LoadData] 数据库连接失败: 
+[2026-06-29 20:49:58] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-29 20:50:00] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-29 20:50:42] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-29 20:50:42] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-29 20:50:43] [ERROR] [logger] [LoadData] 向量索引构建失败: 错误:  extension "vector" is not available
+DETAIL:  Could not open extension control file "E:/PostgreSQL/share/extension/vector.control": No such file or directory.
+HINT:  The extension must first be installed on the system where PostgreSQL is running.
+
+[2026-06-29 20:50:59] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-29 20:50:59] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=['向量索引构建失败: 错误:  extension "vector" is not available\nDETAIL:  Could not open extension control file "E:/PostgreSQL/share/extension/vector.control": No such file or directory.\nHINT:  The extension must first be installed on the system where PostgreSQL is running.\n'])

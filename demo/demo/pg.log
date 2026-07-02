@@ -1,0 +1,118 @@
+2026-07-01 16:42:08.971 CST [42988] LOG:  starting PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35228, 64-bit
+2026-07-01 16:42:08.974 CST [42988] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-07-01 16:42:08.974 CST [42988] LOG:  listening on IPv6 address "::1", port 5432
+2026-07-01 16:42:09.008 CST [20428] LOG:  database system was shut down at 2026-07-01 16:41:58 CST
+2026-07-01 16:42:09.017 CST [42988] LOG:  database system is ready to accept connections
+2026-07-01 16:43:07.286 CST [41116] ERROR:  operator class "gin_trgm_ops" does not accept data type text[]
+2026-07-01 16:43:07.286 CST [41116] STATEMENT:  CREATE INDEX IF NOT EXISTS idx_category_texts_syn_trgm
+	    ON category_texts USING gin (syn_list gin_trgm_ops);
+2026-07-01 16:47:09.009 CST [11800] LOG:  checkpoint starting: time
+2026-07-01 16:49:04.206 CST [11800] LOG:  checkpoint complete: wrote 1058 buffers (6.5%), wrote 3 SLRU buffers; 1 WAL file(s) added, 0 removed, 0 recycled; write=115.031 s, sync=0.107 s, total=115.198 s; sync files=346, longest=0.010 s, average=0.001 s; distance=5264 kB, estimate=5264 kB; lsn=0/1D18C90, redo lsn=0/1D18C00
+2026-07-01 16:55:09.012 CST [31992] ERROR:  operator class "gin_trgm_ops" does not accept data type text[]
+2026-07-01 16:55:09.012 CST [31992] STATEMENT:  
+	                CREATE INDEX IF NOT EXISTS idx_category_texts_syn_trgm
+	                ON category_texts USING gin (syn_list gin_trgm_ops);
+	            
+2026-07-01 16:57:09.229 CST [11800] LOG:  checkpoint starting: time
+2026-07-01 17:01:39.127 CST [11800] LOG:  checkpoint complete: wrote 3033 buffers (18.5%), wrote 11 SLRU buffers; 0 WAL file(s) added, 0 removed, 3 recycled; write=269.851 s, sync=0.022 s, total=269.898 s; sync files=34, longest=0.010 s, average=0.001 s; distance=36418 kB, estimate=36418 kB; lsn=0/40AB770, redo lsn=0/40A9700
+2026-07-01 17:15:09.507 CST [42988] LOG:  could not reserve shared memory region (addr=00000215DBF30000) for child 0000000000001A14: error code 487
+2026-07-01 17:16:45.914 CST [42968] ERROR:  operator class "gin_trgm_ops" does not accept data type text[]
+2026-07-01 17:16:45.914 CST [42968] STATEMENT:  
+	                CREATE INDEX IF NOT EXISTS idx_category_texts_syn_trgm
+	                ON category_texts USING gin (syn_list gin_trgm_ops);
+	            
+2026-07-01 17:17:09.165 CST [11800] LOG:  checkpoint starting: time
+2026-07-01 17:21:39.150 CST [11800] LOG:  checkpoint complete: wrote 10112 buffers (61.7%), wrote 13 SLRU buffers; 0 WAL file(s) added, 0 removed, 5 recycled; write=269.939 s, sync=0.021 s, total=269.985 s; sync files=27, longest=0.009 s, average=0.001 s; distance=86101 kB, estimate=86101 kB; lsn=0/A652E70, redo lsn=0/94BED80
+2026-07-01 17:49:47.763 CST [28200] ERROR:  invalid byte sequence for encoding "UTF8": 0xb4
+2026-07-01 17:52:09.199 CST [11800] LOG:  checkpoint starting: time
+2026-07-01 17:52:18.077 CST [11800] LOG:  checkpoint complete: wrote 81 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=8.833 s, sync=0.017 s, total=8.889 s; sync files=17, longest=0.010 s, average=0.001 s; distance=18001 kB, estimate=79291 kB; lsn=0/A653308, redo lsn=0/A653278
+2026-07-01 17:53:09.680 CST [43952] ERROR:  column "vec_search" does not exist at character 50
+2026-07-01 17:53:09.680 CST [43952] STATEMENT:  SELECT COUNT(*) AS c FROM category_vectors WHERE vec_search IS NOT NULL
+2026-07-01 17:55:26.165 CST [41684] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-01 20:03:38.447 CST [52532] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-01 21:21:23.737 CST [53460] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-01 21:27:42.902 CST [46348] ERROR:  extension "vector" is not available
+2026-07-01 21:27:42.902 CST [46348] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:27:42.902 CST [46348] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:31:16.720 CST [42988] LOG:  client backend (PID 43456) was terminated by exception 0xC0000005
+2026-07-01 21:31:16.720 CST [42988] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-07-01 21:31:16.721 CST [42988] LOG:  terminating any other active server processes
+2026-07-01 21:31:18.475 CST [42988] LOG:  all server processes terminated; reinitializing
+2026-07-01 21:32:32.593 CST [42988] LOG:  could not reserve shared memory region (addr=00000215D9730000) for child 00000000000013A8: error code 487
+2026-07-01 21:34:31.328 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:31.328 CST [42988] LOG:  could not fork "io_worker" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:31.328 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:31.328 CST [42988] LOG:  could not fork "io_worker" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:31.363 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:31.363 CST [42988] LOG:  could not fork "io_worker" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:31.363 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:31.363 CST [42988] LOG:  could not fork "checkpointer" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:32.507 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:32.507 CST [42988] LOG:  could not fork "io_worker" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:32.507 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:32.507 CST [42988] LOG:  could not fork "io_worker" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:32.507 CST [42988] LOG:  CreateProcess() call failed: A non-blocking socket operation could not be completed immediately.
+	 (error code 2)
+2026-07-01 21:34:32.507 CST [42988] LOG:  could not fork "checkpointer" process: A non-blocking socket operation could not be completed immediately.
+	
+2026-07-01 21:34:42.147 CST [48084] FATAL:  the database system is in recovery mode
+2026-07-01 21:34:47.703 CST [42988] LOG:  received fast shutdown request
+2026-07-01 21:36:00.422 CST [42988] LOG:  received immediate shutdown request
+2026-07-01 21:36:00.443 CST [42988] LOG:  abnormal database system shutdown
+2026-07-01 21:36:00.445 CST [42988] LOG:  database system is shut down
+2026-07-01 21:36:02.847 CST [26060] LOG:  starting PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35228, 64-bit
+2026-07-01 21:36:02.850 CST [26060] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-07-01 21:36:02.850 CST [26060] LOG:  listening on IPv6 address "::1", port 5432
+2026-07-01 21:36:02.887 CST [57756] LOG:  database system was interrupted; last known up at 2026-07-01 17:52:18 CST
+2026-07-01 21:36:03.119 CST [57756] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-07-01 21:36:03.135 CST [57756] LOG:  redo starts at 0/A653278
+2026-07-01 21:36:03.145 CST [57756] LOG:  invalid record length at 0/A65E278: expected at least 24, got 0
+2026-07-01 21:36:03.147 CST [57756] LOG:  redo done at 0/A65E240 system usage: CPU: user: 0.00 s, system: 0.01 s, elapsed: 0.01 s
+2026-07-01 21:36:03.153 CST [55888] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-07-01 21:36:03.166 CST [55888] LOG:  checkpoint complete: wrote 8 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.004 s, total=0.014 s; sync files=7, longest=0.001 s, average=0.001 s; distance=44 kB, estimate=44 kB; lsn=0/A65E278, redo lsn=0/A65E278
+2026-07-01 21:36:03.175 CST [26060] LOG:  database system is ready to accept connections
+2026-07-01 21:39:57.744 CST [52656] ERROR:  extension "vector" is not available
+2026-07-01 21:39:57.744 CST [52656] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:39:57.744 CST [52656] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:39:57.754 CST [52656] ERROR:  extension "vector" is not available
+2026-07-01 21:39:57.754 CST [52656] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:39:57.754 CST [52656] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:40:04.792 CST [50712] ERROR:  extension "vector" is not available
+2026-07-01 21:40:04.792 CST [50712] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:40:04.792 CST [50712] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:40:04.794 CST [50712] ERROR:  extension "vector" is not available
+2026-07-01 21:40:04.794 CST [50712] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:40:04.794 CST [50712] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:41:03.172 CST [55888] LOG:  checkpoint starting: time
+2026-07-01 21:41:03.529 CST [55888] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.324 s, sync=0.012 s, total=0.358 s; sync files=2, longest=0.010 s, average=0.006 s; distance=34 kB, estimate=43 kB; lsn=0/A666CC0, redo lsn=0/A666C68
+2026-07-01 21:48:07.558 CST [57396] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-01 21:49:32.096 CST [52880] ERROR:  extension "vector" is not available
+2026-07-01 21:49:32.096 CST [52880] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:49:32.096 CST [52880] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 21:49:32.124 CST [39284] ERROR:  extension "vector" is not available
+2026-07-01 21:49:32.124 CST [39284] HINT:  The extension must first be installed on the system where PostgreSQL is running.
+2026-07-01 21:49:32.124 CST [39284] STATEMENT:  CREATE EXTENSION IF NOT EXISTS vector
+2026-07-01 22:21:10.011 CST [26060] LOG:  received fast shutdown request
+2026-07-01 22:21:10.013 CST [26060] LOG:  aborting any active transactions
+2026-07-01 22:21:10.014 CST [52880] FATAL:  terminating connection due to administrator command
+2026-07-01 22:21:10.045 CST [26060] LOG:  background worker "logical replication launcher" (PID 35240) exited with exit code 1
+2026-07-01 22:21:10.049 CST [55888] LOG:  shutting down
+2026-07-01 22:21:10.051 CST [55888] LOG:  checkpoint starting: shutdown immediate
+2026-07-01 22:21:10.060 CST [55888] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.011 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=38 kB; lsn=0/A666D70, redo lsn=0/A666D70
+2026-07-01 22:21:10.123 CST [26060] LOG:  database system is shut down

@@ -1,0 +1,121 @@
+[2026-06-30 11:21:35] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 11:21:36] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 11:21:50] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 11:21:50] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 11:21:50] [ERROR] [logger] [LoadData] 向量索引构建失败: 错误:  extension "vector" is not available
+DETAIL:  Could not open extension control file "E:/PostgreSQL/share/extension/vector.control": No such file or directory.
+HINT:  The extension must first be installed on the system where PostgreSQL is running.
+
+[2026-06-30 11:22:04] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 11:22:04] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=['向量索引构建失败: 错误:  extension "vector" is not available\nDETAIL:  Could not open extension control file "E:/PostgreSQL/share/extension/vector.control": No such file or directory.\nHINT:  The extension must first be installed on the system where PostgreSQL is running.\n'])
+[2026-06-30 11:22:48] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 11:23:48] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 11:24:20] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 11:24:20] [INFO] [logger] [SynonymUpdater] 手动追加同义词: category_id=1393, synonym=优质大米
+[2026-06-30 11:24:35] [INFO] [logger] [SynonymUpdater] 同义词追加失败
+[2026-06-30 11:24:35] [INFO] [logger] [SynonymUpdater] 同义词更新完成: 共1条操作
+[2026-06-30 11:24:35] [INFO] [logger] [TaxonomyGenerator] 无低置信度匹配结果, 无需生成扩展建议
+[2026-06-30 12:21:33] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 12:21:34] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 12:22:12] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 12:22:12] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 12:22:31] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 12:22:43] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 12:22:43] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 12:34:22] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:35:20] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:36:06] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:37:55] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:39:03] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:39:40] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:40:28] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 12:40:39] [INFO] [logger] [SynonymUpdater] 批量自动发现同义词
+[2026-06-30 12:40:39] [INFO] [logger] [SynonymUpdater] 同义词更新完成: 共0条操作
+[2026-06-30 12:40:52] [INFO] [logger] [TaxonomyGenerator] 无低置信度匹配结果, 无需生成扩展建议
+[2026-06-30 13:24:56] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 13:24:57] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 13:25:08] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 13:25:08] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 13:25:21] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 13:25:32] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 13:25:32] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 13:26:11] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 13:27:04] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 13:28:00] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 13:28:39] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 13:31:16] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 13:31:24] [INFO] [logger] [SynonymUpdater] 批量自动发现同义词
+[2026-06-30 13:31:24] [INFO] [logger] [SynonymUpdater] 同义词更新完成: 共0条操作
+[2026-06-30 13:31:33] [INFO] [logger] [TaxonomyGenerator] 无低置信度匹配结果, 无需生成扩展建议
+[2026-06-30 14:00:37] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 14:05:40] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 14:07:33] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 14:08:38] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 16:08:22] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 16:08:23] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 16:09:02] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 16:09:03] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 16:09:29] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 16:09:43] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 16:09:43] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 16:11:14] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 16:11:15] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 16:11:52] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 16:11:52] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 16:12:17] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 16:12:33] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 16:12:33] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 16:16:55] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 16:18:49] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 16:22:47] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 16:22:48] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 16:23:26] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 16:23:26] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 16:25:25] [INFO] [logger] [LoadData] 向量索引构建完成: 成功0条
+[2026-06-30 16:25:42] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 16:25:42] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 16:28:04] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 16:28:06] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 16:28:49] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 16:28:49] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 16:29:23] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 16:29:41] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 16:29:41] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 16:33:47] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 16:35:44] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 19:00:04] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 19:00:05] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 19:00:52] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 19:00:52] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 19:01:03] [ERROR] [logger] [LoadData] 向量索引构建失败: 
+[2026-06-30 19:01:22] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 19:01:22] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=['向量索引构建失败: '])
+[2026-06-30 19:03:08] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 19:03:10] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 19:03:57] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 19:03:57] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 19:04:07] [ERROR] [logger] [LoadData] 向量索引构建失败: 
+[2026-06-30 19:04:25] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 19:04:25] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=False, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=['向量索引构建失败: '])
+[2026-06-30 19:07:39] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 19:07:40] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 19:08:26] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 19:08:27] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 19:09:59] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 19:10:16] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 19:10:16] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 19:11:13] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 19:14:20] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 19:15:04] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 19:16:13] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 19:17:25] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 20:08:19] [INFO] [logger] [LoadData] 数据库连接初始化成功
+[2026-06-30 20:08:20] [INFO] [logger] [LoadData] 标准体系加载完成: 21090条, 跳过0条
+[2026-06-30 20:08:32] [INFO] [logger] [LoadData] 产品数据加载完成: 728493条
+[2026-06-30 20:08:32] [INFO] [logger] [LoadData] PageIndex树形索引构建成功
+[2026-06-30 20:10:51] [INFO] [logger] [LoadData] 向量索引构建完成: 成功21090条
+[2026-06-30 20:11:01] [INFO] [logger] [LoadData] 文本索引构建完成: 成功21090条
+[2026-06-30 20:11:01] [INFO] [logger] [LoadData] 数据加载全部完成: LoadDataResult(total_categories=21090, total_products=728493, vector_index_status=True, trgm_index_status=True, page_index_status=True, skipped_rows=0, errors=[])
+[2026-06-30 20:12:28] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 20:13:31] [INFO] [logger] [MatchRunner] 匹配完成: 共1条
+[2026-06-30 20:47:15] [INFO] [logger] [EnrichCategories] 同义词扩展完成(5个节点)，开始重建向量索引...
