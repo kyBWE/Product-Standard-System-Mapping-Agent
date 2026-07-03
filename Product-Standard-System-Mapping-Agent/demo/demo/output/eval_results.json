@@ -1,0 +1,43 @@
+{
+  "summary": {
+    "rag": {
+      "total": 1000,
+      "correct": 583,
+      "no_match": 0,
+      "accuracy": 0.583,
+      "avg_confidence": 0.5521,
+      "avg_time_ms": 1600.1,
+      "p95_time_ms": 2083.4
+    },
+    "rag_rerank": {
+      "total": 1000,
+      "correct": 562,
+      "no_match": 0,
+      "accuracy": 0.562,
+      "avg_confidence": 0.6584,
+      "avg_time_ms": 1159.9,
+      "p95_time_ms": 1126.6
+    },
+    "page_index": {
+      "total": 1000,
+      "correct": 438,
+      "no_match": 0,
+      "accuracy": 0.438,
+      "avg_confidence": 0.5901,
+      "avg_time_ms": 2767.5,
+      "p95_time_ms": 8998.5
+    },
+    "page_index_force": {
+      "total": 1000,
+      "correct": 356,
+      "no_match": 0,
+      "accuracy": 0.356,
+      "avg_confidence": 0.9046,
+      "avg_time_ms": 6962.5,
+      "p95_time_ms": 9666.5
+    }
+  },
+  "total_items": 1000,
+  "eval_time": 3126.7,
+  "test_set_path": "output/test_set_1000_fixed.json"
+}
