@@ -3,6 +3,7 @@ import logging
 from dataclasses import dataclass, field
 
 from src.engine.llm_adapter import LLMAdapter
+from src.engine.query_preprocessor import preprocess_query
 from src.index.page_index_tree import IndexHit, PageIndexTree
 from src.models.enums import EngineType, MatchStatus
 from src.models.match_result import CandidateInfo, MatchResult
@@ -11,7 +12,8 @@ from src.models.treenode import TreeNode
 
 logger = logging.getLogger("PageIndexEngine")
 
-_FORCED_GUIDE_TYPES = frozenset({"exact", "synonym"})
+_FORCED_GUIDE_TYPES = frozenset({"exact", "synonym", "bag_of_words", "segment_bag_of_words", "partial_short_core"})
+_WEAK_GUIDE_TYPES = frozenset({"synonym_short", "partial_short", "synonym_contained_short_core", "partial_contained_short_core"})
 
 
 @dataclass
@@ -45,33 +47,94 @@ class PageIndexEngine:
         self._force_llm_each_layer = force_llm_each_layer
 
     def match(self, product_name: str) -> MatchResult:
+        original = product_name
+        cleaned = preprocess_query(product_name)
+        if not cleaned:
+            return MatchResult(
+                product_name=original,
+                match_status=MatchStatus.NO_MATCH,
+                engine_type=EngineType.PAGE_INDEX,
+                llm_participated=False,
+            )
+
         mode = "逐层LLM" if self._force_llm_each_layer else "索引引导"
-        logger.info(f"PageIndex匹配开始: product_name={product_name}, mode={mode}")
+        logger.info(f"PageIndex匹配开始: product_name={cleaned}(原始={original}), mode={mode}")
 
         roots = self._tree.get_root_nodes()
         if not roots:
+            return MatchResult(
+                product_name=original,
+                match_status=MatchStatus.NO_MATCH,
+                engine_type=EngineType.PAGE_INDEX,
+                llm_participated=False,
+            )
+
+        match_fn = self._match_layer_llm_only if self._force_llm_each_layer else self._match_index_guided
+        result = match_fn(cleaned, roots)
+        result.product_name = original
+
+        if result.match_status == MatchStatus.NO_MATCH and cleaned != original.strip():
+            logger.info(f"PageIndex预处理后未匹配,回退原始查询: {original}")
+            result_fallback = match_fn(original.strip(), roots)
+            result_fallback.product_name = original
+            if result_fallback.match_status != MatchStatus.NO_MATCH:
+                return result_fallback
+
+        return result
+
+    def _match_index_guided(self, product_name: str, roots: list[TreeNode]) -> MatchResult:
+        index_hits = self._tree.lookup_index(product_name)
+
+        if not index_hits or index_hits[0].score < 0.55:
+            top_score = index_hits[0].score if index_hits else 0
+            logger.info(
+                f"PageIndex索引无有效命中或Top-1分数过低: "
+                f"hits={len(index_hits) if index_hits else 0}, "
+                f"top_score={top_score:.3f}"
+            )
             return MatchResult(
                 product_name=product_name,
                 match_status=MatchStatus.NO_MATCH,
                 engine_type=EngineType.PAGE_INDEX,
                 llm_participated=False,
             )
-
-        if self._force_llm_each_layer:
-            return self._match_layer_llm_only(product_name, roots)
-        return self._match_index_guided(product_name, roots)
-
-    def _match_index_guided(self, product_name: str, roots: list[TreeNode]) -> MatchResult:
-        index_hits = self._tree.lookup_index(product_name)
         if index_hits and index_hits[0].match_type in _FORCED_GUIDE_TYPES:
             guide_path = index_hits[0].path
             state = self._state_from_guide_path(product_name, guide_path)
-            confidence = 0.95 if index_hits[0].match_type == "exact" else 0.9
+            mt = index_hits[0].match_type
+            if mt == "exact":
+                confidence = 0.95
+            elif mt == "synonym":
+                confidence = 0.9
+            else:
+                confidence = min(index_hits[0].score * 0.9, 0.85)
             logger.info(
                 f"PageIndex索引强制路径: type={index_hits[0].match_type}, "
                 f"target={guide_path[-1].category_name}({guide_path[-1].category_id})"
             )
             return self._build_result(product_name, state, confidence, llm_used=False)
+
+        if index_hits and index_hits[0].match_type in _WEAK_GUIDE_TYPES:
+            logger.info(
+                f"PageIndex弱匹配走beam搜索: type={index_hits[0].match_type}, "
+                f"置信度上限0.60"
+            )
+            guide_path = index_hits[0].path if index_hits else None
+            force_guide = bool(index_hits)
+            entry_roots, root_llm_used = self._select_entry_roots(
+                product_name, roots, index_hits
+            )
+            best_state = self._beam_navigate(
+                product_name,
+                entry_roots,
+                guide_path=guide_path,
+                force_guide=force_guide,
+                initial_llm_steps=int(root_llm_used),
+            )
+            raw_conf = self._compute_confidence(best_state, index_hits)
+            confidence = min(raw_conf, 0.60)
+            llm_used = best_state.llm_steps > 0
+            return self._build_result(product_name, best_state, confidence, llm_used)
 
         guide_path = index_hits[0].path if index_hits else None
         force_guide = bool(index_hits)
@@ -328,16 +391,37 @@ class PageIndexEngine:
     ) -> float:
         base = state.score
         if index_hits and state.node.category_id == index_hits[0].node.category_id:
-            if index_hits[0].match_type == "exact":
+            mt = index_hits[0].match_type
+            if mt == "exact":
                 return max(base, 0.95)
-            if index_hits[0].match_type == "synonym":
+            if mt == "synonym":
                 return max(base, 0.9)
+            if mt == "synonym_short":
+                return max(base, 0.70)
+            if mt in ("partial", "synonym_partial"):
+                return max(base, 0.8)
+            if mt == "partial_short":
+                return max(base, 0.50)
+            if mt == "partial_short_core":
+                return max(base, 0.70)
+            if mt in ("synonym_contained", "segment_match"):
+                return max(base, 0.75)
+            if mt in ("bigram", "synonym_segment_match", "bag_of_words"):
+                return max(base, 0.70)
+            if mt in ("partial_contained", "synonym_contained_short"):
+                return max(base, 0.55)
+            if mt in ("synonym_contained_short_core", "partial_contained_short_core"):
+                return max(base, 0.60)
+            if mt in ("segment_match_partial", "synonym_segment_match_partial",
+                       "synonym_bag_of_words", "segment_bag_of_words",
+                       "synonym_segment_bag_of_words"):
+                return max(base, 0.45)
             return max(base, 0.8)
         if self._force_llm_each_layer:
             llm_ratio = state.llm_steps / max(len(state.path) - 1, 1)
             uncertainty = llm_ratio * 0.15
             return max(base - uncertainty, 0.1)
-        return base
+        return base * 0.6
 
     def _build_result(
         self,
@@ -399,8 +483,8 @@ class PageIndexEngine:
         return False
 
     def _determine_status(self, confidence: float) -> MatchStatus:
-        if confidence >= 0.5:
+        if confidence >= 0.65:
             return MatchStatus.MATCHED
-        if confidence >= 0.3:
+        if confidence >= 0.40:
             return MatchStatus.LOW_CONFIDENCE
         return MatchStatus.NO_MATCH

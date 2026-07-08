@@ -1,6 +1,7 @@
 .venv/
 wheels/
 pgvector/
+kyBWE-Repo/
 build_pgvector.bat
 run_load_data.py
 test_llm.py
@@ -21,11 +22,12 @@ __pycache__/
 **/vector_manual.sql
 **/test_set_1000.json
 **/test_set_1000_fixed.json
+**/eval_progress.txt
+**/*工作总结*.md
 demo/demo/demo.lnk
 demo/demo/test_set_progress.txt
 demo/demo/synonym_cache.json
 demo/demo/vector_manual.sql
 demo/demo/flask_err*.log
 demo/demo/flask_out*.log
-~$*
-*.xlsx
+demo/demo/output/*.csv

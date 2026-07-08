@@ -22,6 +22,8 @@ class LLMConfig:
     max_retries: int = 3
     timeout: int = 30
     thinking_enabled: bool = False
+    cache_enabled: bool = True
+    cache_size: int = 512
 
 
 @dataclass
@@ -53,3 +55,4 @@ class MatchConfig:
     enable_rerank: bool = True
     rerank_weight: float = 0.6
     page_index_force_llm_layers: bool = False
+    coarse_abort_threshold: float = 0.45

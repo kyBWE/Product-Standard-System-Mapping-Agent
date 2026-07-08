@@ -37,11 +37,12 @@ _page_engine = None
 _page_engine_force_llm = None
 _page_tree = None
 _excel_reader = None
+_evolve_scheduler = None
 _initialized = False
 
 
 def _init_components():
-    global _config, _db, _llm, _trgm_mgr, _vec_mgr, _rag_engine, _rag_rerank_engine, _page_engine, _page_engine_force_llm, _page_tree, _excel_reader, _initialized
+    global _config, _db, _llm, _trgm_mgr, _vec_mgr, _rag_engine, _rag_rerank_engine, _page_engine, _page_engine_force_llm, _page_tree, _excel_reader, _evolve_scheduler, _initialized
     if _initialized:
         return
 
@@ -110,6 +111,8 @@ def _init_components():
     _page_engine_force_llm = page_engine_force_llm
     _page_tree = page_tree
     _excel_reader = excel_reader
+    standard_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), standard_file)
+    _evolve_scheduler = SelfEvolveScheduler(llm, db, excel_reader, match_config, standard_file_path)
     _initialized = True
 
 
@@ -178,6 +181,122 @@ def api_match():
         })
     except Exception as e:
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+
+@app.route("/api/confirm", methods=["POST"])
+def api_confirm():
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        product_name = data.get("product_name", "").strip()
+        category_id = data.get("category_id", "").strip()
+        if not product_name or not category_id:
+            return jsonify({"error": "product_name and category_id required"}), 400
+
+        existing = _db.execute_one(
+            "SELECT syn_list FROM category_texts WHERE category_id = %s",
+            (category_id,),
+        )
+        if not existing:
+            return jsonify({"error": f"category_id={category_id} not found"}), 404
+
+        if product_name in existing["syn_list"]:
+            return jsonify({"status": "already_exists", "message": f"{product_name} already in syn_list"})
+
+        cat_row = _db.execute_one(
+            "SELECT category_name FROM category_texts WHERE category_id = %s",
+            (category_id,),
+        )
+        cat_name = cat_row["category_name"] if cat_row else ""
+
+        from src.data.synonym_sanitizer import sanitize_syn_list
+        cleaned, removed = sanitize_syn_list([product_name], cat_name)
+        if removed or not cleaned:
+            return jsonify({"status": "rejected", "message": "synonym rejected by sanitizer"})
+
+        _db.execute(
+            "UPDATE category_texts SET syn_list = array_append(syn_list, %s), updated_at = CURRENT_TIMESTAMP WHERE category_id = %s",
+            (product_name, category_id),
+        )
+        _db.execute(
+            "UPDATE category_vectors SET syn_list = array_append(syn_list, %s), updated_at = CURRENT_TIMESTAMP WHERE category_id = %s",
+            (product_name, category_id),
+        )
+        _db.execute(
+            "INSERT INTO synonym_updates (category_id, new_synonym, llm_verified, trigger_reason, status) VALUES (%s, %s, %s, %s, %s)",
+            (category_id, product_name, True, "用户确认", "COMPLETED"),
+        )
+
+        return jsonify({"status": "ok", "message": f"已将 '{product_name}' 添加为 #{category_id} 的同义词"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/correct", methods=["POST"])
+def api_correct():
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        product_name = data.get("product_name", "").strip()
+        correct_category_id = data.get("correct_category_id", "").strip()
+        if not product_name or not correct_category_id:
+            return jsonify({"error": "product_name and correct_category_id required"}), 400
+
+        existing = _db.execute_one(
+            "SELECT syn_list FROM category_texts WHERE category_id = %s",
+            (correct_category_id,),
+        )
+        if not existing:
+            return jsonify({"error": f"category_id={correct_category_id} not found"}), 404
+
+        if product_name in existing["syn_list"]:
+            return jsonify({"status": "already_exists", "message": f"{product_name} already in syn_list"})
+
+        cat_row = _db.execute_one(
+            "SELECT category_name FROM category_texts WHERE category_id = %s",
+            (correct_category_id,),
+        )
+        cat_name = cat_row["category_name"] if cat_row else ""
+
+        from src.data.synonym_sanitizer import sanitize_syn_list
+        cleaned, removed = sanitize_syn_list([product_name], cat_name)
+        if removed or not cleaned:
+            return jsonify({"status": "rejected", "message": "synonym rejected by sanitizer"})
+
+        _db.execute(
+            "UPDATE category_texts SET syn_list = array_append(syn_list, %s), updated_at = CURRENT_TIMESTAMP WHERE category_id = %s",
+            (product_name, correct_category_id),
+        )
+        _db.execute(
+            "UPDATE category_vectors SET syn_list = array_append(syn_list, %s), updated_at = CURRENT_TIMESTAMP WHERE category_id = %s",
+            (product_name, correct_category_id),
+        )
+        _db.execute(
+            "INSERT INTO synonym_updates (category_id, new_synonym, llm_verified, trigger_reason, status) VALUES (%s, %s, %s, %s, %s)",
+            (correct_category_id, product_name, True, "用户纠正", "COMPLETED"),
+        )
+
+        return jsonify({"status": "ok", "message": f"已纠正: '{product_name}' -> #{correct_category_id}, 同义词已追加"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/search_category", methods=["GET"])
+def api_search_category():
+    try:
+        _init_components()
+        query = request.args.get("q", "").strip()
+        if not query:
+            return jsonify([])
+        rows = _db.execute(
+            """SELECT category_id, category_name FROM category_texts
+               WHERE category_name ILIKE %s OR %s = ANY(syn_list)
+               LIMIT 20""",
+            (f"%{query}%", query),
+        )
+        return jsonify([{"category_id": r["category_id"], "category_name": r["category_name"]} for r in rows])
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/api/stats", methods=["GET"])
@@ -283,6 +402,190 @@ def api_expansion_history():
             results.append({
                 "product_name": r["product_name"],
                 "suggested_parent_id": r["suggested_parent_id"],
+                "suggested_category_name": r["suggested_category_name"],
+                "llm_analysis": r["llm_analysis"],
+                "status": r["status"],
+                "created_at": str(r["created_at"]),
+            })
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/suggest_expansion", methods=["POST"])
+def api_suggest_expansion():
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        product_name = data.get("product_name", "").strip()
+        if not product_name:
+            return jsonify({"error": "product_name required"}), 400
+
+        root_nodes = [(r.category_id, r.category_name) for r in _page_tree.get_root_nodes()]
+        analysis = _llm.detailed_category_analysis(product_name, root_nodes)
+
+        suggested_parent_id = analysis.get("root_category_id", "")
+        if not suggested_parent_id:
+            root_name = analysis.get("root_category_name", "")
+            for rid, rname in root_nodes:
+                if rname == root_name:
+                    suggested_parent_id = rid
+                    break
+
+        if suggested_parent_id:
+            children = _page_tree.get_children(suggested_parent_id)
+            if children:
+                child_names = [(c.category_id, c.category_name) for c in children[:20]]
+                child_analysis = _llm.detailed_category_analysis(product_name, child_names)
+                child_parent_id = child_analysis.get("root_category_id", "")
+                if child_parent_id:
+                    suggested_parent_id = child_parent_id
+
+        suggested_category_name = analysis.get("suggested_category_name", product_name)
+        reason = analysis.get("reason", "")
+        confidence = analysis.get("confidence", 0)
+
+        _db.execute(
+            """INSERT INTO expansion_suggestions
+               (product_name, suggested_parent_id, suggested_category_name, suggested_level_position, llm_analysis, status)
+               VALUES (%s, %s, %s, %s, %s, %s)""",
+            (product_name, suggested_parent_id or None, suggested_category_name,
+             None, f"置信度={confidence:.2f} | {reason}", "PENDING_REVIEW"),
+        )
+
+        return jsonify({
+            "status": "ok",
+            "product_name": product_name,
+            "suggested_parent_id": suggested_parent_id,
+            "suggested_category_name": suggested_category_name,
+            "llm_analysis": reason,
+            "confidence": confidence,
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/approve_expansion", methods=["POST"])
+def api_approve_expansion():
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        product_name = data.get("product_name", "").strip()
+        parent_id = data.get("parent_id", "").strip()
+        category_name = data.get("category_name", product_name).strip()
+        if not product_name or not parent_id:
+            return jsonify({"error": "product_name and parent_id required"}), 400
+
+        parent_node = _page_tree.get_node(parent_id)
+        if not parent_node:
+            return jsonify({"error": f"parent_id={parent_id} not found in tree"}), 404
+
+        max_id_row = _db.execute_one("SELECT MAX(CAST(category_id AS INTEGER)) as max_id FROM category_texts")
+        new_id = str((max_id_row["max_id"] or 21090) + 1)
+
+        _db.execute(
+            """INSERT INTO category_texts (category_id, category_name, category_pids, syn_list)
+               VALUES (%s, %s, %s, %s)""",
+            (new_id, category_name, [parent_id], [product_name]),
+        )
+
+        from src.index.onnx_embedder import ONNXEmbedder
+        embedder = ONNXEmbedder()
+        text_parts = [category_name, product_name]
+        embedding = embedder.encode(" ".join(text_parts))
+        import numpy as np
+        emb_list = embedding.tolist() if isinstance(embedding, np.ndarray) else list(embedding)
+
+        _db.execute(
+            """INSERT INTO category_vectors (category_id, embedding, syn_list)
+               VALUES (%s, %s, %s)""",
+            (new_id, str(emb_list), [product_name]),
+        )
+
+        _page_tree.add_node(new_id, category_name, parent_id, [product_name])
+
+        verify_ok = False
+        try:
+            verify_result = _rag_rerank_engine.match(product_name)
+            if verify_result.matched_category_id == new_id and verify_result.confidence >= 0.3:
+                verify_ok = True
+        except Exception:
+            pass
+
+        if not verify_ok:
+            try:
+                _db.execute("DELETE FROM category_texts WHERE category_id = %s", (new_id,))
+                _db.execute("DELETE FROM category_vectors WHERE category_id = %s", (new_id,))
+                node = _page_tree.get_node(new_id)
+                if node and node.parent:
+                    node.parent.children = [c for c in node.parent.children if c.category_id != new_id]
+                if new_id in _page_tree._node_map:
+                    del _page_tree._node_map[new_id]
+                return jsonify({"status": "verify_failed", "error": f"验证失败: 匹配'{product_name}'未能命中新分类#{new_id}，已自动回滚"})
+            except Exception as rollback_err:
+                return jsonify({"status": "verify_failed_rollback_error", "error": f"验证失败且回滚出错: {rollback_err}"})
+
+        _db.execute(
+            """UPDATE expansion_suggestions SET status = 'APPROVED'
+               WHERE product_name = %s AND status = 'PENDING_REVIEW'""",
+            (product_name,),
+        )
+
+        return jsonify({
+            "status": "ok",
+            "new_category_id": new_id,
+            "category_name": category_name,
+            "parent_id": parent_id,
+            "verified": True,
+            "message": f"已新增分类 #{new_id} '{category_name}' (父节点: #{parent_id})，验证通过",
+        })
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+
+@app.route("/api/reject_expansion", methods=["POST"])
+def api_reject_expansion():
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        product_name = data.get("product_name", "").strip()
+        if not product_name:
+            return jsonify({"error": "product_name required"}), 400
+
+        _db.execute(
+            """UPDATE expansion_suggestions SET status = 'REJECTED'
+               WHERE product_name = %s AND status = 'PENDING_REVIEW'""",
+            (product_name,),
+        )
+
+        return jsonify({"status": "ok", "message": f"已拒绝 '{product_name}' 的扩展建议"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/pending_expansions", methods=["GET"])
+def api_pending_expansions():
+    try:
+        _init_components()
+        rows = _db.execute(
+            """SELECT product_name, suggested_parent_id, suggested_category_name, llm_analysis, status, created_at
+               FROM expansion_suggestions WHERE status = 'PENDING_REVIEW'
+               ORDER BY created_at DESC LIMIT 50""",
+        )
+        results = []
+        for r in rows:
+            parent_name = ""
+            if r["suggested_parent_id"]:
+                pn = _db.execute_one(
+                    "SELECT category_name FROM category_texts WHERE category_id = %s",
+                    (r["suggested_parent_id"],),
+                )
+                parent_name = pn["category_name"] if pn else ""
+            results.append({
+                "product_name": r["product_name"],
+                "suggested_parent_id": r["suggested_parent_id"] or "",
+                "suggested_parent_name": parent_name,
                 "suggested_category_name": r["suggested_category_name"],
                 "llm_analysis": r["llm_analysis"],
                 "status": r["status"],

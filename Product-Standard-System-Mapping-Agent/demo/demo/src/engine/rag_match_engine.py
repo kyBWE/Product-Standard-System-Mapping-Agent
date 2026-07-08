@@ -2,9 +2,11 @@
 import logging
 
 from src.engine.llm_adapter import LLMAdapter
+from src.engine.query_preprocessor import preprocess_query
 from src.engine.rerank_adapter import RerankAdapter
 from src.index.trgm_index_manager import TrgmIndexManager
 from src.index.vector_index_manager import VectorIndexManager
+from src.models.index_result import ExactTextMatch
 from src.models.enums import EngineType, MatchStatus
 from src.models.match_result import CandidateInfo, CandidateNode, MatchResult, ScoredCandidate
 from src.models.config_models import MatchConfig
@@ -44,7 +46,34 @@ class RAGMatchEngine:
         return vec
 
     def match(self, product_name: str) -> MatchResult:
-        logger.info(f"RAG匹配开始: product_name={product_name}")
+        original = product_name
+        cleaned = preprocess_query(product_name)
+        if not cleaned:
+            return MatchResult(
+                product_name=original,
+                match_status=MatchStatus.NO_MATCH,
+                engine_type=self._engine_type,
+                llm_participated=False,
+            )
+        logger.info(f"RAG匹配开始: product_name={cleaned}(原始={original})")
+
+        result = self._do_match(cleaned)
+        result.product_name = original
+
+        if result.match_status == MatchStatus.NO_MATCH and cleaned != original.strip():
+            logger.info(f"RAG预处理后未匹配,回退原始查询: {original}")
+            result_fallback = self._do_match(original.strip())
+            result_fallback.product_name = original
+            if result_fallback.match_status != MatchStatus.NO_MATCH:
+                return result_fallback
+
+        return result
+
+    def _do_match(self, product_name: str) -> MatchResult:
+
+        exact = self._trgm_mgr.lookup_exact_match(product_name)
+        if exact:
+            return self._build_exact_shortcut_result(product_name, exact)
 
         try:
             candidates = self._coarse_recall(product_name)
@@ -74,6 +103,11 @@ class RAGMatchEngine:
         # 体系内已有完全同名节点：粗召回即可，无需精排
         if not skip_llm and product_name == best.category_name:
             skip_llm = True
+
+        if not skip_llm:
+            syn_map = self._load_syn_list(candidates)
+            if self._has_exact_synonym(product_name, best, syn_map):
+                skip_llm = True
 
         ambiguous_top = False if skip_llm else self._is_ambiguous_top(product_name, candidates)
 
@@ -121,6 +155,18 @@ class RAGMatchEngine:
                     )
                     for c in candidates[:5]
                 ],
+                engine_type=self._engine_type,
+                llm_participated=False,
+            )
+
+        if not skip_llm and self._should_abort_coarse(product_name, candidates):
+            logger.info(
+                f"粗召回置信度过低, 跳过精排: {product_name} "
+                f"coarse={candidates[0].coarse_score:.4f}"
+            )
+            return MatchResult(
+                product_name=product_name,
+                match_status=MatchStatus.NO_MATCH,
                 engine_type=self._engine_type,
                 llm_participated=False,
             )
@@ -254,13 +300,82 @@ class RAGMatchEngine:
             if product_name == c.category_name:
                 c.coarse_score = max(c.coarse_score, 0.95)
 
-        candidates = sorted(candidate_map.values(), key=lambda c: self._candidate_rank_key(product_name, c), reverse=True)
+        syn_map = self._load_syn_list(list(candidate_map.values()))
+        for c in candidate_map.values():
+            syns = syn_map.get(c.category_id, [])
+            if product_name in syns:
+                c.trgm_similarity = max(c.trgm_similarity, 0.95)
+                c.coarse_score = max(c.coarse_score, 0.93)
+
+        candidates = sorted(
+            candidate_map.values(),
+            key=lambda c: self._candidate_rank_key(product_name, c, syn_map.get(c.category_id, [])),
+            reverse=True,
+        )
         return candidates[: self._config.coarse_top_k]
 
+    def _build_exact_shortcut_result(self, product_name: str, exact: ExactTextMatch) -> MatchResult:
+        confidence = 0.98 if exact.match_type == "name" else 0.95
+        label = "分类名" if exact.match_type == "name" else "同义词"
+        logger.info(
+            f"精确匹配短路: {product_name} -> {exact.category_name}({exact.category_id}) "
+            f"via {label}, conf={confidence:.2f}"
+        )
+        return MatchResult(
+            product_name=product_name,
+            matched_category_id=exact.category_id,
+            confidence=confidence,
+            match_status=MatchStatus.MATCHED,
+            candidates=[
+                CandidateInfo(
+                    category_id=exact.category_id,
+                    category_name=exact.category_name,
+                    coarse_score=confidence,
+                    final_confidence=confidence,
+                )
+            ],
+            engine_type=self._engine_type,
+            llm_participated=False,
+        )
+
     @staticmethod
-    def _candidate_rank_key(product_name: str, candidate: CandidateNode) -> tuple:
-        exact = 1 if product_name == candidate.category_name else 0
-        return (exact, candidate.coarse_score, candidate.vector_similarity, candidate.trgm_similarity)
+    def _has_exact_synonym(
+        product_name: str,
+        candidate: CandidateNode,
+        syn_map: dict[str, list[str]],
+    ) -> bool:
+        return product_name in syn_map.get(candidate.category_id, [])
+
+    @staticmethod
+    def _candidate_rank_key(
+        product_name: str,
+        candidate: CandidateNode,
+        syn_list: list[str] | None = None,
+    ) -> tuple:
+        if product_name == candidate.category_name:
+            exact_prio = 2
+        elif syn_list and product_name in syn_list:
+            exact_prio = 1
+        else:
+            exact_prio = 0
+        return (exact_prio, candidate.coarse_score, candidate.vector_similarity, candidate.trgm_similarity)
+
+    def _should_abort_coarse(self, product_name: str, candidates: list[CandidateNode]) -> bool:
+        """粗召回 Top-1 置信度过低时跳过精排，避免 OOD 输入白调 LLM/Rerank。"""
+        threshold = self._config.coarse_abort_threshold
+        best = candidates[0]
+
+        if best.coarse_score >= threshold:
+            return False
+        if best.trgm_similarity >= 0.6:
+            return False
+        if product_name in best.category_name or best.category_name in product_name:
+            return False
+        if best.vector_similarity >= 0.55 and best.coarse_score >= threshold - 0.1:
+            return False
+        if all(c.coarse_score < threshold for c in candidates):
+            return True
+        return best.coarse_score < threshold
 
     def _is_ambiguous_top(self, product_name: str, candidates: list[CandidateNode]) -> bool:
         if len(candidates) < 2:
@@ -279,6 +394,9 @@ class RAGMatchEngine:
     def _skip_fine_bonus(self, product_name: str, best: CandidateNode) -> float:
         if product_name == best.category_name:
             return 1.0
+        syn_map = self._load_syn_list([best])
+        if self._has_exact_synonym(product_name, best, syn_map):
+            return 0.95
         if best.trgm_similarity >= 0.8:
             return 1.0
         if product_name in best.category_name or best.category_name in product_name:
@@ -300,18 +418,22 @@ class RAGMatchEngine:
             (c.category_id, c.category_name, syn_map.get(c.category_id, []))
             for c in candidates
         ]
-        coarse_hints = [c.coarse_score for c in candidates]
 
         try:
-            llm_scores = self._llm.multi_candidate_semantic_scoring(
-                product_name, llm_payload, coarse_hints=coarse_hints
+            selected_idx, selection_conf, reason = self._llm.select_best_category(
+                product_name, llm_payload
             )
         except Exception as e:
-            logger.warning(f"多候选语义打分失败: {e}")
-            llm_scores = [0.0] * len(candidates)
+            logger.warning(f"LLM分类择一失败: {e}")
+            selected_idx, selection_conf, reason = None, 0.0, str(e)
+
+        if selected_idx is None:
+            logger.info(f"LLM分类择一无匹配: {product_name} (reason={reason[:80]})")
+            return []
 
         scored: list[ScoredCandidate] = []
-        for c, llm_score in zip(candidates, llm_scores):
+        for i, c in enumerate(candidates):
+            llm_score = selection_conf if selected_idx == i else 0.0
             scored.append(ScoredCandidate(
                 category_id=c.category_id,
                 category_name=c.category_name,
@@ -320,10 +442,10 @@ class RAGMatchEngine:
             ))
 
         scored.sort(key=lambda x: x.final_confidence, reverse=True)
+        chosen = candidates[selected_idx]
         logger.info(
-            f"LLM多候选精匹配: {product_name} -> "
-            f"{scored[0].category_name}(llm={scored[0].llm_score:.3f}, final={scored[0].final_confidence:.3f})"
-            if scored else f"LLM多候选精匹配无结果: {product_name}"
+            f"LLM分类择一: {product_name} -> {chosen.category_name}"
+            f"(conf={selection_conf:.3f}, reason={reason[:80]})"
         )
         return scored
 

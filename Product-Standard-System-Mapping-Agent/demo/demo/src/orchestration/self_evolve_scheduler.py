@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 
 from src.data.excel_reader import ExcelDataReader
+from src.data.synonym_sanitizer import sanitize_syn_list
 from src.engine.llm_adapter import LLMAdapter
 from src.infrastructure.db_manager import DBConnectionManager
 from src.models.enums import EvolveActionType, ExpansionStatus, MatchStatus
@@ -112,6 +113,19 @@ class SelfEvolveScheduler:
         existing = self._get_existing_synonyms(action.category_id)
         if action.product_name in existing:
             logger.info(f"同义词已存在, 跳过: category_id={action.category_id}")
+            return False
+
+        cat_name_row = self._db.execute_one(
+            "SELECT category_name FROM category_texts WHERE category_id = %s",
+            (action.category_id,),
+        )
+        cat_name = cat_name_row["category_name"] if cat_name_row else ""
+        cleaned, removed = sanitize_syn_list([action.product_name], cat_name)
+        if removed or not cleaned:
+            logger.info(
+                f"同义词被清洗规则拒绝: category_id={action.category_id}, "
+                f"synonym={action.product_name}"
+            )
             return False
 
         try:

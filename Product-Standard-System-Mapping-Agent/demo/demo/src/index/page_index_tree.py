@@ -106,11 +106,21 @@ class PageIndexTree:
         if not q:
             return []
 
+        candidate_ids = self._collect_candidates(q)
+
         scored: dict[str, IndexHit] = {}
-        for node in self._node_map.values():
+        for cid in candidate_ids:
+            node = self._node_map.get(cid)
+            if node is None:
+                continue
             score, match_type = self._score_index_match(q, node)
             if score <= 0:
-                continue
+                sem_score, sem_type = self._semantic_bigram_score(q, cid)
+                if sem_score >= 0.35:
+                    score = sem_score
+                    match_type = sem_type
+                else:
+                    continue
             path = self._path_to_root(node)
             if not path:
                 continue
@@ -128,6 +138,103 @@ class PageIndexTree:
         hits = sorted(scored.values(), key=lambda h: (h.score, h.node.depth), reverse=True)
         return hits[:top_k]
 
+    def _collect_candidates(self, q: str) -> set[str]:
+        candidate_ids: set[str] = set()
+
+        if q in self._term_index:
+            candidate_ids.update(self._term_index[q])
+
+        for term in self._extract_index_terms(q):
+            if term in self._term_index:
+                candidate_ids.update(self._term_index[term])
+
+        if not candidate_ids:
+            for node in self._node_map.values():
+                if self._quick_match(q, node):
+                    candidate_ids.add(node.category_id)
+
+        return candidate_ids
+
+    def _bigram_hit_count(self, q: str, category_id: str) -> int:
+        terms = self._extract_index_terms(q)
+        count = 0
+        for term in terms:
+            if len(term) >= 2 and category_id in self._term_index.get(term, set()):
+                count += 1
+        return count
+
+    @staticmethod
+    def _char_bigrams(text: str) -> set[str]:
+        return {text[i:i+2] for i in range(len(text) - 1)} if len(text) >= 2 else set()
+
+    @staticmethod
+    def _char_unigrams(text: str) -> set[str]:
+        return set(text) if text else set()
+
+    @staticmethod
+    def _bag_of_words_match_score(query: str, target: str) -> float:
+        q_uni = PageIndexTree._char_unigrams(query)
+        t_uni = PageIndexTree._char_unigrams(target)
+        uni_score = 0.0
+        if q_uni and t_uni:
+            uni_inter = q_uni & t_uni
+            uni_jaccard = len(uni_inter) / len(q_uni | t_uni)
+            uni_coverage = len(uni_inter) / len(q_uni)
+            uni_score = uni_jaccard * 0.3 + uni_coverage * 0.7
+        q_bi = PageIndexTree._char_bigrams(query)
+        t_bi = PageIndexTree._char_bigrams(target)
+        bi_score = 0.0
+        if q_bi and t_bi:
+            bi_inter = q_bi & t_bi
+            bi_jaccard = len(bi_inter) / len(q_bi | t_bi)
+            bi_coverage = len(bi_inter) / len(q_bi)
+            bi_score = bi_jaccard * 0.3 + bi_coverage * 0.7
+        return max(uni_score, bi_score)
+
+    def _semantic_bigram_score(self, q: str, category_id: str) -> tuple[float, str]:
+        node = self._node_map.get(category_id)
+        if node is None:
+            return 0.0, "none"
+        best_score = 0.0
+        best_type = "none"
+        q_segs = self._extract_chinese_segments(q)
+        long_segs = [s for s in q_segs if len(s) >= 4]
+        short_segs = [s for s in q_segs if len(s) == 3]
+        q_parts = long_segs if long_segs else short_segs
+        if not q_parts:
+            q_parts = [q]
+        for qp in q_parts:
+            if len(qp) < 3:
+                continue
+            min_bow = 0.50 if len(qp) >= 4 else 0.65
+            s = self._bag_of_words_match_score(qp, node.category_name.strip().lower())
+            if s >= min_bow and s > best_score:
+                best_score = s
+                best_type = "bag_of_words"
+            for syn in node.syn_list:
+                if not syn:
+                    continue
+                sl = syn.strip().lower()
+                if not sl:
+                    continue
+                s_syn = self._bag_of_words_match_score(qp, sl) * 0.95
+                if s_syn >= min_bow and s_syn > best_score:
+                    best_score = s_syn
+                    best_type = "synonym_bag_of_words"
+        if best_score < 0.40:
+            return 0.0, "none"
+        return best_score, best_type
+
+    @staticmethod
+    def _quick_match(query: str, node: TreeNode) -> bool:
+        name = node.category_name.strip().lower()
+        if query in name or name in query:
+            return True
+        for syn in node.syn_list:
+            if syn and (query in syn.lower() or syn.lower() in query):
+                return True
+        return False
+
     @staticmethod
     def _score_index_match(query: str, node: TreeNode) -> tuple[float, str]:
         name = node.category_name.strip().lower()
@@ -135,13 +242,127 @@ class PageIndexTree:
             return 1.0, "exact"
         for syn in node.syn_list:
             if syn and query == syn.strip().lower():
+                if len(syn.strip()) <= 2:
+                    return 0.70, "synonym_short"
                 return 0.98, "synonym"
-        if query in name or name in query:
+        if query in name:
+            if len(query) <= 2:
+                is_core = False
+                for suffix in ("设备", "产品", "装置", "系统", "器具", "仪器", "机械", "机器", "材料", "部件", "零件", "组件"):
+                    if name == query + suffix:
+                        is_core = True
+                        break
+                if not is_core and (name.startswith(query) or name.endswith(query)):
+                    rest = name[len(query):] if name.startswith(query) else name[:-len(query)]
+                    if len(rest) <= 3 and all('\u4e00' <= c <= '\u9fff' for c in rest):
+                        is_core = True
+                if is_core:
+                    return 0.70, "partial_short_core"
+                return 0.55, "partial_short"
             return 0.75, "partial"
+        if name in query:
+            if len(name) <= 2:
+                ratio = len(name) / len(query) if query else 0
+                if ratio >= 0.5:
+                    return 0.55, "partial_contained_short_core"
+                return 0.35, "partial_contained_short"
+            return 0.55, "partial_contained"
         for syn in node.syn_list:
-            if syn and (query in syn.lower() or syn.lower() in query):
+            if not syn:
+                continue
+            sl = syn.strip().lower()
+            if not sl:
+                continue
+            if query in sl:
                 return 0.72, "synonym_partial"
+            if sl in query:
+                if len(sl) <= 2:
+                    ratio = len(sl) / len(query) if query else 0
+                    if ratio >= 0.5:
+                        return 0.60, "synonym_contained_short_core"
+                    return 0.35, "synonym_contained_short"
+                return 0.70, "synonym_contained"
+        cns = PageIndexTree._extract_chinese_segments(query)
+        for seg in cns:
+            if len(seg) >= 3 and seg in name:
+                q_uni = PageIndexTree._char_unigrams(query)
+                n_uni = PageIndexTree._char_unigrams(name)
+                overlap = q_uni & n_uni
+                coverage = len(overlap) / len(q_uni) if q_uni else 0
+                if coverage >= 0.9:
+                    return 0.65, "segment_match"
+                elif coverage >= 0.6:
+                    return 0.45, "segment_match_partial"
+                continue
+        for syn in node.syn_list:
+            if not syn:
+                continue
+            sl = syn.strip().lower()
+            if not sl:
+                continue
+            for seg in cns:
+                if len(seg) >= 3 and seg in sl:
+                    q_uni = PageIndexTree._char_unigrams(query)
+                    s_uni = PageIndexTree._char_unigrams(sl)
+                    overlap = q_uni & s_uni
+                    coverage = len(overlap) / len(q_uni) if q_uni else 0
+                    if coverage >= 0.9:
+                        return 0.60, "synonym_segment_match"
+                    elif coverage >= 0.6:
+                        return 0.40, "synonym_segment_match_partial"
+                    continue
+        bow_score = PageIndexTree._bag_of_words_match_score(query, name)
+        bow_threshold = 0.70 if len(query) <= 3 else 0.45
+        if bow_score >= bow_threshold:
+            return bow_score, "bag_of_words"
+        for syn in node.syn_list:
+            if not syn:
+                continue
+            sl = syn.strip().lower()
+            if not sl:
+                continue
+            bow_score_syn = PageIndexTree._bag_of_words_match_score(query, sl)
+            if bow_score_syn >= bow_threshold:
+                return bow_score_syn * 0.95, "synonym_bag_of_words"
+        cns = PageIndexTree._extract_chinese_segments(query)
+        for seg in cns:
+            if len(seg) >= 4:
+                seg_bow = PageIndexTree._bag_of_words_match_score(seg, name)
+                if seg_bow >= 0.70:
+                    return seg_bow * 0.85, "segment_bag_of_words"
+                for syn2 in node.syn_list:
+                    if not syn2:
+                        continue
+                    sl2 = syn2.strip().lower()
+                    if not sl2:
+                        continue
+                    seg_bow_syn = PageIndexTree._bag_of_words_match_score(seg, sl2)
+                    if seg_bow_syn >= 0.70:
+                        return seg_bow_syn * 0.80, "synonym_segment_bag_of_words"
         return 0.0, "none"
+
+    @staticmethod
+    def _extract_chinese_segments(text: str) -> list[str]:
+        raw_segments: list[str] = []
+        current: list[str] = []
+        for ch in text:
+            if '\u4e00' <= ch <= '\u9fff':
+                current.append(ch)
+            else:
+                if len(current) >= 2:
+                    raw_segments.append(''.join(current))
+                current = []
+        if len(current) >= 2:
+            raw_segments.append(''.join(current))
+        result: list[str] = []
+        for seg in raw_segments:
+            if len(seg) <= 4:
+                result.append(seg)
+            else:
+                for i in range(len(seg)):
+                    for j in range(i + 3, len(seg) + 1):
+                        result.append(seg[i:j])
+        return result
 
     def _path_to_root(self, node: TreeNode) -> list[TreeNode]:
         path: list[TreeNode] = []
@@ -178,3 +399,34 @@ class PageIndexTree:
                 yield from _dfs(node.children)
 
         yield from _dfs(self._root_nodes)
+
+    def add_node(self, category_id: str, category_name: str, parent_id: str, syn_list: list[str] | None = None) -> TreeNode | None:
+        parent = self._node_map.get(parent_id)
+        if parent is None:
+            logger.warning(f"热更新: 父节点不存在 parent_id={parent_id}")
+            return None
+        if category_id in self._node_map:
+            logger.info(f"热更新: 节点已存在 category_id={category_id}")
+            return self._node_map[category_id]
+        new_node = TreeNode(
+            category_id=category_id,
+            category_name=category_name,
+            syn_list=syn_list or [],
+            children=[],
+            parent=parent,
+            depth=parent.depth + 1,
+        )
+        parent.children.append(new_node)
+        self._node_map[category_id] = new_node
+        self._index_node(new_node)
+        logger.info(f"热更新: 已添加节点 category_id={category_id}, name={category_name}, parent={parent_id}")
+        return new_node
+
+    def _index_node(self, node: TreeNode) -> None:
+        terms = {node.category_name.strip().lower()}
+        terms.update(s.strip().lower() for s in node.syn_list if s)
+        for kw in self._extract_index_terms(node.category_name):
+            terms.add(kw)
+        for term in terms:
+            if term:
+                self._term_index.setdefault(term, set()).add(node.category_id)

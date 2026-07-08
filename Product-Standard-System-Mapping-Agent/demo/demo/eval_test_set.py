@@ -29,6 +29,7 @@ logger = logging.getLogger("EvalTestSet")
 TEST_SET_PATH = "output/test_set_1000_fixed.json"
 OUTPUT_PATH = "output/eval_results.json"
 MAX_WORKERS = 4
+PROGRESS_FILE = "output/eval_progress.txt"
 
 
 ENGINE_KEYS = ["rag", "rag_rerank", "page_index", "page_index_force"]
@@ -92,9 +93,12 @@ def init_engines(config_path: str = "config.yaml"):
     }
 
 
-def evaluate():
+def evaluate(limit=0):
     with open(TEST_SET_PATH, "r", encoding="utf-8") as f:
         test_set = json.load(f)
+
+    if limit > 0:
+        test_set = test_set[:limit]
 
     logger.info(f"加载测试集: {len(test_set)} 条")
 
@@ -113,6 +117,14 @@ def evaluate():
     total = len(test_set)
     completed = 0
     start_time = time.time()
+    progress_fh = open(PROGRESS_FILE, "w", encoding="utf-8")
+
+    def write_progress(msg):
+        progress_fh.write(msg + "\n")
+        progress_fh.flush()
+
+    write_progress(f"评测开始: 共{total}条, 并发={MAX_WORKERS}")
+    write_progress("=" * 70)
 
     def process_item(item):
         gt = item["ground_truth"]
@@ -145,11 +157,20 @@ def evaluate():
             row_results = future.result()
             all_row_results.append(row_results)
             completed += 1
-            if completed % 50 == 0:
-                elapsed = time.time() - start_time
-                speed = completed / elapsed
-                eta = (total - completed) / speed if speed > 0 else 0
-                logger.info(f"评测进度: {completed}/{total} ({speed:.1f}条/s, ETA={eta:.0f}s)")
+            elapsed = time.time() - start_time
+            speed = completed / elapsed
+            eta = (total - completed) / speed if speed > 0 else 0
+            pct = completed / total * 100
+
+            item = future_map[future]
+            pname = item["product_name"][:25]
+            line_parts = [f"[{completed}/{total} {pct:.1f}%] {pname}"]
+            for ek in ENGINE_KEYS:
+                r = row_results[ek]
+                hit = "✓" if r["predicted"] == r["ground_truth"] else "✗" if r["predicted"] else "-"
+                line_parts.append(f"  {ek}: {r['predicted'] or 'NONE':<8} conf={r['confidence']:.3f} {hit}")
+            line_parts.append(f"  速度={speed:.1f}条/s 剩余={eta:.0f}s")
+            write_progress("\n".join(line_parts))
 
     elapsed = time.time() - start_time
     logger.info(f"评测完成, 耗时={elapsed:.1f}s")
@@ -194,6 +215,14 @@ def evaluate():
         s = summary[ek]
         logger.info(f"{ek:<20} {s['accuracy']:<10.4f} {s['avg_confidence']:<12.4f} {s['avg_time_ms']:<12.1f} {s['p95_time_ms']:<12.1f} {s['no_match']:<10}")
 
+    write_progress("=" * 70)
+    write_progress(f"评测完成! 耗时={elapsed:.1f}s")
+    write_progress(f"{'引擎':<20} {'准确率':<10} {'平均置信度':<12} {'平均耗时ms':<12} {'P95耗时ms':<12} {'无匹配数':<10}")
+    for ek in ENGINE_KEYS:
+        s = summary[ek]
+        write_progress(f"{ek:<20} {s['accuracy']:<10.4f} {s['avg_confidence']:<12.4f} {s['avg_time_ms']:<12.1f} {s['p95_time_ms']:<12.1f} {s['no_match']:<10}")
+    progress_fh.close()
+
     output = {
         "summary": summary,
         "total_items": total,
@@ -208,4 +237,5 @@ def evaluate():
 
 
 if __name__ == "__main__":
-    evaluate()
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 0
+    evaluate(limit=n)

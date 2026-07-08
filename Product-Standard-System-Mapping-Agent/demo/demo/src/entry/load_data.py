@@ -3,6 +3,7 @@ import logging
 import sys
 
 from src.data.excel_reader import ExcelDataReader
+from src.data.synonym_sanitizer import sanitize_nodes
 from src.index.page_index_tree import PageIndexTree
 from src.index.trgm_index_manager import TrgmIndexManager
 from src.index.vector_index_manager import VectorIndexManager
@@ -51,6 +52,9 @@ def load_data(config_path: str = "config.yaml") -> LoadDataResult:
         result.total_categories = len(nodes)
         result.skipped_rows = skipped
         logger.info("LoadData", f"标准体系加载完成: {len(nodes)}条, 跳过{skipped}条")
+        removed = sanitize_nodes(nodes)
+        if removed:
+            logger.info("LoadData", f"同义词清洗: 移除{removed}条泛词同义词")
     except Exception as e:
         logger.error("LoadData", f"标准体系加载失败: {e}")
         result.errors.append(f"标准体系加载失败: {e}")

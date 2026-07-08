@@ -54,6 +54,8 @@ class ConfigManager:
             max_retries=llm.get("max_retries", 3),
             timeout=llm.get("timeout", 30),
             thinking_enabled=llm.get("thinking_enabled", False),
+            cache_enabled=llm.get("cache_enabled", True),
+            cache_size=llm.get("cache_size", 512),
         )
 
     def get_rerank_config(self) -> RerankConfig:
@@ -88,4 +90,5 @@ class ConfigManager:
             enable_rerank=match.get("enable_rerank", True),
             rerank_weight=match.get("rerank_weight", match.get("llm_weight", 0.6)),
             page_index_force_llm_layers=match.get("page_index_force_llm_layers", False),
+            coarse_abort_threshold=match.get("coarse_abort_threshold", 0.45),
         )

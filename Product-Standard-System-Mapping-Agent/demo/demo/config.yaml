@@ -6,14 +6,16 @@ database:
   password: ''
   pool_size: 10
 llm:
-  api_key: sk-b7574e6edae94f088ecb3e8728ffee3c
-  base_url: https://api.deepseek.com/v1
-  model: deepseek-v4-flash
+  api_key: sk-NeZZ35h3SyD6p9GmnOSOArW7Yz7uhuL3x9ceFFPHQ6TtaQb3
+  base_url: https://apihub.agnes-ai.com/v1
+  model: agnes-2.0-flash
   embedding_model: onnx
   embedding_dimension: 512
   max_retries: 3
   timeout: 30
   thinking_enabled: false
+  cache_enabled: true
+  cache_size: 512
 match:
   vector_weight: 0.6
   trgm_weight: 0.4
@@ -27,6 +29,7 @@ match:
   low_confidence_threshold: 0.5
   enable_llm: true
   page_index_force_llm_layers: false
+  coarse_abort_threshold: 0.45
   enable_rerank: true
   rerank_weight: 0.6
 data:

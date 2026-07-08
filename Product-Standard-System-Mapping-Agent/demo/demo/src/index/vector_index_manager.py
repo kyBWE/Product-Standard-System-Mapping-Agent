@@ -443,48 +443,37 @@ class VectorIndexManager:
         return success
 
     def _write_chunk_to_db(self, rows: list[tuple], vec_strs: list[tuple]) -> None:
-        conn = self._db.get_connection()
+        if not rows:
+            return
         try:
-            with conn.cursor() as cur:
-                for row in rows:
-                    try:
-                        cur.execute(
-                            """INSERT INTO category_vectors (category_id, category_name, syn_list, embedding)
-                               VALUES (%s, %s, %s, %s)
-                               ON CONFLICT (category_id) DO UPDATE
-                               SET category_name=EXCLUDED.category_name,
-                                   syn_list=EXCLUDED.syn_list,
-                                   embedding=EXCLUDED.embedding,
-                                   updated_at=CURRENT_TIMESTAMP""",
-                            row,
-                        )
-                    except Exception as e:
-                        logger.warning(f"写入向量异常: {e}")
-                conn.commit()
+            self._db.execute_values_batch(
+                """INSERT INTO category_vectors (category_id, category_name, syn_list, embedding)
+                   VALUES %s
+                   ON CONFLICT (category_id) DO UPDATE
+                   SET category_name=EXCLUDED.category_name,
+                       syn_list=EXCLUDED.syn_list,
+                       embedding=EXCLUDED.embedding,
+                       updated_at=CURRENT_TIMESTAMP""",
+                rows,
+                page_size=500,
+            )
         except Exception as e:
-            conn.rollback()
             logger.error(f"批量写入失败: {e}")
-        finally:
-            self._db.put_connection(conn)
 
         if self._use_pgvector and vec_strs:
-            conn = self._db.get_connection()
             try:
-                with conn.cursor() as cur:
-                    for cat_id, vec_str in vec_strs:
-                        try:
-                            cur.execute(
-                                "UPDATE category_vectors SET vec_search = %s::vector WHERE category_id = %s",
-                                (vec_str, cat_id),
-                            )
-                        except Exception as e:
-                            logger.warning(f"vec_search更新异常: {cat_id}: {e}")
-                    conn.commit()
+                self._db.execute_values_batch(
+                    """UPDATE category_vectors AS cv
+                       SET vec_search = v.vec::vector,
+                           updated_at = CURRENT_TIMESTAMP
+                       FROM (VALUES %s) AS v(category_id, vec)
+                       WHERE cv.category_id = v.category_id""",
+                    vec_strs,
+                    template="(%s, %s)",
+                    page_size=500,
+                )
             except Exception as e:
-                conn.rollback()
                 logger.warning(f"vec_search批量更新失败: {e}")
-            finally:
-                self._db.put_connection(conn)
 
     def update_category_vectors(self, nodes: list[CategoryNode]) -> int:
         success = 0

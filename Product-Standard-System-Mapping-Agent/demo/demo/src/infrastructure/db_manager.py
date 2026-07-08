@@ -4,6 +4,7 @@ from typing import Any
 
 import psycopg2
 from psycopg2 import pool
+from psycopg2.extras import execute_values
 
 from src.models.config_models import DBConfig
 
@@ -11,12 +12,12 @@ from src.models.config_models import DBConfig
 class DBConnectionManager:
     def __init__(self, config: DBConfig):
         self._config = config
-        self._pool: pool.SimpleConnectionPool | None = None
+        self._pool: pool.ThreadedConnectionPool | None = None
         self._logger = logging.getLogger("DBConnectionManager")
 
     def initialize(self) -> None:
         try:
-            self._pool = pool.SimpleConnectionPool(
+            self._pool = pool.ThreadedConnectionPool(
                 minconn=1,
                 maxconn=self._config.pool_size,
                 host=self._config.host,
@@ -73,6 +74,35 @@ class DBConnectionManager:
         except Exception as e:
             conn.rollback()
             self._logger.error(f"批量SQL执行失败: {e}, query={query[:100]}")
+            raise
+        finally:
+            self.put_connection(conn)
+
+    def execute_values_batch(
+        self,
+        query: str,
+        params_list: list[tuple],
+        template: str | None = None,
+        page_size: int = 1000,
+    ) -> int:
+        if not params_list:
+            return 0
+        conn = self.get_connection()
+        try:
+            with conn.cursor() as cur:
+                execute_values(
+                    cur,
+                    query,
+                    params_list,
+                    template=template,
+                    page_size=page_size,
+                )
+                affected = cur.rowcount
+                conn.commit()
+                return affected
+        except Exception as e:
+            conn.rollback()
+            self._logger.error(f"execute_values批量写入失败: {e}, query={query[:100]}")
             raise
         finally:
             self.put_connection(conn)

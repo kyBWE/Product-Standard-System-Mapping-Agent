@@ -14,3 +14,10 @@ class TrgmSearchResult:
     category_id: str
     category_name: str
     similarity: float
+
+
+@dataclass
+class ExactTextMatch:
+    category_id: str
+    category_name: str
+    match_type: str  # "name" | "synonym"
