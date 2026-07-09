@@ -10,6 +10,12 @@ from flask import Flask, request, jsonify, send_from_directory
 WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "web")
 
 from src.data.excel_reader import ExcelDataReader
+from src.data.taxonomy_utils import (
+    allocate_next_category_id,
+    build_category_path_fields,
+    format_category_path,
+    locate_expansion_parent,
+)
 from src.engine.llm_adapter import LLMAdapter
 from src.engine.page_index_engine import PageIndexEngine
 from src.engine.rag_match_engine import RAGMatchEngine
@@ -421,36 +427,21 @@ def api_suggest_expansion():
         if not product_name:
             return jsonify({"error": "product_name required"}), 400
 
-        root_nodes = [(r.category_id, r.category_name) for r in _page_tree.get_root_nodes()]
-        analysis = _llm.detailed_category_analysis(product_name, root_nodes)
-
-        suggested_parent_id = analysis.get("root_category_id", "")
-        if not suggested_parent_id:
-            root_name = analysis.get("root_category_name", "")
-            for rid, rname in root_nodes:
-                if rname == root_name:
-                    suggested_parent_id = rid
-                    break
-
-        if suggested_parent_id:
-            children = _page_tree.get_children(suggested_parent_id)
-            if children:
-                child_names = [(c.category_id, c.category_name) for c in children[:20]]
-                child_analysis = _llm.detailed_category_analysis(product_name, child_names)
-                child_parent_id = child_analysis.get("root_category_id", "")
-                if child_parent_id:
-                    suggested_parent_id = child_parent_id
+        suggested_parent_id, analysis, mount_path = locate_expansion_parent(
+            _llm, _page_tree, product_name
+        )
 
         suggested_category_name = analysis.get("suggested_category_name", product_name)
         reason = analysis.get("reason", "")
         confidence = analysis.get("confidence", 0)
+        path_note = f"挂载路径: {mount_path}" if mount_path else "挂载路径: 未确定"
 
         _db.execute(
             """INSERT INTO expansion_suggestions
                (product_name, suggested_parent_id, suggested_category_name, suggested_level_position, llm_analysis, status)
                VALUES (%s, %s, %s, %s, %s, %s)""",
             (product_name, suggested_parent_id or None, suggested_category_name,
-             None, f"置信度={confidence:.2f} | {reason}", "PENDING_REVIEW"),
+             mount_path or None, f"置信度={confidence:.2f} | {path_note} | {reason}", "PENDING_REVIEW"),
         )
 
         return jsonify({
@@ -458,6 +449,7 @@ def api_suggest_expansion():
             "product_name": product_name,
             "suggested_parent_id": suggested_parent_id,
             "suggested_category_name": suggested_category_name,
+            "mount_path": mount_path,
             "llm_analysis": reason,
             "confidence": confidence,
         })
@@ -481,13 +473,19 @@ def api_approve_expansion():
         if not parent_node:
             return jsonify({"error": f"parent_id={parent_id} not found in tree"}), 404
 
-        max_id_row = _db.execute_one("SELECT MAX(CAST(category_id AS INTEGER)) as max_id FROM category_texts")
-        new_id = str((max_id_row["max_id"] or 21090) + 1)
+        new_id = allocate_next_category_id(_db)
+        if _page_tree.get_node(new_id) or _db.execute_one(
+            "SELECT 1 FROM category_texts WHERE category_id = %s", (new_id,)
+        ):
+            return jsonify({"error": f"分配的新 category_id={new_id} 已存在，请检查 id 分配逻辑"}), 409
+
+        category_pids, category_group_name = build_category_path_fields(_page_tree, parent_id)
+        mount_path = format_category_path(_page_tree, parent_id)
 
         _db.execute(
-            """INSERT INTO category_texts (category_id, category_name, category_pids, syn_list)
-               VALUES (%s, %s, %s, %s)""",
-            (new_id, category_name, [parent_id], [product_name]),
+            """INSERT INTO category_texts (category_id, category_name, category_pids, syn_list, category_group_name)
+               VALUES (%s, %s, %s, %s, %s)""",
+            (new_id, category_name, category_pids, [product_name], category_group_name),
         )
 
         from src.index.onnx_embedder import ONNXEmbedder
@@ -498,9 +496,9 @@ def api_approve_expansion():
         emb_list = embedding.tolist() if isinstance(embedding, np.ndarray) else list(embedding)
 
         _db.execute(
-            """INSERT INTO category_vectors (category_id, embedding, syn_list)
-               VALUES (%s, %s, %s)""",
-            (new_id, str(emb_list), [product_name]),
+            """INSERT INTO category_vectors (category_id, category_name, embedding, syn_list)
+               VALUES (%s, %s, %s, %s)""",
+            (new_id, category_name, str(emb_list), [product_name]),
         )
 
         _page_tree.add_node(new_id, category_name, parent_id, [product_name])
@@ -537,8 +535,10 @@ def api_approve_expansion():
             "new_category_id": new_id,
             "category_name": category_name,
             "parent_id": parent_id,
+            "mount_path": mount_path,
+            "category_pids": category_pids,
             "verified": True,
-            "message": f"已新增分类 #{new_id} '{category_name}' (父节点: #{parent_id})，验证通过",
+            "message": f"已新增分类 #{new_id} '{category_name}'，挂载于 {mount_path}，验证通过",
         })
     except Exception as e:
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
@@ -569,23 +569,26 @@ def api_pending_expansions():
     try:
         _init_components()
         rows = _db.execute(
-            """SELECT product_name, suggested_parent_id, suggested_category_name, llm_analysis, status, created_at
+            """SELECT product_name, suggested_parent_id, suggested_category_name,
+                      suggested_level_position, llm_analysis, status, created_at
                FROM expansion_suggestions WHERE status = 'PENDING_REVIEW'
                ORDER BY created_at DESC LIMIT 50""",
         )
         results = []
         for r in rows:
+            parent_id = r["suggested_parent_id"] or ""
+            mount_path = r["suggested_level_position"] or ""
+            if not mount_path and parent_id:
+                mount_path = format_category_path(_page_tree, parent_id)
             parent_name = ""
-            if r["suggested_parent_id"]:
-                pn = _db.execute_one(
-                    "SELECT category_name FROM category_texts WHERE category_id = %s",
-                    (r["suggested_parent_id"],),
-                )
-                parent_name = pn["category_name"] if pn else ""
+            if parent_id:
+                parent_node = _page_tree.get_node(parent_id)
+                parent_name = parent_node.category_name if parent_node else ""
             results.append({
                 "product_name": r["product_name"],
-                "suggested_parent_id": r["suggested_parent_id"] or "",
+                "suggested_parent_id": parent_id,
                 "suggested_parent_name": parent_name,
+                "mount_path": mount_path,
                 "suggested_category_name": r["suggested_category_name"],
                 "llm_analysis": r["llm_analysis"],
                 "status": r["status"],

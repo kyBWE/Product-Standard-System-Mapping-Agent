@@ -296,7 +296,11 @@ class LLMAdapter:
         return CategoryAnalysisResult()
 
     def detailed_category_analysis(
-        self, product_name: str, root_nodes: list[tuple[str, str]]
+        self,
+        product_name: str,
+        root_nodes: list[tuple[str, str]],
+        *,
+        level_hint: str = "一级分类",
     ) -> dict:
         root_lines = [f"{i+1}. #{rid} {rname}" for i, (rid, rname) in enumerate(root_nodes)]
         root_text = "\n".join(root_lines)
@@ -304,13 +308,15 @@ class LLMAdapter:
 
 产品名称：{product_name}
 
-标准体系一级分类：
+标准体系{level_hint}候选：
 {root_text}
 
-请先选择最相关的一级分类，然后说明该产品应作为什么新分类插入。
+请从候选中选择最相关的分类节点，作为「建议新增子分类」的挂载父节点。
+若候选中已有足够细的分类，优先选择语义最接近的节点，而不是停留在过浅的层级。
+然后说明该产品应作为什么新分类插入。
 
 请以JSON格式返回：
-{{"root_category_id": "一级分类ID", "root_category_name": "一级分类名称", "suggested_category_name": "建议新增的分类名称", "reason": "归类理由", "confidence": 0.8}}"""
+{{"root_category_id": "所选父节点ID", "root_category_name": "所选父节点名称", "suggested_category_name": "建议新增的分类名称", "reason": "归类理由", "confidence": 0.8}}"""
 
         for attempt in range(self._max_retries):
             try:

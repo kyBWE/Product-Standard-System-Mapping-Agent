@@ -385,6 +385,12 @@ class PageIndexTree:
     def get_node(self, node_id: str) -> TreeNode | None:
         return self._node_map.get(node_id)
 
+    def get_path_to_root(self, node_id: str) -> list[TreeNode]:
+        node = self._node_map.get(node_id)
+        if node is None:
+            return []
+        return self._path_to_root(node)
+
     def get_leaf_nodes(self) -> list[TreeNode]:
         leaves: list[TreeNode] = []
         for node in self._node_map.values():

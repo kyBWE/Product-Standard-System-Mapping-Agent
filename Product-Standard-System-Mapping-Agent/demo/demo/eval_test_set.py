@@ -26,8 +26,8 @@ from src.models.enums import EngineType
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s - %(message)s")
 logger = logging.getLogger("EvalTestSet")
 
-TEST_SET_PATH = "output/test_set_1000_fixed.json"
-OUTPUT_PATH = "output/eval_results.json"
+TEST_SET_PATH = "output/test_set_200_fixed.json"
+OUTPUT_PATH = "output/eval_results_200.json"
 MAX_WORKERS = 4
 PROGRESS_FILE = "output/eval_progress.txt"
 

@@ -16,8 +16,8 @@ from openai import OpenAI
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s - %(message)s")
 logger = logging.getLogger("FixGroundTruth")
 
-INPUT_PATH = "output/test_set_1000.json"
-OUTPUT_PATH = "output/test_set_1000_fixed.json"
+INPUT_PATH = "output/test_set_200.json"
+OUTPUT_PATH = "output/test_set_200_fixed.json"
 NEED_FIX_SOURCES = {"llm_arbitrate_fallback_top_vote", "top_vote_fallback", "top_vote_1"}
 
 

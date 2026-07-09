@@ -236,7 +236,7 @@ def determine_ground_truth(item: TestSetItem, engines: dict) -> TestSetItem:
 
 def main():
     config_path = "config.yaml"
-    sample_size = 1000
+    sample_size = int(sys.argv[1]) if len(sys.argv) > 1 else 200
     max_workers = 4
     output_dir = "./output"
     os.makedirs(output_dir, exist_ok=True)
@@ -251,7 +251,7 @@ def main():
 
     if len(all_products) < sample_size:
         sample_size = len(all_products)
-        logger.warning(f"产品数不足1000, 使用全部 {sample_size} 条")
+        logger.warning(f"产品数不足目标抽样数, 使用全部 {sample_size} 条")
 
     random.seed(42)
     sampled = random.sample(all_products, sample_size)
@@ -298,7 +298,7 @@ def main():
     gt_counts = Counter(item.ground_truth_source for item in items)
     logger.info(f"ground truth 来源统计: {dict(gt_counts)}")
 
-    output_path = os.path.join(output_dir, "test_set_1000.json")
+    output_path = os.path.join(output_dir, "test_set_200.json")
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump([asdict(item) for item in items], f, ensure_ascii=False, indent=2)
     logger.info(f"测试集已保存: {output_path}")
