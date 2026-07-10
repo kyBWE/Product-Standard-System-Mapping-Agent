@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品-标准体系映射智能体</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-canvas:#050506;--bg-card:#0A0A0B;--bg-card-hover:#0F0F11;
+  --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);
+  --text-primary:#EDEDEF;--text-secondary:#8A8F98;--text-muted:#55585F;
+  --accent:#6366F1;--accent-glow:rgba(99,102,241,0.15);--accent-soft:rgba(99,102,241,0.08);
+  --green:#22C55E;--green-glow:rgba(34,197,94,0.15);
+  --amber:#F59E0B;--amber-glow:rgba(245,158,11,0.15);
+  --red:#EF4444;--red-glow:rgba(239,68,68,0.15);
+  --purple:#A855F7;--purple-glow:rgba(168,85,247,0.15);
+  --cyan:#38bdf8;--cyan-glow:rgba(56,189,248,0.12);
+  --radius:12px;--radius-sm:8px;--radius-xs:6px;
+}
+html{font-size:14px}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg-canvas);color:var(--text-primary);
+  min-height:100vh;overflow-x:hidden;letter-spacing:-0.01em;
+}
+body::before{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(99,102,241,0.08),transparent),
+             radial-gradient(ellipse 60% 40% at 80% 100%,rgba(168,85,247,0.05),transparent);
+  pointer-events:none;z-index:0;
+}
+.app{position:relative;z-index:1;max-width:1480px;margin:0 auto;padding:20px 28px 48px}
+
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 20px var(--accent-glow)}
+.header-title{font-size:1.2rem;font-weight:700;letter-spacing:-0.03em}
+.header-sub{font-size:0.75rem;color:var(--text-secondary);margin-top:1px}
+.header-right{display:flex;gap:8px}
+.badge{padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;letter-spacing:0.02em;border:1px solid var(--border)}
+.badge-green{color:var(--green);border-color:rgba(34,197,94,0.2);background:var(--green-glow)}
+.badge-purple{color:var(--purple);border-color:rgba(168,85,247,0.2);background:var(--purple-glow)}
+
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
+.stat-value{font-size:1.6rem;font-weight:700;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--text-primary),var(--text-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.7rem;color:var(--text-muted);margin-top:4px}
+
+.tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px}
+.tab{padding:8px 16px;border-radius:var(--radius-xs);font-size:0.8rem;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.2s;border:none;background:none;font-family:inherit}
+.tab:hover{color:var(--text-primary);background:var(--bg-card-hover)}
+.tab.active{color:var(--accent);background:var(--accent-soft)}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden;transition:border-color 0.2s}
+.card:hover{border-color:var(--border-hover)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
+.card-title{font-size:0.75rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-title .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+
+.input-row{display:flex;gap:8px;margin-bottom:14px}
+.match-input{flex:1;background:var(--bg-canvas);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;color:var(--text-primary);font-size:0.9rem;font-family:inherit;outline:none;transition:border-color 0.2s}
+.match-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.match-input::placeholder{color:var(--text-muted)}
+textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
+
+.btn{padding:9px 18px;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 16px var(--accent-glow)}
+.btn-primary:hover{background:#5558E6;box-shadow:0 0 24px var(--accent-glow)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--text-secondary)}
+.btn-ghost:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+
+.engine-btns{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.engine-btn{padding:6px 14px;border-radius:20px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all 0.2s;font-family:inherit}
+.engine-btn:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+.engine-btn.active{background:var(--accent-soft);color:var(--accent);border-color:rgba(99,102,241,0.3)}
+.engine-btn.active[data-eng="rag_rerank"]{background:var(--cyan-glow);color:var(--cyan);border-color:rgba(56,189,248,0.3)}
+.engine-btn.active[data-eng="pageindex"]{background:var(--purple-glow);color:var(--purple);border-color:rgba(168,85,247,0.3)}
+.engine-btn.active[data-eng="pageindex_force_llm"]{background:var(--amber-glow);color:var(--amber);border-color:rgba(245,158,11,0.3)}
+
+.compare-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.compare-card{background:var(--bg-canvas);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;position:relative;overflow:hidden;transition:all 0.3s}
+.compare-card:hover{border-color:var(--border-hover)}
+.compare-card.engine-rag{--eng-color:var(--accent);--eng-glow:var(--accent-glow)}
+.compare-card.engine-rag_rerank{--eng-color:var(--cyan);--eng-glow:var(--cyan-glow)}
+.compare-card.engine-pageindex{--eng-color:var(--purple);--eng-glow:var(--purple-glow)}
+.compare-card.engine-pageindex_force_llm{--eng-color:var(--amber);--eng-glow:var(--amber-glow)}
+.compare-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--eng-color)}
+.compare-eng-label{font-size:0.68rem;font-weight:700;color:var(--eng-color);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.compare-result{font-size:1rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;min-height:24px}
+.compare-result.empty{color:var(--text-muted);font-weight:400;font-size:0.85rem}
+.compare-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tag{padding:2px 8px;border-radius:20px;font-size:0.65rem;font-weight:600}
+.tag-matched{color:var(--green);background:var(--green-glow);border:1px solid rgba(34,197,94,0.2)}
+.tag-low{color:var(--amber);background:var(--amber-glow);border:1px solid rgba(245,158,11,0.2)}
+.tag-nomatch{color:var(--red);background:var(--red-glow);border:1px solid rgba(239,68,68,0.2)}
+.tag-llm-yes{color:var(--green);background:var(--green-glow);border:1px solid rgba(34,197,94,0.2)}
+.tag-llm-no{color:var(--text-muted);background:var(--bg-card);border:1px solid var(--border)}
+
+.conf-gauge{position:relative;width:100%;height:6px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden;margin-top:6px}
+.conf-gauge-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+.conf-label{display:flex;justify-content:space-between;margin-top:4px;font-size:0.65rem;color:var(--text-muted)}
+.conf-val{font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+
+.path-tree{margin-top:8px}
+.path-node{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:0.78rem}
+.path-connector{width:16px;text-align:center;color:var(--text-muted);font-size:0.7rem;flex-shrink:0}
+.path-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.path-dot.root{background:var(--accent)}
+.path-dot.mid{background:var(--text-muted)}
+.path-dot.leaf{background:var(--green);box-shadow:0 0 6px var(--green-glow)}
+.path-name{color:var(--text-secondary)}
+.path-name.leaf{color:var(--text-primary);font-weight:600}
+.path-id{color:var(--text-muted);font-size:0.65rem}
+
+.history-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.history-list{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.history-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.78rem}
+.history-item:last-child{border-bottom:none}
+.history-product{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-category{color:var(--accent);font-weight:500;min-width:40px}
+.history-conf{font-variant-numeric:tabular-nums;color:var(--text-secondary);min-width:40px;text-align:right}
+.history-status{min-width:60px;text-align:right}
+
+.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.3s ease}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skeleton{background:linear-gradient(90deg,var(--bg-card) 25%,var(--bg-card-hover) 50%,var(--bg-card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+
+.flow-row{display:flex;align-items:center;justify-content:center;gap:0;padding:16px 0;flex-wrap:nowrap}
+.flow-step{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-canvas);min-width:80px;transition:all 0.3s}
+.flow-step.active{border-color:var(--accent);box-shadow:0 0 16px var(--accent-glow);background:var(--accent-soft)}
+.flow-step .step-icon{font-size:1.1rem}
+.flow-step .step-label{font-size:0.62rem;color:var(--text-secondary);font-weight:500;text-align:center;white-space:nowrap}
+.flow-step.active .step-label{color:var(--accent)}
+.flow-arrow{color:var(--text-muted);font-size:0.8rem;margin:0 3px;flex-shrink:0}
+.flow-arrow.active{color:var(--accent)}
+
+.batch-area{display:none}
+.batch-area.visible{display:block}
+.single-area.hidden{display:none}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+@media(max-width:1100px){.compare-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.compare-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(3,1fr)}.history-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-icon">&#x1F9E0;</div>
+      <div>
+        <div class="header-title">产品-标准体系映射智能体</div>
+        <div class="header-sub">Product-Standard Taxonomy Mapping Agent</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="badge badge-green" id="statusBadge">&#x25CF; 就绪</span>
+      <span class="badge badge-purple">v2.0</span>
+    </div>
+  </div>
+
+  <div class="stats-row" id="statsGrid">
+    <div class="stat-card"><div class="stat-value" id="statVec">-</div><div class="stat-label">向量索引节点</div></div>
+    <div class="stat-card"><div class="stat-value" id="statTxt">-</div><div class="stat-label">文本索引节点</div></div>
+    <div class="stat-card"><div class="stat-value" id="statMatch">-</div><div class="stat-label">已匹配记录</div></div>
+    <div class="stat-card"><div class="stat-value" id="statSyn">-</div><div class="stat-label">同义词更新</div></div>
+    <div class="stat-card"><div class="stat-value" id="statExp">-</div><div class="stat-label">扩展建议</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title"><span class="dot"></span>匹配流程</div>
+    <div class="flow-row" id="flowContainer">
+      <div class="flow-step" id="flowInput"><span class="step-icon">&#x1F4E5;</span><span class="step-label">输入产品名</span></div>
+      <div class="flow-arrow" id="arrow1">&#x276F;</div>
+      <div class="flow-step" id="flowRecall"><span class="step-icon">&#x1F50D;</span><span class="step-label">粗召回</span></div>
+      <div class="flow-arrow" id="arrow2">&#x276F;</div>
+      <div class="flow-step" id="flowFine"><span class="step-icon">&#x1F9E0;</span><span class="step-label">精排</span></div>
+      <div class="flow-arrow" id="arrow3">&#x276F;</div>
+      <div class="flow-step" id="flowResult"><span class="step-icon">&#x2705;</span><span class="step-label">输出结果</span></div>
+      <div class="flow-arrow" id="arrow4">&#x276F;</div>
+      <div class="flow-step" id="flowEvolve"><span class="step-icon">&#x1F504;</span><span class="step-label">自进化</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:0"><span class="dot"></span>智能匹配</div>
+      <div class="tabs">
+        <button class="tab active" id="tabSingle" onclick="switchMode('single')">单条匹配</button>
+        <button class="tab" id="tabBatch" onclick="switchMode('batch')">批量匹配</button>
+        <button class="tab" id="tabCompare" onclick="switchMode('compare')">四引擎对比</button>
+      </div>
+    </div>
+
+    <div class="single-area" id="singleArea">
+      <div class="input-row">
+        <input class="match-input" id="productInput" placeholder="输入产品名称，如：汽油、大米、印刷机..." autocomplete="off">
+        <button class="btn btn-primary" id="matchBtn" onclick="doSingleMatch()">&#x1F50D; 匹配</button>
+      </div>
+      <div class="engine-btns" id="singleEngineBtns">
+        <button class="engine-btn active" data-eng="rag" onclick="setEngine(this)">RAG 向量</button>
+        <button class="engine-btn" data-eng="rag_rerank" onclick="setEngine(this)">RAG+Rerank</button>
+        <button class="engine-btn" data-eng="pageindex" onclick="setEngine(this)">PageIndex</button>
+        <button class="engine-btn" data-eng="pageindex_force_llm" onclick="setEngine(this)">PageIndex 逐层LLM</button>
+      </div>
+      <div id="singleResult"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0">输入产品名称开始匹配</div></div>
+    </div>
+
+    <div class="batch-area" id="batchArea">
+      <div class="input-row" style="align-items:flex-start">
+        <textarea class="match-input" id="batchInput" placeholder="每行一个产品名称，如：&#10;汽油&#10;大米&#10;印刷机" rows="6"></textarea>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label class="btn btn-ghost" style="cursor:pointer;text-align:center">
+            &#x1F4C2; 导入TXT
+            <input type="file" accept=".txt" id="txtFileInput" style="display:none" onchange="handleTxtImport(this)">
+          </label>
+          <label class="btn btn-ghost" style="cursor:pointer;text-align:center">
+            &#x1F4C2; 导入CSV
+            <input type="file" accept=".csv" id="csvFileInput" style="display:none" onchange="handleCsvImport(this)">
+          </label>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+        <button class="btn btn-primary" id="batchBtn" onclick="doBatchMatch()">&#x1F4E4; RAG向量批量匹配</button>
+        <button class="btn btn-ghost" onclick="exportBatchCSV()">&#x1F4BE; 导出CSV</button>
+        <span id="batchFileInfo" style="font-size:0.72rem;color:var(--text-muted)"></span>
+      </div>
+      <div id="batchResult"></div>
+    </div>
+
+    <div class="batch-area" id="compareArea">
+      <div class="input-row">
+        <input class="match-input" id="compareInput" placeholder="输入产品名称，四引擎同时匹配对比..." autocomplete="off">
+        <button class="btn btn-primary" id="compareBtn" onclick="doCompare()">&#x2699; 对比匹配</button>
+      </div>
+      <div class="compare-grid" id="compareGrid">
+        <div class="compare-card engine-rag"><div class="compare-eng-label">RAG 向量</div><div class="compare-result empty" id="cmpRag">等待输入</div></div>
+        <div class="compare-card engine-rag_rerank"><div class="compare-eng-label">RAG+Rerank</div><div class="compare-result empty" id="cmpRerank">等待输入</div></div>
+        <div class="compare-card engine-pageindex"><div class="compare-eng-label">PageIndex</div><div class="compare-result empty" id="cmpPi">等待输入</div></div>
+        <div class="compare-card engine-pageindex_force_llm"><div class="compare-eng-label">PageIndex 逐层LLM</div><div class="compare-result empty" id="cmpPiF">等待输入</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-grid">
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>匹配历史</div>
+      <div class="history-list" id="historyList"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无记录</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>同义词更新记录</div>
+      <div class="history-list" id="synonymList"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无记录</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber-glow)"></span>体系扩展审核</div>
+      <button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px" onclick="loadPendingExpansions()">&#x1F504; 刷新</button>
+    </div>
+    <div id="expansionPanel"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无待审核扩展</div></div>
+  </div>
+</div>
+
+<script>
+let currentEngine = 'rag';
+let currentMode = 'single';
+let batchResults = [];
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById('tabSingle').classList.toggle('active', mode === 'single');
+  document.getElementById('tabBatch').classList.toggle('active', mode === 'batch');
+  document.getElementById('tabCompare').classList.toggle('active', mode === 'compare');
+  document.getElementById('singleArea').classList.toggle('hidden', mode !== 'single');
+  document.getElementById('batchArea').classList.toggle('visible', mode === 'batch' || mode === 'compare');
+  document.getElementById('singleArea').style.display = mode === 'single' ? '' : 'none';
+  document.getElementById('batchArea').style.display = mode === 'batch' ? '' : 'none';
+  document.getElementById('compareArea').style.display = mode === 'compare' ? '' : 'none';
+}
+
+function setEngine(el) {
+  currentEngine = el.dataset.eng;
+  document.querySelectorAll('#singleEngineBtns .engine-btn').forEach(b => b.classList.toggle('active', b === el));
+}
+
+document.getElementById('productInput').addEventListener('keydown', e => { if (e.key === 'Enter') doSingleMatch(); });
+document.getElementById('compareInput').addEventListener('keydown', e => { if (e.key === 'Enter') doCompare(); });
+
+function setFlowActive(step) {
+  ['flowInput','flowRecall','flowFine','flowResult','flowEvolve'].forEach((id, i) => {
+    document.getElementById(id).classList.toggle('active', i <= step);
+  });
+  ['arrow1','arrow2','arrow3','arrow4'].forEach((id, i) => {
+    document.getElementById(id).classList.toggle('active', i < step);
+  });
+}
+
+function buildPayload(name, eng) {
+  if (eng === 'rag' || eng === 'rag_rerank') return { product_name: name, engine: eng };
+  const p = { product_name: name, engine: 'pageindex' };
+  if (eng === 'pageindex_force_llm') p.pageindex_mode = 'force_llm';
+  return p;
+}
+
+async function apiMatch(name, eng) {
+  const r = await fetch('/api/match', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(buildPayload(name, eng)) });
+  return r.json();
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function fmtMs(ms) { if (ms == null) return '-'; return ms < 1000 ? `${ms} ms` : `${(ms/1000).toFixed(2)} s`; }
+function confColor(c) { return c >= 0.65 ? 'var(--green)' : c >= 0.4 ? 'var(--amber)' : 'var(--red)'; }
+function confFill(c) { return c >= 0.65 ? 'linear-gradient(90deg,var(--green),#4ADE80)' : c >= 0.4 ? 'linear-gradient(90deg,var(--amber),#FBBF24)' : 'linear-gradient(90deg,var(--red),#F87171)'; }
+function statusTag(s) {
+  if (s === 'MATCHED') return '<span class="tag tag-matched">已匹配</span>';
+  if (s === 'LOW_CONFIDENCE') return '<span class="tag tag-low">低置信</span>';
+  return '<span class="tag tag-nomatch">无匹配</span>';
+}
+
+function renderPath(candidates) {
+  if (!candidates || candidates.length === 0) return '';
+  const hasPath = candidates.some(c => c.path_total > 0);
+  if (!hasPath) return '';
+  let html = '<div class="path-tree">';
+  candidates.forEach((c, i) => {
+    const dotCls = c.path_depth === 1 ? 'root' : c.is_match_target ? 'leaf' : 'mid';
+    const nameCls = c.is_match_target ? 'leaf' : '';
+    const indent = (c.path_depth - 1) * 16;
+    html += `<div class="path-node fade-in" style="animation-delay:${i*40}ms;padding-left:${indent}px">
+      <span class="path-dot ${dotCls}"></span>
+      <span class="path-name ${nameCls}">${esc(c.category_name)}</span>
+      <span class="path-id">#${c.category_id}</span>
+      ${c.is_match_target ? `<span class="tag tag-matched" style="margin-left:auto;font-size:0.6rem">${c.final_confidence.toFixed(4)}</span>` : ''}
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderSingleResult(data) {
+  const confCls = confFill(data.confidence);
+  const isPI = data.engine_type === 'PAGE_INDEX';
+  const hasPath = isPI && data.candidates && data.candidates.some(c => c.path_total > 0);
+  const engLabel = data.engine_type === 'RAG_VECTOR' ? 'RAG' : data.engine_type === 'RAG_RERANK' ? 'RAG+Rerank' : (data.pageindex_mode === 'force_llm' ? 'PI 逐层LLM' : 'PageIndex');
+  const canEvolve = data.matched_category_id && data.match_status !== 'NO_MATCH';
+  let html = `<div class="fade-in" style="margin-bottom:12px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <span style="font-size:1rem;font-weight:700">${esc(data.product_name)}</span>
+      <span style="color:var(--text-muted)">&#x2192;</span>
+      <span style="font-size:1rem;font-weight:700;color:var(--accent)">${data.matched_category_id ? esc(data.matched_category_id) : '无匹配'}</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+      ${statusTag(data.match_status)}
+      <span class="tag" style="color:var(--text-secondary);background:var(--bg-canvas);border:1px solid var(--border)">${engLabel}</span>
+      <span class="tag" style="color:var(--text-secondary);background:var(--bg-canvas);border:1px solid var(--border)">${fmtMs(data.elapsed_ms)}</span>
+      ${data.llm_participated ? '<span class="tag tag-llm-yes">LLM参与</span>' : '<span class="tag tag-llm-no">LLM未参与</span>'}
+    </div>
+    <div class="conf-gauge"><div class="conf-gauge-fill" style="width:${Math.min(data.confidence*100,100)}%;background:${confCls}"></div></div>
+    <div class="conf-label"><span>置信度</span><span class="conf-val" style="color:${confColor(data.confidence)}">${data.confidence.toFixed(4)}</span></div>
+  </div>`;
+  if (hasPath) {
+    html += '<div style="margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">匹配路径</div>';
+    html += renderPath(data.candidates);
+  }
+  html += `<div id="evolvePanel" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:0.72rem;color:var(--text-secondary);font-weight:600">自进化:</span>`;
+  if (canEvolve) {
+    html += `<button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px" onclick="confirmMatch('${esc(data.product_name)}','${esc(data.matched_category_id)}')">&#x2705; 确认正确</button>`;
+  }
+  html += `<button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px" onclick="showCorrectDialog('${esc(data.product_name)}')">&#x270F; 纠正</button>
+    <span id="evolveMsg" style="font-size:0.72rem;color:var(--green);display:none"></span>
+  </div>`;
+  return html;
+}
+
+async function doSingleMatch() {
+  const name = document.getElementById('productInput').value.trim();
+  if (!name) return;
+  const btn = document.getElementById('matchBtn');
+  const div = document.getElementById('singleResult');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> 匹配中';
+  div.innerHTML = '<div style="text-align:center;padding:20px"><span class="spinner"></span></div>';
+  document.getElementById('statusBadge').innerHTML = '&#x25CF; 匹配中';
+  document.getElementById('statusBadge').className = 'badge badge-purple';
+  setFlowActive(0);
+  try {
+    await new Promise(r => setTimeout(r, 200)); setFlowActive(1);
+    await new Promise(r => setTimeout(r, 300)); setFlowActive(2);
+    const data = await apiMatch(name, currentEngine);
+    await new Promise(r => setTimeout(r, 100)); setFlowActive(3);
+    await new Promise(r => setTimeout(r, 200)); setFlowActive(4);
+    if (data.error) { div.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">&#x26A0; ${esc(data.error)}</div>`; return; }
+    div.innerHTML = renderSingleResult(data);
+    document.getElementById('statusBadge').innerHTML = '&#x25CF; 就绪';
+    document.getElementById('statusBadge').className = 'badge badge-green';
+    loadHistory(); loadSynonyms(); loadStats();
+    if (data.match_status === 'NO_MATCH') suggestExpansion(data.product_name);
+  } catch(e) {
+    div.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">&#x26A0; ${esc(e.message)}</div>`;
+  } finally { btn.disabled = false; btn.innerHTML = '&#x1F50D; 匹配'; }
+}
+
+function renderCompareCard(data, eng) {
+  if (!data || data.error) return `<div class="compare-result empty">请求失败</div>`;
+  const conf = data.confidence || 0;
+  const confCls = confFill(conf);
+  const resultText = data.matched_category_id ? esc(data.matched_category_id) : '无匹配';
+  const resultCls = data.matched_category_id ? '' : 'empty';
+  const isPI = data.engine_type === 'PAGE_INDEX';
+  const hasPath = isPI && data.candidates && data.candidates.some(c => c.path_total > 0);
+  let html = `<div class="compare-result ${resultCls}">${resultText}</div>
+    <div class="compare-meta">${statusTag(data.match_status)}
+      <span class="tag" style="color:var(--text-secondary);background:var(--bg-card);border:1px solid var(--border)">${fmtMs(data.elapsed_ms)}</span>
+      ${data.llm_participated ? '<span class="tag tag-llm-yes">LLM</span>' : ''}
+    </div>
+    <div class="conf-gauge"><div class="conf-gauge-fill" style="width:${Math.min(conf*100,100)}%;background:${confCls}"></div></div>
+    <div class="conf-label"><span>置信度</span><span class="conf-val" style="color:${confColor(conf)}">${conf.toFixed(4)}</span></div>`;
+  if (hasPath) html += renderPath(data.candidates);
+  return html;
+}
+
+async function doCompare() {
+  const name = document.getElementById('compareInput').value.trim();
+  if (!name) return;
+  const btn = document.getElementById('compareBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> 对比中';
+  ['cmpRag','cmpRerank','cmpPi','cmpPiF'].forEach(id => {
+    document.getElementById(id).innerHTML = '<span class="spinner"></span>';
+    document.getElementById(id).className = 'compare-result empty';
+  });
+  document.getElementById('statusBadge').innerHTML = '&#x25CF; 对比中';
+  document.getElementById('statusBadge').className = 'badge badge-purple';
+  setFlowActive(0);
+  try {
+    await new Promise(r => setTimeout(r, 100)); setFlowActive(1);
+    const engines = ['rag','rag_rerank','pageindex','pageindex_force_llm'];
+    const ids = ['cmpRag','cmpRerank','cmpPi','cmpPiF'];
+    const results = await Promise.all(engines.map(eng => apiMatch(name, eng).catch(e => ({error: e.message}))));
+    await new Promise(r => setTimeout(r, 100)); setFlowActive(3);
+    await new Promise(r => setTimeout(r, 200)); setFlowActive(4);
+    results.forEach((data, i) => {
+      const el = document.getElementById(ids[i]);
+      el.className = 'compare-result';
+      el.innerHTML = renderCompareCard(data, engines[i]);
+    });
+    document.getElementById('statusBadge').innerHTML = '&#x25CF; 就绪';
+    document.getElementById('statusBadge').className = 'badge badge-green';
+    loadHistory(); loadStats();
+  } catch(e) {
+    ['cmpRag','cmpRerank','cmpPi','cmpPiF'].forEach(id => {
+      document.getElementById(id).innerHTML = `<span style="color:var(--red)">&#x26A0;</span>`;
+    });
+  } finally { btn.disabled = false; btn.innerHTML = '&#x2699; 对比匹配'; }
+}
+
+async function doBatchMatch() {
+  const text = document.getElementById('batchInput').value.trim();
+  if (!text) return;
+  const names = text.split('\n').map(s => s.trim()).filter(Boolean);
+  if (names.length === 0) return;
+  const btn = document.getElementById('batchBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> 匹配中';
+  document.getElementById('statusBadge').innerHTML = '&#x25CF; 批量匹配中';
+  document.getElementById('statusBadge').className = 'badge badge-purple';
+  batchResults = [];
+  const div = document.getElementById('batchResult');
+  div.innerHTML = `<div style="color:var(--text-muted);font-size:0.82rem;margin-bottom:8px">正在匹配 ${names.length} 条 (RAG向量)...</div>`;
+  try {
+    for (let i = 0; i < names.length; i++) {
+      const data = await apiMatch(names[i], 'rag');
+      batchResults.push({ input: names[i], ...data });
+      const pct = ((i + 1) / names.length * 100).toFixed(0);
+      div.innerHTML = `<div style="color:var(--text-muted);font-size:0.82rem;margin-bottom:8px">进度: ${i+1}/${names.length} (${pct}%)</div>`;
+    }
+    let html = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.78rem">';
+    html += '<tr style="border-bottom:1px solid var(--border);color:var(--text-secondary)"><th style="text-align:left;padding:6px 8px">产品名</th><th style="text-align:left;padding:6px 8px">匹配ID</th><th style="padding:6px 8px">状态</th><th style="padding:6px 8px">置信度</th><th style="padding:6px 8px">耗时</th></tr>';
+    batchResults.forEach(r => {
+      html += `<tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:6px 8px;font-weight:500">${esc(r.input)}</td>
+        <td style="padding:6px 8px;color:var(--accent)">${r.matched_category_id || '-'}</td>
+        <td style="padding:6px 8px">${statusTag(r.match_status)}</td>
+        <td style="padding:6px 8px;font-variant-numeric:tabular-nums;color:${confColor(r.confidence)}">${(r.confidence||0).toFixed(4)}</td>
+        <td style="padding:6px 8px;color:var(--text-secondary)">${fmtMs(r.elapsed_ms)}</td>
+      </tr>`;
+    });
+    html += '</table></div>';
+    div.innerHTML = html;
+    document.getElementById('statusBadge').innerHTML = '&#x25CF; 就绪';
+    document.getElementById('statusBadge').className = 'badge badge-green';
+    loadHistory(); loadStats();
+  } catch(e) {
+    div.innerHTML = `<div style="color:var(--red)">&#x26A0; ${esc(e.message)}</div>`;
+  } finally { btn.disabled = false; btn.innerHTML = '&#x1F4E4; RAG向量批量匹配'; }
+}
+
+function handleTxtImport(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    document.getElementById('batchInput').value = e.target.result;
+    const lines = e.target.result.split('\n').filter(s => s.trim()).length;
+    document.getElementById('batchFileInfo').textContent = `已导入 ${file.name} (${lines} 条)`;
+  };
+  reader.readAsText(file, 'UTF-8');
+  input.value = '';
+}
+
+function handleCsvImport(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const lines = e.target.result.split('\n').slice(1).map(s => {
+      const cols = s.split(',');
+      return cols[0] ? cols[0].replace(/^"|"$/g, '').trim() : '';
+    }).filter(Boolean);
+    document.getElementById('batchInput').value = lines.join('\n');
+    document.getElementById('batchFileInfo').textContent = `已导入 ${file.name} (${lines.length} 条)`;
+  };
+  reader.readAsText(file, 'UTF-8');
+  input.value = '';
+}
+
+async function loadStats() {
+  try {
+    const r = await fetch('/api/stats'); const d = await r.json(); if (d.error) return;
+    document.getElementById('statVec').textContent = d.vector_count?.toLocaleString() || '0';
+    document.getElementById('statTxt').textContent = d.text_count?.toLocaleString() || '0';
+    document.getElementById('statMatch').textContent = d.match_count?.toLocaleString() || '0';
+    document.getElementById('statSyn').textContent = d.synonym_count?.toLocaleString() || '0';
+    document.getElementById('statExp').textContent = d.expansion_count?.toLocaleString() || '0';
+  } catch(e) {}
+}
+
+async function loadHistory() {
+  try {
+    const r = await fetch('/api/match_history?limit=30'); const d = await r.json();
+    if (!Array.isArray(d) || d.length === 0) return;
+    document.getElementById('historyList').innerHTML = d.map(item => {
+      const sc = item.match_status === 'MATCHED' ? 'tag-matched' : item.match_status === 'LOW_CONFIDENCE' ? 'tag-low' : 'tag-nomatch';
+      const st = item.match_status === 'MATCHED' ? '匹配' : item.match_status === 'LOW_CONFIDENCE' ? '低置信' : '无匹配';
+      return `<div class="history-item"><div class="history-product">${esc(item.product_name)}</div><div class="history-category">${item.matched_category_id||'-'}</div><div class="history-conf">${(item.confidence||0).toFixed(2)}</div><div class="history-status"><span class="tag ${sc}" style="font-size:0.62rem">${st}</span></div></div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function loadSynonyms() {
+  try {
+    const r = await fetch('/api/synonym_history?limit=20'); const d = await r.json();
+    if (!Array.isArray(d) || d.length === 0) return;
+    document.getElementById('synonymList').innerHTML = d.map(item => {
+      return `<div class="history-item"><div class="history-product" style="color:var(--green)">${esc(item.new_synonym)}</div><div class="history-category">#${esc(item.category_id)}</div><div class="history-conf">${item.llm_verified ? '&#x2705;' : '&#x2753;'}</div></div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+
+async function loadPendingExpansions() {
+  try {
+    const r = await fetch('/api/pending_expansions');
+    const d = await r.json();
+    const panel = document.getElementById('expansionPanel');
+    if (!Array.isArray(d) || d.length === 0) {
+      panel.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无待审核扩展</div>';
+      return;
+    }
+    panel.innerHTML = d.map(item => {
+      const parentInfo = item.mount_path
+        ? esc(item.mount_path)
+        : (item.suggested_parent_name ? `#${esc(item.suggested_parent_id)} ${esc(item.suggested_parent_name)}` : '未确定');
+      return `<div style="padding:12px;margin-bottom:8px;background:var(--bg-canvas);border:1px solid var(--border);border-radius:var(--radius-sm);border-left:3px solid var(--amber)" class="fade-in">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+          <span style="font-weight:700;font-size:0.9rem">${esc(item.product_name)}</span>
+          <span style="color:var(--text-muted)">&#x2192;</span>
+          <span style="color:var(--amber);font-size:0.85rem">${parentInfo} > </span>
+          <span style="color:var(--green);font-weight:600;font-size:0.85rem">${esc(item.suggested_category_name)}</span>
+        </div>
+        ${item.llm_analysis ? `<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px;padding:6px 8px;background:var(--bg-card);border-radius:4px;max-height:60px;overflow-y:auto">${esc(item.llm_analysis)}</div>` : ''}
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--green)" onclick="approveExpansion('${esc(item.product_name)}','${esc(item.suggested_parent_id)}','${esc(item.suggested_category_name)}')">&#x2705; 通过</button>
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--red)" onclick="rejectExpansion('${esc(item.product_name)}')">&#x274C; 拒绝</button>
+          <span id="expMsg_${esc(item.product_name).replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g,'_')}" style="font-size:0.7rem;display:none"></span>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function approveExpansion(productName, parentId, categoryName) {
+  if (!parentId) { alert('父节点未确定，请先纠正父节点'); return; }
+  const msgId = `expMsg_${productName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g,'_')}`;
+  const msg = document.getElementById(msgId);
+  msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '写入中...';
+  try {
+    const r = await fetch('/api/approve_expansion', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: productName, parent_id: parentId, category_name: categoryName}) });
+    const d = await r.json();
+    if (d.error) { msg.style.color = 'var(--red)'; msg.textContent = d.error; return; }
+    msg.style.color = 'var(--green)'; msg.textContent = d.message || '已通过';
+    setTimeout(() => { loadPendingExpansions(); loadStats(); }, 1000);
+  } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; }
+}
+
+async function rejectExpansion(productName) {
+  const msgId = `expMsg_${productName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g,'_')}`;
+  const msg = document.getElementById(msgId);
+  msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '拒绝中...';
+  try {
+    const r = await fetch('/api/reject_expansion', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: productName}) });
+    const d = await r.json();
+    if (d.error) { msg.style.color = 'var(--red)'; msg.textContent = d.error; return; }
+    msg.style.color = 'var(--text-muted)'; msg.textContent = '已拒绝';
+    setTimeout(() => { loadPendingExpansions(); }, 500);
+  } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; }
+}
+
+async function confirmMatch(productName, categoryId) {
+  const msg = document.getElementById('evolveMsg');
+  if (!msg) return;
+  msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '确认中...';
+  try {
+    const r = await fetch('/api/confirm', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: productName, category_id: categoryId}) });
+    const d = await r.json();
+    if (d.error) { msg.style.color = 'var(--red)'; msg.textContent = d.error; return; }
+    msg.style.color = 'var(--green)'; msg.textContent = d.message || '已确认';
+    loadSynonyms(); loadStats();
+  } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; }
+}
+
+function showCorrectDialog(productName) {
+  const panel = document.getElementById('evolvePanel');
+  if (!panel) return;
+  const existing = document.getElementById('correctInput');
+  if (existing) return;
+  const wrapper = document.createElement('div');
+  wrapper.id = 'correctInput';
+  wrapper.style.cssText = 'display:flex;gap:6px;align-items:center;margin-top:6px';
+  wrapper.innerHTML = `<input class="match-input" id="correctCatInput" placeholder="输入正确的分类ID，如：01.021.03" style="flex:1;font-size:0.8rem;padding:6px 10px">
+    <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--green)" onclick="submitCorrection('${esc(productName)}')">&#x2705; 提交</button>
+    <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--text-muted)" onclick="this.parentElement.remove()">&#x2716; 取消</button>`;
+  panel.appendChild(wrapper);
+  const input = document.getElementById('correctCatInput');
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') submitCorrection(productName); });
+  input.focus();
+}
+
+async function submitCorrection(productName) {
+  const catId = document.getElementById('correctCatInput').value.trim();
+  if (!catId) return;
+  const msg = document.getElementById('evolveMsg');
+  if (!msg) return;
+  msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '纠正中...';
+  try {
+    const r = await fetch('/api/correct', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: productName, correct_category_id: catId}) });
+    const d = await r.json();
+    if (d.error) { msg.style.color = 'var(--red)'; msg.textContent = d.error; return; }
+    msg.style.color = 'var(--green)'; msg.textContent = d.message || '已纠正';
+    const wrapper = document.getElementById('correctInput');
+    if (wrapper) wrapper.remove();
+    loadSynonyms(); loadStats();
+  } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; }
+}
+
+function exportBatchCSV() {
+  if (!batchResults || batchResults.length === 0) { alert('暂无批量匹配结果可导出'); return; }
+  let csv = '\uFEFF产品名,匹配ID,状态,置信度,耗时(ms)\n';
+  batchResults.forEach(r => {
+    csv += `"${r.input}","${r.matched_category_id || ''}","${r.match_status || ''}",${(r.confidence||0).toFixed(4)},${r.elapsed_ms || ''}\n`;
+  });
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `batch_match_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+async function suggestExpansion(productName) {
+  try {
+    await fetch('/api/suggest_expansion', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: productName}) });
+    loadPendingExpansions();
+  } catch(e) {}
+}
+
+loadStats();
+</script>
+</body>
+</html>
