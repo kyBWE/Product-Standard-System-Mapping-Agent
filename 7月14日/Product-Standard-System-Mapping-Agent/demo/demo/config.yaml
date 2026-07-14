@@ -1,0 +1,56 @@
+database:
+  host: localhost
+  port: 5432
+  database: product_standard_mapping
+  user: postgres
+  password: 'postgres'
+  pool_size: 10
+llm:
+  api_key: sk-NeZZ35h3SyD6p9GmnOSOArW7Yz7uhuL3x9ceFFPHQ6TtaQb3
+  base_url: https://apihub.agnes-ai.com/v1
+  model: agnes-2.0-flash
+  embedding_model: api
+  embedding_dimension: 1024
+  max_retries: 3
+  timeout: 30
+  thinking_enabled: false
+  cache_enabled: true
+  cache_size: 512
+embedding:
+  api_key: biarewhS1veX0Af_8emS9FngADsGgm3Y8XLr3umL2k5_wddpVWKlhOfy3l8K2se8KvW3TBxUIqppgwVl98CfhQ
+  base_url: https://api.modelarts-maas.com/v1/embeddings
+  model: bge-m3
+  dimension: 1024
+  max_retries: 3
+  timeout: 30
+  batch_size: 64
+match:
+  vector_weight: 0.6
+  trgm_weight: 0.4
+  coarse_weight: 0.4
+  llm_weight: 0.6
+  coarse_top_k: 50
+  trgm_threshold: 0.1
+  syn_confidence_threshold: 0.95
+  syn_trgm_threshold: 0.3
+  expand_confidence_threshold: 0.3
+  low_confidence_threshold: 0.5
+  enable_llm: true
+  page_index_force_llm_layers: false
+  coarse_abort_threshold: 0.25
+  enable_rerank: true
+  rerank_weight: 0.6
+data:
+  standard_system_file: 产品标准体系.xlsx
+  company_product_file: temp_company_product_0522_1.xlsx
+  output_dir: ./output
+logging:
+  level: INFO
+  log_dir: ./logs
+rerank:
+  api_key: sk-3c3345cfa6bc4ca093724db842fbe350
+  model: qwen3-rerank
+  top_n: 10
+  max_retries: 2
+  timeout: 30
+  instruct: 给定企业产品名称，从多个标准分类候选中选出最精确匹配的那一个。注意区分同级相似类别，优先选择分类路径和同义词与产品名称语义最吻合的候选。

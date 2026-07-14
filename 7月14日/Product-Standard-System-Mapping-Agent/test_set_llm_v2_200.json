@@ -1,0 +1,956 @@
+[
+  {
+    "product_name": "电子级氢氟酸",
+    "ground_truth": "4813",
+    "ground_truth_name": "新兴工业用特种化学品",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学试剂和助剂 > 化学试剂 > 新兴工业用特种化学品"
+  },
+  {
+    "product_name": "PPSU",
+    "ground_truth": "24140",
+    "ground_truth_name": "聚苯砜",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 初级形态塑料 > 聚苯砜"
+  },
+  {
+    "product_name": "油纸伞",
+    "ground_truth": "3330",
+    "ground_truth_name": "工艺伞",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 剧装道具，相关工艺美术品 > 工艺伞"
+  },
+  {
+    "product_name": "RVV软护套线",
+    "ground_truth": "24679",
+    "ground_truth_name": "电线线缆",
+    "path": "机械、设备类产品 > 电气机械及器材 > 电线电缆 > 专用电缆 > 其他专用电缆 > 电线线缆"
+  },
+  {
+    "product_name": "喷气织机",
+    "ground_truth": "9203",
+    "ground_truth_name": "织造辅助机械及装置",
+    "path": "机械、设备类产品 > 专用设备 > 纺织专用设备 > 织造辅助机械及装置"
+  },
+  {
+    "product_name": "血气分析仪",
+    "ground_truth": "10290",
+    "ground_truth_name": "血气分析系统",
+    "path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 临床检验分析仪器及诊断系统 > 血气分析系统"
+  },
+  {
+    "product_name": "信封机",
+    "ground_truth": "8961",
+    "ground_truth_name": "信封专用生产机械",
+    "path": "机械、设备类产品 > 专用设备 > 制浆和造纸专用设备 > 纸制品生产专用机械 > 信封专用生产机械"
+  },
+  {
+    "product_name": "圆柱滚子",
+    "ground_truth": "7312",
+    "ground_truth_name": "滚子",
+    "path": "机械、设备类产品 > 通用设备 > 轴承及其零件 > 轴承零配件 > 滚子"
+  },
+  {
+    "product_name": "XJ系列修井机",
+    "ground_truth": "8334",
+    "ground_truth_name": "系列修井机",
+    "path": "机械、设备类产品 > 专用设备 > 石油钻探、开采专用设备 > 修井设备 > 系列修井机"
+  },
+  {
+    "product_name": "水晶灯",
+    "ground_truth": "12366",
+    "ground_truth_name": "吊灯",
+    "path": "机械、设备类产品 > 电气机械及器材 > 灯具及照明装置 > 室内照明灯具 > 吊灯"
+  },
+  {
+    "product_name": "斑铜摆件",
+    "ground_truth": "3181",
+    "ground_truth_name": "斑铜工艺品",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 金属工艺品 > 铜制工艺品 > 斑铜工艺品"
+  },
+  {
+    "product_name": "木麻黄单宁",
+    "ground_truth": "4910",
+    "ground_truth_name": "木麻黄栲胶",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 林产化学产品 > 栲胶 > 木麻黄栲胶"
+  },
+  {
+    "product_name": "面粉",
+    "ground_truth": "1391",
+    "ground_truth_name": "碾磨谷物及谷物加工品",
+    "path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 碾磨谷物及谷物加工品"
+  },
+  {
+    "product_name": "蓝图晒图机",
+    "ground_truth": "13786",
+    "ground_truth_name": "制版照相机",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 照相机及器材 > 照相机 > 制版照相机"
+  },
+  {
+    "product_name": "手持式金属探测器",
+    "ground_truth": "13504",
+    "ground_truth_name": "其他矿藏探测器",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 地质勘探和地震专用仪器 > 金属、矿藏探测器 > 其他矿藏探测器"
+  },
+  {
+    "product_name": "BB夹",
+    "ground_truth": "3427",
+    "ground_truth_name": "发夹",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 日用杂品 > 头发装饰用物品 > 发夹"
+  },
+  {
+    "product_name": "直线振动筛",
+    "ground_truth": "8314",
+    "ground_truth_name": "振动筛",
+    "path": "机械、设备类产品 > 专用设备 > 矿山专用设备 > 矿物筛分、洗选设备 > 振动筛"
+  },
+  {
+    "product_name": "回转窑焚烧炉",
+    "ground_truth": "11148",
+    "ground_truth_name": "垃圾焚烧炉",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 垃圾焚烧炉"
+  },
+  {
+    "product_name": "东山白玉枇杷",
+    "ground_truth": "482",
+    "ground_truth_name": "枇杷",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 水果及坚果 > 水果(园林水果) > 枇杷"
+  },
+  {
+    "product_name": "lambda sensor",
+    "ground_truth": "21740",
+    "ground_truth_name": "氧传感器",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 传感器 > 氧传感器"
+  },
+  {
+    "product_name": "波士顿动力Atlas",
+    "ground_truth": "26445",
+    "ground_truth_name": "人形机器人",
+    "path": "产业链 > 人工智能 > 智能机器人 > 人形机器人"
+  },
+  {
+    "product_name": "Y-Eu草酸盐",
+    "ground_truth": "4596",
+    "ground_truth_name": "草酸钇铕",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 贵金属化合物、相关基础化学品 > 稀土化合物 > 草酸稀土 > 草酸钇铕"
+  },
+  {
+    "product_name": "轮转凸印机",
+    "ground_truth": "8981",
+    "ground_truth_name": "凸版印刷机",
+    "path": "凸版印刷机"
+  },
+  {
+    "product_name": "挖斗",
+    "ground_truth": "8423",
+    "ground_truth_name": "挖掘机用铲",
+    "path": "机械、设备类产品 > 专用设备 > 建筑工程用机械 > 建筑工程用机械零件 > 挖掘机用铲"
+  },
+  {
+    "product_name": "STP",
+    "ground_truth": "12540",
+    "ground_truth_name": "七号信令转接设备",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信交换设备 > 程控交换机 > 七号信令转接设备"
+  },
+  {
+    "product_name": "吐温80",
+    "ground_truth": "22018",
+    "ground_truth_name": "增溶剂",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学试剂和助剂 > 塑料助剂 > 增溶剂"
+  },
+  {
+    "product_name": "戊酸乙酯",
+    "ground_truth": "3847",
+    "ground_truth_name": "戊酸及其盐和酯",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 羧酸及其衍生物 > 戊酸及其盐和酯"
+  },
+  {
+    "product_name": "苇席",
+    "ground_truth": "138",
+    "ground_truth_name": "芦苇",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 水生植物类 > 芦苇"
+  },
+  {
+    "product_name": "原汁机",
+    "ground_truth": "12205",
+    "ground_truth_name": "榨汁机",
+    "path": "机械、设备类产品 > 电气机械及器材 > 家用厨房电器具 > 家用食品加工电动器具 > 榨汁机"
+  },
+  {
+    "product_name": "H型管式省煤器",
+    "ground_truth": "20342",
+    "ground_truth_name": "H型省煤器",
+    "path": "机械、设备类产品 > 通用设备 > 节能通用设备 > H型省煤器"
+  },
+  {
+    "product_name": "ATF泵",
+    "ground_truth": "20501",
+    "ground_truth_name": "自动变速箱油泵",
+    "path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 机动车(汽车)零配件 > 机动车用控制装置总成 > 转向系统 > 自动变速箱油泵"
+  },
+  {
+    "product_name": "氧化铝陶瓷管",
+    "ground_truth": "5820",
+    "ground_truth_name": "陶瓷管及管子配件",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 技术陶瓷制品 > 陶瓷管及管子配件"
+  },
+  {
+    "product_name": "苏云金杆菌（Bt）",
+    "ground_truth": "4716",
+    "ground_truth_name": "生物杀虫剂制剂",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 生物农药及微生物农药 > 生物农药制剂 > 生物杀虫剂制剂"
+  },
+  {
+    "product_name": "ERP系统",
+    "ground_truth": "14131",
+    "ground_truth_name": "对基础软件、应用软件、嵌入式软件等软件提",
+    "path": "销售服务 > 现代服务 > 信息技术服务 > 软件服务 > 软件开发服务 > 对基础软件、应用软件、嵌入式软件等软件提"
+  },
+  {
+    "product_name": "小齿轮齿条副",
+    "ground_truth": "7333",
+    "ground_truth_name": "齿条、差动齿轮",
+    "path": "机械、设备类产品 > 通用设备 > 齿轮、传动轴和驱动部件 > 齿轮 > 齿条、差动齿轮"
+  },
+  {
+    "product_name": "耳背式助听器",
+    "ground_truth": "10966",
+    "ground_truth_name": "助听器",
+    "path": "机械、设备类产品 > 专用设备 > 假肢、人工器官及植(介)入器械 > 助听器"
+  },
+  {
+    "product_name": "压路机",
+    "ground_truth": "8383",
+    "ground_truth_name": "压实机械",
+    "path": "机械、设备类产品 > 专用设备 > 建筑工程用机械 > 压实机械"
+  },
+  {
+    "product_name": "叶面积测量仪",
+    "ground_truth": "13473",
+    "ground_truth_name": "光电叶面积仪",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 农林牧渔专用仪器仪表 > 农、林专用仪器 > 光电叶面积仪"
+  },
+  {
+    "product_name": "工程投影仪",
+    "ground_truth": "13838",
+    "ground_truth_name": "正射投影仪",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 影像投影仪 > 投影仪 > 正射投影仪"
+  },
+  {
+    "product_name": "定型机",
+    "ground_truth": "9201",
+    "ground_truth_name": "印染辅机及通用单元设备",
+    "path": "机械、设备类产品 > 专用设备 > 纺织专用设备 > 印染机械 > 印染辅机及通用单元设备"
+  },
+  {
+    "product_name": "跨境货车",
+    "ground_truth": "14014",
+    "ground_truth_name": "港澳台其他陆路货物运输服务",
+    "path": "销售服务 > 交通运输服务 > 陆路运输服务 > 陆路货物运输服务 > 其他陆路货物运输服务 > 港澳台其他陆路货物运输服务"
+  },
+  {
+    "product_name": "大闸蟹",
+    "ground_truth": "1071",
+    "ground_truth_name": "淡水蟹",
+    "path": "农、林、牧、渔业类产品 > 淡水养殖产品、捕捞产品 > 淡水蟹"
+  },
+  {
+    "product_name": "氯霉素滴眼液",
+    "ground_truth": "5096",
+    "ground_truth_name": "滴剂",
+    "path": "石油、化工、医药产品 > 医药 > 化学药品制剂 > 滴剂"
+  },
+  {
+    "product_name": "叉车货叉",
+    "ground_truth": "7054",
+    "ground_truth_name": "托盘",
+    "path": "机械、设备类产品 > 通用设备 > 工业车辆 > 工业车辆专用配套件 > 托盘"
+  },
+  {
+    "product_name": "网络货运",
+    "ground_truth": "14061",
+    "ground_truth_name": "无运输工具承运业务",
+    "path": "销售服务 > 交通运输服务 > 无运输工具承运业务"
+  },
+  {
+    "product_name": "YSZ粉体",
+    "ground_truth": "20602",
+    "ground_truth_name": "燃料电池用稀土锆基陶瓷粉体材料",
+    "path": "金属及非金属制品 > 金属材料及工具 > 稀土材料 > 燃料电池用稀土锆基陶瓷粉体材料"
+  },
+  {
+    "product_name": "黄铜螺旋弹簧",
+    "ground_truth": "6559",
+    "ground_truth_name": "黄铜弹簧",
+    "path": "金属及非金属制品 > 金属制品 > 弹簧 > 铜弹簧 > 黄铜弹簧"
+  },
+  {
+    "product_name": "多肉植物",
+    "ground_truth": "420",
+    "ground_truth_name": "园艺产品",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 盆景及园艺产品 > 园艺产品"
+  },
+  {
+    "product_name": "均质机阀组",
+    "ground_truth": "8915",
+    "ground_truth_name": "乳品加工机械零件",
+    "path": "机械、设备类产品 > 专用设备 > 食品、饮料、烟草专用生产设备零件 > 乳品加工机械零件"
+  },
+  {
+    "product_name": "汉麻纱",
+    "ground_truth": "1810",
+    "ground_truth_name": "大麻纱线",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 麻纺织品 > 麻纱线 > 大麻纱线"
+  },
+  {
+    "product_name": "浮法玻璃",
+    "ground_truth": "5700",
+    "ground_truth_name": "平板玻璃",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 玻璃 > 平板玻璃"
+  },
+  {
+    "product_name": "FPC指纹传感器",
+    "ground_truth": "26983",
+    "ground_truth_name": "指纹识别芯片",
+    "path": "产业链 > 集成电路半导体 > 集成电路制造 > 微机电系统芯片 > 指纹识别芯片"
+  },
+  {
+    "product_name": "风速风向仪",
+    "ground_truth": "13438",
+    "ground_truth_name": "气象观测仪器",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 气象、水文仪器及装置 > 气象观测仪器"
+  },
+  {
+    "product_name": "EVA封边条胶",
+    "ground_truth": "24538",
+    "ground_truth_name": "家具热熔胶",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 粘合剂 > 家具热熔胶"
+  },
+  {
+    "product_name": "真空接触器",
+    "ground_truth": "25765",
+    "ground_truth_name": "高压接触器",
+    "path": "机械、设备类产品 > 电气机械及器材 > 配电或电器控制设备 > 接触器 > 高压接触器"
+  },
+  {
+    "product_name": "RTO焚烧炉",
+    "ground_truth": "11060",
+    "ground_truth_name": "冷凝净化装置",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 大气污染防治设备 > 空气净化装置 > 冷凝净化装置"
+  },
+  {
+    "product_name": "活性白土",
+    "ground_truth": "20744",
+    "ground_truth_name": "高岭土化工载体/吸附材料",
+    "path": "矿产品 > 非金属矿石 > 矿物功能材料 > 高岭土化工载体/吸附材料"
+  },
+  {
+    "product_name": "电视广告位",
+    "ground_truth": "14199",
+    "ground_truth_name": "影视、广播广告发布服务",
+    "path": "销售服务 > 现代服务 > 文化创意服务 > 广告服务 > 广告发布服务 > 影视、广播广告发布服务"
+  },
+  {
+    "product_name": "纵梁",
+    "ground_truth": "11610",
+    "ground_truth_name": "横梁",
+    "path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 汽车底盘车架及其零件 > 横梁"
+  },
+  {
+    "product_name": "白鳝",
+    "ground_truth": "1042",
+    "ground_truth_name": "淡水鳗鲡",
+    "path": "农、林、牧、渔业类产品 > 淡水养殖产品、捕捞产品 > 淡水鱼 > 淡水鳗鲡"
+  },
+  {
+    "product_name": "包机货运",
+    "ground_truth": "14042",
+    "ground_truth_name": "航空货物运输湿租业务",
+    "path": "销售服务 > 交通运输服务 > 航空运输服务 > 航空客货运输服务 > 航空运输湿租业务 > 航空货物运输湿租业务"
+  },
+  {
+    "product_name": "氧化铝陶瓷基板",
+    "ground_truth": "5828",
+    "ground_truth_name": "其他技术陶瓷制品",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 技术陶瓷制品 > 其他技术陶瓷制品"
+  },
+  {
+    "product_name": "NPB",
+    "ground_truth": "26593",
+    "ground_truth_name": "发光层主体",
+    "path": "产业链 > 新型显示 > 有机发光材料(OLED材料) > 发光层主体"
+  },
+  {
+    "product_name": "生猪",
+    "ground_truth": "848",
+    "ground_truth_name": "活牲畜",
+    "path": "农、林、牧、渔业类产品 > 饲养动物、野生动物及其产品 > 活牲畜"
+  },
+  {
+    "product_name": "热分析仪",
+    "ground_truth": "13250",
+    "ground_truth_name": "其他物性分析仪器",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 分析仪器及装置 > 物性分析仪器 > 其他物性分析仪器"
+  },
+  {
+    "product_name": "盐酸曲马多缓释片",
+    "ground_truth": "5094",
+    "ground_truth_name": "含有生物碱及其衍生物缓释控释片",
+    "path": "石油、化工、医药产品 > 医药 > 化学药品制剂 > 缓释控释片 > 含有生物碱及其衍生物缓释控释片"
+  },
+  {
+    "product_name": "智能电表集中器",
+    "ground_truth": "12682",
+    "ground_truth_name": "集中器",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 计算机网络设备 > 网络控制设备 > 集中器"
+  },
+  {
+    "product_name": "亚麻脱胶机",
+    "ground_truth": "9876",
+    "ground_truth_name": "麻类加工机械",
+    "path": "机械、设备类产品 > 专用设备 > 农产品初加工机械 > 纺织纤维初加工机械 > 麻类加工机械"
+  },
+  {
+    "product_name": "五花肉",
+    "ground_truth": "1444",
+    "ground_truth_name": "畜禽肉、油脂及食用杂碎",
+    "path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 畜禽肉、油脂及食用杂碎"
+  },
+  {
+    "product_name": "全景天窗",
+    "ground_truth": "20795",
+    "ground_truth_name": "汽车天窗",
+    "path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 车身车顶 > 汽车天窗"
+  },
+  {
+    "product_name": "振动按摩器",
+    "ground_truth": "10817",
+    "ground_truth_name": "其他机械疗法器械",
+    "path": "机械、设备类产品 > 专用设备 > 机械治疗及病房护理设备 > 机械治疗器具 > 机械疗法器械 > 其他机械疗法器械"
+  },
+  {
+    "product_name": "硅藻土过滤助剂",
+    "ground_truth": "20762",
+    "ground_truth_name": "硅藻土净化材料",
+    "path": "矿产品 > 非金属矿石 > 矿物功能材料 > 硅藻土净化材料"
+  },
+  {
+    "product_name": "自动充绒机",
+    "ground_truth": "9298",
+    "ground_truth_name": "充绒机",
+    "path": "机械、设备类产品 > 专用设备 > 服装、鞋帽加工机械 > 羽绒加工设备 > 充绒机"
+  },
+  {
+    "product_name": "换流变",
+    "ground_truth": "22487",
+    "ground_truth_name": "智能型直流换流变压器",
+    "path": "机械、设备类产品 > 电气机械及器材 > 变压器、整流器和电感器 > 变压器 > 智能型直流换流变压器"
+  },
+  {
+    "product_name": "维尼纶",
+    "ground_truth": "5332",
+    "ground_truth_name": "维纶纤维",
+    "path": "石油、化工、医药产品 > 化学纤维 > 合成纤维 > 维纶纤维"
+  },
+  {
+    "product_name": "冰菜",
+    "ground_truth": "237",
+    "ground_truth_name": "番杏",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 蔬菜及食用菌 > 芹菜等叶菜类蔬菜 > 番杏"
+  },
+  {
+    "product_name": "麻醉机",
+    "ground_truth": "10759",
+    "ground_truth_name": "麻醉设备及附件",
+    "path": "机械、设备类产品 > 专用设备 > 医疗、外科及兽医用器械 > 手术室、急救室、诊疗室设备及器具 > 麻醉设备及附件"
+  },
+  {
+    "product_name": "筋膜枪",
+    "ground_truth": "10798",
+    "ground_truth_name": "电动按摩器具",
+    "path": "机械、设备类产品 > 专用设备 > 机械治疗及病房护理设备 > 机械治疗器具 > 电动按摩器具"
+  },
+  {
+    "product_name": "拖车绳",
+    "ground_truth": "2011",
+    "ground_truth_name": "汽车牵引带",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 纤维纺制线、绳、索、缆 > 吊装绳索具 > 汽车牵引带"
+  },
+  {
+    "product_name": "纯电动轿车",
+    "ground_truth": "24025",
+    "ground_truth_name": "新能源汽车",
+    "path": "产业链 > 新能源车 > 新能源汽车"
+  },
+  {
+    "product_name": "机油",
+    "ground_truth": "3499",
+    "ground_truth_name": "润滑油",
+    "path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 石油制品 > 润滑油"
+  },
+  {
+    "product_name": "玻璃钢船",
+    "ground_truth": "11684",
+    "ground_truth_name": "非金属船舶",
+    "path": "机械、设备类产品 > 交通运输设备 > 非金属船舶"
+  },
+  {
+    "product_name": "医用氧气袋",
+    "ground_truth": "10921",
+    "ground_truth_name": "氧气袋",
+    "path": "机械、设备类产品 > 专用设备 > 机械治疗及病房护理设备 > 呼吸器具 > 其他呼吸器具 > 氧气袋"
+  },
+  {
+    "product_name": "氮化硅",
+    "ground_truth": "4661",
+    "ground_truth_name": "金属氮化物",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 贵金属化合物、相关基础化学品 > 氢化物、氮化物、叠氮化物 > 金属氮化物"
+  },
+  {
+    "product_name": "喷气织机",
+    "ground_truth": "9171",
+    "ground_truth_name": "用纺织纱线或其他纤维纱线织造织物的纺织机",
+    "path": "机械、设备类产品 > 专用设备 > 纺织专用设备 > 织机 > 用纺织纱线或其他纤维纱线织造织物的纺织机"
+  },
+  {
+    "product_name": "DFB激光器芯片",
+    "ground_truth": "21445",
+    "ground_truth_name": "半导体激光器芯片",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 微电子组件 > 芯片 > 半导体激光器芯片"
+  },
+  {
+    "product_name": "零信任网关",
+    "ground_truth": "12781",
+    "ground_truth_name": "其他边界防护类设备和系统",
+    "path": "边界防护类设备 > 其他边界防护类设备和系统"
+  },
+  {
+    "product_name": "积木",
+    "ground_truth": "3094",
+    "ground_truth_name": "木制玩具",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 文教体育用品 > 玩具 > 木制玩具"
+  },
+  {
+    "product_name": "CAR-T疗法",
+    "ground_truth": "27220",
+    "ground_truth_name": "可控细胞与基因治疗",
+    "path": "产业链 > 合成生物 > 可控细胞与基因治疗"
+  },
+  {
+    "product_name": "Kindle",
+    "ground_truth": "24346",
+    "ground_truth_name": "移动电子书",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信传输设备 > 其他通信终端设备 > 移动电子书"
+  },
+  {
+    "product_name": "汇款单",
+    "ground_truth": "14097",
+    "ground_truth_name": "邮政汇兑",
+    "path": "销售服务 > 邮政服务 > 邮政普遍服务 > 邮政汇兑"
+  },
+  {
+    "product_name": "微晶蜡",
+    "ground_truth": "3514",
+    "ground_truth_name": "其他合成方法制类似产品",
+    "path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 石油制品 > 矿物蜡及合成法制类似产品 > 其他合成方法制类似产品"
+  },
+  {
+    "product_name": "涤纶缝纫线",
+    "ground_truth": "1760",
+    "ground_truth_name": "缝纫线",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 棉、化纤纺织及印染产品 > 缝纫线"
+  },
+  {
+    "product_name": "永磁除铁器",
+    "ground_truth": "24424",
+    "ground_truth_name": "大型永磁筒式磁选机",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 资源再利用设备 > 其他资源再利用设备 > 大型永磁筒式磁选机"
+  },
+  {
+    "product_name": "粗糙度仪",
+    "ground_truth": "13142",
+    "ground_truth_name": "表面质量量仪",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 绘图、计算及测量仪器 > 量仪 > 表面质量量仪"
+  },
+  {
+    "product_name": "真丝围巾",
+    "ground_truth": "1829",
+    "ground_truth_name": "丝绢纺织及精加工产品",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 丝绢纺织及精加工产品"
+  },
+  {
+    "product_name": "纯水机",
+    "ground_truth": "7752",
+    "ground_truth_name": "反渗透制水装置",
+    "path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 液体过滤、净化机械 > 反渗透制水装置"
+  },
+  {
+    "product_name": "蓄热式加热炉",
+    "ground_truth": "20354",
+    "ground_truth_name": "高温空气燃烧技术冶金加热炉",
+    "path": "机械、设备类产品 > 通用设备 > 节能通用设备 > 高温空气燃烧技术冶金加热炉"
+  },
+  {
+    "product_name": "光场控制器",
+    "ground_truth": "22606",
+    "ground_truth_name": "聚光场控制装置",
+    "path": "电力、热力、水、燃气类产品 > 电力和热力、冷气 > 发电及供电 > 发电 > 太阳能发电 > 聚光场控制装置"
+  },
+  {
+    "product_name": "ERP系统定制开发",
+    "ground_truth": "14130",
+    "ground_truth_name": "软件开发服务",
+    "path": "销售服务 > 现代服务 > 信息技术服务 > 软件服务 > 软件开发服务"
+  },
+  {
+    "product_name": "电子废弃物贵金属回收生产线",
+    "ground_truth": "23427",
+    "ground_truth_name": "含铜、重金属废弃电子产品回收提纯成套装备",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 资源再利用设备 > 其他资源再利用设备 > 含铜、重金属废弃电子产品回收提纯成套装备"
+  },
+  {
+    "product_name": "盖格计数器",
+    "ground_truth": "13530",
+    "ground_truth_name": "盖革计数器",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 核子及核辐射测量仪器 > 离子射线测量或检验仪器 > 盖革计数器"
+  },
+  {
+    "product_name": "作业本",
+    "ground_truth": "2678",
+    "ground_truth_name": "练习簿",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 印刷品、记录媒介复制品 > 本册 > 用于书写本册 > 练习簿"
+  },
+  {
+    "product_name": "输送带",
+    "ground_truth": "2024",
+    "ground_truth_name": "纺织材料制传输带",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 纺织材料制传输带"
+  },
+  {
+    "product_name": "生理盐水",
+    "ground_truth": "5052",
+    "ground_truth_name": "注射液",
+    "path": "石油、化工、医药产品 > 医药 > 化学药品制剂 > 注射液"
+  },
+  {
+    "product_name": "真空乳化机",
+    "ground_truth": "7651",
+    "ground_truth_name": "真空均质乳化锅",
+    "path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 干燥、分散、混合设备及类似设备 > 均质乳化设备 > 真空均质乳化锅"
+  },
+  {
+    "product_name": "涡旋压缩机",
+    "ground_truth": "7129",
+    "ground_truth_name": "制冷设备用压缩机",
+    "path": "机械、设备类产品 > 通用设备 > 气体压缩机 > 制冷设备用压缩机"
+  },
+  {
+    "product_name": "光纤跳线",
+    "ground_truth": "12056",
+    "ground_truth_name": "光缆",
+    "path": "机械、设备类产品 > 电气机械及器材 > 光纤、光缆 > 光缆"
+  },
+  {
+    "product_name": "排线",
+    "ground_truth": "25112",
+    "ground_truth_name": "微细通讯线材",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 其他电子元件 > 微细通讯线材"
+  },
+  {
+    "product_name": "锡白粉",
+    "ground_truth": "3692",
+    "ground_truth_name": "氯氧化锡",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 氯氧化物及氢氧基氯化物 > 氯氧化锡"
+  },
+  {
+    "product_name": "亚硫酸钠",
+    "ground_truth": "3641",
+    "ground_truth_name": "金属亚硫酸盐",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 金属硫化物及硫酸盐 > 金属亚硫酸盐"
+  },
+  {
+    "product_name": "光罩",
+    "ground_truth": "26611",
+    "ground_truth_name": "掩膜版",
+    "path": "产业链 > 新型显示 > 掩膜版"
+  },
+  {
+    "product_name": "热饮贩卖机",
+    "ground_truth": "11260",
+    "ground_truth_name": "加热饮料自动销售机",
+    "path": "机械、设备类产品 > 专用设备 > 商业、饮食、服务专用设备 > 自动售货机、售票机 > 饮料自动销售机 > 加热饮料自动销售机"
+  },
+  {
+    "product_name": "安全气囊碰撞传感器",
+    "ground_truth": "21715",
+    "ground_truth_name": "乘员区别传感器",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 传感器 > 乘员区别传感器"
+  },
+  {
+    "product_name": "数显卡尺",
+    "ground_truth": "13130",
+    "ground_truth_name": "电子数显量具",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 绘图、计算及测量仪器 > 量具 > 电子数显量具"
+  },
+  {
+    "product_name": "安全带插扣",
+    "ground_truth": "20799",
+    "ground_truth_name": "安全带锁舌",
+    "path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 车身车顶 > 安全带锁舌"
+  },
+  {
+    "product_name": "OCT光学相干断层扫描仪",
+    "ground_truth": "10153",
+    "ground_truth_name": "其他激光诊断仪器",
+    "path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 医用激光诊断、治疗仪器及设备 > 激光诊断仪器 > 其他激光诊断仪器"
+  },
+  {
+    "product_name": "茂金属线性低密度聚乙烯",
+    "ground_truth": "25365",
+    "ground_truth_name": "MLLDPE",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 初级形态塑料 > MLLDPE"
+  },
+  {
+    "product_name": "碱式氯化铝",
+    "ground_truth": "3686",
+    "ground_truth_name": "氯氧化物及氢氧基氯化物",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 氯氧化物及氢氧基氯化物"
+  },
+  {
+    "product_name": "电脑裁皮机",
+    "ground_truth": "9232",
+    "ground_truth_name": "皮革制品制作机械",
+    "path": "机械、设备类产品 > 专用设备 > 皮革、毛皮及其制品加工专用设备 > 皮革制品制作机械"
+  },
+  {
+    "product_name": "串补装置",
+    "ground_truth": "11946",
+    "ground_truth_name": "串联电容器装置",
+    "path": "机械、设备类产品 > 电气机械及器材 > 电力电容器及其配套设备 > 电力电容器成套装置 > 串联电容器装置"
+  },
+  {
+    "product_name": "地下水水质自动监测站",
+    "ground_truth": "25000",
+    "ground_truth_name": "地下水采样与检测一体化移动式设备",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 环境监测专用仪器仪表 > 其他环境监测仪器 > 地下水采样与检测一体化移动式设备"
+  },
+  {
+    "product_name": "海缆故障定位仪",
+    "ground_truth": "21792",
+    "ground_truth_name": "海缆故障检测设备",
+    "path": "电力、热力、水、燃气类产品 > 电力和热力、冷气 > 发电及供电 > 发电 > 风力发电 > 海缆故障检测设备"
+  },
+  {
+    "product_name": "彩钢瓦成型机",
+    "ground_truth": "24386",
+    "ground_truth_name": "冷弯机",
+    "path": "机械、设备类产品 > 专用设备 > 矿山专用设备 > 其他矿山专用设备 > 冷弯机"
+  },
+  {
+    "product_name": "Low-E玻璃",
+    "ground_truth": "23360",
+    "ground_truth_name": "建筑节能玻璃",
+    "path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品 > 建筑装饰 > 建材物料 > 建筑用玻璃 > 建筑节能玻璃"
+  },
+  {
+    "product_name": "DR平板探测器",
+    "ground_truth": "12883",
+    "ground_truth_name": "X射线",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 光电子器件及激光器件 > 电真空光电子器件 > X射线"
+  },
+  {
+    "product_name": "绿薄荷",
+    "ground_truth": "582",
+    "ground_truth_name": "留兰香",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 香料原料 > 香味料 > 留兰香"
+  },
+  {
+    "product_name": "骨凿",
+    "ground_truth": "10441",
+    "ground_truth_name": "骨刮",
+    "path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 口腔科手术器械 > 切除颌骨用器械 > 骨刮"
+  },
+  {
+    "product_name": "EBL",
+    "ground_truth": "9365",
+    "ground_truth_name": "电子束光刻机",
+    "path": "机械、设备类产品 > 专用设备 > 电子工业专用设备 > 芯片制造设备 > 电子束光刻机"
+  },
+  {
+    "product_name": "小爱同学",
+    "ground_truth": "26561",
+    "ground_truth_name": "智能语音助手",
+    "path": "产业链 > 人工智能 > 智能语音助手"
+  },
+  {
+    "product_name": "场地平整",
+    "ground_truth": "14344",
+    "ground_truth_name": "平整土地",
+    "path": "销售服务 > 建筑服务 > 其他建筑服务 > 平整土地"
+  },
+  {
+    "product_name": "火罐",
+    "ground_truth": "10792",
+    "ground_truth_name": "拔火罐类器械",
+    "path": "机械、设备类产品 > 专用设备 > 医疗、外科及兽医用器械 > 中医治疗器具 > 拔火罐类器械"
+  },
+  {
+    "product_name": "气动平衡吊",
+    "ground_truth": "7027",
+    "ground_truth_name": "平衡起重机",
+    "path": "机械、设备类产品 > 通用设备 > 起重机 > 悬臂起重机 > 平衡起重机"
+  },
+  {
+    "product_name": "松香",
+    "ground_truth": "839",
+    "ground_truth_name": "其他林产品",
+    "path": "农、林、牧、渔业类产品 > 林业产品 > 林产品 > 其他林产品"
+  },
+  {
+    "product_name": "LNA",
+    "ground_truth": "25064",
+    "ground_truth_name": "射频低噪声放大器",
+    "path": "产业链 > 集成电路半导体 > 集成电路制造 > 集成电路芯片(IC) > 模拟芯片 > 信号链芯片 > 射频芯片 > 射频低噪声放大器"
+  },
+  {
+    "product_name": "水喷射泵",
+    "ground_truth": "11723",
+    "ground_truth_name": "喷水推进器",
+    "path": "机械、设备类产品 > 交通运输设备 > 船用推进器及螺旋桨、锚制品 > 喷水推进器"
+  },
+  {
+    "product_name": "白电油",
+    "ground_truth": "4891",
+    "ground_truth_name": "工业级混合油",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 工业级混合油"
+  },
+  {
+    "product_name": "香兰素",
+    "ground_truth": "5000",
+    "ground_truth_name": "合成香料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 香料 > 合成香料"
+  },
+  {
+    "product_name": "CPE",
+    "ground_truth": "12609",
+    "ground_truth_name": "WiMAX设备",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信接入设备 > 固定无线接入设备 > WiMAX设备"
+  },
+  {
+    "product_name": "尼龙",
+    "ground_truth": "27231",
+    "ground_truth_name": "PA",
+    "path": "产业链 > 合成生物 > PA"
+  },
+  {
+    "product_name": "边缘AI盒子",
+    "ground_truth": "26483",
+    "ground_truth_name": "计算与存储设备",
+    "path": "产业链 > 人工智能 > 边缘计算设备 > 计算与存储设备"
+  },
+  {
+    "product_name": "回转烘干机",
+    "ground_truth": "7643",
+    "ground_truth_name": "蒸汽回转干燥机",
+    "path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 干燥、分散、混合设备及类似设备 > 干燥设备 > 蒸汽回转干燥机"
+  },
+  {
+    "product_name": "LuAc",
+    "ground_truth": "4478",
+    "ground_truth_name": "醋酸镥",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 贵金属化合物、相关基础化学品 > 稀土化合物 > 醋酸稀土 > 醋酸镥"
+  },
+  {
+    "product_name": "氧化铝陶瓷基板",
+    "ground_truth": "24171",
+    "ground_truth_name": "电工陶瓷材料",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 其他陶瓷制品 > 电工陶瓷材料"
+  },
+  {
+    "product_name": "百叶轮",
+    "ground_truth": "22289",
+    "ground_truth_name": "砂带",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 磨具 > 砂带"
+  },
+  {
+    "product_name": "TFT-LCD",
+    "ground_truth": "21691",
+    "ground_truth_name": "LCD显示模块",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 光电子器件及激光器件 > 电真空光电子器件 > 显示器件 > LCD显示模块"
+  },
+  {
+    "product_name": "断桥铝合金型材",
+    "ground_truth": "22324",
+    "ground_truth_name": "建筑铝挤压材",
+    "path": "金属及非金属制品 > 黑色金属冶炼及压延产品 > 钢材 > 建筑铝挤压材"
+  },
+  {
+    "product_name": "万能角度尺",
+    "ground_truth": "13140",
+    "ground_truth_name": "通用角度量仪",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 绘图、计算及测量仪器 > 量仪 > 通用角度量仪"
+  },
+  {
+    "product_name": "调音台",
+    "ground_truth": "20165",
+    "ground_truth_name": "数字专业音响设备",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 数字创意技术设备 > 数字专业音响设备"
+  },
+  {
+    "product_name": "多效蒸馏水机",
+    "ground_truth": "7562",
+    "ground_truth_name": "制药用蒸馏水机",
+    "path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 制药用蒸馏水机"
+  },
+  {
+    "product_name": "BMS芯片",
+    "ground_truth": "26960",
+    "ground_truth_name": "电池管理芯片",
+    "path": "产业链 > 集成电路半导体 > 集成电路制造 > 集成电路芯片(IC) > 模拟芯片 > 电源管理芯片 > 电池管理芯片"
+  },
+  {
+    "product_name": "净水器",
+    "ground_truth": "7712",
+    "ground_truth_name": "液体过滤、净化机械",
+    "path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 液体过滤、净化机械"
+  },
+  {
+    "product_name": "猫砂盆",
+    "ground_truth": "3465",
+    "ground_truth_name": "沙杠",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 宠物用品 > 宠物专用品 > 沙杠"
+  },
+  {
+    "product_name": "光时域反射仪",
+    "ground_truth": "13571",
+    "ground_truth_name": "光纤特性测量仪器",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 光学、电子测量仪器 > 通信测量仪器 > 光纤特性测量仪器"
+  },
+  {
+    "product_name": "加州鲈鱼",
+    "ground_truth": "1063",
+    "ground_truth_name": "淡水鲈鱼",
+    "path": "农、林、牧、渔业类产品 > 淡水养殖产品、捕捞产品 > 淡水鱼 > 淡水鲈鱼"
+  },
+  {
+    "product_name": "铜编织带",
+    "ground_truth": "6493",
+    "ground_truth_name": "铜丝编带",
+    "path": "金属及非金属制品 > 金属制品 > 金属制绳、缆 > 铜丝绞线、缆、编带 > 铜丝编带"
+  },
+  {
+    "product_name": "伸缩警棍",
+    "ground_truth": "11323",
+    "ground_truth_name": "警棍及类似警用器械",
+    "path": "机械、设备类产品 > 专用设备 > 社会公共安全设备及器材 > 警棍及类似警用器械"
+  },
+  {
+    "product_name": "高压清洗机",
+    "ground_truth": "8006",
+    "ground_truth_name": "喷水器、喷雾器",
+    "path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷水器、喷雾器"
+  },
+  {
+    "product_name": "液压矫平机",
+    "ground_truth": "6960",
+    "ground_truth_name": "数控矫平机",
+    "path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属成形机床 > 数控弯曲、折叠、矫直或矫平机床 > 数控矫平机"
+  }
+]
