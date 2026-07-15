@@ -1,4 +1,22 @@
 from __future__ import annotations
+from src.orchestration.self_evolve_scheduler import SelfEvolveScheduler
+from src.models.enums import EngineType, MatchStatus
+from src.infrastructure.db_manager import DBConnectionManager
+from src.infrastructure.config_manager import ConfigManager
+from src.index.vector_index_manager import VectorIndexManager
+from src.index.trgm_index_manager import TrgmIndexManager
+from src.index.page_index_tree import PageIndexTree
+from src.engine.rerank_adapter import RerankAdapter
+from src.engine.rag_match_engine import RAGMatchEngine
+from src.engine.page_index_engine import PageIndexEngine
+from src.engine.llm_adapter import LLMAdapter
+from src.data.taxonomy_utils import (
+    allocate_next_category_id,
+    build_category_path_fields,
+    format_category_path,
+    locate_expansion_parent,
+)
+from src.data.excel_reader import ExcelDataReader
 import json
 import logging
 import os
@@ -7,28 +25,12 @@ import traceback
 
 from flask import Flask, request, jsonify, send_from_directory
 
-WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "web")
+WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))), "web")
 
-from src.data.excel_reader import ExcelDataReader
-from src.data.taxonomy_utils import (
-    allocate_next_category_id,
-    build_category_path_fields,
-    format_category_path,
-    locate_expansion_parent,
-)
-from src.engine.llm_adapter import LLMAdapter
-from src.engine.page_index_engine import PageIndexEngine
-from src.engine.rag_match_engine import RAGMatchEngine
-from src.engine.rerank_adapter import RerankAdapter
-from src.index.page_index_tree import PageIndexTree
-from src.index.trgm_index_manager import TrgmIndexManager
-from src.index.vector_index_manager import VectorIndexManager
-from src.infrastructure.config_manager import ConfigManager
-from src.infrastructure.db_manager import DBConnectionManager
-from src.models.enums import EngineType, MatchStatus
-from src.orchestration.self_evolve_scheduler import SelfEvolveScheduler
 
-app = Flask(__name__, static_folder=os.path.join(WEB_DIR, "static"), static_url_path="/static")
+app = Flask(__name__, static_folder=os.path.join(
+    WEB_DIR, "static"), static_url_path="/static")
 
 CONFIG_PATH = "config.yaml"
 
@@ -57,6 +59,7 @@ def _init_components():
     llm_config = config.get_llm_config()
 
     db = DBConnectionManager(db_config)
+    db.initialize()
     llm = LLMAdapter(llm_config)
 
     embedding_config = config.get_embedding_config()
@@ -105,10 +108,13 @@ def _init_components():
     except Exception as e:
         logging.getLogger("WebAPI").error(f"PageIndex树构建失败: {e}")
 
-    rerank_adapter = RerankAdapter(rerank_config) if rerank_config.api_key else None
+    rerank_adapter = RerankAdapter(
+        rerank_config) if rerank_config.api_key else None
 
-    page_engine = PageIndexEngine(page_tree, llm, force_llm_each_layer=False, vec_mgr=vec_mgr, rerank=rerank_adapter, trgm_mgr=trgm_mgr)
-    page_engine_force_llm = PageIndexEngine(page_tree, llm, force_llm_each_layer=True, vec_mgr=vec_mgr, rerank=rerank_adapter, trgm_mgr=trgm_mgr)
+    page_engine = PageIndexEngine(page_tree, llm, force_llm_each_layer=False,
+                                  vec_mgr=vec_mgr, rerank=rerank_adapter, trgm_mgr=trgm_mgr)
+    page_engine_force_llm = PageIndexEngine(
+        page_tree, llm, force_llm_each_layer=True, vec_mgr=vec_mgr, rerank=rerank_adapter, trgm_mgr=trgm_mgr)
 
     _config = config
     _db = db
@@ -121,8 +127,10 @@ def _init_components():
     _page_engine_force_llm = page_engine_force_llm
     _page_tree = page_tree
     _excel_reader = excel_reader
-    standard_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), standard_file)
-    _evolve_scheduler = SelfEvolveScheduler(llm, db, excel_reader, match_config, standard_file_path)
+    standard_file_path = os.path.join(os.path.dirname(os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__)))), standard_file)
+    _evolve_scheduler = SelfEvolveScheduler(
+        llm, db, excel_reader, match_config, standard_file_path)
     _initialized = True
 
 
@@ -325,7 +333,8 @@ def api_stats():
         rows4 = _db.execute("SELECT COUNT(*) as cnt FROM synonym_updates")
         syn_count = rows4[0]["cnt"] if rows4 else 0
 
-        rows5 = _db.execute("SELECT COUNT(*) as cnt FROM expansion_suggestions")
+        rows5 = _db.execute(
+            "SELECT COUNT(*) as cnt FROM expansion_suggestions")
         exp_count = rows5[0]["cnt"] if rows5 else 0
 
         status_rows = _db.execute(
@@ -435,7 +444,8 @@ def api_suggest_expansion():
             _llm, _page_tree, product_name
         )
 
-        suggested_category_name = analysis.get("suggested_category_name", product_name)
+        suggested_category_name = analysis.get(
+            "suggested_category_name", product_name)
         reason = analysis.get("reason", "")
         confidence = analysis.get("confidence", 0)
         path_note = f"挂载路径: {mount_path}" if mount_path else "挂载路径: 未确定"
@@ -483,13 +493,15 @@ def api_approve_expansion():
         ):
             return jsonify({"error": f"分配的新 category_id={new_id} 已存在，请检查 id 分配逻辑"}), 409
 
-        category_pids, category_group_name = build_category_path_fields(_page_tree, parent_id)
+        category_pids, category_group_name = build_category_path_fields(
+            _page_tree, parent_id)
         mount_path = format_category_path(_page_tree, parent_id)
 
         _db.execute(
             """INSERT INTO category_texts (category_id, category_name, category_pids, syn_list, category_group_name)
                VALUES (%s, %s, %s, %s, %s)""",
-            (new_id, category_name, category_pids, [product_name], category_group_name),
+            (new_id, category_name, category_pids,
+             [product_name], category_group_name),
         )
 
         from src.index.api_embedder import ApiEmbedder
@@ -502,7 +514,8 @@ def api_approve_expansion():
         text_parts = [category_name, product_name]
         embedding = embedder.embed(" ".join(text_parts))
         import numpy as np
-        emb_list = embedding.tolist() if isinstance(embedding, np.ndarray) else list(embedding)
+        emb_list = embedding.tolist() if isinstance(
+            embedding, np.ndarray) else list(embedding)
 
         import pickle
         embedding_bytes = pickle.dumps(embedding)
@@ -525,11 +538,14 @@ def api_approve_expansion():
 
         if not verify_ok:
             try:
-                _db.execute("DELETE FROM category_texts WHERE category_id = %s", (new_id,))
-                _db.execute("DELETE FROM category_vectors WHERE category_id = %s", (new_id,))
+                _db.execute(
+                    "DELETE FROM category_texts WHERE category_id = %s", (new_id,))
+                _db.execute(
+                    "DELETE FROM category_vectors WHERE category_id = %s", (new_id,))
                 node = _page_tree.get_node(new_id)
                 if node and node.parent:
-                    node.parent.children = [c for c in node.parent.children if c.category_id != new_id]
+                    node.parent.children = [
+                        c for c in node.parent.children if c.category_id != new_id]
                 if new_id in _page_tree._node_map:
                     del _page_tree._node_map[new_id]
                 return jsonify({"status": "verify_failed", "error": f"验证失败: 匹配'{product_name}'未能命中新分类#{new_id}，已自动回滚"})

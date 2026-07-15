@@ -1,0 +1,53 @@
+=== 当前测试集 ===
+llm_200: n=198 unique=195 keys=['product_name', 'ground_truth', 'ground_truth_name', 'path', 'ground_truth_fix']
+llm_v2 : n=159 unique=157 keys=['product_name', 'ground_truth', 'ground_truth_name', 'path']
+llm_200 ground_truth_fix 分布: {'literal_leaf_2026-07-14': 38, None: 160}
+llm_200 带 fix 标记条数: 38
+  - 罗茨风机: gt=25558 罗茨风机 fix=literal_leaf_2026-07-14
+  - 杀毒软件: gt=25212 杀毒软件 fix=literal_leaf_2026-07-14
+  - 牙科手机: gt=10379 牙科手机 fix=literal_leaf_2026-07-14
+  - 智能音箱: gt=26552 智能音箱 fix=literal_leaf_2026-07-14
+  - 数控插齿机: gt=6923 数控插齿机 fix=literal_leaf_2026-07-14
+  - 罗茨风机: gt=25558 罗茨风机 fix=literal_leaf_2026-07-14
+  - 高压无气喷涂机: gt=7990 高压无气喷涂机 fix=literal_leaf_2026-07-14
+  - 酒精回收塔: gt=7576 酒精回收塔 fix=literal_leaf_2026-07-14
+  - 真空蒸发器: gt=7602 真空蒸发器 fix=literal_leaf_2026-07-14
+  - 风力发电机组: gt=24794 风力发电机组 fix=literal_leaf_2026-07-14
+  - 硒鼓: gt=12767 硒鼓 fix=literal_leaf_2026-07-14
+  - 网络分析仪: gt=13589 网络分析仪 fix=literal_leaf_2026-07-14
+  - 激光切割机: gt=26646 激光切割机 fix=literal_leaf_2026-07-14
+  - 煤制油: gt=24573 煤制油 fix=literal_leaf_2026-07-14
+  - 缝纫线: gt=1760 缝纫线 fix=literal_leaf_2026-07-14
+
+llm_200 相对本次 full 评测时的 GT 变更: 36 条
+  罗茨风机: eval时gt=24985 -> 现gt=25558 (罗茨风机) fix=literal_leaf_2026-07-14
+  杀毒软件: eval时gt=20096 -> 现gt=25212 (杀毒软件) fix=literal_leaf_2026-07-14
+  牙科手机: eval时gt=10407 -> 现gt=10379 (牙科手机) fix=literal_leaf_2026-07-14
+  智能音箱: eval时gt=20023 -> 现gt=26552 (智能音箱) fix=literal_leaf_2026-07-14
+  数控插齿机: eval时gt=6916 -> 现gt=6923 (数控插齿机) fix=literal_leaf_2026-07-14
+  高压无气喷涂机: eval时gt=7978 -> 现gt=7990 (高压无气喷涂机) fix=literal_leaf_2026-07-14
+  酒精回收塔: eval时gt=7577 -> 现gt=7576 (酒精回收塔) fix=literal_leaf_2026-07-14
+  真空蒸发器: eval时gt=7613 -> 现gt=7602 (真空蒸发器) fix=literal_leaf_2026-07-14
+  风力发电机组: eval时gt=26677 -> 现gt=24794 (风力发电机组) fix=literal_leaf_2026-07-14
+  硒鼓: eval时gt=13869 -> 现gt=12767 (硒鼓) fix=literal_leaf_2026-07-14
+  网络分析仪: eval时gt=12703 -> 现gt=13589 (网络分析仪) fix=literal_leaf_2026-07-14
+  激光切割机: eval时gt=9451 -> 现gt=26646 (激光切割机) fix=literal_leaf_2026-07-14
+  煤制油: eval时gt=3538 -> 现gt=24573 (煤制油) fix=literal_leaf_2026-07-14
+  缝纫线: eval时gt=1755 -> 现gt=1760 (缝纫线) fix=literal_leaf_2026-07-14
+  订书机: eval时gt=13899 -> 现gt=13900 (订书机) fix=literal_leaf_2026-07-14
+  碳纤维增强复合材料: eval时gt=21228 -> 现gt=4880 (碳纤维增强复合材料) fix=literal_leaf_2026-07-14
+  离心泵: eval时gt=8580 -> 现gt=24201 (离心泵) fix=literal_leaf_2026-07-14
+  接线端子: eval时gt=11976 -> 现gt=24036 (接线端子) fix=literal_leaf_2026-07-14
+  起垄机: eval时gt=9557 -> 现gt=9509 (起垄机) fix=literal_leaf_2026-07-14
+  轿车: eval时gt=11472 -> 现gt=23830 (轿车) fix=literal_leaf_2026-07-14
+llm_v2 相对本次 full 评测时的 GT 变更: 0 条
+llm_v2 相对历史 v3 评测 GT 变更: 0 条
+
+=== 评测结果文件（当前口径）===
+eval_llm200_full: {'embedding': 'bge-m3-1024-full', 'engine': 'rag_rerank', 'accuracy': 0.2121, 'correct': 42, 'total': 198}
+eval_llmv2_full: {'embedding': 'bge-m3-1024-full', 'engine': 'rag_rerank', 'accuracy': 0.2453, 'correct': 39, 'total': 159}
+rescored llm200: {'embedding': 'bge-m3-1024-full', 'engine': 'rag_rerank', 'note': 'rescored_with_fixed_gt_and_soft_metrics', 'total': 198, 'accuracy_strict': 0.4091, 'accuracy_near': 0.5707, 'accuracy_soft': 0.6313}
+rescored llmv2: {'embedding': 'bge-m3-1024-full', 'engine': 'rag_rerank', 'note': 'rescored_with_fixed_gt_and_soft_metrics', 'total': 159, 'accuracy_strict': 0.2453, 'accuracy_near': 0.4465, 'accuracy_soft': 0.5094}
+llm_soft llm200: {'embedding': 'bge-m3-1024-full', 'engine': 'rag_rerank', 'note': 'rescored_with_fixed_gt_and_soft_metrics+llm_reasonableness_judge', 'total': 198, 'accuracy_strict': 0.4091, 'accuracy_near': 0.5707, 'accuracy_soft': 0.6313, 'accuracy_llm_soft': 0.8131, 'correct_llm_soft': 161, 'llm_judged': 72, 'llm_accepted': 36}
+resc200 accuracy_strict=0.4091 accuracy_soft=0.6313 note=rescored_with_fixed_gt_and_soft_metrics
+rescv2 accuracy_strict=0.2453 accuracy_soft=0.5094 note=rescored_with_fixed_gt_and_soft_metrics

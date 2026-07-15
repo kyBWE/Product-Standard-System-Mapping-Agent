@@ -1,0 +1,1546 @@
+{
+  "sets": [
+    {
+      "file": "eval_llm200_full.json",
+      "accuracy": 0.2121,
+      "correct": 42,
+      "total": 198,
+      "wrong": 156,
+      "verdict_counts": {
+        "LIKELY_GT_ISSUE": 38,
+        "NEAR_MISS": 45,
+        "FAR_WRONG": 54,
+        "BROAD_RELATED": 18,
+        "NO_MATCH": 1
+      },
+      "adjusted_acc_if_literal_gt_accepted": 0.404,
+      "soft_acc_plus_near_miss": 0.6313,
+      "samples": {
+        "LIKELY_GT_ISSUE": [
+          {
+            "product": "罗茨风机",
+            "gt_id": "7501",
+            "gt_name": "螺杆式鼓风机",
+            "gt_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 回转式鼓风机",
+            "pred_id": "25558",
+            "pred_name": "罗茨风机",
+            "pred_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 罗茨风机",
+            "lca_depth": 5,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "sibling_near",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "杀毒软件",
+            "gt_id": "20096",
+            "gt_name": "工具软件产品",
+            "gt_path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 工具软件产品",
+            "pred_id": "25212",
+            "pred_name": "杀毒软件",
+            "pred_path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 网络与信息安全软件 > 杀毒软件",
+            "lca_depth": 4,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "same_subtree",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "牙科手机",
+            "gt_id": "10407",
+            "gt_name": "口腔科手术器械",
+            "gt_path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 口腔科手术器械",
+            "pred_id": "10379",
+            "pred_name": "牙科手机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 牙科手机",
+            "lca_depth": 3,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "sibling_near",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "智能音箱",
+            "gt_id": "20023",
+            "gt_name": "智慧智能设备",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 智慧智能设备",
+            "pred_id": "26552",
+            "pred_name": "智能音箱",
+            "pred_path": "产业链 > 人工智能 > 智能语音设备 > 智能音箱",
+            "lca_depth": 0,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "cross_domain",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "数控插齿机",
+            "gt_id": "6916",
+            "gt_name": "数控插床",
+            "gt_path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属切削机床 > 数控刨床 > 数控插床",
+            "pred_id": "6923",
+            "pred_name": "数控插齿机",
+            "pred_path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属切削机床 > 数控刨床 > 数控插齿机",
+            "lca_depth": 5,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "sibling_near",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "罗茨风机",
+            "gt_id": "24985",
+            "gt_name": "回转式鼓风机",
+            "gt_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 回转式鼓风机",
+            "pred_id": "25558",
+            "pred_name": "罗茨风机",
+            "pred_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 罗茨风机",
+            "lca_depth": 5,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "sibling_near",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "高压无气喷涂机",
+            "gt_id": "7978",
+            "gt_name": "其他喷枪",
+            "gt_path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷枪 > 其他喷枪",
+            "pred_id": "7990",
+            "pred_name": "高压无气喷涂机",
+            "pred_path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷涂机 > 高压无气喷涂机",
+            "lca_depth": 3,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "same_subtree",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "酒精回收塔",
+            "gt_id": "7582",
+            "gt_name": "蒸馏釜",
+            "gt_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 多功能酒精回收器",
+            "pred_id": "7576",
+            "pred_name": "酒精回收塔",
+            "pred_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 酒精回收塔",
+            "lca_depth": 5,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "sibling_near",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "真空蒸发器",
+            "gt_id": "7613",
+            "gt_name": "真空浓缩器",
+            "gt_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 浓缩设备 > 浓缩机 > 真空浓缩器",
+            "pred_id": "7602",
+            "pred_name": "真空蒸发器",
+            "pred_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 浓缩设备 > 蒸发器 > 真空蒸发器",
+            "lca_depth": 4,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "same_subtree",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "风力发电机组",
+            "gt_id": "26677",
+            "gt_name": "风电开发及运维",
+            "gt_path": "产业链 > 风电产业 > 风电开发及运维",
+            "pred_id": "24794",
+            "pred_name": "风力发电机组",
+            "pred_path": "机械、设备类产品 > 电气机械及器材 > 发电机组、内燃发电机组及旋转式变流机 > 发电机组 > 风力发电机组",
+            "lca_depth": 0,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "cross_domain",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "硒鼓",
+            "gt_id": "13869",
+            "gt_name": "成像卡盒组件",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 复印和胶版印制设备 > 复印设备配套装置、零件 > 成像卡盒组件",
+            "pred_id": "12767",
+            "pred_name": "硒鼓",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子计算机配套产品及耗材 > 其他电子计算机配套产品及耗材 > 硒鼓",
+            "lca_depth": 1,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "same_top_only",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          },
+          {
+            "product": "网络分析仪",
+            "gt_id": "12703",
+            "gt_name": "网络检测设备",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 计算机网络设备 > 网络检测设备",
+            "pred_id": "13589",
+            "pred_name": "网络分析仪",
+            "pred_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 光学、电子测量仪器 > 通用电子测量仪器 > 网络分析仪",
+            "lca_depth": 1,
+            "confidence": 0.98,
+            "labels": [
+              "pred_exact_name_match",
+              "pred_is_literal_category",
+              "gt_not_literal_but_literal_exists",
+              "same_top_only",
+              "LIKELY_GT_WEAKER_THAN_PRED"
+            ],
+            "verdict": "LIKELY_GT_ISSUE"
+          }
+        ],
+        "NEAR_MISS": [
+          {
+            "product": "环氧底漆",
+            "gt_id": "23591",
+            "gt_name": "涂覆材料",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 涂料 > 涂覆材料",
+            "pred_id": "21948",
+            "pred_name": "环氧涂料",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 涂料 > 环氧涂料",
+            "lca_depth": 3,
+            "confidence": 0.684,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "硅铬合金",
+            "gt_id": "24471",
+            "gt_name": "铬系铁合金",
+            "gt_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 有色金属合金 > 铬系铁合金",
+            "pred_id": "23898",
+            "pred_name": "Cu-Cr-Zr合金",
+            "pred_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 有色金属合金 > Cu-Cr-Zr合金",
+            "lca_depth": 3,
+            "confidence": 0.67,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "卧螺离心机",
+            "gt_id": "7809",
+            "gt_name": "过滤离心机",
+            "gt_path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 离心机 > 过滤离心机",
+            "pred_id": "7815",
+            "pred_name": "螺旋卸料过滤离心机",
+            "pred_path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 离心机 > 过滤离心机 > 螺旋卸料过滤离心机",
+            "lca_depth": 5,
+            "confidence": 0.95,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "燃气燃烧器",
+            "gt_id": "7378",
+            "gt_name": "炉用燃烧器",
+            "gt_path": "机械、设备类产品 > 通用设备 > 窑炉、熔炉及电炉 > 炉用燃烧器",
+            "pred_id": "7381",
+            "pred_name": "气体燃烧器",
+            "pred_path": "机械、设备类产品 > 通用设备 > 窑炉、熔炉及电炉 > 炉用燃烧器 > 气体燃烧器",
+            "lca_depth": 4,
+            "confidence": 0.698,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "辅酶Q10",
+            "gt_id": "5214",
+            "gt_name": "核酸类药制剂",
+            "gt_path": "石油、化工、医药产品 > 医药 > 生物化学药品 > 核酸类药制剂",
+            "pred_id": "5185",
+            "pred_name": "辅酶Q10制剂",
+            "pred_path": "石油、化工、医药产品 > 医药 > 生物化学药品 > 酶类生化制剂 > 辅酶Q10制剂",
+            "lca_depth": 3,
+            "confidence": 0.851,
+            "labels": [
+              "pred_contains_product",
+              "same_subtree"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "大苏打",
+            "gt_id": "3643",
+            "gt_name": "硫代硫酸盐",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 金属硫化物及硫酸盐 > 硫代硫酸盐",
+            "pred_id": "3642",
+            "pred_name": "次亚硫酸钠",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 金属硫化物及硫酸盐 > 次亚硫酸钠",
+            "lca_depth": 4,
+            "confidence": 0.95,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "自行车外胎",
+            "gt_id": "5394",
+            "gt_name": "力车胎",
+            "gt_path": "石油、化工、医药产品 > 橡胶制品 > 橡胶轮胎及内胎 > 力车胎",
+            "pred_id": "5374",
+            "pred_name": "橡胶轮胎外胎",
+            "pred_path": "石油、化工、医药产品 > 橡胶制品 > 橡胶轮胎及内胎 > 橡胶轮胎外胎",
+            "lca_depth": 3,
+            "confidence": 0.693,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "无人机遥控器",
+            "gt_id": "12629",
+            "gt_name": "无线电遥控设备",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 雷达、无线电导航及无线电遥控设备 > 无线电遥控设备",
+            "pred_id": "12631",
+            "pred_name": "无人驾驶飞机无线电遥控设备",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 雷达、无线电导航及无线电遥控设备 > 无线电遥控设备 > 无人驾驶飞机无线电遥控设备",
+            "lca_depth": 4,
+            "confidence": 0.726,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "织带",
+            "gt_id": "2044",
+            "gt_name": "狭幅机织物",
+            "gt_path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 狭幅机织物",
+            "pred_id": "2024",
+            "pred_name": "纺织材料制传输带",
+            "pred_path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 纺织材料制传输带",
+            "lca_depth": 3,
+            "confidence": 0.642,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "钢板网",
+            "gt_id": "6506",
+            "gt_name": "钢铁丝篱及格栅",
+            "gt_path": "金属及非金属制品 > 金属制品 > 金属丝绳制品 > 钢铁丝制品 > 钢铁丝篱及格栅",
+            "pred_id": "6507",
+            "pred_name": "网眼钢铁板",
+            "pred_path": "金属及非金属制品 > 金属制品 > 金属丝绳制品 > 钢铁丝制品 > 网眼钢铁板",
+            "lca_depth": 4,
+            "confidence": 0.704,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "电磁炉",
+            "gt_id": "12198",
+            "gt_name": "家用电炉灶",
+            "gt_path": "机械、设备类产品 > 电气机械及器材 > 家用厨房电器具 > 家用电炉灶",
+            "pred_id": "12200",
+            "pred_name": "电磁灶",
+            "pred_path": "机械、设备类产品 > 电气机械及器材 > 家用厨房电器具 > 家用电炉灶 > 电磁灶",
+            "lca_depth": 4,
+            "confidence": 0.95,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "汽车坐垫套",
+            "gt_id": "23599",
+            "gt_name": "汽车座椅座套",
+            "gt_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 其他车身零配件 > 汽车座椅座套",
+            "pred_id": "21584",
+            "pred_name": "汽车坐垫",
+            "pred_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 座椅安全带 > 汽车坐垫",
+            "lca_depth": 4,
+            "confidence": 0.72,
+            "labels": [
+              "same_subtree"
+            ],
+            "verdict": "NEAR_MISS"
+          }
+        ],
+        "BROAD_RELATED": [
+          {
+            "product": "雾炮机",
+            "gt_id": "25519",
+            "gt_name": "粉尘重污染场所和行业抑尘技术设备",
+            "gt_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 大气污染防治设备 > 其他大气污染防治设备 > 粉尘重污染场所和行业抑尘技术设备",
+            "pred_id": "9565",
+            "pred_name": "机动喷雾机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 机械化农业及园艺机具 > 田间管理机械 > 植保机械 > 机动喷雾机",
+            "lca_depth": 2,
+            "confidence": 0.631,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "百叶帘",
+            "gt_id": "1933",
+            "gt_name": "其他纺织材料制窗帘及类似品",
+            "gt_path": "纺织、服装、皮革类产品 > 纺织产品 > 日用织物制品 > 窗帘及类似品 > 其他纺织材料制窗帘及类似品",
+            "pred_id": "2023",
+            "pred_name": "其他帘子布",
+            "pred_path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 帘子布 > 其他帘子布",
+            "lca_depth": 2,
+            "confidence": 0.565,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "二硫化钼涂层",
+            "gt_id": "21270",
+            "gt_name": "固体润滑薄膜",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 膜材料 > 固体润滑薄膜",
+            "pred_id": "21932",
+            "pred_name": "表面涂镀材料",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 涂料 > 表面涂镀材料",
+            "lca_depth": 2,
+            "confidence": 0.663,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "鱼鳞胶原蛋白提取设备",
+            "gt_id": "24432",
+            "gt_name": "水产加工废弃物综合利用技术及装置",
+            "gt_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 资源再利用设备 > 其他资源再利用设备 > 水产加工废弃物综合利用技术及装置",
+            "pred_id": "20265",
+            "pred_name": "应变感知材料",
+            "pred_path": "机械、设备类产品 > 专用设备 > 智能制造设备 > 智能设备零部件 > 应变感知材料",
+            "lca_depth": 2,
+            "confidence": 0.501,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "铅锭",
+            "gt_id": "6067",
+            "gt_name": "铅锌",
+            "gt_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 铅锌",
+            "pred_id": "6244",
+            "pred_name": "铅材",
+            "pred_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 铅压延加工材 > 铅材",
+            "lca_depth": 2,
+            "confidence": 0.688,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "万用表",
+            "gt_id": "13056",
+            "gt_name": "电磁参数测量仪器仪表",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 电工仪器仪表 > 电磁参数测量仪器仪表",
+            "pred_id": "13128",
+            "pred_name": "量表",
+            "pred_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 绘图、计算及测量仪器 > 量具 > 量表",
+            "lca_depth": 2,
+            "confidence": 0.634,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "家用无线路由器",
+            "gt_id": "24962",
+            "gt_name": "单槽位处理路由器",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 计算机网络设备 > 网络连接设备 > 路由器 > 单槽位处理路由器",
+            "pred_id": "23731",
+            "pred_name": "无线宽带互联设备",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信传输设备 > 其他通信传输设备 > 无线宽带互联设备",
+            "lca_depth": 2,
+            "confidence": 0.705,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "指甲钳",
+            "gt_id": "6418",
+            "gt_name": "修饰用手工具",
+            "gt_path": "金属及非金属制品 > 金属制品 > 刀剪及类似日用金属工具 > 修饰用手工具",
+            "pred_id": "6332",
+            "pred_name": "钳子",
+            "pred_path": "金属及非金属制品 > 金属制品 > 通用手工具 > 钳子",
+            "lca_depth": 2,
+            "confidence": 0.646,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "光动力诊断仪",
+            "gt_id": "10148",
+            "gt_name": "激光荧光肿瘤诊断仪",
+            "gt_path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 医用激光诊断、治疗仪器及设备 > 激光诊断仪器 > 激光荧光肿瘤诊断仪",
+            "pred_id": "10847",
+            "pred_name": "光谱辐射治疗仪器",
+            "pred_path": "机械、设备类产品 > 专用设备 > 机械治疗及病房护理设备 > 光谱辐射治疗仪器",
+            "lca_depth": 2,
+            "confidence": 0.604,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "绷鞋机",
+            "gt_id": "9249",
+            "gt_name": "底工转车",
+            "gt_path": "机械、设备类产品 > 专用设备 > 皮革、毛皮及其制品加工专用设备 > 皮革制品制作机械 > 鞋靴专用生产机械 > 底工转车",
+            "pred_id": "9270",
+            "pred_name": "绷缝机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 服装、鞋帽加工机械 > 缝纫机及其零件 > 工业用非电控缝纫机 > 绷缝机",
+            "lca_depth": 2,
+            "confidence": 0.694,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "干湿球温度计",
+            "gt_id": "13440",
+            "gt_name": "气象专用测湿仪器及湿度传感器",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 气象、水文仪器及装置 > 气象观测仪器 > 气象专用测湿仪器及湿度传感器",
+            "pred_id": "13249",
+            "pred_name": "湿度计",
+            "pred_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 分析仪器及装置 > 物性分析仪器 > 湿度计",
+            "lca_depth": 2,
+            "confidence": 0.695,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "镁砂",
+            "gt_id": "6089",
+            "gt_name": "镁粒",
+            "gt_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 镁金属 > 镁粒",
+            "pred_id": "6260",
+            "pred_name": "镁材",
+            "pred_path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 镁、钛，相关常用有色金属加工材 > 镁材",
+            "lca_depth": 2,
+            "confidence": 0.689,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          }
+        ],
+        "FAR_WRONG": [
+          {
+            "product": "碳纤维复合材料船体",
+            "gt_id": "27179",
+            "gt_name": "海洋轻量化构件",
+            "gt_path": "产业链 > 煤化工 > 煤化工设备与试剂 > 海洋轻量化构件",
+            "pred_id": "4880",
+            "pred_name": "碳纤维增强复合材料",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 特种纤维及高功能化工产品 > 碳纤维增强复合材料",
+            "lca_depth": 0,
+            "confidence": 0.668,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "玻璃钢装饰板",
+            "gt_id": "5548",
+            "gt_name": "装饰用纤维增强塑料制品",
+            "gt_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品",
+            "pred_id": "21220",
+            "pred_name": "装饰复合材料",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 复合材料 > 装饰复合材料",
+            "lca_depth": 1,
+            "confidence": 0.657,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "一氯乙酸",
+            "gt_id": "3844",
+            "gt_name": "氯乙酸及其盐和酯",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 羧酸及其衍生物 > 氯乙酸及其盐和酯",
+            "pred_id": "25233",
+            "pred_name": "氯乙酸",
+            "pred_path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 焦炭及其副产品 > 氯乙酸",
+            "lca_depth": 1,
+            "confidence": 0.583,
+            "labels": [
+              "same_top_only",
+              "pred_is_ancestor_of_gt"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "PSA制氧装置",
+            "gt_id": "27014",
+            "gt_name": "分子筛吸附塔",
+            "gt_path": "产业链 > 煤化工 > 煤化工设备与试剂 > 分子筛吸附塔",
+            "pred_id": "7544",
+            "pred_name": "变压吸附制氧设备",
+            "pred_path": "机械、设备类产品 > 通用设备 > 气体分离及液化设备 > 制氧设备 > 变压吸附制氧设备",
+            "lca_depth": 0,
+            "confidence": 0.716,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "沙发套",
+            "gt_id": "1934",
+            "gt_name": "垫子套",
+            "gt_path": "纺织、服装、皮革类产品 > 纺织产品 > 日用织物制品 > 垫子套",
+            "pred_id": "2510",
+            "pred_name": "沙发",
+            "pred_path": "木制品、家具类产品 > 家具及配件 > 家具 > 软体家具 > 沙发",
+            "lca_depth": 0,
+            "confidence": 0.667,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "粉末包装机",
+            "gt_id": "8035",
+            "gt_name": "固体产品灌装机、包装机",
+            "gt_path": "机械、设备类产品 > 通用设备 > 包装专用设备 > 灌装、装填容器用机械 > 固体产品灌装机、包装机",
+            "pred_id": "9845",
+            "pred_name": "磨粉机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 农产品初加工机械 > 磨粉（浆）机械 > 磨粉机",
+            "lca_depth": 1,
+            "confidence": 0.64,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "弯头",
+            "gt_id": "5988",
+            "gt_name": "铸铁管附件",
+            "gt_path": "金属及非金属制品 > 黑色金属冶炼及压延产品 > 铸铁管及其附件 > 铸铁管附件",
+            "pred_id": "10383",
+            "pred_name": "连扣弯手机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 牙科手机 > 连扣弯手机",
+            "lca_depth": 0,
+            "confidence": 0.614,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "黄饼",
+            "gt_id": "1252",
+            "gt_name": "铀矿石",
+            "gt_path": "矿产品 > 有色金属矿石 > 放射性金属矿石 > 铀矿石",
+            "pred_id": "1694",
+            "pred_name": "黄酒",
+            "pred_path": "食品、饮料、烟、酒类产品 > 饮料、酒及酒精 > 黄酒",
+            "lca_depth": 0,
+            "confidence": 0.657,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "止裂钢板",
+            "gt_id": "20544",
+            "gt_name": "集装箱船用止裂厚板",
+            "gt_path": "金属及非金属制品 > 黑色金属冶炼及压延产品 > 钢材 > 高技术船舶及海洋工程用钢 > 集装箱船用止裂厚板",
+            "pred_id": "25033",
+            "pred_name": "大厚度高止裂钢板",
+            "pred_path": "金属及非金属制品 > 金属材料及工具 > 优特钢 > 大厚度高止裂钢板",
+            "lca_depth": 1,
+            "confidence": 0.58,
+            "labels": [
+              "pred_contains_product",
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "汽车电子控制单元(ECU)主控芯片",
+            "gt_id": "26955",
+            "gt_name": "车规级MCU",
+            "gt_path": "产业链 > 集成电路半导体 > 集成电路制造 > 集成电路芯片(IC) > 数字芯片 > 微控制器(MCU芯片) > 车规级MCU",
+            "pred_id": "21409",
+            "pred_name": "车载芯片",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 微电子组件 > 芯片 > 车载芯片",
+            "lca_depth": 0,
+            "confidence": 0.706,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "银铜焊料",
+            "gt_id": "20958",
+            "gt_name": "含银无氧铜",
+            "gt_path": "金属及非金属制品 > 金属材料及工具 > 不锈钢 > 含银无氧铜",
+            "pred_id": "21206",
+            "pred_name": "银铜复合材料",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 复合材料 > 银铜复合材料",
+            "lca_depth": 0,
+            "confidence": 0.698,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "枸杞子",
+            "gt_id": "5122",
+            "gt_name": "果实、种子类饮片",
+            "gt_path": "石油、化工、医药产品 > 医药 > 中药饮片 > 植物类饮片 > 果实、种子类饮片",
+            "pred_id": "613",
+            "pred_name": "大海子",
+            "pred_path": "农、林、牧、渔业类产品 > 农业产品 > 中草药材 > 大海子",
+            "lca_depth": 0,
+            "confidence": 0.478,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          }
+        ]
+      },
+      "high_conf_far_wrong": [
+        {
+          "product": "监控摄像头",
+          "gt_id": "24220",
+          "gt_name": "网络摄像设备",
+          "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信传输设备 > 其他通信终端设备 > 网络摄像设备",
+          "pred_id": "11341",
+          "pred_name": "监控电视摄像机",
+          "pred_path": "机械、设备类产品 > 专用设备 > 社会公共安全设备及器材 > 监控电视摄像机",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "雷达罩",
+          "gt_id": "23588",
+          "gt_name": "隐身雷达天线罩",
+          "gt_path": "机械、设备类产品 > 专用设备 > 海洋工程设备 > 海洋工程设备零部件 > 隐身雷达天线罩",
+          "pred_id": "23048",
+          "pred_name": "雷达壳体",
+          "pred_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 车载电子电器 > 汽车电子防盗系统 > 雷达壳体",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "石墨换热器",
+          "gt_id": "22185",
+          "gt_name": "石墨化工设备",
+          "gt_path": "石油、化工、医药产品 > 化学纤维 > 石墨化工设备",
+          "pred_id": "5910",
+          "pred_name": "石墨热交换器",
+          "pred_path": "金属及非金属制品 > 非金属矿物制品 > 石墨及炭素制品 > 其他炭素产品 > 石墨热交换器",
+          "lca_depth": 0,
+          "confidence": 0.95,
+          "labels": [
+            "cross_domain"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "LED闪烁芯片",
+          "gt_id": "22521",
+          "gt_name": "闪灯IC",
+          "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 集成电路 > 闪灯IC",
+          "pred_id": "26600",
+          "pred_name": "LED灯珠",
+          "pred_path": "产业链 > 新型显示 > LED灯珠",
+          "lca_depth": 0,
+          "confidence": 0.951,
+          "labels": [
+            "cross_domain"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "混凝土空心砌块",
+          "gt_id": "5646",
+          "gt_name": "建筑砌块",
+          "gt_path": "金属及非金属制品 > 非金属矿物制品 > 砖瓦及建筑砌块 > 建筑砌块",
+          "pred_id": "23414",
+          "pred_name": "砼空心砖",
+          "pred_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品 > 建筑装饰 > 建材物料 > 砖/砌块 > 砼空心砖",
+          "lca_depth": 0,
+          "confidence": 0.95,
+          "labels": [
+            "cross_domain"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "岩芯钻机",
+          "gt_id": "13505",
+          "gt_name": "钻探测试、分析仪器",
+          "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 地质勘探和地震专用仪器 > 钻探测试、分析仪器",
+          "pred_id": "11208",
+          "pred_name": "地质岩心钻机",
+          "pred_path": "机械、设备类产品 > 专用设备 > 地质勘查专用设备 > 地质钻探机 > 地质岩心钻机",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "PEEK",
+          "gt_id": "25391",
+          "gt_name": "特种工程塑料",
+          "gt_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 塑料制品 > 其他塑料制品 > 特种工程塑料",
+          "pred_id": "23702",
+          "pred_name": "聚醚醚酮",
+          "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 初级形态塑料 > 聚醚醚酮",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        }
+      ]
+    },
+    {
+      "file": "eval_llmv2_full.json",
+      "accuracy": 0.2453,
+      "correct": 39,
+      "total": 159,
+      "wrong": 120,
+      "verdict_counts": {
+        "BROAD_RELATED": 16,
+        "NEAR_MISS": 41,
+        "FAR_WRONG": 57,
+        "NO_MATCH": 6
+      },
+      "adjusted_acc_if_literal_gt_accepted": 0.2453,
+      "soft_acc_plus_near_miss": 0.5031,
+      "samples": {
+        "LIKELY_GT_ISSUE": [],
+        "NEAR_MISS": [
+          {
+            "product": "PPSU",
+            "gt_id": "24140",
+            "gt_name": "聚苯砜",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 初级形态塑料 > 聚苯砜",
+            "pred_id": "24191",
+            "pred_name": "聚醚砜",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 初级形态塑料 > 聚醚砜",
+            "lca_depth": 4,
+            "confidence": 0.95,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "手持式金属探测器",
+            "gt_id": "13504",
+            "gt_name": "其他矿藏探测器",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 地质勘探和地震专用仪器 > 金属、矿藏探测器 > 其他矿藏探测器",
+            "pred_id": "13500",
+            "pred_name": "金属探测器",
+            "pred_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 地质勘探和地震专用仪器 > 金属、矿藏探测器 > 金属探测器",
+            "lca_depth": 4,
+            "confidence": 0.694,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "回转窑焚烧炉",
+            "gt_id": "11148",
+            "gt_name": "垃圾焚烧炉",
+            "gt_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 垃圾焚烧炉",
+            "pred_id": "11155",
+            "pred_name": "回转窑室焚烧炉",
+            "pred_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 垃圾焚烧炉 > 回转窑室焚烧炉",
+            "lca_depth": 5,
+            "confidence": 0.95,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "lambda sensor",
+            "gt_id": "21740",
+            "gt_name": "氧传感器",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 传感器 > 氧传感器",
+            "pred_id": "21763",
+            "pred_name": "物联网传感器",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 传感器 > 物联网传感器",
+            "lca_depth": 3,
+            "confidence": 0.692,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "ATF泵",
+            "gt_id": "20501",
+            "gt_name": "自动变速箱油泵",
+            "gt_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 机动车(汽车)零配件 > 机动车用控制装置总成 > 转向系统 > 自动变速箱油泵",
+            "pred_id": "24759",
+            "pred_name": "自动变速箱油",
+            "pred_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 机动车（汽车）零配件 > 变速器总成 > 自动变速箱油",
+            "lca_depth": 3,
+            "confidence": 0.755,
+            "labels": [
+              "same_subtree",
+              "pred_is_ancestor_of_gt"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "压路机",
+            "gt_id": "8383",
+            "gt_name": "压实机械",
+            "gt_path": "机械、设备类产品 > 专用设备 > 建筑工程用机械 > 压实机械",
+            "pred_id": "8384",
+            "pred_name": "机动压路机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 建筑工程用机械 > 压实机械 > 机动压路机",
+            "lca_depth": 4,
+            "confidence": 0.95,
+            "labels": [
+              "pred_contains_product",
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "氯霉素滴眼液",
+            "gt_id": "5096",
+            "gt_name": "滴剂",
+            "gt_path": "石油、化工、医药产品 > 医药 > 化学药品制剂 > 滴剂",
+            "pred_id": "5099",
+            "pred_name": "滴眼剂",
+            "pred_path": "石油、化工、医药产品 > 医药 > 化学药品制剂 > 滴剂 > 滴眼剂",
+            "lca_depth": 4,
+            "confidence": 0.7,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "叉车货叉",
+            "gt_id": "7054",
+            "gt_name": "托盘",
+            "gt_path": "机械、设备类产品 > 通用设备 > 工业车辆 > 工业车辆专用配套件 > 托盘",
+            "pred_id": "7053",
+            "pred_name": "货叉",
+            "pred_path": "机械、设备类产品 > 通用设备 > 工业车辆 > 工业车辆专用配套件 > 货叉",
+            "lca_depth": 4,
+            "confidence": 0.598,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "汉麻纱",
+            "gt_id": "1810",
+            "gt_name": "大麻纱线",
+            "gt_path": "纺织、服装、皮革类产品 > 纺织产品 > 麻纺织品 > 麻纱线 > 大麻纱线",
+            "pred_id": "1807",
+            "pred_name": "亚麻纱",
+            "pred_path": "纺织、服装、皮革类产品 > 纺织产品 > 麻纺织品 > 麻纱线 > 亚麻纱",
+            "lca_depth": 4,
+            "confidence": 0.668,
+            "labels": [
+              "sibling_near"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "风速风向仪",
+            "gt_id": "13438",
+            "gt_name": "气象观测仪器",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 气象、水文仪器及装置 > 气象观测仪器",
+            "pred_id": "13443",
+            "pred_name": "测风仪器",
+            "pred_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 气象、水文仪器及装置 > 气象观测仪器 > 测风仪器",
+            "lca_depth": 4,
+            "confidence": 0.728,
+            "labels": [
+              "sibling_near",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "EVA封边条胶",
+            "gt_id": "24538",
+            "gt_name": "家具热熔胶",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 粘合剂 > 家具热熔胶",
+            "pred_id": "21281",
+            "pred_name": "EVA封装胶膜",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 膜材料 > EVA封装胶膜",
+            "lca_depth": 3,
+            "confidence": 0.955,
+            "labels": [
+              "same_subtree"
+            ],
+            "verdict": "NEAR_MISS"
+          },
+          {
+            "product": "真空接触器",
+            "gt_id": "25765",
+            "gt_name": "高压接触器",
+            "gt_path": "机械、设备类产品 > 电气机械及器材 > 配电或电器控制设备 > 接触器 > 高压接触器",
+            "pred_id": "12818",
+            "pred_name": "真空开关管",
+            "pred_path": "机械、设备类产品 > 电气机械及器材 > 配电或电器控制设备 > 断路器 > 真空开关管",
+            "lca_depth": 3,
+            "confidence": 0.673,
+            "labels": [
+              "same_subtree"
+            ],
+            "verdict": "NEAR_MISS"
+          }
+        ],
+        "BROAD_RELATED": [
+          {
+            "product": "电子级氢氟酸",
+            "gt_id": "4813",
+            "gt_name": "新兴工业用特种化学品",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学试剂和助剂 > 化学试剂 > 新兴工业用特种化学品",
+            "pred_id": "3557",
+            "pred_name": "氟酸",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 无机酸类 > 其他无机酸 > 氟酸",
+            "lca_depth": 2,
+            "confidence": 0.696,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "油纸伞",
+            "gt_id": "3330",
+            "gt_name": "工艺伞",
+            "gt_path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 剧装道具，相关工艺美术品 > 工艺伞",
+            "pred_id": "3400",
+            "pred_name": "晴雨伞及其零件",
+            "pred_path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 日用杂品 > 伞、手杖、鞭子、马鞭及其零件 > 晴雨伞及其零件",
+            "lca_depth": 2,
+            "confidence": 0.631,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "面粉",
+            "gt_id": "1391",
+            "gt_name": "碾磨谷物及谷物加工品",
+            "gt_path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 碾磨谷物及谷物加工品",
+            "pred_id": "1388",
+            "pred_name": "小麦粉",
+            "pred_path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 谷物细粉 > 小麦粉",
+            "lca_depth": 2,
+            "confidence": 0.672,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "氧化铝陶瓷管",
+            "gt_id": "5820",
+            "gt_name": "陶瓷管及管子配件",
+            "gt_path": "金属及非金属制品 > 非金属矿物制品 > 技术陶瓷制品 > 陶瓷管及管子配件",
+            "pred_id": "25226",
+            "pred_name": "氧化铝可控硅瓷环、瓷管",
+            "pred_path": "金属及非金属制品 > 非金属矿物制品 > 其他陶瓷制品 > 氧化铝可控硅瓷环、瓷管",
+            "lca_depth": 2,
+            "confidence": 0.675,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "苏云金杆菌（Bt）",
+            "gt_id": "4716",
+            "gt_name": "生物杀虫剂制剂",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 生物农药及微生物农药 > 生物农药制剂 > 生物杀虫剂制剂",
+            "pred_id": "4709",
+            "pred_name": "杀菌剂",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学农药 > 化学农药原药 > 杀菌剂",
+            "lca_depth": 2,
+            "confidence": 0.599,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "耳背式助听器",
+            "gt_id": "10966",
+            "gt_name": "助听器",
+            "gt_path": "机械、设备类产品 > 专用设备 > 假肢、人工器官及植(介)入器械 > 助听器",
+            "pred_id": "10967",
+            "pred_name": "外带式助听器",
+            "pred_path": "机械、设备类产品 > 专用设备 > 假肢、人工器官及植（介）入器械 > 助听器 > 外带式助听器",
+            "lca_depth": 2,
+            "confidence": 0.95,
+            "labels": [
+              "same_broad",
+              "pred_deeper_under_gt_path"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "定型机",
+            "gt_id": "9201",
+            "gt_name": "印染辅机及通用单元设备",
+            "gt_path": "机械、设备类产品 > 专用设备 > 纺织专用设备 > 印染机械 > 印染辅机及通用单元设备",
+            "pred_id": "9829",
+            "pred_name": "网片定型机",
+            "pred_path": "机械、设备类产品 > 专用设备 > 渔业捕捞养殖机械 > 网片处理机械 > 网片定型机",
+            "lca_depth": 2,
+            "confidence": 0.572,
+            "labels": [
+              "pred_contains_product",
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "多肉植物",
+            "gt_id": "420",
+            "gt_name": "园艺产品",
+            "gt_path": "农、林、牧、渔业类产品 > 农业产品 > 盆景及园艺产品 > 园艺产品",
+            "pred_id": "380",
+            "pred_name": "花卉",
+            "pred_path": "农、林、牧、渔业类产品 > 农业产品 > 花卉",
+            "lca_depth": 2,
+            "confidence": 0.626,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "活性白土",
+            "gt_id": "20744",
+            "gt_name": "高岭土化工载体/吸附材料",
+            "gt_path": "矿产品 > 非金属矿石 > 矿物功能材料 > 高岭土化工载体/吸附材料",
+            "pred_id": "1309",
+            "pred_name": "漂白土",
+            "pred_path": "矿产品 > 非金属矿石 > 粘土、砂、石 > 粘土 > 漂白土",
+            "lca_depth": 2,
+            "confidence": 0.95,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "五花肉",
+            "gt_id": "1444",
+            "gt_name": "畜禽肉、油脂及食用杂碎",
+            "gt_path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 畜禽肉、油脂及食用杂碎",
+            "pred_id": "1469",
+            "pred_name": "卤肉",
+            "pred_path": "食品、饮料、烟、酒类产品 > 农副食品，动、植物油制品 > 熟肉制品 > 酱卤烧烤肉制品 > 卤肉",
+            "lca_depth": 2,
+            "confidence": 0.631,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "氮化硅",
+            "gt_id": "4661",
+            "gt_name": "金属氮化物",
+            "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 贵金属化合物、相关基础化学品 > 氢化物、氮化物、叠氮化物 > 金属氮化物",
+            "pred_id": "4876",
+            "pred_name": "瓷氮化物陶瓷",
+            "pred_path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 化学陶瓷 > 瓷氮化物陶瓷",
+            "lca_depth": 2,
+            "confidence": 0.678,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          },
+          {
+            "product": "真丝围巾",
+            "gt_id": "1829",
+            "gt_name": "丝绢纺织及精加工产品",
+            "gt_path": "纺织、服装、皮革类产品 > 纺织产品 > 丝绢纺织及精加工产品",
+            "pred_id": "2109",
+            "pred_name": "针织围巾",
+            "pred_path": "纺织、服装、皮革类产品 > 纺织产品 > 围巾、领带、手帕 > 围巾类 > 针织围巾",
+            "lca_depth": 2,
+            "confidence": 0.663,
+            "labels": [
+              "same_broad"
+            ],
+            "verdict": "BROAD_RELATED"
+          }
+        ],
+        "FAR_WRONG": [
+          {
+            "product": "RVV软护套线",
+            "gt_id": "24679",
+            "gt_name": "电线线缆",
+            "gt_path": "机械、设备类产品 > 电气机械及器材 > 电线电缆 > 专用电缆 > 其他专用电缆 > 电线线缆",
+            "pred_id": "25547",
+            "pred_name": "绝缘套管",
+            "pred_path": "机械、设备类产品 > 专用设备 > 电工机械专用设备 > 电器绝缘材料设备 > 绝缘套管",
+            "lca_depth": 1,
+            "confidence": 0.618,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "喷气织机",
+            "gt_id": "9203",
+            "gt_name": "织造辅助机械及装置",
+            "gt_path": "机械、设备类产品 > 专用设备 > 纺织专用设备 > 织机 > 用纺织纱线或其他纤维纱线织造织物的纺织机",
+            "pred_id": "7995",
+            "pred_name": "喷射机械",
+            "pred_path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷射机械",
+            "lca_depth": 1,
+            "confidence": 0.633,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "蓝图晒图机",
+            "gt_id": "13786",
+            "gt_name": "制版照相机",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 照相机及器材 > 照相机 > 制版照相机",
+            "pred_id": "12715",
+            "pred_name": "绘图仪",
+            "pred_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子计算机外部设备及装置 > 输入设备及装置 > 绘图仪",
+            "lca_depth": 1,
+            "confidence": 0.632,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "BB夹",
+            "gt_id": "3427",
+            "gt_name": "发夹",
+            "gt_path": "纸、印刷品、软件、文教、工艺品类产品 > 工艺品及其他制造产品 > 日用杂品 > 头发装饰用物品 > 发夹",
+            "pred_id": "7052",
+            "pred_name": "专用夹具",
+            "pred_path": "机械、设备类产品 > 通用设备 > 工业车辆 > 工业车辆专用配套件 > 专用夹具",
+            "lca_depth": 0,
+            "confidence": 0.613,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "波士顿动力Atlas",
+            "gt_id": "26445",
+            "gt_name": "人形机器人",
+            "gt_path": "产业链 > 人工智能 > 智能机器人 > 人形机器人",
+            "pred_id": "11770",
+            "pred_name": "推进系统",
+            "pred_path": "机械、设备类产品 > 交通运输设备 > 航天器及其运载工具、零件 > 航天器及其运载工具 > 运载火箭 > 推进系统",
+            "lca_depth": 0,
+            "confidence": 0.589,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "STP",
+            "gt_id": "12540",
+            "gt_name": "七号信令转接设备",
+            "gt_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信交换设备 > 程控交换机 > 七号信令转接设备",
+            "pred_id": "25550",
+            "pred_name": "RTP设备",
+            "pred_path": "产业链 > 集成电路半导体 > 半导体设备 > RTP设备",
+            "lca_depth": 0,
+            "confidence": 0.57,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "苇席",
+            "gt_id": "138",
+            "gt_name": "芦苇",
+            "gt_path": "农、林、牧、渔业类产品 > 农业产品 > 水生植物类 > 芦苇",
+            "pred_id": "2494",
+            "pred_name": "苇制品",
+            "pred_path": "木制品、家具类产品 > 木材及木、竹、藤、棕、草制品 > 棕、藤、草及类似制品 > 苇制品",
+            "lca_depth": 0,
+            "confidence": 0.669,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "ERP系统",
+            "gt_id": "14131",
+            "gt_name": "对基础软件、应用软件、嵌入式软件等软件提",
+            "gt_path": "销售服务 > 现代服务 > 信息技术服务 > 软件服务 > 软件开发服务 > 对基础软件、应用软件、嵌入式软件等软件提",
+            "pred_id": "24864",
+            "pred_name": "企业管理软件",
+            "pred_path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 管理软件产品 > 企业管理软件",
+            "lca_depth": 0,
+            "confidence": 0.774,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "小齿轮齿条副",
+            "gt_id": "7333",
+            "gt_name": "齿条、差动齿轮",
+            "gt_path": "机械、设备类产品 > 通用设备 > 齿轮、传动轴和驱动部件 > 齿轮 > 齿条、差动齿轮",
+            "pred_id": "11576",
+            "pred_name": "小齿轮",
+            "pred_path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 机动车（汽车）零配件 > 变速器总成 > 小齿轮",
+            "lca_depth": 1,
+            "confidence": 0.576,
+            "labels": [
+              "same_top_only"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "工程投影仪",
+            "gt_id": "13838",
+            "gt_name": "正射投影仪",
+            "gt_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 影像投影仪 > 投影仪 > 正射投影仪",
+            "pred_id": "23339",
+            "pred_name": "照明工程",
+            "pred_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品 > 建筑装饰 > 土木工程 > 照明工程",
+            "lca_depth": 0,
+            "confidence": 0.512,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "跨境货车",
+            "gt_id": "14014",
+            "gt_name": "港澳台其他陆路货物运输服务",
+            "gt_path": "销售服务 > 交通运输服务 > 陆路运输服务 > 陆路货物运输服务 > 其他陆路货物运输服务 > 港澳台其他陆路货物运输服务",
+            "pred_id": "11535",
+            "pred_name": "载货汽车",
+            "pred_path": "机械、设备类产品 > 交通运输设备 > 汽车 > 载货汽车",
+            "lca_depth": 0,
+            "confidence": 0.678,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          },
+          {
+            "product": "大闸蟹",
+            "gt_id": "1071",
+            "gt_name": "淡水蟹",
+            "gt_path": "农、林、牧、渔业类产品 > 淡水养殖产品、捕捞产品 > 淡水蟹",
+            "pred_id": "30000",
+            "pred_name": "产业链",
+            "pred_path": "产业链",
+            "lca_depth": 0,
+            "confidence": 0.435,
+            "labels": [
+              "cross_domain"
+            ],
+            "verdict": "FAR_WRONG"
+          }
+        ]
+      },
+      "high_conf_far_wrong": [
+        {
+          "product": "YSZ粉体",
+          "gt_id": "20602",
+          "gt_name": "燃料电池用稀土锆基陶瓷粉体材料",
+          "gt_path": "金属及非金属制品 > 金属材料及工具 > 稀土材料 > 燃料电池用稀土锆基陶瓷粉体材料",
+          "pred_id": "24407",
+          "pred_name": "YSZ复相陶瓷",
+          "pred_path": "金属及非金属制品 > 非金属矿物制品 > 其他陶瓷制品 > YSZ复相陶瓷",
+          "lca_depth": 1,
+          "confidence": 0.831,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "纯水机",
+          "gt_id": "7752",
+          "gt_name": "反渗透制水装置",
+          "gt_path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 液体过滤、净化机械 > 反渗透制水装置",
+          "pred_id": "20428",
+          "pred_name": "饮用水强化处理装置",
+          "pred_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 水及海水资源再利用设备 > 饮用水强化处理装置",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "Low-E玻璃",
+          "gt_id": "23360",
+          "gt_name": "建筑节能玻璃",
+          "gt_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品 > 建筑装饰 > 建材物料 > 建筑用玻璃 > 建筑节能玻璃",
+          "pred_id": "22271",
+          "pred_name": "热学功能玻璃",
+          "pred_path": "金属及非金属制品 > 非金属矿物制品 > 玻璃 > 特种玻璃 > 热学功能玻璃",
+          "lca_depth": 0,
+          "confidence": 0.95,
+          "labels": [
+            "cross_domain"
+          ],
+          "verdict": "FAR_WRONG"
+        },
+        {
+          "product": "白电油",
+          "gt_id": "4891",
+          "gt_name": "工业级混合油",
+          "gt_path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 工业级混合油",
+          "pred_id": "3494",
+          "pred_name": "工业溶剂油",
+          "pred_path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 石油制品 > 溶剂油 > 工业溶剂油",
+          "lca_depth": 1,
+          "confidence": 0.95,
+          "labels": [
+            "same_top_only"
+          ],
+          "verdict": "FAR_WRONG"
+        }
+      ]
+    }
+  ]
+}

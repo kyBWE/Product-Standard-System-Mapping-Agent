@@ -109,7 +109,8 @@ class RAGMatchEngine:
             if self._has_exact_synonym(product_name, best, syn_map):
                 skip_llm = True
 
-        ambiguous_top = False if skip_llm else self._is_ambiguous_top(product_name, candidates)
+        ambiguous_top = False if skip_llm else self._is_ambiguous_top(
+            product_name, candidates)
 
         if not skip_llm and not ambiguous_top:
             if best.coarse_score >= 0.85:
@@ -129,7 +130,8 @@ class RAGMatchEngine:
 
         if skip_llm:
             llm_bonus = self._skip_fine_bonus(product_name, best)
-            confidence = self._compute_final_confidence(best.coarse_score, llm_bonus)
+            confidence = self._compute_final_confidence(
+                best.coarse_score, llm_bonus)
             status = self._determine_status(confidence)
             logger.info(
                 f"跳过精匹配(粗召回高置信): {product_name} -> {best.category_name} "
@@ -189,7 +191,8 @@ class RAGMatchEngine:
                         category_name=c.category_name,
                         coarse_score=round(c.coarse_score, 4),
                         final_confidence=round(
-                            self._compute_final_confidence(c.coarse_score, 0), 4
+                            self._compute_final_confidence(
+                                c.coarse_score, 0), 4
                         ),
                     )
                     for c in candidates[:5]
@@ -214,7 +217,8 @@ class RAGMatchEngine:
                 category_name=sc.category_name,
                 coarse_score=round(
                     next(
-                        (c.coarse_score for c in candidates if c.category_id == sc.category_id),
+                        (c.coarse_score for c in candidates if c.category_id ==
+                         sc.category_id),
                         0,
                     ),
                     4,
@@ -249,7 +253,8 @@ class RAGMatchEngine:
         vec_results = []
         query_list = self._get_query_vector(product_name)
         if query_list:
-            vec_results = self._vec_mgr.search_by_vector(query_list, top_k=self._config.coarse_top_k)
+            vec_results = self._vec_mgr.search_by_vector(
+                query_list, top_k=self._config.coarse_top_k)
 
         candidate_map = {}
 
@@ -309,7 +314,8 @@ class RAGMatchEngine:
 
         candidates = sorted(
             candidate_map.values(),
-            key=lambda c: self._candidate_rank_key(product_name, c, syn_map.get(c.category_id, [])),
+            key=lambda c: self._candidate_rank_key(
+                product_name, c, syn_map.get(c.category_id, [])),
             reverse=True,
         )
         return candidates[: self._config.coarse_top_k]
@@ -383,10 +389,12 @@ class RAGMatchEngine:
         if candidates[0].category_name == product_name:
             return False
         top_score = candidates[0].coarse_score
-        tied = sum(1 for c in candidates[:5] if c.coarse_score >= top_score - 1e-6)
+        tied = sum(1 for c in candidates[:5]
+                   if c.coarse_score >= top_score - 1e-6)
         if tied >= 2:
             return True
-        exact = next((c for c in candidates if c.category_name == product_name), None)
+        exact = next(
+            (c for c in candidates if c.category_name == product_name), None)
         if exact and exact.category_id != candidates[0].category_id:
             return True
         return False
@@ -438,7 +446,8 @@ class RAGMatchEngine:
                 category_id=c.category_id,
                 category_name=c.category_name,
                 llm_score=llm_score,
-                final_confidence=self._compute_final_confidence(c.coarse_score, llm_score),
+                final_confidence=self._compute_final_confidence(
+                    c.coarse_score, llm_score),
             ))
 
         scored.sort(key=lambda x: x.final_confidence, reverse=True)
@@ -452,7 +461,8 @@ class RAGMatchEngine:
     def _fine_match_rerank(self, product_name: str, candidates: list[CandidateNode]) -> list[ScoredCandidate]:
         syn_map, group_map = self._load_syn_and_group(candidates)
         documents = [
-            self._build_rerank_document(c.category_name, syn_map.get(c.category_id, []), group_map.get(c.category_id, ""))
+            self._build_rerank_document(c.category_name, syn_map.get(
+                c.category_id, []), group_map.get(c.category_id, ""))
             for c in candidates
         ]
 
@@ -463,7 +473,8 @@ class RAGMatchEngine:
             rerank_scores = [0.0] * len(candidates)
 
         if len(rerank_scores) < len(candidates):
-            rerank_scores = rerank_scores + [0.0] * (len(candidates) - len(rerank_scores))
+            rerank_scores = rerank_scores + \
+                [0.0] * (len(candidates) - len(rerank_scores))
 
         scored: list[ScoredCandidate] = []
         for c, rerank_score in zip(candidates, rerank_scores):
@@ -471,7 +482,8 @@ class RAGMatchEngine:
                 category_id=c.category_id,
                 category_name=c.category_name,
                 llm_score=rerank_score,
-                final_confidence=self._compute_final_confidence(c.coarse_score, rerank_score),
+                final_confidence=self._compute_final_confidence(
+                    c.coarse_score, rerank_score),
             ))
 
         scored.sort(key=lambda x: x.final_confidence, reverse=True)
@@ -491,6 +503,11 @@ class RAGMatchEngine:
         parts.append(f"同义词：{syn_text}")
         return "；".join(parts)
 
+    def _load_syn_list(self, candidates: list[CandidateNode]) -> dict[str, list[str]]:
+        """加载候选节点的同义词列表（兼容旧接口）"""
+        syn_map, _ = self._load_syn_and_group(candidates)
+        return syn_map
+
     def _load_syn_and_group(self, candidates: list[CandidateNode]) -> tuple[dict[str, list[str]], dict[str, str]]:
         syn_map: dict[str, list[str]] = {}
         group_map: dict[str, str] = {}
@@ -506,7 +523,8 @@ class RAGMatchEngine:
             for r in rows:
                 syn = r["syn_list"]
                 if syn:
-                    syn_map[r["category_id"]] = list(syn) if isinstance(syn, list) else []
+                    syn_map[r["category_id"]] = list(
+                        syn) if isinstance(syn, list) else []
             rows2 = self._vec_mgr._db.execute(
                 f"SELECT category_id, category_group_name FROM category_texts WHERE category_id IN ({placeholders})",
                 tuple(cat_ids),

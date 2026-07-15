@@ -368,3 +368,59 @@ class LLMAdapter:
                 if attempt == self._max_retries - 1:
                     return None
         return None
+
+    def judge_mapping_reasonable(
+        self,
+        product_name: str,
+        predicted_name: str,
+        predicted_path: str,
+        gt_name: str = "",
+        gt_path: str = "",
+    ) -> tuple[bool, float, str]:
+        """评测兜底：判断「预测分类路径」对企业产品名是否合理（可与 GT 不同支/同义）。
+
+        返回 (reasonable, confidence, reason)。
+        """
+        gt_block = ""
+        if gt_name or gt_path:
+            gt_block = f"""
+参考标准答案（仅供对照，预测走另一合理分支也可判合理）：
+- 标准分类：{gt_name or "未知"}
+- 分类路径：{gt_path or "未知"}
+"""
+        prompt = f"""请判断：将企业产品映射到「预测分类」是否合理。
+
+企业产品名称：{product_name}
+
+系统预测：
+- 分类名称：{predicted_name}
+- 分类路径：{predicted_path or "未知"}
+{gt_block}
+判定标准：
+1. 若预测分类在业务上可表示该产品（同义、材料/制品双视角、设备树与产业链双树、父子/近邻），判合理；
+2. 仅名称碰巧相似但品类明显错误（如黄饼→黄酒、弯头→牙科手机），判不合理；
+3. 缩写/俗称无法对上预测语义时，判不合理。
+
+请以JSON格式返回：
+{{"reasonable": true, "confidence": 0.85, "reason": "一句话说明"}}"""
+
+        for attempt in range(self._max_retries):
+            try:
+                response = self._call_llm(
+                    prompt,
+                    system_prompt=(
+                        "你是产品标准分类评测员。关注预测映射是否业务合理，"
+                        "不要求与参考答案路径完全一致。"
+                    ),
+                    method="eval_mapping_reasonable",
+                )
+                result = self._parse_json_response(response)
+                reasonable = bool(result.get("reasonable", False))
+                confidence = max(0.0, min(1.0, float(result.get("confidence", 0))))
+                reason = str(result.get("reason", ""))
+                return reasonable, confidence, reason
+            except Exception as e:
+                logger.warning(f"映射合理性判定失败(第{attempt + 1}次): {e}")
+                if attempt == self._max_retries - 1:
+                    return False, 0.0, f"判定失败: {e}"
+        return False, 0.0, "未知错误"
