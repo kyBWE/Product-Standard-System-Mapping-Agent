@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "cluster_time": "2026-07-16T14:21:55.990342",
+  "cluster_method": "llm",
+  "total_entries": 10,
+  "cluster_count": 5,
+  "outlier_count": 5,
+  "clusters": [
+    {
+      "cluster_id": "c_001",
+      "suggested_parent_id": "6622",
+      "suggested_parent_name": "机械、设备类产品",
+      "suggested_category_name": "机械、设备类产品",
+      "merged_category_name": "机械、设备类产品",
+      "full_path": "机械、设备类产品 > 专用设备 > 发电设备 > 燃气轮机设备 > M701J型燃气轮机组",
+      "entry_count": 1,
+      "avg_confidence": 0.95,
+      "confidence_variance": 0.0,
+      "star_rating": 1,
+      "has_divergence": false,
+      "entries": [
+        "e_fb5c6c"
+      ],
+      "product_names": [
+        "M701J型燃气轮机组"
+      ],
+      "llm_reason": "所有产品均与机械、设备类产品相关，且M701J型燃气轮机组属于发电设备下的燃气轮机设备，因此归为同一组。",
+      "status": "PENDING_REVIEW",
+      "review_note": "",
+      "category_id_created": "",
+      "is_llm_clustered": true
+    },
+    {
+      "cluster_id": "c_002",
+      "suggested_parent_id": "6622",
+      "suggested_parent_name": "机械、设备类产品",
+      "suggested_category_name": "机械、设备类产品",
+      "merged_category_name": "机械、设备类产品",
+      "full_path": "机械、设备类产品 > 通用设备 > 空调设备 > 中央空调 > 水冷离心式中央空调",
+      "entry_count": 1,
+      "avg_confidence": 0.95,
+      "confidence_variance": 0.0,
+      "star_rating": 1,
+      "has_divergence": false,
+      "entries": [
+        "e_649216"
+      ],
+      "product_names": [
+        "水冷离心式中央空调"
+      ],
+      "llm_reason": "水冷离心式中央空调属于通用设备下的空调设备，因此归为同一组。",
+      "status": "PENDING_REVIEW",
+      "review_note": "",
+      "category_id_created": "",
+      "is_llm_clustered": true
+    },
+    {
+      "cluster_id": "c_003",
+      "suggested_parent_id": "6622",
+      "suggested_parent_name": "机械、设备类产品",
+      "suggested_category_name": "机械、设备类产品",
+      "merged_category_name": "机械、设备类产品",
+      "full_path": "机械、设备类产品 > 专用设备 > 工业控制设备 > 工控主板 > GM-N97DX16-LE无风扇工控主板",
+      "entry_count": 1,
+      "avg_confidence": 0.95,
+      "confidence_variance": 0.0,
+      "star_rating": 1,
+      "has_divergence": false,
+      "entries": [
+        "e_41757c"
+      ],
+      "product_names": [
+        "GM-N97DX16-LE无风扇工控主板"
+      ],
+      "llm_reason": "无风扇工控主板属于工业控制设备下的工控主板，因此归为同一组。",
+      "status": "PENDING_REVIEW",
+      "review_note": "",
+      "category_id_created": "",
+      "is_llm_clustered": true
+    },
+    {
+      "cluster_id": "c_004",
+      "suggested_parent_id": "6622",
+      "suggested_parent_name": "机械、设备类产品",
+      "suggested_category_name": "机械、设备类产品",
+      "merged_category_name": "机械、设备类产品",
+      "full_path": "机械、设备类产品 > 专用设备 > 航空航天设备 > 飞行器设备 > 光电设备 > 飞机光电球罩",
+      "entry_count": 1,
+      "avg_confidence": 0.95,
+      "confidence_variance": 0.0,
+      "star_rating": 1,
+      "has_divergence": false,
+      "entries": [
+        "e_3623b8"
+      ],
+      "product_names": [
+        "飞机光电球罩"
+      ],
+      "llm_reason": "飞机光电球罩属于航空航天设备下的飞行器设备，因此归为同一组。",
+      "status": "PENDING_REVIEW",
+      "review_note": "",
+      "category_id_created": "",
+      "is_llm_clustered": true
+    },
+    {
+      "cluster_id": "c_005",
+      "suggested_parent_id": "6622",
+      "suggested_parent_name": "机械、设备类产品",
+      "suggested_category_name": "机械、设备类产品",
+      "merged_category_name": "机械、设备类产品",
+      "full_path": "机械、设备类产品 > 专用设备 > 交通运输设备 > 专用设备 > 铁路运输设备 > 高速列车设备 > 制动系统配件",
+      "entry_count": 1,
+      "avg_confidence": 0.85,
+      "confidence_variance": 0.0,
+      "star_rating": 1,
+      "has_divergence": false,
+      "entries": [
+        "e_e87b38"
+      ],
+      "product_names": [
+        "高速列车制动系统管路配件"
+      ],
+      "llm_reason": "高速列车制动系统管路配件属于铁路运输设备下的高速列车设备，因此归为同一组。",
+      "status": "PENDING_REVIEW",
+      "review_note": "",
+      "category_id_created": "",
+      "is_llm_clustered": true
+    }
+  ],
+  "outliers": [
+    {
+      "entry_id": "e_bec463",
+      "product_name": "节能商用电磁灶",
+      "suggested_parent_id": "",
+      "suggested_category_name": "商用电磁灶",
+      "reason": "LLM判定无法归类"
+    },
+    {
+      "entry_id": "e_8f996d",
+      "product_name": "酸枣仁益生菌发酵产品",
+      "suggested_parent_id": "",
+      "suggested_category_name": "酸枣仁益生菌发酵产品",
+      "path_text": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 特殊食品 > 益生菌食品 > 酸枣仁益生菌发酵产品",
+      "reason": "该大类(食品、饮料、烟、酒类产品)下仅1条，无法聚类"
+    },
+    {
+      "entry_id": "e_a60dcf",
+      "product_name": "网御签名验签服务器SV-G",
+      "suggested_parent_id": "",
+      "suggested_category_name": "网御签名验签服务器SV-G",
+      "path_text": "销售服务 > 金融服务 > 信息安全产品 > 网络安全设备 > 网御签名验签服务器SV-G",
+      "reason": "该大类(销售服务)下仅1条，无法聚类"
+    },
+    {
+      "entry_id": "e_314b38",
+      "product_name": "安全用电管理系统",
+      "suggested_parent_id": "",
+      "suggested_category_name": "安全用电管理系统",
+      "path_text": "电力、热力、水、燃气类产品 > 电力和热力 > 电力设备 > 安全设备 > 安全用电管理系统",
+      "reason": "该大类(电力、热力、水、燃气类产品)下仅1条，无法聚类"
+    },
+    {
+      "entry_id": "e_f41b79",
+      "product_name": "抗人T细胞猪免疫球蛋白",
+      "suggested_parent_id": "",
+      "suggested_category_name": "抗人T细胞猪免疫球蛋白",
+      "path_text": "医药产品 > 生物制品 > 免疫球蛋白 > 人T细胞免疫球蛋白 > 抗人T细胞猪免疫球蛋白",
+      "reason": "该大类(医药产品)下仅1条，无法聚类"
+    }
+  ]
+}

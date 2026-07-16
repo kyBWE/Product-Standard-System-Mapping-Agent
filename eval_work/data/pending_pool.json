@@ -1,0 +1,468 @@
+{
+  "version": 1,
+  "last_cluster_time": "2026-07-16T14:21:55.990342",
+  "entries": [
+    {
+      "id": "e_fb5c6c",
+      "product_name": "M701J型燃气轮机组",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "M701J型燃气轮机组",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "专用设备",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "发电设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "燃气轮机设备",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "M701J型燃气轮机组",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 发电设备 > 燃气轮机设备 > M701J型燃气轮机组",
+      "confidence": 0.95,
+      "llm_reason": "M701J型燃气轮机组属于机械、设备类产品中的专用设备，具体用于发电，属于燃气轮机设备类别，因此按照这一路径进行分类。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:46:43.728192"
+    },
+    {
+      "id": "e_8f996d",
+      "product_name": "酸枣仁益生菌发酵产品",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "酸枣仁益生菌发酵产品",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "食品、饮料、烟、酒类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "食品及加工盐",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "特殊食品",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "益生菌食品",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "酸枣仁益生菌发酵产品",
+          "is_new": true
+        }
+      ],
+      "path_text": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 特殊食品 > 益生菌食品 > 酸枣仁益生菌发酵产品",
+      "confidence": 0.85,
+      "llm_reason": "酸枣仁益生菌发酵产品属于食品类别，且具有益生菌的特性，同时结合了酸枣仁的成分，因此从食品及加工盐大类开始，逐级细分至特殊食品，再细分至益生菌食品，最后以酸枣仁益生菌发酵产品作为最终分类名。这样的分类路径能够准确反映产品的特性。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:54:46.294981"
+    },
+    {
+      "id": "e_a60dcf",
+      "product_name": "网御签名验签服务器SV-G",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "网御签名验签服务器SV-G",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "销售服务",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "金融服务",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "信息安全产品",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "网络安全设备",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "网御签名验签服务器SV-G",
+          "is_new": true
+        }
+      ],
+      "path_text": "销售服务 > 金融服务 > 信息安全产品 > 网络安全设备 > 网御签名验签服务器SV-G",
+      "confidence": 0.85,
+      "llm_reason": "网御签名验签服务器SV-G属于网络安全设备，而网络安全设备是金融服务领域中的一个重要组成部分，用于保护金融交易和数据安全。因此，从销售服务大类开始，逐级细分到最终分类。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:55:41.678378"
+    },
+    {
+      "id": "e_314b38",
+      "product_name": "安全用电管理系统",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "安全用电管理系统",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "电力、热力、水、燃气类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "电力和热力",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "电力设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "安全设备",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "安全用电管理系统",
+          "is_new": true
+        }
+      ],
+      "path_text": "电力、热力、水、燃气类产品 > 电力和热力 > 电力设备 > 安全设备 > 安全用电管理系统",
+      "confidence": 0.85,
+      "llm_reason": "安全用电管理系统是针对电力系统安全管理的专用设备，属于电力设备范畴，且专注于安全领域，因此从电力和热力大类开始，逐级细分至安全用电管理系统这一最终分类。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:57:42.321093"
+    },
+    {
+      "id": "e_bec463",
+      "product_name": "节能商用电磁灶",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "商用电磁灶",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "家用电器",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "烹饪设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "电磁灶",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "商用电磁灶",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 家用电器 > 烹饪设备 > 电磁灶 > 商用电磁灶",
+      "confidence": 0.85,
+      "llm_reason": "节能商用电磁灶属于家用电器范畴，且是专门用于商业用途的烹饪设备，因此从家用电器大类开始，逐级细分到商用电磁灶这一最终分类。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:58:16.833908"
+    },
+    {
+      "id": "e_e87b38",
+      "product_name": "高速列车制动系统管路配件",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "制动系统配件",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "交通运输设备",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "专用设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "铁路运输设备",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "高速列车设备",
+          "is_new": true
+        },
+        {
+          "level": 6,
+          "category_id": null,
+          "category_name": "制动系统配件",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 交通运输设备 > 专用设备 > 铁路运输设备 > 高速列车设备 > 制动系统配件",
+      "confidence": 0.85,
+      "llm_reason": "高速列车制动系统管路配件属于铁路运输设备中的专用设备，是高速列车设备的一部分，因此从机械、设备类产品开始，逐级细分到铁路运输设备，再具体到制动系统配件。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T13:59:28.954575"
+    },
+    {
+      "id": "e_f41b79",
+      "product_name": "抗人T细胞猪免疫球蛋白",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "抗人T细胞猪免疫球蛋白",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "医药产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "生物制品",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "免疫球蛋白",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "人T细胞免疫球蛋白",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "抗人T细胞猪免疫球蛋白",
+          "is_new": true
+        }
+      ],
+      "path_text": "医药产品 > 生物制品 > 免疫球蛋白 > 人T细胞免疫球蛋白 > 抗人T细胞猪免疫球蛋白",
+      "confidence": 0.85,
+      "llm_reason": "抗人T细胞猪免疫球蛋白是一种生物制品，属于免疫球蛋白的范畴，而免疫球蛋白是生物制品中的一种，根据其特性和用途，我们将其细分为人T细胞免疫球蛋白，最后根据其来源为猪，命名为抗人T细胞猪免疫球蛋白。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T14:02:17.873720"
+    },
+    {
+      "id": "e_649216",
+      "product_name": "水冷离心式中央空调",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "水冷离心式中央空调",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "通用设备",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "空调设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "中央空调",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "水冷离心式中央空调",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 通用设备 > 空调设备 > 中央空调 > 水冷离心式中央空调",
+      "confidence": 0.95,
+      "llm_reason": "水冷离心式中央空调属于空调设备的一种，而空调设备是通用设备的一部分。由于它是中央空调的一种，因此在中类中进一步细分为中央空调。考虑到其冷却方式为水冷离心，这是其特有的技术特点，因此将其作为最终分类名。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T14:02:50.575483"
+    },
+    {
+      "id": "e_41757c",
+      "product_name": "GM-N97DX16-LE无风扇工控主板",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "无风扇工控主板",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "专用设备",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "工业控制设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "工控主板",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "无风扇工控主板",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 工业控制设备 > 工控主板 > 无风扇工控主板",
+      "confidence": 0.95,
+      "llm_reason": "GM-N97DX16-LE无风扇工控主板属于工业控制设备中的工控主板，且具有无风扇的特点，因此从机械、设备类产品开始，逐级细分到无风扇工控主板。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T14:03:32.672809"
+    },
+    {
+      "id": "e_3623b8",
+      "product_name": "飞机光电球罩",
+      "suggested_parent_id": "",
+      "suggested_parent_name": "",
+      "suggested_category_name": "飞机光电球罩",
+      "path": [
+        {
+          "level": 1,
+          "category_id": null,
+          "category_name": "机械、设备类产品",
+          "is_new": true
+        },
+        {
+          "level": 2,
+          "category_id": null,
+          "category_name": "专用设备",
+          "is_new": true
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "航空航天设备",
+          "is_new": true
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "飞行器设备",
+          "is_new": true
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "光电设备",
+          "is_new": true
+        },
+        {
+          "level": 6,
+          "category_id": null,
+          "category_name": "飞机光电球罩",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 航空航天设备 > 飞行器设备 > 光电设备 > 飞机光电球罩",
+      "confidence": 0.95,
+      "llm_reason": "飞机光电球罩是安装在飞机上的光电设备，属于航空航天设备中的飞行器设备类别，进一步细分至光电设备，最后确定为飞机光电球罩。",
+      "sibling_nodes": [],
+      "source": "web",
+      "created_at": "2026-07-16T14:04:54.122387"
+    }
+  ]
+}

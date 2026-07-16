@@ -1,0 +1,25 @@
+{
+  "embedding": "bge-m3-1024-full",
+  "sets": [
+    {
+      "gt_source": "test_set_llm_200.json",
+      "accuracy": 0.2121,
+      "correct": 42,
+      "total": 198,
+      "no_match": 1,
+      "avg_confidence": 0.7452,
+      "avg_time_ms": 2242.2,
+      "output": "output/eval_llm200_full.json"
+    },
+    {
+      "gt_source": "test_set_llm_v2_200.json",
+      "accuracy": 0.2453,
+      "correct": 39,
+      "total": 159,
+      "no_match": 6,
+      "avg_confidence": 0.6698,
+      "avg_time_ms": 3117.9,
+      "output": "output/eval_llmv2_full.json"
+    }
+  ]
+}

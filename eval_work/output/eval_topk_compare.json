@@ -1,0 +1,105 @@
+{
+  "embedding": "bge-m3-1024-full",
+  "ks": [
+    5,
+    10,
+    20,
+    50
+  ],
+  "sets": [
+    {
+      "gt_source": "test_set_llm_200_refined.json",
+      "by_k": {
+        "5": {
+          "recall": 0.6818,
+          "recall_count": 135,
+          "coarse_top1_acc": 0.4949,
+          "coarse_top1_count": 98,
+          "rerank_acc": 0.6263,
+          "rerank_acc_count": 124,
+          "total": 198
+        },
+        "10": {
+          "recall": 0.7222,
+          "recall_count": 143,
+          "coarse_top1_acc": 0.4949,
+          "coarse_top1_count": 98,
+          "rerank_acc": 0.6364,
+          "rerank_acc_count": 126,
+          "total": 198
+        },
+        "20": {
+          "recall": 0.7677,
+          "recall_count": 152,
+          "coarse_top1_acc": 0.4949,
+          "coarse_top1_count": 98,
+          "rerank_acc": 0.6515,
+          "rerank_acc_count": 129,
+          "total": 198
+        },
+        "50": {
+          "recall": 0.8182,
+          "recall_count": 162,
+          "coarse_top1_acc": 0.4949,
+          "coarse_top1_count": 98,
+          "rerank_acc": 0.6717,
+          "rerank_acc_count": 133,
+          "total": 198
+        }
+      },
+      "extras": {
+        "exact": 54,
+        "no_coarse": 0,
+        "total": 198
+      },
+      "elapsed_sec": 152.0
+    },
+    {
+      "gt_source": "test_set_llm_v2_200.json",
+      "by_k": {
+        "5": {
+          "recall": 0.3396,
+          "recall_count": 54,
+          "coarse_top1_acc": 0.2075,
+          "coarse_top1_count": 33,
+          "rerank_acc": 0.239,
+          "rerank_acc_count": 38,
+          "total": 159
+        },
+        "10": {
+          "recall": 0.4025,
+          "recall_count": 64,
+          "coarse_top1_acc": 0.2075,
+          "coarse_top1_count": 33,
+          "rerank_acc": 0.2516,
+          "rerank_acc_count": 40,
+          "total": 159
+        },
+        "20": {
+          "recall": 0.4403,
+          "recall_count": 70,
+          "coarse_top1_acc": 0.2075,
+          "coarse_top1_count": 33,
+          "rerank_acc": 0.2516,
+          "rerank_acc_count": 40,
+          "total": 159
+        },
+        "50": {
+          "recall": 0.5157,
+          "recall_count": 82,
+          "coarse_top1_acc": 0.2075,
+          "coarse_top1_count": 33,
+          "rerank_acc": 0.2579,
+          "rerank_acc_count": 41,
+          "total": 159
+        }
+      },
+      "extras": {
+        "exact": 23,
+        "no_coarse": 0,
+        "total": 159
+      },
+      "elapsed_sec": 151.4
+    }
+  ]
+}

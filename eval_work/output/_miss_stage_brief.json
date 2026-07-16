@@ -1,0 +1,1134 @@
+{
+  "eval_llm200_full_llm_soft.json": {
+    "miss_total": 37,
+    "stage_counts": {
+      "recall_miss": 26,
+      "rerank_picked_non_gt": 4,
+      "exact_wrong_shortcut": 1,
+      "skip_fine_wrong": 1,
+      "rerank_kept_wrong_top1": 5
+    },
+    "gt_in_coarse_rate": 0.2703,
+    "gt_ranks": [
+      32,
+      11,
+      1,
+      22,
+      7,
+      3,
+      13,
+      2,
+      2,
+      3
+    ],
+    "samples": {
+      "recall_miss": [
+        {
+          "product": "雾炮机",
+          "gt": "粉尘重污染场所和行业抑尘技术设备(25519)",
+          "pred": "机动喷雾机",
+          "gt_rank": null,
+          "coarse_top1": "烟雾机",
+          "coarse_top1_score": 0.3375,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "烟雾机",
+              "coarse": 0.3375,
+              "vec": 0.5625,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "重油燃烧器",
+              "coarse": 0.3083,
+              "vec": 0.5139,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "去雾器",
+              "coarse": 0.3069,
+              "vec": 0.5114,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "雾炮机主要用于工业扬尘治理，属于大气污染防治设备；而预测的机动喷雾机属于农业植保机械，两者应用场景和功能原理差异巨大，属于明显的品类误判。"
+        },
+        {
+          "product": "弯头",
+          "gt": "铸铁管附件(5988)",
+          "pred": "连扣弯手机",
+          "gt_rank": null,
+          "coarse_top1": "连扣弯手机",
+          "coarse_top1_score": 0.3338,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "连扣弯手机",
+              "coarse": 0.3338,
+              "vec": 0.5563,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "木钩",
+              "coarse": 0.3112,
+              "vec": 0.5187,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "弯曲试验机",
+              "coarse": 0.3059,
+              "vec": 0.5099,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "预测分类'连扣弯手机'属于牙科医疗器械，而'弯头'是管道连接件，两者虽含'弯'字但属完全不同行业，存在明显的名称误导导致的品类错误。"
+        },
+        {
+          "product": "黄饼",
+          "gt": "铀矿石(1252)",
+          "pred": "黄酒",
+          "gt_rank": null,
+          "coarse_top1": "黄芪",
+          "coarse_top1_score": 0.3046,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "黄芪",
+              "coarse": 0.3046,
+              "vec": 0.5076,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "黄芩",
+              "coarse": 0.3044,
+              "vec": 0.5074,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "黄玉米",
+              "coarse": 0.286,
+              "vec": 0.4767,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "黄饼是铀浓缩过程中的中间产物（黄色粉末状氧化物），属于矿产品或化工原料，而黄酒是发酵酒类，两者在物理形态、化学成分及行业属性上完全不同，仅因首字相同导致误判，属于典型的名称碰巧相似但品类错误。"
+        },
+        {
+          "product": "枸杞子",
+          "gt": "果实、种子类饮片(5122)",
+          "pred": "大海子",
+          "gt_rank": null,
+          "coarse_top1": "金顶侧耳",
+          "coarse_top1_score": 0.295,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "金顶侧耳",
+              "coarse": 0.295,
+              "vec": 0.4917,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "盖襄侧耳",
+              "coarse": 0.2917,
+              "vec": 0.4861,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "阿魏侧耳",
+              "coarse": 0.2816,
+              "vec": 0.4693,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "枸杞子是茄科植物的成熟果实，而'大海子'通常指代湖泊或特定地名，并非枸杞的别名或同义词，两者在生物学属性及行业分类上无关联，属于明显的品类错误。"
+        },
+        {
+          "product": "挂机",
+          "gt": "壁挂式空调器(7881)",
+          "pred": "推挂机",
+          "gt_rank": null,
+          "coarse_top1": "PSTN普通电话机",
+          "coarse_top1_score": 0.3091,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "PSTN普通电话机",
+              "coarse": 0.3091,
+              "vec": 0.5152,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "键合设备",
+              "coarse": 0.3034,
+              "vec": 0.5056,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "螺栓安装及拆除机",
+              "coarse": 0.3026,
+              "vec": 0.5043,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "“挂机”通常指代“挂机空调”，而预测分类将其映射为邮政领域的“推挂机”（信件处理设备），属于典型的同名异义词导致的品类误判，业务逻辑不合理。"
+        },
+        {
+          "product": "鱼鳞胶原蛋白提取设备",
+          "gt": "水产加工废弃物综合利用技术及装置(24432)",
+          "pred": "应变感知材料",
+          "gt_rank": null,
+          "coarse_top1": "等离子去胶机",
+          "coarse_top1_score": 0.307,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "等离子去胶机",
+              "coarse": 0.307,
+              "vec": 0.5116,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "海水淡化核心部件",
+              "coarse": 0.3022,
+              "vec": 0.5037,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "正渗透膜分离装备",
+              "coarse": 0.2955,
+              "vec": 0.4925,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "预测分类为‘应变感知材料’（传感器元件），而产品为‘胶原蛋白提取设备’（化工/食品机械），两者在功能、所属领域及物理形态上均无业务关联，属于明显的品类错误。"
+        }
+      ],
+      "rerank_picked_non_gt": [
+        {
+          "product": "粉末包装机",
+          "gt": "固体产品灌装机、包装机(8035)",
+          "pred": "磨粉机",
+          "gt_rank": 32,
+          "coarse_top1": "高性能金属粉末制备工艺",
+          "coarse_top1_score": 0.3683,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "高性能金属粉末制备工艺",
+              "coarse": 0.3683,
+              "vec": 0.6138,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "磨粉机",
+              "coarse": 0.3628,
+              "vec": 0.6047,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "堆积机",
+              "coarse": 0.3626,
+              "vec": 0.6043,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "粉末包装机属于包装专用设备，而磨粉机属于粉碎/研磨加工设备，两者在功能、所属细分领域及产业链环节上完全不同，不存在业务上的合理映射关系。"
+        },
+        {
+          "product": "银铜焊料",
+          "gt": "含银无氧铜(20958)",
+          "pred": "银铜复合材料",
+          "gt_rank": 11,
+          "coarse_top1": "镍基、钴基、银焊条产品",
+          "coarse_top1_score": 0.3807,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "镍基、钴基、银焊条产品",
+              "coarse": 0.3807,
+              "vec": 0.6345,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "银锆铜材料",
+              "coarse": 0.3771,
+              "vec": 0.6286,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "含银铜排",
+              "coarse": 0.3749,
+              "vec": 0.6248,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "银铜焊料属于焊接材料（通常归类于有色金属压延加工或专用化学材料），而预测的'银铜复合材料'通常指结构用合金或板材，且路径归属'化学合成材料'存在明显的行业分类逻辑错误，两者在用途和标准分类体系中差异较"
+        },
+        {
+          "product": "鲫瓜子",
+          "gt": "淡水鲫鱼(1051)",
+          "pred": "瓜类蔬菜",
+          "gt_rank": 1,
+          "coarse_top1": "淡水鲫鱼",
+          "coarse_top1_score": 0.301,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "淡水鲫鱼",
+              "coarse": 0.301,
+              "vec": 0.5017,
+              "trgm": 0.0,
+              "gt": true
+            },
+            {
+              "name": "瓠瓜",
+              "coarse": 0.2976,
+              "vec": 0.4959,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "笋瓜",
+              "coarse": 0.2911,
+              "vec": 0.4851,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "“鲫瓜子”是淡水鱼（鲫鱼）的俗称或加工品，属于水产/肉类范畴，而预测分类“瓜类蔬菜”属于植物性农产品，两者在生物学属性和业务分类上完全不同，仅为名称中“瓜”字的字面误匹配。"
+        },
+        {
+          "product": "空白标签",
+          "gt": "未印文字图画纸制标签(2643)",
+          "pred": "空白磁盘",
+          "gt_rank": 3,
+          "coarse_top1": "空白磁带",
+          "coarse_top1_score": 0.345,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "空白磁带",
+              "coarse": 0.345,
+              "vec": 0.575,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "空白磁盘",
+              "coarse": 0.3393,
+              "vec": 0.5655,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "未印文字图画纸制标签",
+              "coarse": 0.3318,
+              "vec": 0.553,
+              "trgm": 0.0,
+              "gt": true
+            }
+          ],
+          "llm_reason": "预测分类'空白磁盘'属于计算机存储介质，而企业产品'空白标签'通常指纸质或塑料材质的标识贴纸，两者在物理形态、材质及核心用途上完全不同，属于明显的品类错误。"
+        }
+      ],
+      "exact_wrong_shortcut": [
+        {
+          "product": "雷达罩",
+          "gt": "(23588)",
+          "pred": "雷达壳体",
+          "gt_rank": null,
+          "coarse_top1": null,
+          "coarse_top1_score": null,
+          "skip_fine": null,
+          "skip_reason": null,
+          "top3": [],
+          "llm_reason": "雷达罩通常指航空或海洋领域的隐身天线罩，属于专用设备零部件；预测将其归类为汽车电子防盗系统的车载雷达壳体，应用场景（汽车vs航空/海洋）及功能属性（防盗vs隐身/通信）均不匹配，属于明显的品类错误。"
+        }
+      ],
+      "skip_fine_wrong": [
+        {
+          "product": "LED闪烁芯片",
+          "gt": "闪灯IC(22521)",
+          "pred": "LED灯珠",
+          "gt_rank": 22,
+          "coarse_top1": "LED灯珠",
+          "coarse_top1_score": 0.8766,
+          "skip_fine": true,
+          "skip_reason": "coarse>=0.85",
+          "top3": [
+            {
+              "name": "LED灯珠",
+              "coarse": 0.8766,
+              "vec": 0.5885,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "LED模块",
+              "coarse": 0.8657,
+              "vec": 0.5522,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "LED器件",
+              "coarse": 0.8632,
+              "vec": 0.5441,
+              "trgm": 1.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "LED闪烁芯片属于集成电路（IC）中的控制类芯片，而预测分类'LED灯珠'属于发光器件（被动元件/光电转换组件），两者在电子产业链中处于不同层级且功能完全不同，存在本质品类错误。"
+        }
+      ],
+      "rerank_kept_wrong_top1": [
+        {
+          "product": "光动力诊断仪",
+          "gt": "激光荧光肿瘤诊断仪(10148)",
+          "pred": "光谱辐射治疗仪器",
+          "gt_rank": 7,
+          "coarse_top1": "光谱辐射治疗仪器",
+          "coarse_top1_score": 0.3452,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "光谱辐射治疗仪器",
+              "coarse": 0.3452,
+              "vec": 0.5753,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "激光肿瘤光谱诊断装置",
+              "coarse": 0.3442,
+              "vec": 0.5737,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "常规光源医疗机",
+              "coarse": 0.3352,
+              "vec": 0.5586,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "光动力诊断仪利用特定波长光激发光敏剂进行诊断，属于光学诊断范畴；而'光谱辐射治疗仪器'侧重于利用光谱辐射能量进行治疗，且通常指代热疗或特定辐射疗法，两者在核心原理（诊断vs治疗）和功能用途上存在本质区"
+        },
+        {
+          "product": "机场助航灯光系统",
+          "gt": "飞机场用电气信号装置(11394)",
+          "pred": "飞机用照明装置",
+          "gt_rank": 3,
+          "coarse_top1": "飞机用照明装置",
+          "coarse_top1_score": 0.3657,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "飞机用照明装置",
+              "coarse": 0.3657,
+              "vec": 0.6096,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "飞机场用盲降控制设备",
+              "coarse": 0.3549,
+              "vec": 0.5916,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "飞机场用电气信号装置",
+              "coarse": 0.3482,
+              "vec": 0.5803,
+              "trgm": 0.0,
+              "gt": true
+            }
+          ],
+          "llm_reason": "机场助航灯光系统属于地面固定设施，用于引导飞机起降，而'飞机用照明装置'指安装在航空器本体上的机载灯具，两者应用场景和功能主体完全不同，属于明显的品类误判。"
+        },
+        {
+          "product": "骨瓷碗",
+          "gt": "日用瓷质餐具(5831)",
+          "pred": "搪瓷餐具",
+          "gt_rank": 13,
+          "coarse_top1": "搪瓷餐具",
+          "coarse_top1_score": 0.3231,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "搪瓷餐具",
+              "coarse": 0.3231,
+              "vec": 0.5386,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "搪瓷制厨房用具",
+              "coarse": 0.2863,
+              "vec": 0.4772,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "搪瓷制品",
+              "coarse": 0.284,
+              "vec": 0.4733,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "骨瓷属于高温烧制的陶瓷制品，而搪瓷是金属表面涂覆玻璃质釉料，两者材质工艺完全不同，存在明显的品类错误。"
+        },
+        {
+          "product": "丁酸乙酯",
+          "gt": "醋酸丁酯(25701)",
+          "pred": "丁酸及其盐和酯",
+          "gt_rank": 2,
+          "coarse_top1": "丁酸及其盐和酯",
+          "coarse_top1_score": 0.385,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "丁酸及其盐和酯",
+              "coarse": 0.385,
+              "vec": 0.6417,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "醋酸丁酯",
+              "coarse": 0.3725,
+              "vec": 0.6208,
+              "trgm": 0.0,
+              "gt": true
+            },
+            {
+              "name": "EBA树脂",
+              "coarse": 0.371,
+              "vec": 0.6183,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "丁酸乙酯是丁酸的酯类，而预测分类'丁酸及其盐和酯'通常指代丁酸本体或其盐类，且参考标准将其归类为'醋酸丁酯'所在的'焦炭及其副产品'分支，两者在化工细分品类（丁酸系 vs 醋酸系）及产业链来源上均不匹"
+        },
+        {
+          "product": "TC4钻杆接头管",
+          "gt": "石油钻探用耐蚀钛合金管(20568)",
+          "pred": "TC4",
+          "gt_rank": 2,
+          "coarse_top1": "TC4",
+          "coarse_top1_score": 0.8267,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "TC4",
+              "coarse": 0.8267,
+              "vec": 0.4223,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "石油钻探用耐蚀钛合金管",
+              "coarse": 0.2739,
+              "vec": 0.4565,
+              "trgm": 0.0,
+              "gt": true
+            },
+            {
+              "name": "脐带缆系统",
+              "coarse": 0.271,
+              "vec": 0.4516,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "预测路径将其归类为'建筑钢材'，而TC4是钛合金，且钻杆接头属于石油/天然气钻探设备配件，与建筑材料在材质和应用场景上均无业务关联，属于明显的品类错误。"
+        }
+      ]
+    }
+  },
+  "eval_llmv2_full_llm_soft.json": {
+    "miss_total": 47,
+    "stage_counts": {
+      "recall_miss": 38,
+      "rerank_picked_non_gt": 3,
+      "skip_fine_wrong": 1,
+      "rerank_kept_wrong_top1": 5
+    },
+    "gt_in_coarse_rate": 0.1915,
+    "gt_ranks": [
+      2,
+      6,
+      31,
+      5,
+      3,
+      30,
+      44,
+      2,
+      17
+    ],
+    "samples": {
+      "recall_miss": [
+        {
+          "product": "RVV软护套线",
+          "gt": "电线线缆(24679)",
+          "pred": "绝缘套管",
+          "gt_rank": null,
+          "coarse_top1": "线束保护器",
+          "coarse_top1_score": 0.3018,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "线束保护器",
+              "coarse": 0.3018,
+              "vec": 0.503,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "绝缘套管",
+              "coarse": 0.2897,
+              "vec": 0.4828,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "车用软管",
+              "coarse": 0.2853,
+              "vec": 0.4756,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "RVV软护套线属于电线电缆成品，而预测分类'绝缘套管'通常指用于保护电线的塑料或橡胶管状配件（如热缩管、PVC穿线管），二者在产业链中属于不同层级的产品（成品 vs 辅材/配件），业务分类差异显著，不"
+        },
+        {
+          "product": "喷气织机",
+          "gt": "用纺织纱线或其他纤维纱线织造织物的纺织机(9171)",
+          "pred": "喷射机械",
+          "gt_rank": null,
+          "coarse_top1": "喷码机",
+          "coarse_top1_score": 0.3499,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "喷码机",
+              "coarse": 0.3499,
+              "vec": 0.5832,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "喷绘机",
+              "coarse": 0.3492,
+              "vec": 0.5821,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "空气自动喷枪",
+              "coarse": 0.3472,
+              "vec": 0.5786,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "喷气织机属于纺织专用设备，而预测的'喷射机械'通常指工业清洗或喷涂设备，两者应用场景和核心功能差异巨大，属于明显的品类误判。"
+        },
+        {
+          "product": "波士顿动力Atlas",
+          "gt": "人形机器人(26445)",
+          "pred": "推进系统",
+          "gt_rank": null,
+          "coarse_top1": "驱动电机",
+          "coarse_top1_score": 0.2807,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "驱动电机",
+              "coarse": 0.2807,
+              "vec": 0.4678,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "汽车电控系统",
+              "coarse": 0.2667,
+              "vec": 0.4445,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "新能源车",
+              "coarse": 0.2657,
+              "vec": 0.4429,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "波士顿动力Atlas为人形机器人，属于智能装备或机器人领域，而预测分类将其归为航天运载火箭的推进系统，两者在功能、应用场景及所属产业类别上均无业务关联，属于明显的品类错误。"
+        },
+        {
+          "product": "STP",
+          "gt": "七号信令转接设备(12540)",
+          "pred": "RTP设备",
+          "gt_rank": null,
+          "coarse_top1": "RTP设备",
+          "coarse_top1_score": 0.3299,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "RTP设备",
+              "coarse": 0.3299,
+              "vec": 0.4546,
+              "trgm": 0.1429,
+              "gt": false
+            },
+            {
+              "name": "SIP封装服务",
+              "coarse": 0.3281,
+              "vec": 0.4516,
+              "trgm": 0.1429,
+              "gt": false
+            },
+            {
+              "name": "图像信号处理器IP",
+              "coarse": 0.2604,
+              "vec": 0.4341,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "STP通常指屏蔽双绞线（通信线缆）或软件技术栈，与RTP设备（快速热处理半导体制造设备）在物理形态、应用领域及产业链环节上均无业务关联，属于明显的品类误判。"
+        },
+        {
+          "product": "吐温80",
+          "gt": "增溶剂(22018)",
+          "pred": null,
+          "gt_rank": null,
+          "coarse_top1": "苯磺酸",
+          "coarse_top1_score": 0.2267,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "苯磺酸",
+              "coarse": 0.2267,
+              "vec": 0.0,
+              "trgm": 0.5667,
+              "gt": false
+            },
+            {
+              "name": "语音通话服务",
+              "coarse": 0.2176,
+              "vec": 0.3626,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "电信服务",
+              "coarse": 0.2092,
+              "vec": 0.3486,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "no_match"
+        },
+        {
+          "product": "苏云金杆菌（Bt）",
+          "gt": "生物杀虫剂制剂(4716)",
+          "pred": "杀菌剂",
+          "gt_rank": null,
+          "coarse_top1": "苏铁",
+          "coarse_top1_score": 0.2526,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "苏铁",
+              "coarse": 0.2526,
+              "vec": 0.4211,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "金顶侧耳",
+              "coarse": 0.2292,
+              "vec": 0.382,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "紫苏芽",
+              "coarse": 0.2276,
+              "vec": 0.3793,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "苏云金杆菌（Bt）是典型的生物杀虫剂，将其归类为化学杀菌剂属于核心功能（杀虫vs杀菌）和来源（生物vs化学）的根本性错误，不符合业务逻辑。"
+        }
+      ],
+      "rerank_picked_non_gt": [
+        {
+          "product": "BB夹",
+          "gt": "发夹(3427)",
+          "pred": "专用夹具",
+          "gt_rank": 2,
+          "coarse_top1": "管理夹",
+          "coarse_top1_score": 0.3096,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "管理夹",
+              "coarse": 0.3096,
+              "vec": 0.516,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "发夹",
+              "coarse": 0.3091,
+              "vec": 0.5152,
+              "trgm": 0.0,
+              "gt": true
+            },
+            {
+              "name": "文件夹",
+              "coarse": 0.2949,
+              "vec": 0.4915,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "BB夹属于日用发饰，而预测分类'专用夹具'属于工业机械配件，两者在用途、行业属性及物理形态上均无业务关联，属于典型的跨类目误判。"
+        },
+        {
+          "product": "电视广告位",
+          "gt": "影视、广播广告发布服务(14199)",
+          "pred": "节能电视机",
+          "gt_rank": 3,
+          "coarse_top1": "广播影视服务",
+          "coarse_top1_score": 0.3561,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "广播影视服务",
+              "coarse": 0.3561,
+              "vec": 0.5936,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "广告服务",
+              "coarse": 0.3393,
+              "vec": 0.5654,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "影视、广播广告发布服务",
+              "coarse": 0.3384,
+              "vec": 0.5641,
+              "trgm": 0.0,
+              "gt": true
+            }
+          ],
+          "llm_reason": "‘电视广告位’属于广告服务资源，而预测分类‘节能电视机’为硬件终端设备，二者在业务本质（服务 vs 实物）和产业链环节上完全不同，属于明显的品类错误。"
+        },
+        {
+          "product": "永磁除铁器",
+          "gt": "大型永磁筒式磁选机(24424)",
+          "pred": "磁性系列过滤器",
+          "gt_rank": 30,
+          "coarse_top1": "永磁滚筒",
+          "coarse_top1_score": 0.3466,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "永磁滚筒",
+              "coarse": 0.3466,
+              "vec": 0.5777,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "电磁铁",
+              "coarse": 0.3427,
+              "vec": 0.5712,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "稀土永磁铁氧体",
+              "coarse": 0.3412,
+              "vec": 0.5687,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "永磁除铁器主要用于去除物料中的铁杂质，属于选矿或环保领域的分离/过滤设备，而预测分类'磁性系列过滤器'通常指液压系统中的磁性回油滤油器，两者应用场景和功能原理差异巨大，属于跨行业误判。"
+        }
+      ],
+      "skip_fine_wrong": [
+        {
+          "product": "小齿轮齿条副",
+          "gt": "齿条、差动齿轮(7333)",
+          "pred": "小齿轮",
+          "gt_rank": 6,
+          "coarse_top1": "小齿轮",
+          "coarse_top1_score": 0.391,
+          "skip_fine": true,
+          "skip_reason": "name_in_product",
+          "top3": [
+            {
+              "name": "小齿轮",
+              "coarse": 0.391,
+              "vec": 0.6516,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "其他齿轮",
+              "coarse": 0.332,
+              "vec": 0.5533,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "其他粉末冶金齿轮",
+              "coarse": 0.3281,
+              "vec": 0.5468,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "预测将其归类为汽车变速器的核心传动件，而标准及实际业务中‘小齿轮齿条副’通常指代转向系统或通用机械传动组件，两者所属功能子系统不同，存在明显的业务逻辑偏差。"
+        }
+      ],
+      "rerank_kept_wrong_top1": [
+        {
+          "product": "网络货运",
+          "gt": "无运输工具承运业务(14061)",
+          "pred": "货物运输代理服务",
+          "gt_rank": 31,
+          "coarse_top1": "货物运输代理服务",
+          "coarse_top1_score": 0.384,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "货物运输代理服务",
+              "coarse": 0.384,
+              "vec": 0.6399,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "装卸搬运服务",
+              "coarse": 0.3805,
+              "vec": 0.6342,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "国内货物运输代理服务",
+              "coarse": 0.3747,
+              "vec": 0.6245,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "网络货运的核心商业模式是'无运输工具承运'，属于交通运输服务；而预测的'货物运输代理'属于物流辅助服务，两者在法律关系（承运人vs代理人）和税务分类上存在本质区别，并非同义或近邻关系。"
+        },
+        {
+          "product": "FPC指纹传感器",
+          "gt": "指纹识别芯片(26983)",
+          "pred": "FPC贴片",
+          "gt_rank": 5,
+          "coarse_top1": "FPC贴片",
+          "coarse_top1_score": 0.7,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "FPC贴片",
+              "coarse": 0.7,
+              "vec": 0.0,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "柔性电路板(FPC)",
+              "coarse": 0.7,
+              "vec": 0.0,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "FPC灌孔导电银浆",
+              "coarse": 0.7,
+              "vec": 0.0,
+              "trgm": 1.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "FPC指纹传感器属于生物识别组件或半导体芯片，而预测分类'FPC贴片'位于'车用仪表'下，通常指柔性电路板基材或特定仪表配件，两者在功能属性（生物识别 vs 车辆仪表）和产业链层级上差异巨大，属于明显"
+        },
+        {
+          "product": "TFT-LCD",
+          "gt": "LCD显示模块(21691)",
+          "pred": "TFT-LCD生产线设备",
+          "gt_rank": 44,
+          "coarse_top1": "TFT-LCD生产线设备",
+          "coarse_top1_score": 0.7,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "TFT-LCD生产线设备",
+              "coarse": 0.7,
+              "vec": 0.0,
+              "trgm": 1.0,
+              "gt": false
+            },
+            {
+              "name": "TFT 正性光刻胶",
+              "coarse": 0.5859,
+              "vec": 0.6432,
+              "trgm": 0.5,
+              "gt": false
+            },
+            {
+              "name": "液晶显示(LCD)面板",
+              "coarse": 0.5472,
+              "vec": 0.5787,
+              "trgm": 0.5,
+              "gt": false
+            }
+          ],
+          "llm_reason": "TFT-LCD是显示面板成品或核心组件，而预测分类为‘生产线设备’，属于制造该产品的机器而非产品本身，存在本体与工具的本质区别，业务逻辑不符。"
+        },
+        {
+          "product": "多效蒸馏水机",
+          "gt": "制药用蒸馏水机(7562)",
+          "pred": "多效蒸发器",
+          "gt_rank": 2,
+          "coarse_top1": "多效蒸发器",
+          "coarse_top1_score": 0.4105,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "多效蒸发器",
+              "coarse": 0.4105,
+              "vec": 0.6842,
+              "trgm": 0.0,
+              "gt": false
+            },
+            {
+              "name": "制药用蒸馏水机",
+              "coarse": 0.3618,
+              "vec": 0.6029,
+              "trgm": 0.0,
+              "gt": true
+            },
+            {
+              "name": "精馏-生化法耦合处理技术与成套装备",
+              "coarse": 0.3459,
+              "vec": 0.5765,
+              "trgm": 0.0,
+              "gt": false
+            }
+          ],
+          "llm_reason": "多效蒸馏水机属于制药/化工领域的纯化水制备设备，而预测分类将其归入乳品加工机械，行业应用场景完全错误，属于明显的品类误判。"
+        },
+        {
+          "product": "BMS芯片",
+          "gt": "电池管理芯片(26960)",
+          "pred": "电池及其零部件",
+          "gt_rank": 17,
+          "coarse_top1": "电池及其零部件",
+          "coarse_top1_score": 0.4611,
+          "skip_fine": false,
+          "skip_reason": "",
+          "top3": [
+            {
+              "name": "电池及其零部件",
+              "coarse": 0.4611,
+              "vec": 0.511,
+              "trgm": 0.3864,
+              "gt": false
+            },
+            {
+              "name": "MEMS芯片",
+              "coarse": 0.4092,
+              "vec": 0.5986,
+              "trgm": 0.125,
+              "gt": false
+            },
+            {
+              "name": "电池热管理系统",
+              "coarse": 0.4021,
+              "vec": 0.5406,
+              "trgm": 0.1943,
+              "gt": false
+            }
+          ],
+          "llm_reason": "BMS芯片属于集成电路（半导体）范畴，而预测分类'电池及其零部件'通常指物理电池本体或结构件，两者在产业链层级和物理形态上存在本质区别，映射不准确。"
+        }
+      ]
+    }
+  }
+}
