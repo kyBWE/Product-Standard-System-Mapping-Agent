@@ -1,0 +1,431 @@
+{
+  "test_set_llm_200.json": {
+    "backup": "C:\\Users\\hp\\Desktop\\课设3\\7月14日\\Product-Standard-System-Mapping-Agent\\test_set_llm_200.json.bak_20260714_200438",
+    "fixed_count": 38,
+    "changes": [
+      {
+        "index": 0,
+        "product_name": "罗茨风机",
+        "old_gt": "7501",
+        "old_name": "螺杆式鼓风机",
+        "old_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 鼓风机 > 螺杆式鼓风机",
+        "new_gt": "25558",
+        "new_name": "罗茨风机",
+        "new_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 罗茨风机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 6,
+        "product_name": "杀毒软件",
+        "old_gt": "20096",
+        "old_name": "工具软件产品",
+        "old_path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 工具软件产品",
+        "new_gt": "25212",
+        "new_name": "杀毒软件",
+        "new_path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 网络与信息安全软件 > 杀毒软件",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 18,
+        "product_name": "牙科手机",
+        "old_gt": "10407",
+        "old_name": "口腔科手术器械",
+        "old_path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 口腔科手术器械",
+        "new_gt": "10379",
+        "new_name": "牙科手机",
+        "new_path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 牙科手机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 19,
+        "product_name": "智能音箱",
+        "old_gt": "20023",
+        "old_name": "智慧智能设备",
+        "old_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 智慧智能设备",
+        "new_gt": "26552",
+        "new_name": "智能音箱",
+        "new_path": "产业链 > 人工智能 > 智能语音设备 > 智能音箱",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 23,
+        "product_name": "数控插齿机",
+        "old_gt": "6916",
+        "old_name": "数控插床",
+        "old_path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属切削机床 > 数控刨床 > 数控插床",
+        "new_gt": "6923",
+        "new_name": "数控插齿机",
+        "new_path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属切削机床 > 数控刨床 > 数控插齿机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 25,
+        "product_name": "罗茨风机",
+        "old_gt": "24985",
+        "old_name": "回转式鼓风机",
+        "old_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 回转式鼓风机",
+        "new_gt": "25558",
+        "new_name": "罗茨风机",
+        "new_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 罗茨风机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 28,
+        "product_name": "高压无气喷涂机",
+        "old_gt": "7978",
+        "old_name": "其他喷枪",
+        "old_path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷枪 > 其他喷枪",
+        "new_gt": "7990",
+        "new_name": "高压无气喷涂机",
+        "new_path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷涂机 > 高压无气喷涂机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 37,
+        "product_name": "酒精回收塔",
+        "old_gt": "7582",
+        "old_name": "蒸馏釜",
+        "old_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 蒸馏釜",
+        "new_gt": "7576",
+        "new_name": "酒精回收塔",
+        "new_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 酒精回收塔",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 38,
+        "product_name": "真空蒸发器",
+        "old_gt": "7613",
+        "old_name": "真空浓缩器",
+        "old_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 浓缩设备 > 浓缩机 > 真空浓缩器",
+        "new_gt": "7602",
+        "new_name": "真空蒸发器",
+        "new_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 浓缩设备 > 蒸发器 > 真空蒸发器",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 40,
+        "product_name": "风力发电机组",
+        "old_gt": "26677",
+        "old_name": "风电开发及运维",
+        "old_path": "产业链 > 风电产业 > 风电开发及运维",
+        "new_gt": "24794",
+        "new_name": "风力发电机组",
+        "new_path": "机械、设备类产品 > 电气机械及器材 > 发电机组、内燃发电机组及旋转式变流机 > 发电机组 > 风力发电机组",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 43,
+        "product_name": "硒鼓",
+        "old_gt": "13869",
+        "old_name": "成像卡盒组件",
+        "old_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 复印和胶版印制设备 > 复印设备配套装置、零件 > 成像卡盒组件",
+        "new_gt": "12767",
+        "new_name": "硒鼓",
+        "new_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子计算机配套产品及耗材 > 其他电子计算机配套产品及耗材 > 硒鼓",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 45,
+        "product_name": "网络分析仪",
+        "old_gt": "12703",
+        "old_name": "网络检测设备",
+        "old_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 计算机网络设备 > 网络检测设备",
+        "new_gt": "13589",
+        "new_name": "网络分析仪",
+        "new_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 光学、电子测量仪器 > 通用电子测量仪器 > 网络分析仪",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 46,
+        "product_name": "激光切割机",
+        "old_gt": "9451",
+        "old_name": "其他金属处理机械",
+        "old_path": "机械、设备类产品 > 专用设备 > 金属处理机械 > 其他金属处理机械",
+        "new_gt": "26646",
+        "new_name": "激光切割机",
+        "new_path": "产业链 > 新型显示 > 激光设备 > 激光切割机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 49,
+        "product_name": "煤制油",
+        "old_gt": "3538",
+        "old_name": "其他合成液体燃料",
+        "old_path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 人造能源产品 > 合成液体燃料 > 其他合成液体燃料",
+        "new_gt": "24573",
+        "new_name": "煤制油",
+        "new_path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 焦炭及其副产品 > 煤制油",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 53,
+        "product_name": "缝纫线",
+        "old_gt": "1755",
+        "old_name": "线",
+        "old_path": "纺织、服装、皮革类产品 > 纺织产品 > 棉、化纤纺织及印染产品 > 线",
+        "new_gt": "1760",
+        "new_name": "缝纫线",
+        "new_path": "纺织、服装、皮革类产品 > 纺织产品 > 棉、化纤纺织及印染产品 > 缝纫线",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 57,
+        "product_name": "订书机",
+        "old_gt": "13899",
+        "old_name": "文件装订用机械",
+        "old_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 文化、办公用设备或器具 > 文件装订用机械",
+        "new_gt": "13900",
+        "new_name": "订书机",
+        "new_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 文化、办公用设备或器具 > 文件装订用机械 > 订书机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 60,
+        "product_name": "碳纤维增强复合材料",
+        "old_gt": "21228",
+        "old_name": "岛礁建设用碳纤维复合材料",
+        "old_path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 复合材料 > 岛礁建设用碳纤维复合材料",
+        "new_gt": "4880",
+        "new_name": "碳纤维增强复合材料",
+        "new_path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 特种纤维及高功能化工产品 > 碳纤维增强复合材料",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 66,
+        "product_name": "离心泵",
+        "old_gt": "8580",
+        "old_name": "蜗壳辐流泵",
+        "old_path": "机械、设备类产品 > 专用设备 > 炼油、化工生产专用设备 > 化工用液体运送机械 > 蜗壳辐流泵",
+        "new_gt": "24201",
+        "new_name": "离心泵",
+        "new_path": "机械、设备类产品 > 通用设备 > 泵及液体提升机 > 泵 > 离心泵",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 68,
+        "product_name": "接线端子",
+        "old_gt": "11976",
+        "old_name": "其他电路连接装置",
+        "old_path": "机械、设备类产品 > 电气机械及器材 > 配电或电器控制设备 > 电路连接装置 > 其他电路连接装置",
+        "new_gt": "24036",
+        "new_name": "接线端子",
+        "new_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 其他电子元件 > 接线端子",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 85,
+        "product_name": "起垄机",
+        "old_gt": "9557",
+        "old_name": "培土机",
+        "old_path": "机械、设备类产品 > 专用设备 > 机械化农业及园艺机具 > 田间管理机械 > 中耕机械 > 培土机",
+        "new_gt": "9509",
+        "new_name": "起垄机",
+        "new_path": "机械、设备类产品 > 专用设备 > 机械化农业及园艺机具 > 土壤耕整机械 > 整地机械 > 起垄机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 86,
+        "product_name": "轿车",
+        "old_gt": "11472",
+        "old_name": "汽车",
+        "old_path": "机械、设备类产品 > 交通运输设备 > 汽车",
+        "new_gt": "23830",
+        "new_name": "轿车",
+        "new_path": "机械、设备类产品 > 交通运输设备 > 汽车 > 轿车",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 96,
+        "product_name": "不粘煤",
+        "old_gt": "26188",
+        "old_name": "弱粘煤",
+        "old_path": "矿产品 > 煤炭采选产品 > 原煤 > 弱粘煤",
+        "new_gt": "26194",
+        "new_name": "不粘煤",
+        "new_path": "矿产品 > 煤炭采选产品 > 原煤 > 不粘煤",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 100,
+        "product_name": "3D打印机",
+        "old_gt": "20188",
+        "old_name": "激光快速成形设备",
+        "old_path": "机械、设备类产品 > 专用设备 > 智能制造设备 > 智能设备 > 激光快速成形设备",
+        "new_gt": "26559",
+        "new_name": "3D打印机",
+        "new_path": "产业链 > 人工智能 > 3D打印机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 115,
+        "product_name": "双酚A",
+        "old_gt": "3836",
+        "old_name": "多元酚",
+        "old_path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 酚 > 多元酚",
+        "new_gt": "26037",
+        "new_name": "双酚A",
+        "new_path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 酚 > 双酚A",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 131,
+        "product_name": "引风机",
+        "old_gt": "7462",
+        "old_name": "电站锅炉鼓引风机",
+        "old_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 离心式通风机 > 电站锅炉鼓引风机",
+        "new_gt": "23812",
+        "new_name": "引风机",
+        "new_path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 引风机",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 135,
+        "product_name": "苯酚",
+        "old_gt": "3834",
+        "old_name": "酚",
+        "old_path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 酚",
+        "new_gt": "26178",
+        "new_name": "苯酚",
+        "new_path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 酚 > 苯酚",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 144,
+        "product_name": "郁金香种球",
+        "old_gt": "708",
+        "old_name": "花卉种球",
+        "old_path": "农、林、牧、渔业类产品 > 农业产品 > 种子、种苗 > 花草种 > 花卉种球",
+        "new_gt": "711",
+        "new_name": "郁金香种球",
+        "new_path": "农、林、牧、渔业类产品 > 农业产品 > 种子、种苗 > 花草种 > 花卉种球 > 郁金香种球",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 153,
+        "product_name": "碳纳米管",
+        "old_gt": "21131",
+        "old_name": "合成纤维单体纳米材料",
+        "old_path": "石油、化工、医药产品 > 化学原料及化学制品 > 纳米材料 > 合成纤维单体纳米材料",
+        "new_gt": "21128",
+        "new_name": "碳纳米管",
+        "new_path": "石油、化工、医药产品 > 化学原料及化学制品 > 纳米材料 > 碳纳米管",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 155,
+        "product_name": "电磁阀",
+        "old_gt": "7194",
+        "old_name": "方向阀",
+        "old_path": "液压元件 > 方向阀",
+        "new_gt": "13039",
+        "new_name": "电磁阀",
+        "new_path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 工业仪表 > 执行器 > 电磁阀",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 162,
+        "product_name": "静电除尘器",
+        "old_gt": "11054",
+        "old_name": "组合式电除尘器",
+        "old_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 大气污染防治设备 > 除尘设备 > 组合式电除尘器",
+        "new_gt": "11035",
+        "new_name": "静电除尘器",
+        "new_path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 大气污染防治设备 > 除尘设备 > 静电除尘器",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 165,
+        "product_name": "砂轮",
+        "old_gt": "5915",
+        "old_name": "研磨和抛光的工具",
+        "old_path": "金属及非金属制品 > 非金属矿物制品 > 磨具 > 固结磨具 > 研磨和抛光的工具",
+        "new_gt": "5920",
+        "new_name": "砂轮",
+        "new_path": "金属及非金属制品 > 非金属矿物制品 > 磨具 > 固结磨具 > 砂轮",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 171,
+        "product_name": "透水砖",
+        "old_gt": "5603",
+        "old_name": "其他水泥混凝土制品",
+        "old_path": "金属及非金属制品 > 非金属矿物制品 > 水泥混凝土制品 > 其他水泥混凝土制品",
+        "new_gt": "23004",
+        "new_name": "透水砖",
+        "new_path": "石油、化工、医药产品 > 塑料制品、半成品及辅料 > 纤维增强塑料制品 > 装饰用纤维增强塑料制品 > 建筑装饰 > 建材物料 > 透水砖",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 174,
+        "product_name": "酒精回收塔",
+        "old_gt": "7577",
+        "old_name": "多功能酒精回收器",
+        "old_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 多功能酒精回收器",
+        "new_gt": "7576",
+        "new_name": "酒精回收塔",
+        "new_path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 酒精回收塔",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 181,
+        "product_name": "酒精",
+        "old_gt": "22033",
+        "old_name": "乙醇",
+        "old_path": "石油、化工、医药产品 > 医药 > 生物化学制品 > 乙醇",
+        "new_gt": "1687",
+        "new_name": "酒精",
+        "new_path": "食品、饮料、烟、酒类产品 > 饮料、酒及酒精 > 酒精",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 182,
+        "product_name": "单晶硅片",
+        "old_gt": "22735",
+        "old_name": "光伏电池材料",
+        "old_path": "电力、热力、水、燃气类产品 > 电力和热力、冷气 > 发电及供电 > 发电 > 太阳能发电 > 太阳能材料 > 光伏电池材料",
+        "new_gt": "21073",
+        "new_name": "单晶硅片",
+        "new_path": "产业链 > 集成电路半导体 > 半导体基体材料 > 单晶硅片",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 186,
+        "product_name": "冰淇淋",
+        "old_gt": "1663",
+        "old_name": "冷冻饮品",
+        "old_path": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 冷冻饮品",
+        "new_gt": "1664",
+        "new_name": "冰淇淋",
+        "new_path": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 冷冻饮品 > 冰淇淋",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 191,
+        "product_name": "石英晶体振荡器",
+        "old_gt": "26165",
+        "old_name": "谐振电路",
+        "old_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 其他电子元件 > 谐振电路",
+        "new_gt": "25482",
+        "new_name": "石英晶体振荡器",
+        "new_path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 频率控制元器件 > 石英晶体振荡器",
+        "reason": "literal_category_name_equals_product"
+      },
+      {
+        "index": 193,
+        "product_name": "叉车",
+        "old_gt": "7050",
+        "old_name": "其他工业车辆",
+        "old_path": "机械、设备类产品 > 通用设备 > 工业车辆 > 其他工业车辆",
+        "new_gt": "20141",
+        "new_name": "叉车",
+        "new_path": "机械、设备类产品 > 交通运输设备 > 汽车 > 特种专用车 > 叉车",
+        "reason": "literal_category_name_equals_product"
+      }
+    ]
+  },
+  "test_set_llm_v2_200.json": {
+    "backup": "C:\\Users\\hp\\Desktop\\课设3\\7月14日\\Product-Standard-System-Mapping-Agent\\test_set_llm_v2_200.json.bak_20260714_200438",
+    "fixed_count": 0,
+    "changes": []
+  }
+}

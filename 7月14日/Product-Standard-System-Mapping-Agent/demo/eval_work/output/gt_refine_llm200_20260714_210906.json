@@ -1,0 +1,571 @@
+{
+  "source": "C:\\Users\\hp\\Desktop\\课设3\\7月14日\\Product-Standard-System-Mapping-Agent\\test_set_llm_200.json",
+  "output": "C:\\Users\\hp\\Desktop\\课设3\\7月14日\\Product-Standard-System-Mapping-Agent\\test_set_llm_200_refined.json",
+  "stamp": "20260714_210906",
+  "total": 198,
+  "changed": 54,
+  "reason_counts": {
+    "keep_literal_leaf": 38,
+    "adopt_sibling_better_name_overlap": 4,
+    "adopt_llm_reasonable_pred": 36,
+    "keep_sibling_deny": 2,
+    "keep_hard_case_llm_rejected": 37,
+    "keep_already_strict": 43,
+    "adopt_finer_child": 13,
+    "adopt_subtree_name_match": 1,
+    "keep_sibling_ambiguous": 6,
+    "keep_soft_other": 11,
+    "keep_ancestor_pred_not_deeper": 7
+  },
+  "rescored_on_existing_predictions": {
+    "accuracy_strict": 0.6768,
+    "accuracy_near": 0.7576,
+    "accuracy_soft": 0.8131,
+    "correct_strict": 134,
+    "correct_near": 150,
+    "correct_soft": 161,
+    "note": "基于原评测预测重算，未重新跑匹配；原 llm_soft 采纳样本在此多已变为 strict"
+  },
+  "changes": [
+    {
+      "product_name": "环氧底漆",
+      "old_gt": "23591",
+      "old_name": "涂覆材料",
+      "new_gt": "21948",
+      "new_name": "环氧涂料",
+      "reason": "adopt_sibling_better_name_overlap",
+      "eval_relation": "sibling",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "碳纤维复合材料船体",
+      "old_gt": "27179",
+      "old_name": "海洋轻量化构件",
+      "new_gt": "4880",
+      "new_name": "碳纤维增强复合材料",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "玻璃钢装饰板",
+      "old_gt": "5548",
+      "old_name": "装饰用纤维增强塑料制品",
+      "new_gt": "21220",
+      "new_name": "装饰复合材料",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "一氯乙酸",
+      "old_gt": "3844",
+      "old_name": "氯乙酸及其盐和酯",
+      "new_gt": "25233",
+      "new_name": "氯乙酸",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "PSA制氧装置",
+      "old_gt": "27014",
+      "old_name": "分子筛吸附塔",
+      "new_gt": "7544",
+      "new_name": "变压吸附制氧设备",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "沙发套",
+      "old_gt": "1934",
+      "old_name": "垫子套",
+      "new_gt": "2510",
+      "new_name": "沙发",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "卧螺离心机",
+      "old_gt": "7809",
+      "old_name": "过滤离心机",
+      "new_gt": "7815",
+      "new_name": "螺旋卸料过滤离心机",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "燃气燃烧器",
+      "old_gt": "7378",
+      "old_name": "炉用燃烧器",
+      "new_gt": "7381",
+      "new_name": "气体燃烧器",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "辅酶Q10",
+      "old_gt": "5214",
+      "old_name": "核酸类药制剂",
+      "new_gt": "5185",
+      "new_name": "辅酶Q10制剂",
+      "reason": "adopt_subtree_name_match",
+      "eval_relation": "same_subtree",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "自行车外胎",
+      "old_gt": "5394",
+      "old_name": "力车胎",
+      "new_gt": "5374",
+      "new_name": "橡胶轮胎外胎",
+      "reason": "adopt_sibling_better_name_overlap",
+      "eval_relation": "sibling",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "无人机遥控器",
+      "old_gt": "12629",
+      "old_name": "无线电遥控设备",
+      "new_gt": "12631",
+      "new_name": "无人驾驶飞机无线电遥控设备",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "止裂钢板",
+      "old_gt": "20544",
+      "old_name": "集装箱船用止裂厚板",
+      "new_gt": "25033",
+      "new_name": "大厚度高止裂钢板",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "百叶帘",
+      "old_gt": "1933",
+      "old_name": "其他纺织材料制窗帘及类似品",
+      "new_gt": "2023",
+      "new_name": "其他帘子布",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "汽车电子控制单元(ECU)主控芯片",
+      "old_gt": "26955",
+      "old_name": "车规级MCU",
+      "new_gt": "21409",
+      "new_name": "车载芯片",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "二硫化钼涂层",
+      "old_gt": "21270",
+      "old_name": "固体润滑薄膜",
+      "new_gt": "21932",
+      "new_name": "表面涂镀材料",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "电磁炉",
+      "old_gt": "12198",
+      "old_name": "家用电炉灶",
+      "new_gt": "12200",
+      "new_name": "电磁灶",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "EMI接收机",
+      "old_gt": "13629",
+      "old_name": "干扰场强测量仪器",
+      "new_gt": "12627",
+      "new_name": "接收机",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "监控摄像头",
+      "old_gt": "24220",
+      "old_name": "网络摄像设备",
+      "new_gt": "11341",
+      "new_name": "监控电视摄像机",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "铅锭",
+      "old_gt": "6067",
+      "old_name": "铅锌",
+      "new_gt": "6244",
+      "new_name": "铅材",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "探地雷达",
+      "old_gt": "13499",
+      "old_name": "金属、矿藏探测器",
+      "new_gt": "12613",
+      "new_name": "雷达设备",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "中和罐",
+      "old_gt": "7689",
+      "old_name": "中和槽",
+      "new_gt": "11121",
+      "new_name": "中和装置",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "万用表",
+      "old_gt": "13056",
+      "old_name": "电磁参数测量仪器仪表",
+      "new_gt": "13128",
+      "new_name": "量表",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "事故现场勘查车",
+      "old_gt": "11374",
+      "old_name": "其他交通事故现场勘查救援设备",
+      "new_gt": "11362",
+      "new_name": "智能交通事故现场勘查车",
+      "reason": "adopt_sibling_better_name_overlap",
+      "eval_relation": "sibling",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "家用无线路由器",
+      "old_gt": "24962",
+      "old_name": "单槽位处理路由器",
+      "new_gt": "23731",
+      "new_name": "无线宽带互联设备",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "氧氯化反应器",
+      "old_gt": "27054",
+      "old_name": "氧化反应器",
+      "new_gt": "8554",
+      "new_name": "高压反应釜",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "石墨换热器",
+      "old_gt": "22185",
+      "old_name": "石墨化工设备",
+      "new_gt": "5910",
+      "new_name": "石墨热交换器",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "指甲钳",
+      "old_gt": "6418",
+      "old_name": "修饰用手工具",
+      "new_gt": "6332",
+      "new_name": "钳子",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "铁路信号机",
+      "old_gt": "11470",
+      "old_name": "铁路用机械信号、交通管理装置",
+      "new_gt": "24485",
+      "new_name": "列车控制信号系统",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "涤棉纱",
+      "old_gt": "1753",
+      "old_name": "棉混纺纱",
+      "new_gt": "1752",
+      "new_name": "棉纱",
+      "reason": "adopt_sibling_better_name_overlap",
+      "eval_relation": "sibling",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "黄桃罐头",
+      "old_gt": "1582",
+      "old_name": "罐头",
+      "new_gt": "507",
+      "new_name": "桃",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "混凝土空心砌块",
+      "old_gt": "5646",
+      "old_name": "建筑砌块",
+      "new_gt": "23414",
+      "new_name": "砼空心砖",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "燃气灶",
+      "old_gt": "12292",
+      "old_name": "家用燃气用具",
+      "new_gt": "7383",
+      "new_name": "煤气燃烧器",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "Sentiment Analysis API",
+      "old_gt": "26432",
+      "old_name": "情感分析软件",
+      "new_gt": "26527",
+      "new_name": "情感分析",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "玻璃罐头瓶",
+      "old_gt": "5740",
+      "old_name": "日用玻璃瓶",
+      "new_gt": "5742",
+      "new_name": "玻璃食品瓶",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "漏洞扫描器",
+      "old_gt": "24356",
+      "old_name": "软件安全检测工具",
+      "new_gt": "12791",
+      "new_name": "安全扫描器",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "干湿球温度计",
+      "old_gt": "13440",
+      "old_name": "气象专用测湿仪器及湿度传感器",
+      "new_gt": "13249",
+      "new_name": "湿度计",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "镁砂",
+      "old_gt": "6089",
+      "old_name": "镁粒",
+      "new_gt": "6260",
+      "new_name": "镁材",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "煤焦油颗粒",
+      "old_gt": "26864",
+      "old_name": "液态焦油颗粒",
+      "new_gt": "26865",
+      "new_name": "焦油",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "岩芯钻机",
+      "old_gt": "13505",
+      "old_name": "钻探测试、分析仪器",
+      "new_gt": "11208",
+      "new_name": "地质岩心钻机",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "直线加速器",
+      "old_gt": "9981",
+      "old_name": "医用高能射线治疗设备",
+      "new_gt": "9982",
+      "new_name": "医用电子直线加速器",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "B4C微粉",
+      "old_gt": "5946",
+      "old_name": "碳化硼磨料",
+      "new_gt": "21180",
+      "new_name": "碳化硼与金属复合材料",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "羟基磷灰石陶瓷",
+      "old_gt": "24597",
+      "old_name": "医用陶瓷基材料",
+      "new_gt": "4873",
+      "new_name": "化学陶瓷",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "基站固件",
+      "old_gt": "2737",
+      "old_name": "通信设备嵌入式软件",
+      "new_gt": "24322",
+      "new_name": "移动通信基站",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "自行车灯",
+      "old_gt": "12443",
+      "old_name": "自行车照明或视觉、音响信号装置",
+      "new_gt": "12444",
+      "new_name": "自行车电气照明装置",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "光学玻璃透镜",
+      "old_gt": "5713",
+      "old_name": "其他玻璃制光学元件",
+      "new_gt": "13735",
+      "new_name": "透镜",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "PEEK",
+      "old_gt": "25391",
+      "old_name": "特种工程塑料",
+      "new_gt": "23702",
+      "new_name": "聚醚醚酮",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_top",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "双馈风力发电机",
+      "old_gt": "26714",
+      "old_name": "笼型异步发电机",
+      "new_gt": "24794",
+      "new_name": "风力发电机组",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "cross_domain",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "定子铁芯",
+      "old_gt": "25609",
+      "old_name": "节能电机及发电机组专用零件",
+      "new_gt": "24689",
+      "new_name": "电机定子",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "苜蓿",
+      "old_gt": "129",
+      "old_name": "饲料作物",
+      "new_gt": "131",
+      "new_name": "苜蓿干草",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "马铃薯收获机",
+      "old_gt": "9621",
+      "old_name": "根茎作物收获机械",
+      "new_gt": "9622",
+      "new_name": "薯类收获机",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "甘蔗压榨机",
+      "old_gt": "8839",
+      "old_name": "制糖机械",
+      "new_gt": "8840",
+      "new_name": "甘蔗榨汁机械",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "电缆",
+      "old_gt": "12023",
+      "old_name": "电线电缆",
+      "new_gt": "12042",
+      "new_name": "通信及电子网络用电缆",
+      "reason": "adopt_finer_child",
+      "eval_relation": "ancestor_descendant",
+      "llm_reasonable": null
+    },
+    {
+      "product_name": "集装箱房",
+      "old_gt": "6314",
+      "old_name": "金属结构预制建筑物(活动房屋)",
+      "new_gt": "6424",
+      "new_name": "集装箱",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    },
+    {
+      "product_name": "牵引床",
+      "old_gt": "10797",
+      "old_name": "机械治疗器具",
+      "new_gt": "11012",
+      "new_name": "电动间隙牵引床",
+      "reason": "adopt_llm_reasonable_pred",
+      "eval_relation": "same_broad",
+      "llm_reasonable": true
+    }
+  ]
+}

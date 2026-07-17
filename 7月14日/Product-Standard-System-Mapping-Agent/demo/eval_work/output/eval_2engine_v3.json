@@ -1,0 +1,2885 @@
+{
+  "gt_source": "test_set_llm_v2_200.json",
+  "embedding": "bge-m3-1024-full",
+  "summary": {
+    "rag_rerank": {
+      "accuracy": 0.4969,
+      "correct": 79,
+      "total": 159,
+      "no_match": 1,
+      "avg_time_ms": 2268.3
+    },
+    "page_index": {
+      "accuracy": 0.4843,
+      "correct": 77,
+      "total": 159,
+      "no_match": 0,
+      "avg_time_ms": 12856.6
+    }
+  },
+  "total_items": 159,
+  "details": [
+    {
+      "product_name": "电子级氢氟酸",
+      "ground_truth": "4813",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "4813",
+          "confidence": 0.95,
+          "time_ms": 21.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "4813",
+          "confidence": 0.8369,
+          "time_ms": 2367.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "PPSU",
+      "ground_truth": "24140",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24191",
+          "confidence": 0.95,
+          "time_ms": 22.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "24191",
+          "confidence": 0.9,
+          "time_ms": 2000.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "油纸伞",
+      "ground_truth": "3330",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3330",
+          "confidence": 0.6622,
+          "time_ms": 2151.4,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "3331",
+          "confidence": 0.7379,
+          "time_ms": 22318.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "RVV软护套线",
+      "ground_truth": "24679",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24679",
+          "confidence": 0.4465,
+          "time_ms": 1531.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "24679",
+          "confidence": 0.3389,
+          "time_ms": 23916.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "喷气织机",
+      "ground_truth": "9203",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9170",
+          "confidence": 0.7094,
+          "time_ms": 2376.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "9172",
+          "confidence": 0.2815,
+          "time_ms": 19329.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "血气分析仪",
+      "ground_truth": "10290",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10290",
+          "confidence": 0.95,
+          "time_ms": 6.4,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10290",
+          "confidence": 0.9,
+          "time_ms": 1516.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "信封机",
+      "ground_truth": "8961",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8961",
+          "confidence": 0.95,
+          "time_ms": 7.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8961",
+          "confidence": 0.9,
+          "time_ms": 13074.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "圆柱滚子",
+      "ground_truth": "7312",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7312",
+          "confidence": 0.95,
+          "time_ms": 21.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "7312",
+          "confidence": 0.9,
+          "time_ms": 1986.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "XJ系列修井机",
+      "ground_truth": "8334",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8334",
+          "confidence": 0.7685,
+          "time_ms": 1913.8,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8334",
+          "confidence": 0.5225,
+          "time_ms": 12610.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "水晶灯",
+      "ground_truth": "12366",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21879",
+          "confidence": 0.7531,
+          "time_ms": 2196.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "21879",
+          "confidence": 0.5471,
+          "time_ms": 2294.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "斑铜摆件",
+      "ground_truth": "3181",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3181",
+          "confidence": 0.95,
+          "time_ms": 14.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "3181",
+          "confidence": 0.8627,
+          "time_ms": 2359.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "木麻黄单宁",
+      "ground_truth": "4910",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "4910",
+          "confidence": 0.95,
+          "time_ms": 13.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "4910",
+          "confidence": 0.8739,
+          "time_ms": 2282.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "面粉",
+      "ground_truth": "1391",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1391",
+          "confidence": 0.95,
+          "time_ms": 11.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1391",
+          "confidence": 0.5652,
+          "time_ms": 2164.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "蓝图晒图机",
+      "ground_truth": "13786",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13852",
+          "confidence": 0.7167,
+          "time_ms": 2089.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13852",
+          "confidence": 0.7132,
+          "time_ms": 45918.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "手持式金属探测器",
+      "ground_truth": "13504",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13500",
+          "confidence": 0.6312,
+          "time_ms": 1490.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13500",
+          "confidence": 0.5274,
+          "time_ms": 13362.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "BB夹",
+      "ground_truth": "3427",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3427",
+          "confidence": 0.95,
+          "time_ms": 8.9,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "3427",
+          "confidence": 0.8145,
+          "time_ms": 2126.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "直线振动筛",
+      "ground_truth": "8314",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8314",
+          "confidence": 0.7263,
+          "time_ms": 2042.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8314",
+          "confidence": 0.5071,
+          "time_ms": 10405.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "回转窑焚烧炉",
+      "ground_truth": "11148",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11155",
+          "confidence": 0.95,
+          "time_ms": 4.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11155",
+          "confidence": 0.9,
+          "time_ms": 2349.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "东山白玉枇杷",
+      "ground_truth": "482",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "482",
+          "confidence": 0.6795,
+          "time_ms": 1934.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "482",
+          "confidence": 0.3813,
+          "time_ms": 9082.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "lambda sensor",
+      "ground_truth": "21740",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21763",
+          "confidence": 0.7123,
+          "time_ms": 2059.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "21711",
+          "confidence": 0.3071,
+          "time_ms": 13219.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "波士顿动力Atlas",
+      "ground_truth": "26445",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26445",
+          "confidence": 0.7343,
+          "time_ms": 2107.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "26445",
+          "confidence": 0.747,
+          "time_ms": 2325.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "Y-Eu草酸盐",
+      "ground_truth": "4596",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "4596",
+          "confidence": 0.7216,
+          "time_ms": 2193.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "4555",
+          "confidence": 0.5867,
+          "time_ms": 69945.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "轮转凸印机",
+      "ground_truth": "8981",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8970",
+          "confidence": 0.7073,
+          "time_ms": 13624.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "8981",
+          "confidence": 0.7623,
+          "time_ms": 2454.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "挖斗",
+      "ground_truth": "8423",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8423",
+          "confidence": 0.7009,
+          "time_ms": 2400.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8423",
+          "confidence": 0.5954,
+          "time_ms": 9798.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "STP",
+      "ground_truth": "12540",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "12540",
+          "confidence": 0.95,
+          "time_ms": 4.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "12540",
+          "confidence": 0.8044,
+          "time_ms": 2348.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "吐温80",
+      "ground_truth": "22018",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "22018",
+          "confidence": 0.95,
+          "time_ms": 8.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "22018",
+          "confidence": 0.8397,
+          "time_ms": 2347.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "戊酸乙酯",
+      "ground_truth": "3847",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3847",
+          "confidence": 0.765,
+          "time_ms": 2975.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "3847",
+          "confidence": 0.7535,
+          "time_ms": 40740.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "苇席",
+      "ground_truth": "138",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "2494",
+          "confidence": 0.6884,
+          "time_ms": 13605.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "2494",
+          "confidence": 0.6167,
+          "time_ms": 15230.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "原汁机",
+      "ground_truth": "12205",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "12205",
+          "confidence": 0.95,
+          "time_ms": 3.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "12205",
+          "confidence": 0.9,
+          "time_ms": 2213.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "H型管式省煤器",
+      "ground_truth": "20342",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20342",
+          "confidence": 0.95,
+          "time_ms": 9.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "20342",
+          "confidence": 0.9,
+          "time_ms": 2393.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "ATF泵",
+      "ground_truth": "20501",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24759",
+          "confidence": 0.7163,
+          "time_ms": 2365.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "24759",
+          "confidence": 0.4655,
+          "time_ms": 10395.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "氧化铝陶瓷管",
+      "ground_truth": "5820",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "25225",
+          "confidence": 0.7224,
+          "time_ms": 14019.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25226",
+          "confidence": 0.3125,
+          "time_ms": 12888.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "苏云金杆菌（Bt）",
+      "ground_truth": "4716",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5264",
+          "confidence": 0.5811,
+          "time_ms": 2780.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "5264",
+          "confidence": 0.4999,
+          "time_ms": 64567.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "ERP系统",
+      "ground_truth": "14131",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14131",
+          "confidence": 0.95,
+          "time_ms": 6.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "14131",
+          "confidence": 0.8046,
+          "time_ms": 13524.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "小齿轮齿条副",
+      "ground_truth": "7333",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11576",
+          "confidence": 0.6364,
+          "time_ms": 1498.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11576",
+          "confidence": 0.5169,
+          "time_ms": 2446.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "耳背式助听器",
+      "ground_truth": "10966",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10967",
+          "confidence": 0.95,
+          "time_ms": 6.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "10967",
+          "confidence": 0.9,
+          "time_ms": 2484.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "压路机",
+      "ground_truth": "8383",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8384",
+          "confidence": 0.95,
+          "time_ms": 17.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "8384",
+          "confidence": 0.9,
+          "time_ms": 2285.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "叶面积测量仪",
+      "ground_truth": "13473",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13473",
+          "confidence": 0.4788,
+          "time_ms": 1860.4,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "13473",
+          "confidence": 0.5574,
+          "time_ms": 13507.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "工程投影仪",
+      "ground_truth": "13838",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13837",
+          "confidence": 0.6117,
+          "time_ms": 1983.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13837",
+          "confidence": 0.5296,
+          "time_ms": 11648.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "定型机",
+      "ground_truth": "9201",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9201",
+          "confidence": 0.95,
+          "time_ms": 6.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "9201",
+          "confidence": 0.824,
+          "time_ms": 13365.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "跨境货车",
+      "ground_truth": "14014",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11535",
+          "confidence": 0.697,
+          "time_ms": 2244.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11535",
+          "confidence": 0.7825,
+          "time_ms": 10812.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "大闸蟹",
+      "ground_truth": "1071",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1071",
+          "confidence": 0.95,
+          "time_ms": 19.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1071",
+          "confidence": 0.8281,
+          "time_ms": 2320.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "氯霉素滴眼液",
+      "ground_truth": "5096",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5099",
+          "confidence": 0.717,
+          "time_ms": 2439.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "5099",
+          "confidence": 0.7858,
+          "time_ms": 73722.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "叉车货叉",
+      "ground_truth": "7054",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20141",
+          "confidence": 0.6338,
+          "time_ms": 12796.2,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "7053",
+          "confidence": 0.4279,
+          "time_ms": 17754.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "网络货运",
+      "ground_truth": "14061",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14061",
+          "confidence": 0.95,
+          "time_ms": 5.4,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "14061",
+          "confidence": 0.5652,
+          "time_ms": 2342.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "YSZ粉体",
+      "ground_truth": "20602",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24407",
+          "confidence": 0.7122,
+          "time_ms": 2331.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "24407",
+          "confidence": 0.6302,
+          "time_ms": 14887.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "黄铜螺旋弹簧",
+      "ground_truth": "6559",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "6559",
+          "confidence": 0.95,
+          "time_ms": 9.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "6559",
+          "confidence": 0.9156,
+          "time_ms": 13959.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "多肉植物",
+      "ground_truth": "420",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "420",
+          "confidence": 0.95,
+          "time_ms": 16.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "420",
+          "confidence": 0.5652,
+          "time_ms": 2471.9,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "均质机阀组",
+      "ground_truth": "8915",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8915",
+          "confidence": 0.95,
+          "time_ms": 10.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8915",
+          "confidence": 0.8221,
+          "time_ms": 2400.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "汉麻纱",
+      "ground_truth": "1810",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1810",
+          "confidence": 0.6744,
+          "time_ms": 2463.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1810",
+          "confidence": 0.4915,
+          "time_ms": 14784.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "浮法玻璃",
+      "ground_truth": "5700",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5700",
+          "confidence": 0.95,
+          "time_ms": 5.8,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "5700",
+          "confidence": 0.8743,
+          "time_ms": 2724.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "FPC指纹传感器",
+      "ground_truth": "26983",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23161",
+          "confidence": 0.7003,
+          "time_ms": 2812.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "26656",
+          "confidence": 0.3005,
+          "time_ms": 54008.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "风速风向仪",
+      "ground_truth": "13438",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13443",
+          "confidence": 0.8028,
+          "time_ms": 14274.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13443",
+          "confidence": 0.5595,
+          "time_ms": 13193.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "EVA封边条胶",
+      "ground_truth": "24538",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21281",
+          "confidence": 0.7314,
+          "time_ms": 14546.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "24538",
+          "confidence": 0.4689,
+          "time_ms": 16295.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "真空接触器",
+      "ground_truth": "25765",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7259",
+          "confidence": 0.7168,
+          "time_ms": 3218.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25475",
+          "confidence": 0.3475,
+          "time_ms": 14161.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "RTO焚烧炉",
+      "ground_truth": "11060",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11060",
+          "confidence": 0.95,
+          "time_ms": 6.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11060",
+          "confidence": 0.8023,
+          "time_ms": 3429.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "活性白土",
+      "ground_truth": "20744",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1309",
+          "confidence": 0.95,
+          "time_ms": 18.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "1309",
+          "confidence": 0.9,
+          "time_ms": 3438.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "电视广告位",
+      "ground_truth": "14199",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24125",
+          "confidence": 0.6434,
+          "time_ms": 3145.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "26666",
+          "confidence": 0.4806,
+          "time_ms": 3326.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "纵梁",
+      "ground_truth": "11610",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11608",
+          "confidence": 0.6812,
+          "time_ms": 3134.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11608",
+          "confidence": 0.6622,
+          "time_ms": 23264.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "白鳝",
+      "ground_truth": "1042",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1042",
+          "confidence": 0.95,
+          "time_ms": 5.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1042",
+          "confidence": 0.5652,
+          "time_ms": 3422.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "包机货运",
+      "ground_truth": "14042",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14237",
+          "confidence": 0.658,
+          "time_ms": 14415.2,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "14237",
+          "confidence": 0.6367,
+          "time_ms": 13907.4,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "氧化铝陶瓷基板",
+      "ground_truth": "5828",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5828",
+          "confidence": 0.95,
+          "time_ms": 3.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "5828",
+          "confidence": 0.8421,
+          "time_ms": 3754.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "NPB",
+      "ground_truth": "26593",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26593",
+          "confidence": 0.95,
+          "time_ms": 7.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "26593",
+          "confidence": 0.7699,
+          "time_ms": 3184.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "生猪",
+      "ground_truth": "848",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "849",
+          "confidence": 0.5808,
+          "time_ms": 2773.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "849",
+          "confidence": 0.342,
+          "time_ms": 27907.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "热分析仪",
+      "ground_truth": "13250",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13188",
+          "confidence": 0.95,
+          "time_ms": 2.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13188",
+          "confidence": 0.9,
+          "time_ms": 14289.4,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "盐酸曲马多缓释片",
+      "ground_truth": "5094",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5087",
+          "confidence": 0.6773,
+          "time_ms": 3148.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "5087",
+          "confidence": 0.2991,
+          "time_ms": 17762.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "智能电表集中器",
+      "ground_truth": "12682",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20200",
+          "confidence": 0.6391,
+          "time_ms": 2334.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20200",
+          "confidence": 0.5509,
+          "time_ms": 3235.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "亚麻脱胶机",
+      "ground_truth": "9876",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9876",
+          "confidence": 0.95,
+          "time_ms": 19.4,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "9876",
+          "confidence": 0.5652,
+          "time_ms": 3256.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "五花肉",
+      "ground_truth": "1444",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1453",
+          "confidence": 0.6329,
+          "time_ms": 2981.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "1486",
+          "confidence": 0.4735,
+          "time_ms": 10874.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "全景天窗",
+      "ground_truth": "20795",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23164",
+          "confidence": 0.7206,
+          "time_ms": 14326.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20795",
+          "confidence": 0.3024,
+          "time_ms": 13695.9,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "振动按摩器",
+      "ground_truth": "10817",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10817",
+          "confidence": 0.95,
+          "time_ms": 8.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10817",
+          "confidence": 0.8293,
+          "time_ms": 3184.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "硅藻土过滤助剂",
+      "ground_truth": "20762",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20750",
+          "confidence": 0.95,
+          "time_ms": 17.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20750",
+          "confidence": 0.9,
+          "time_ms": 14163.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "自动充绒机",
+      "ground_truth": "9298",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9298",
+          "confidence": 0.95,
+          "time_ms": 8.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "9298",
+          "confidence": 0.865,
+          "time_ms": 3012.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "换流变",
+      "ground_truth": "22487",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11887",
+          "confidence": 0.95,
+          "time_ms": 8.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11887",
+          "confidence": 0.9,
+          "time_ms": 3028.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "维尼纶",
+      "ground_truth": "5332",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5332",
+          "confidence": 0.95,
+          "time_ms": 6.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "5332",
+          "confidence": 0.9,
+          "time_ms": 3271.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "冰菜",
+      "ground_truth": "237",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "237",
+          "confidence": 0.95,
+          "time_ms": 28.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "237",
+          "confidence": 0.5652,
+          "time_ms": 3119.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "麻醉机",
+      "ground_truth": "10759",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10761",
+          "confidence": 0.6218,
+          "time_ms": 2163.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "10761",
+          "confidence": 0.4805,
+          "time_ms": 15793.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "筋膜枪",
+      "ground_truth": "10798",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10798",
+          "confidence": 0.95,
+          "time_ms": 19.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10798",
+          "confidence": 0.8291,
+          "time_ms": 14353.9,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "拖车绳",
+      "ground_truth": "2011",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11370",
+          "confidence": 0.6973,
+          "time_ms": 2830.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "2011",
+          "confidence": 0.6006,
+          "time_ms": 12801.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "纯电动轿车",
+      "ground_truth": "24025",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11562",
+          "confidence": 0.7666,
+          "time_ms": 3569.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11562",
+          "confidence": 0.3868,
+          "time_ms": 10879.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "机油",
+      "ground_truth": "3499",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23672",
+          "confidence": 0.6433,
+          "time_ms": 2211.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "23672",
+          "confidence": 0.4745,
+          "time_ms": 21723.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "玻璃钢船",
+      "ground_truth": "11684",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11684",
+          "confidence": 0.95,
+          "time_ms": 5.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11684",
+          "confidence": 0.5652,
+          "time_ms": 3318.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "医用氧气袋",
+      "ground_truth": "10921",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10921",
+          "confidence": 0.7878,
+          "time_ms": 3291.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10921",
+          "confidence": 0.393,
+          "time_ms": 10802.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "氮化硅",
+      "ground_truth": "4661",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "4876",
+          "confidence": 0.7092,
+          "time_ms": 3501.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "4876",
+          "confidence": 0.308,
+          "time_ms": 28163.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "喷气织机",
+      "ground_truth": "9171",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9170",
+          "confidence": 0.7094,
+          "time_ms": 2455.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "9172",
+          "confidence": 0.2815,
+          "time_ms": 14430.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "DFB激光器芯片",
+      "ground_truth": "21445",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21445",
+          "confidence": 0.7648,
+          "time_ms": 2860.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "21445",
+          "confidence": 0.3331,
+          "time_ms": 19540.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "零信任网关",
+      "ground_truth": "12781",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24223",
+          "confidence": 0.6721,
+          "time_ms": 14476.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "23500",
+          "confidence": 0.5563,
+          "time_ms": 10513.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "积木",
+      "ground_truth": "3094",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3094",
+          "confidence": 0.6412,
+          "time_ms": 3331.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "2427",
+          "confidence": 0.5249,
+          "time_ms": 26582.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "CAR-T疗法",
+      "ground_truth": "27220",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "27220",
+          "confidence": 0.95,
+          "time_ms": 4.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "27220",
+          "confidence": 0.844,
+          "time_ms": 14593.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "Kindle",
+      "ground_truth": "24346",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "24346",
+          "confidence": 0.6664,
+          "time_ms": 3036.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "24346",
+          "confidence": 0.6,
+          "time_ms": 3168.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "汇款单",
+      "ground_truth": "14097",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14383",
+          "confidence": 0.6261,
+          "time_ms": 2558.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "14383",
+          "confidence": 0.6008,
+          "time_ms": 14948.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "微晶蜡",
+      "ground_truth": "3514",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3513",
+          "confidence": 0.7012,
+          "time_ms": 3440.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "3513",
+          "confidence": 0.6168,
+          "time_ms": 23342.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "涤纶缝纫线",
+      "ground_truth": "1760",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1760",
+          "confidence": 0.6175,
+          "time_ms": 2423.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1761",
+          "confidence": 0.2801,
+          "time_ms": 10898.4,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "永磁除铁器",
+      "ground_truth": "24424",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8236",
+          "confidence": 0.6962,
+          "time_ms": 3529.3,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "11144",
+          "confidence": 0.5718,
+          "time_ms": 12651.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "粗糙度仪",
+      "ground_truth": "13142",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13142",
+          "confidence": 0.7154,
+          "time_ms": 4315.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "13292",
+          "confidence": 0.5561,
+          "time_ms": 22940.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "真丝围巾",
+      "ground_truth": "1829",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1830",
+          "confidence": 0.6771,
+          "time_ms": 3282.6,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "2111",
+          "confidence": 0.6157,
+          "time_ms": 15093.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "纯水机",
+      "ground_truth": "7752",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20428",
+          "confidence": 0.95,
+          "time_ms": 3.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20428",
+          "confidence": 0.9,
+          "time_ms": 3367.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "蓄热式加热炉",
+      "ground_truth": "20354",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20356",
+          "confidence": 0.6449,
+          "time_ms": 2056.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20356",
+          "confidence": 0.5634,
+          "time_ms": 23644.4,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "光场控制器",
+      "ground_truth": "22606",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21465",
+          "confidence": 0.4492,
+          "time_ms": 2523.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "22606",
+          "confidence": 0.3186,
+          "time_ms": 26907.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "ERP系统定制开发",
+      "ground_truth": "14130",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14131",
+          "confidence": 0.6993,
+          "time_ms": 3396.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "24274",
+          "confidence": 0.5572,
+          "time_ms": 10872.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "电子废弃物贵金属回收生产线",
+      "ground_truth": "23427",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23427",
+          "confidence": 0.7164,
+          "time_ms": 3784.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "23427",
+          "confidence": 0.3237,
+          "time_ms": 18690.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "盖格计数器",
+      "ground_truth": "13530",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13530",
+          "confidence": 0.95,
+          "time_ms": 5.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "13530",
+          "confidence": 0.8662,
+          "time_ms": 3468.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "作业本",
+      "ground_truth": "2678",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "2678",
+          "confidence": 0.7276,
+          "time_ms": 3565.9,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "2679",
+          "confidence": 0.7186,
+          "time_ms": 13114.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "输送带",
+      "ground_truth": "2024",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5400",
+          "confidence": 0.6139,
+          "time_ms": 2315.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "5400",
+          "confidence": 0.4609,
+          "time_ms": 51073.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "生理盐水",
+      "ground_truth": "5052",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5052",
+          "confidence": 0.95,
+          "time_ms": 5.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "5052",
+          "confidence": 0.8508,
+          "time_ms": 13629.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "真空乳化机",
+      "ground_truth": "7651",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7650",
+          "confidence": 0.7608,
+          "time_ms": 2298.3,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "9106",
+          "confidence": 0.7505,
+          "time_ms": 21854.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "涡旋压缩机",
+      "ground_truth": "7129",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7128",
+          "confidence": 0.7265,
+          "time_ms": 13604.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "7135",
+          "confidence": 0.6014,
+          "time_ms": 18336.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "光纤跳线",
+      "ground_truth": "12056",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "12051",
+          "confidence": 0.7128,
+          "time_ms": 2893.3,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "23891",
+          "confidence": 0.3357,
+          "time_ms": 20515.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "排线",
+      "ground_truth": "25112",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "25112",
+          "confidence": 0.95,
+          "time_ms": 8.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "25112",
+          "confidence": 0.8305,
+          "time_ms": 13400.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "锡白粉",
+      "ground_truth": "3692",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "6257",
+          "confidence": 0.7096,
+          "time_ms": 2378.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "6258",
+          "confidence": 0.6247,
+          "time_ms": 11219.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "亚硫酸钠",
+      "ground_truth": "3641",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3642",
+          "confidence": 0.6299,
+          "time_ms": 1885.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "3641",
+          "confidence": 0.4904,
+          "time_ms": 13309.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "光罩",
+      "ground_truth": "26611",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26611",
+          "confidence": 0.95,
+          "time_ms": 19.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "26611",
+          "confidence": 0.5652,
+          "time_ms": 13348.8,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "热饮贩卖机",
+      "ground_truth": "11260",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11260",
+          "confidence": 0.7615,
+          "time_ms": 2270.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11260",
+          "confidence": 0.8274,
+          "time_ms": 2349.1,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "安全气囊碰撞传感器",
+      "ground_truth": "21715",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21734",
+          "confidence": 0.6306,
+          "time_ms": 1902.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "21734",
+          "confidence": 0.5186,
+          "time_ms": 9973.1,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "数显卡尺",
+      "ground_truth": "13130",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13125",
+          "confidence": 0.7182,
+          "time_ms": 2713.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "13125",
+          "confidence": 0.4881,
+          "time_ms": 12087.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "安全带插扣",
+      "ground_truth": "20799",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21586",
+          "confidence": 0.4724,
+          "time_ms": 2011.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "21586",
+          "confidence": 0.5451,
+          "time_ms": 20816.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "OCT光学相干断层扫描仪",
+      "ground_truth": "10153",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10153",
+          "confidence": 0.7432,
+          "time_ms": 2348.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "9989",
+          "confidence": 0.2838,
+          "time_ms": 16492.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "茂金属线性低密度聚乙烯",
+      "ground_truth": "25365",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23999",
+          "confidence": 0.95,
+          "time_ms": 9.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "23999",
+          "confidence": 0.9,
+          "time_ms": 2453.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "碱式氯化铝",
+      "ground_truth": "3686",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3689",
+          "confidence": 0.95,
+          "time_ms": 4.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "3689",
+          "confidence": 0.9,
+          "time_ms": 2301.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "电脑裁皮机",
+      "ground_truth": "9232",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9286",
+          "confidence": 0.6847,
+          "time_ms": 2477.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "9234",
+          "confidence": 0.5966,
+          "time_ms": 12932.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "串补装置",
+      "ground_truth": "11946",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11946",
+          "confidence": 0.95,
+          "time_ms": 5.3,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11946",
+          "confidence": 0.8895,
+          "time_ms": 13408.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "地下水水质自动监测站",
+      "ground_truth": "25000",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13494",
+          "confidence": 0.7325,
+          "time_ms": 2333.9,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25000",
+          "confidence": 0.3084,
+          "time_ms": 15793.9,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "海缆故障定位仪",
+      "ground_truth": "21792",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "21792",
+          "confidence": 0.95,
+          "time_ms": 7.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "21792",
+          "confidence": 0.9,
+          "time_ms": 2064.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "彩钢瓦成型机",
+      "ground_truth": "24386",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8466",
+          "confidence": 0.6864,
+          "time_ms": 13381.3,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "8466",
+          "confidence": 0.3035,
+          "time_ms": 17418.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "Low-E玻璃",
+      "ground_truth": "23360",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "22271",
+          "confidence": 0.95,
+          "time_ms": 14.3,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "22271",
+          "confidence": 0.9,
+          "time_ms": 2476.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "DR平板探测器",
+      "ground_truth": "12883",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "12883",
+          "confidence": 0.4492,
+          "time_ms": 2292.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "22427",
+          "confidence": 0.6094,
+          "time_ms": 9767.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "绿薄荷",
+      "ground_truth": "582",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "582",
+          "confidence": 0.95,
+          "time_ms": 19.9,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "582",
+          "confidence": 0.5652,
+          "time_ms": 2439.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "骨凿",
+      "ground_truth": "10441",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10441",
+          "confidence": 0.95,
+          "time_ms": 20.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10441",
+          "confidence": 0.8346,
+          "time_ms": 2227.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "EBL",
+      "ground_truth": "9365",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "9365",
+          "confidence": 0.95,
+          "time_ms": 9.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "9365",
+          "confidence": 0.5652,
+          "time_ms": 2267.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "小爱同学",
+      "ground_truth": "26561",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26561",
+          "confidence": 0.6088,
+          "time_ms": 2485.8,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "26660",
+          "confidence": 0.3239,
+          "time_ms": 40506.3,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "场地平整",
+      "ground_truth": "14344",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "14344",
+          "confidence": 0.95,
+          "time_ms": 7.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "14344",
+          "confidence": 0.8934,
+          "time_ms": 13623.0,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "火罐",
+      "ground_truth": "10792",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "10792",
+          "confidence": 0.95,
+          "time_ms": 7.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "10792",
+          "confidence": 0.8859,
+          "time_ms": 2253.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "气动平衡吊",
+      "ground_truth": "7027",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7027",
+          "confidence": 0.95,
+          "time_ms": 12.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "7027",
+          "confidence": 0.8952,
+          "time_ms": 2615.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "松香",
+      "ground_truth": "839",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "839",
+          "confidence": 0.95,
+          "time_ms": 12.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "839",
+          "confidence": 0.8037,
+          "time_ms": 2310.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "LNA",
+      "ground_truth": "25064",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "25064",
+          "confidence": 0.95,
+          "time_ms": 8.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "25064",
+          "confidence": 0.5652,
+          "time_ms": 2399.4,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "水喷射泵",
+      "ground_truth": "11723",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11723",
+          "confidence": 0.7357,
+          "time_ms": 2455.5,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11723",
+          "confidence": 0.3147,
+          "time_ms": 10186.6,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "白电油",
+      "ground_truth": "4891",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3494",
+          "confidence": 0.95,
+          "time_ms": 17.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "3494",
+          "confidence": 0.9,
+          "time_ms": 2517.4,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "香兰素",
+      "ground_truth": "5000",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "579",
+          "confidence": 0.6565,
+          "time_ms": 2268.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "27194",
+          "confidence": 0.5546,
+          "time_ms": 17125.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "CPE",
+      "ground_truth": "12609",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26010",
+          "confidence": 0.642,
+          "time_ms": 2763.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25011",
+          "confidence": 0.2828,
+          "time_ms": 34010.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "尼龙",
+      "ground_truth": "27231",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "27231",
+          "confidence": 0.95,
+          "time_ms": 6.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "27231",
+          "confidence": 0.5652,
+          "time_ms": 13320.9,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "边缘AI盒子",
+      "ground_truth": "26483",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "26478",
+          "confidence": 0.723,
+          "time_ms": 2086.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "26478",
+          "confidence": 0.7643,
+          "time_ms": 2481.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "回转烘干机",
+      "ground_truth": "7643",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7636",
+          "confidence": 0.95,
+          "time_ms": 34.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "7636",
+          "confidence": 0.9,
+          "time_ms": 2488.6,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "LuAc",
+      "ground_truth": "4478",
+      "engines": {
+        "rag_rerank": {
+          "predicted": null,
+          "confidence": 0.0,
+          "time_ms": 1552.4,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20579",
+          "confidence": 0.2536,
+          "time_ms": 22349.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "氧化铝陶瓷基板",
+      "ground_truth": "24171",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "5828",
+          "confidence": 0.95,
+          "time_ms": 4.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "5828",
+          "confidence": 0.8421,
+          "time_ms": 13733.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "百叶轮",
+      "ground_truth": "22289",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "7510",
+          "confidence": 0.6755,
+          "time_ms": 2599.0,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "26680",
+          "confidence": 0.2933,
+          "time_ms": 42630.7,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "TFT-LCD",
+      "ground_truth": "21691",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "25603",
+          "confidence": 0.6624,
+          "time_ms": 2223.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "26658",
+          "confidence": 0.3204,
+          "time_ms": 19700.2,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "断桥铝合金型材",
+      "ground_truth": "22324",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "23364",
+          "confidence": 0.4641,
+          "time_ms": 1919.7,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20559",
+          "confidence": 0.5211,
+          "time_ms": 13080.5,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "万能角度尺",
+      "ground_truth": "13140",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13140",
+          "confidence": 0.95,
+          "time_ms": 4.0,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "13140",
+          "confidence": 0.9013,
+          "time_ms": 13557.1,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "调音台",
+      "ground_truth": "20165",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20165",
+          "confidence": 0.95,
+          "time_ms": 9.6,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "20165",
+          "confidence": 0.8289,
+          "time_ms": 2407.7,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "多效蒸馏水机",
+      "ground_truth": "7562",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8790",
+          "confidence": 0.4546,
+          "time_ms": 1657.8,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25471",
+          "confidence": 0.3173,
+          "time_ms": 2381.8,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "BMS芯片",
+      "ground_truth": "26960",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "20469",
+          "confidence": 0.7007,
+          "time_ms": 2391.5,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "20469",
+          "confidence": 0.3077,
+          "time_ms": 52391.9,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "净水器",
+      "ground_truth": "7712",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "25051",
+          "confidence": 0.6248,
+          "time_ms": 1726.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "25051",
+          "confidence": 0.4933,
+          "time_ms": 21876.1,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "猫砂盆",
+      "ground_truth": "3465",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "3453",
+          "confidence": 0.7113,
+          "time_ms": 13477.1,
+          "hit": false
+        },
+        "page_index": {
+          "predicted": "3453",
+          "confidence": 0.5644,
+          "time_ms": 2333.0,
+          "hit": false
+        }
+      }
+    },
+    {
+      "product_name": "光时域反射仪",
+      "ground_truth": "13571",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "13571",
+          "confidence": 0.95,
+          "time_ms": 9.1,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "13571",
+          "confidence": 0.5652,
+          "time_ms": 2553.2,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "加州鲈鱼",
+      "ground_truth": "1063",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "1063",
+          "confidence": 0.95,
+          "time_ms": 2.9,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "1063",
+          "confidence": 0.5652,
+          "time_ms": 2440.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "铜编织带",
+      "ground_truth": "6493",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "6493",
+          "confidence": 0.95,
+          "time_ms": 21.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "6493",
+          "confidence": 0.9,
+          "time_ms": 2248.3,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "伸缩警棍",
+      "ground_truth": "11323",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "11323",
+          "confidence": 0.95,
+          "time_ms": 9.2,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "11323",
+          "confidence": 0.8555,
+          "time_ms": 13387.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "高压清洗机",
+      "ground_truth": "8006",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "8006",
+          "confidence": 0.95,
+          "time_ms": 11.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "8006",
+          "confidence": 0.5652,
+          "time_ms": 2509.5,
+          "hit": true
+        }
+      }
+    },
+    {
+      "product_name": "液压矫平机",
+      "ground_truth": "6960",
+      "engines": {
+        "rag_rerank": {
+          "predicted": "6960",
+          "confidence": 0.95,
+          "time_ms": 12.7,
+          "hit": true
+        },
+        "page_index": {
+          "predicted": "6960",
+          "confidence": 0.8333,
+          "time_ms": 2254.2,
+          "hit": true
+        }
+      }
+    }
+  ]
+}

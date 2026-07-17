@@ -1,0 +1,27 @@
+{
+  "embedding": "bge-m3-1024-full",
+  "sets": [
+    {
+      "gt_source": "test_set_llm_200.json",
+      "accuracy_strict": 0.4091,
+      "accuracy_soft": 0.6313,
+      "accuracy_llm_soft": 0.9495,
+      "correct_llm_soft": 188,
+      "total": 198,
+      "llm_judged": 72,
+      "llm_accepted": 63,
+      "output": "output\\eval_llm200_full_llm_soft_glm4flash.json"
+    },
+    {
+      "gt_source": "test_set_llm_v2_200.json",
+      "accuracy_strict": 0.2453,
+      "accuracy_soft": 0.5094,
+      "accuracy_llm_soft": 0.8994,
+      "correct_llm_soft": 143,
+      "total": 159,
+      "llm_judged": 72,
+      "llm_accepted": 62,
+      "output": "output\\eval_llmv2_full_llm_soft_glm4flash.json"
+    }
+  ]
+}

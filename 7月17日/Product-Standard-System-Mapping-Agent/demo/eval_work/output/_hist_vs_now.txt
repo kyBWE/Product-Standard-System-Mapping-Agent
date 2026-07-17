@@ -1,0 +1,82 @@
+=== 历史 v3 vs 本次 full 复测 (同集 llm_v2) ===
+历史条目=157 本次=157 重叠=157
+重叠上历史命中=78/157=49.7%
+重叠上本次命中=39/157=24.8%
+历史对→本次错: 45
+历史错→本次对: 6
+都对: 33  都错: 73
+
+--- 历史能对、现在不能对（关键，说明当时环境多了什么）---
+* BB夹
+  hist pred=3427 conf=0.95 t=8.9
+  now  pred=7052 conf=0.6131 t=3477.7
+  gt=3427 发夹
+* CAR-T疗法
+  hist pred=27220 conf=0.95 t=4.5
+  now  pred=None conf=0.0 t=1010.8
+  gt=27220 可控细胞与基因治疗
+* DR平板探测器
+  hist pred=12883 conf=0.4492 t=2292.2
+  now  pred=22427 conf=0.6363 t=4961.4
+  gt=12883 X射线
+* EBL
+  hist pred=9365 conf=0.95 t=9.1
+  now  pred=3893 conf=0.6181 t=3207.6
+  gt=9365 电子束光刻机
+* ERP系统
+  hist pred=14131 conf=0.95 t=6.0
+  now  pred=24864 conf=0.774 t=3971.9
+  gt=14131 对基础软件、应用软件、嵌入式软件等软件提
+* Kindle
+  hist pred=24346 conf=0.6664 t=3036.2
+  now  pred=None conf=0.0 t=599.6
+  gt=24346 移动电子书
+* LNA
+  hist pred=25064 conf=0.95 t=8.2
+  now  pred=10866 conf=0.6108 t=3245.9
+  gt=25064 射频低噪声放大器
+* NPB
+  hist pred=26593 conf=0.95 t=7.6
+  now  pred=21077 conf=0.6172 t=3161.7
+  gt=26593 发光层主体
+* OCT光学相干断层扫描仪
+  hist pred=10153 conf=0.7432 t=2348.0
+  now  pred=13425 conf=0.5712 t=3242.7
+  gt=10153 其他激光诊断仪器
+* RTO焚烧炉
+  hist pred=11060 conf=0.95 t=6.0
+  now  pred=11155 conf=0.6427 t=3174.4
+  gt=11060 冷凝净化装置
+* RVV软护套线
+  hist pred=24679 conf=0.4465 t=1531.7
+  now  pred=25547 conf=0.6183 t=3768.1
+  gt=24679 电线线缆
+* STP
+  hist pred=12540 conf=0.95 t=4.6
+  now  pred=25550 conf=0.5696 t=3642.5
+  gt=12540 七号信令转接设备
+
+历史 <50ms 且正确: 54 （同义词/精确短路迹象）
+  其中本次仍正确: 19
+  本次丢掉: 35
+  - BB夹: hist_pred=3427 now_pred=7052 gt=发夹
+  - CAR-T疗法: hist_pred=27220 now_pred=None gt=可控细胞与基因治疗
+  - EBL: hist_pred=9365 now_pred=3893 gt=电子束光刻机
+  - ERP系统: hist_pred=14131 now_pred=24864 gt=对基础软件、应用软件、嵌入式软件等软件提
+  - LNA: hist_pred=25064 now_pred=10866 gt=射频低噪声放大器
+  - NPB: hist_pred=26593 now_pred=21077 gt=发光层主体
+  - RTO焚烧炉: hist_pred=11060 now_pred=11155 gt=冷凝净化装置
+  - STP: hist_pred=12540 now_pred=25550 gt=七号信令转接设备
+  - 亚麻脱胶机: hist_pred=9876 now_pred=9878 gt=麻类加工机械
+  - 伸缩警棍: hist_pred=11323 now_pred=2929 gt=警棍及类似警用器械
+  - 光罩: hist_pred=26611 now_pred=26137 gt=掩膜版
+  - 冰菜: hist_pred=237 now_pred=21863 gt=番杏
+  - 加州鲈鱼: hist_pred=1063 now_pred=2979 gt=淡水鲈鱼
+  - 吐温80: hist_pred=22018 now_pred=None gt=增溶剂
+  - 场地平整: hist_pred=14344 now_pred=9503 gt=平整土地
+
+历史因类型不一致漏判(pred==gt as str but hit=False): 0
+hist predicted==gt(str) but hit=False: 0
+
+历史 page_index: {'accuracy': 0.4843, 'correct': 77, 'total': 159, 'no_match': 0, 'avg_time_ms': 12856.6}
+历史 rag_rerank: {'accuracy': 0.4969, 'correct': 79, 'total': 159, 'no_match': 1, 'avg_time_ms': 2268.3}

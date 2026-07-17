@@ -1,0 +1,1604 @@
+{
+  "gt_source": "test_set_llm_v2_200.json",
+  "embedding": "bge-m3-1024-full",
+  "engine": "rag_rerank",
+  "accuracy": 0.2453,
+  "correct": 39,
+  "total": 159,
+  "no_match": 6,
+  "avg_confidence": 0.6698,
+  "avg_time_ms": 3117.9,
+  "p95_time_ms": 5235.3,
+  "details": [
+    {
+      "product_name": "电子级氢氟酸",
+      "predicted": "3557",
+      "ground_truth": "4813",
+      "ground_truth_name": "新兴工业用特种化学品",
+      "confidence": 0.6957,
+      "correct": false,
+      "time_ms": 2994.3,
+      "error": null
+    },
+    {
+      "product_name": "PPSU",
+      "predicted": "24191",
+      "ground_truth": "24140",
+      "ground_truth_name": "聚苯砜",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 7.1,
+      "error": null
+    },
+    {
+      "product_name": "油纸伞",
+      "predicted": "3400",
+      "ground_truth": "3330",
+      "ground_truth_name": "工艺伞",
+      "confidence": 0.6311,
+      "correct": false,
+      "time_ms": 3860.0,
+      "error": null
+    },
+    {
+      "product_name": "RVV软护套线",
+      "predicted": "25547",
+      "ground_truth": "24679",
+      "ground_truth_name": "电线线缆",
+      "confidence": 0.6183,
+      "correct": false,
+      "time_ms": 3768.1,
+      "error": null
+    },
+    {
+      "product_name": "喷气织机",
+      "predicted": "7995",
+      "ground_truth": "9203",
+      "ground_truth_name": "织造辅助机械及装置",
+      "confidence": 0.6328,
+      "correct": false,
+      "time_ms": 3161.0,
+      "error": null
+    },
+    {
+      "product_name": "血气分析仪",
+      "predicted": "10290",
+      "ground_truth": "10290",
+      "ground_truth_name": "血气分析系统",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 10.3,
+      "error": null
+    },
+    {
+      "product_name": "信封机",
+      "predicted": "8961",
+      "ground_truth": "8961",
+      "ground_truth_name": "信封专用生产机械",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 7.0,
+      "error": null
+    },
+    {
+      "product_name": "圆柱滚子",
+      "predicted": "7312",
+      "ground_truth": "7312",
+      "ground_truth_name": "滚子",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 10.0,
+      "error": null
+    },
+    {
+      "product_name": "XJ系列修井机",
+      "predicted": "8334",
+      "ground_truth": "8334",
+      "ground_truth_name": "系列修井机",
+      "confidence": 0.695,
+      "correct": true,
+      "time_ms": 4935.1,
+      "error": null
+    },
+    {
+      "product_name": "水晶灯",
+      "predicted": "12366",
+      "ground_truth": "12366",
+      "ground_truth_name": "吊灯",
+      "confidence": 0.685,
+      "correct": true,
+      "time_ms": 24812.2,
+      "error": null
+    },
+    {
+      "product_name": "斑铜摆件",
+      "predicted": "3181",
+      "ground_truth": "3181",
+      "ground_truth_name": "斑铜工艺品",
+      "confidence": 0.6839,
+      "correct": true,
+      "time_ms": 3723.1,
+      "error": null
+    },
+    {
+      "product_name": "木麻黄单宁",
+      "predicted": "4910",
+      "ground_truth": "4910",
+      "ground_truth_name": "木麻黄栲胶",
+      "confidence": 0.6467,
+      "correct": true,
+      "time_ms": 3051.4,
+      "error": null
+    },
+    {
+      "product_name": "面粉",
+      "predicted": "1388",
+      "ground_truth": "1391",
+      "ground_truth_name": "碾磨谷物及谷物加工品",
+      "confidence": 0.6722,
+      "correct": false,
+      "time_ms": 3275.5,
+      "error": null
+    },
+    {
+      "product_name": "蓝图晒图机",
+      "predicted": "12715",
+      "ground_truth": "13786",
+      "ground_truth_name": "制版照相机",
+      "confidence": 0.6324,
+      "correct": false,
+      "time_ms": 3097.4,
+      "error": null
+    },
+    {
+      "product_name": "手持式金属探测器",
+      "predicted": "13500",
+      "ground_truth": "13504",
+      "ground_truth_name": "其他矿藏探测器",
+      "confidence": 0.6941,
+      "correct": false,
+      "time_ms": 3250.2,
+      "error": null
+    },
+    {
+      "product_name": "BB夹",
+      "predicted": "7052",
+      "ground_truth": "3427",
+      "ground_truth_name": "发夹",
+      "confidence": 0.6131,
+      "correct": false,
+      "time_ms": 3477.7,
+      "error": null
+    },
+    {
+      "product_name": "直线振动筛",
+      "predicted": "8314",
+      "ground_truth": "8314",
+      "ground_truth_name": "振动筛",
+      "confidence": 0.6566,
+      "correct": true,
+      "time_ms": 3178.0,
+      "error": null
+    },
+    {
+      "product_name": "回转窑焚烧炉",
+      "predicted": "11155",
+      "ground_truth": "11148",
+      "ground_truth_name": "垃圾焚烧炉",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 11.1,
+      "error": null
+    },
+    {
+      "product_name": "东山白玉枇杷",
+      "predicted": "482",
+      "ground_truth": "482",
+      "ground_truth_name": "枇杷",
+      "confidence": 0.6584,
+      "correct": true,
+      "time_ms": 2439.6,
+      "error": null
+    },
+    {
+      "product_name": "lambda sensor",
+      "predicted": "21763",
+      "ground_truth": "21740",
+      "ground_truth_name": "氧传感器",
+      "confidence": 0.6919,
+      "correct": false,
+      "time_ms": 3453.2,
+      "error": null
+    },
+    {
+      "product_name": "波士顿动力Atlas",
+      "predicted": "11770",
+      "ground_truth": "26445",
+      "ground_truth_name": "人形机器人",
+      "confidence": 0.5886,
+      "correct": false,
+      "time_ms": 4803.1,
+      "error": null
+    },
+    {
+      "product_name": "Y-Eu草酸盐",
+      "predicted": "4596",
+      "ground_truth": "4596",
+      "ground_truth_name": "草酸钇铕",
+      "confidence": 0.6937,
+      "correct": true,
+      "time_ms": 4923.4,
+      "error": null
+    },
+    {
+      "product_name": "轮转凸印机",
+      "predicted": "8981",
+      "ground_truth": "8981",
+      "ground_truth_name": "凸版印刷机",
+      "confidence": 0.6897,
+      "correct": true,
+      "time_ms": 24656.5,
+      "error": null
+    },
+    {
+      "product_name": "挖斗",
+      "predicted": "8423",
+      "ground_truth": "8423",
+      "ground_truth_name": "挖掘机用铲",
+      "confidence": 0.6702,
+      "correct": true,
+      "time_ms": 24106.2,
+      "error": null
+    },
+    {
+      "product_name": "STP",
+      "predicted": "25550",
+      "ground_truth": "12540",
+      "ground_truth_name": "七号信令转接设备",
+      "confidence": 0.5696,
+      "correct": false,
+      "time_ms": 3642.5,
+      "error": null
+    },
+    {
+      "product_name": "吐温80",
+      "predicted": null,
+      "ground_truth": "22018",
+      "ground_truth_name": "增溶剂",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 647.8,
+      "error": null
+    },
+    {
+      "product_name": "戊酸乙酯",
+      "predicted": "3847",
+      "ground_truth": "3847",
+      "ground_truth_name": "戊酸及其盐和酯",
+      "confidence": 0.7237,
+      "correct": true,
+      "time_ms": 2807.2,
+      "error": null
+    },
+    {
+      "product_name": "苇席",
+      "predicted": "2494",
+      "ground_truth": "138",
+      "ground_truth_name": "芦苇",
+      "confidence": 0.6692,
+      "correct": false,
+      "time_ms": 2804.0,
+      "error": null
+    },
+    {
+      "product_name": "原汁机",
+      "predicted": "12205",
+      "ground_truth": "12205",
+      "ground_truth_name": "榨汁机",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 12.5,
+      "error": null
+    },
+    {
+      "product_name": "H型管式省煤器",
+      "predicted": "20342",
+      "ground_truth": "20342",
+      "ground_truth_name": "H型省煤器",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 6.2,
+      "error": null
+    },
+    {
+      "product_name": "ATF泵",
+      "predicted": "24759",
+      "ground_truth": "20501",
+      "ground_truth_name": "自动变速箱油泵",
+      "confidence": 0.755,
+      "correct": false,
+      "time_ms": 3822.9,
+      "error": null
+    },
+    {
+      "product_name": "氧化铝陶瓷管",
+      "predicted": "25226",
+      "ground_truth": "5820",
+      "ground_truth_name": "陶瓷管及管子配件",
+      "confidence": 0.6753,
+      "correct": false,
+      "time_ms": 3472.4,
+      "error": null
+    },
+    {
+      "product_name": "苏云金杆菌（Bt）",
+      "predicted": "4709",
+      "ground_truth": "4716",
+      "ground_truth_name": "生物杀虫剂制剂",
+      "confidence": 0.5985,
+      "correct": false,
+      "time_ms": 3087.1,
+      "error": null
+    },
+    {
+      "product_name": "ERP系统",
+      "predicted": "24864",
+      "ground_truth": "14131",
+      "ground_truth_name": "对基础软件、应用软件、嵌入式软件等软件提",
+      "confidence": 0.774,
+      "correct": false,
+      "time_ms": 3971.9,
+      "error": null
+    },
+    {
+      "product_name": "小齿轮齿条副",
+      "predicted": "11576",
+      "ground_truth": "7333",
+      "ground_truth_name": "齿条、差动齿轮",
+      "confidence": 0.5764,
+      "correct": false,
+      "time_ms": 649.0,
+      "error": null
+    },
+    {
+      "product_name": "耳背式助听器",
+      "predicted": "10967",
+      "ground_truth": "10966",
+      "ground_truth_name": "助听器",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 5.0,
+      "error": null
+    },
+    {
+      "product_name": "压路机",
+      "predicted": "8384",
+      "ground_truth": "8383",
+      "ground_truth_name": "压实机械",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 3.0,
+      "error": null
+    },
+    {
+      "product_name": "叶面积测量仪",
+      "predicted": "13473",
+      "ground_truth": "13473",
+      "ground_truth_name": "光电叶面积仪",
+      "confidence": 0.7408,
+      "correct": true,
+      "time_ms": 3880.4,
+      "error": null
+    },
+    {
+      "product_name": "工程投影仪",
+      "predicted": "23339",
+      "ground_truth": "13838",
+      "ground_truth_name": "正射投影仪",
+      "confidence": 0.5123,
+      "correct": false,
+      "time_ms": 3003.4,
+      "error": null
+    },
+    {
+      "product_name": "定型机",
+      "predicted": "9829",
+      "ground_truth": "9201",
+      "ground_truth_name": "印染辅机及通用单元设备",
+      "confidence": 0.5723,
+      "correct": false,
+      "time_ms": 589.5,
+      "error": null
+    },
+    {
+      "product_name": "跨境货车",
+      "predicted": "11535",
+      "ground_truth": "14014",
+      "ground_truth_name": "港澳台其他陆路货物运输服务",
+      "confidence": 0.6778,
+      "correct": false,
+      "time_ms": 3475.2,
+      "error": null
+    },
+    {
+      "product_name": "大闸蟹",
+      "predicted": "30000",
+      "ground_truth": "1071",
+      "ground_truth_name": "淡水蟹",
+      "confidence": 0.4351,
+      "correct": false,
+      "time_ms": 3478.4,
+      "error": null
+    },
+    {
+      "product_name": "氯霉素滴眼液",
+      "predicted": "5099",
+      "ground_truth": "5096",
+      "ground_truth_name": "滴剂",
+      "confidence": 0.7,
+      "correct": false,
+      "time_ms": 3835.9,
+      "error": null
+    },
+    {
+      "product_name": "叉车货叉",
+      "predicted": "7053",
+      "ground_truth": "7054",
+      "ground_truth_name": "托盘",
+      "confidence": 0.5981,
+      "correct": false,
+      "time_ms": 660.0,
+      "error": null
+    },
+    {
+      "product_name": "网络货运",
+      "predicted": "14237",
+      "ground_truth": "14061",
+      "ground_truth_name": "无运输工具承运业务",
+      "confidence": 0.6238,
+      "correct": false,
+      "time_ms": 2575.1,
+      "error": null
+    },
+    {
+      "product_name": "YSZ粉体",
+      "predicted": "24407",
+      "ground_truth": "20602",
+      "ground_truth_name": "燃料电池用稀土锆基陶瓷粉体材料",
+      "confidence": 0.8313,
+      "correct": false,
+      "time_ms": 3110.9,
+      "error": null
+    },
+    {
+      "product_name": "黄铜螺旋弹簧",
+      "predicted": "6559",
+      "ground_truth": "6559",
+      "ground_truth_name": "黄铜弹簧",
+      "confidence": 0.7135,
+      "correct": true,
+      "time_ms": 3650.9,
+      "error": null
+    },
+    {
+      "product_name": "多肉植物",
+      "predicted": "380",
+      "ground_truth": "420",
+      "ground_truth_name": "园艺产品",
+      "confidence": 0.6262,
+      "correct": false,
+      "time_ms": 2549.9,
+      "error": null
+    },
+    {
+      "product_name": "均质机阀组",
+      "predicted": "13038",
+      "ground_truth": "8915",
+      "ground_truth_name": "乳品加工机械零件",
+      "confidence": 0.6249,
+      "correct": false,
+      "time_ms": 3014.2,
+      "error": null
+    },
+    {
+      "product_name": "汉麻纱",
+      "predicted": "1807",
+      "ground_truth": "1810",
+      "ground_truth_name": "大麻纱线",
+      "confidence": 0.6681,
+      "correct": false,
+      "time_ms": 2356.9,
+      "error": null
+    },
+    {
+      "product_name": "浮法玻璃",
+      "predicted": "5700",
+      "ground_truth": "5700",
+      "ground_truth_name": "平板玻璃",
+      "confidence": 0.6597,
+      "correct": true,
+      "time_ms": 2769.4,
+      "error": null
+    },
+    {
+      "product_name": "FPC指纹传感器",
+      "predicted": "23161",
+      "ground_truth": "26983",
+      "ground_truth_name": "指纹识别芯片",
+      "confidence": 0.7614,
+      "correct": false,
+      "time_ms": 3693.1,
+      "error": null
+    },
+    {
+      "product_name": "风速风向仪",
+      "predicted": "13443",
+      "ground_truth": "13438",
+      "ground_truth_name": "气象观测仪器",
+      "confidence": 0.7275,
+      "correct": false,
+      "time_ms": 3869.3,
+      "error": null
+    },
+    {
+      "product_name": "EVA封边条胶",
+      "predicted": "21281",
+      "ground_truth": "24538",
+      "ground_truth_name": "家具热熔胶",
+      "confidence": 0.9546,
+      "correct": false,
+      "time_ms": 654.8,
+      "error": null
+    },
+    {
+      "product_name": "真空接触器",
+      "predicted": "12818",
+      "ground_truth": "25765",
+      "ground_truth_name": "高压接触器",
+      "confidence": 0.6734,
+      "correct": false,
+      "time_ms": 2697.4,
+      "error": null
+    },
+    {
+      "product_name": "RTO焚烧炉",
+      "predicted": "11155",
+      "ground_truth": "11060",
+      "ground_truth_name": "冷凝净化装置",
+      "confidence": 0.6427,
+      "correct": false,
+      "time_ms": 3174.4,
+      "error": null
+    },
+    {
+      "product_name": "活性白土",
+      "predicted": "1309",
+      "ground_truth": "20744",
+      "ground_truth_name": "高岭土化工载体/吸附材料",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 5.6,
+      "error": null
+    },
+    {
+      "product_name": "电视广告位",
+      "predicted": "20154",
+      "ground_truth": "14199",
+      "ground_truth_name": "影视、广播广告发布服务",
+      "confidence": 0.5931,
+      "correct": false,
+      "time_ms": 24366.1,
+      "error": null
+    },
+    {
+      "product_name": "纵梁",
+      "predicted": "11608",
+      "ground_truth": "11610",
+      "ground_truth_name": "横梁",
+      "confidence": 0.6701,
+      "correct": false,
+      "time_ms": 3095.6,
+      "error": null
+    },
+    {
+      "product_name": "白鳝",
+      "predicted": "1061",
+      "ground_truth": "1042",
+      "ground_truth_name": "淡水鳗鲡",
+      "confidence": 0.6546,
+      "correct": false,
+      "time_ms": 2856.6,
+      "error": null
+    },
+    {
+      "product_name": "包机货运",
+      "predicted": "14237",
+      "ground_truth": "14042",
+      "ground_truth_name": "航空货物运输湿租业务",
+      "confidence": 0.6217,
+      "correct": false,
+      "time_ms": 2750.8,
+      "error": null
+    },
+    {
+      "product_name": "氧化铝陶瓷基板",
+      "predicted": "22246",
+      "ground_truth": "5828",
+      "ground_truth_name": "其他技术陶瓷制品",
+      "confidence": 0.5811,
+      "correct": false,
+      "time_ms": 488.6,
+      "error": null
+    },
+    {
+      "product_name": "NPB",
+      "predicted": "21077",
+      "ground_truth": "26593",
+      "ground_truth_name": "发光层主体",
+      "confidence": 0.6172,
+      "correct": false,
+      "time_ms": 3161.7,
+      "error": null
+    },
+    {
+      "product_name": "生猪",
+      "predicted": "849",
+      "ground_truth": "848",
+      "ground_truth_name": "活牲畜",
+      "confidence": 0.5808,
+      "correct": false,
+      "time_ms": 622.6,
+      "error": null
+    },
+    {
+      "product_name": "热分析仪",
+      "predicted": "13188",
+      "ground_truth": "13250",
+      "ground_truth_name": "其他物性分析仪器",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 7.5,
+      "error": null
+    },
+    {
+      "product_name": "盐酸曲马多缓释片",
+      "predicted": "5087",
+      "ground_truth": "5094",
+      "ground_truth_name": "含有生物碱及其衍生物缓释控释片",
+      "confidence": 0.6698,
+      "correct": false,
+      "time_ms": 2803.3,
+      "error": null
+    },
+    {
+      "product_name": "智能电表集中器",
+      "predicted": "20200",
+      "ground_truth": "12682",
+      "ground_truth_name": "集中器",
+      "confidence": 0.7032,
+      "correct": false,
+      "time_ms": 2882.5,
+      "error": null
+    },
+    {
+      "product_name": "亚麻脱胶机",
+      "predicted": "9878",
+      "ground_truth": "9876",
+      "ground_truth_name": "麻类加工机械",
+      "confidence": 0.6771,
+      "correct": false,
+      "time_ms": 2784.8,
+      "error": null
+    },
+    {
+      "product_name": "五花肉",
+      "predicted": "1469",
+      "ground_truth": "1444",
+      "ground_truth_name": "畜禽肉、油脂及食用杂碎",
+      "confidence": 0.631,
+      "correct": false,
+      "time_ms": 4017.2,
+      "error": null
+    },
+    {
+      "product_name": "全景天窗",
+      "predicted": "26603",
+      "ground_truth": "20795",
+      "ground_truth_name": "汽车天窗",
+      "confidence": 0.5397,
+      "correct": false,
+      "time_ms": 2746.5,
+      "error": null
+    },
+    {
+      "product_name": "振动按摩器",
+      "predicted": "10799",
+      "ground_truth": "10817",
+      "ground_truth_name": "其他机械疗法器械",
+      "confidence": 0.7192,
+      "correct": false,
+      "time_ms": 3288.5,
+      "error": null
+    },
+    {
+      "product_name": "硅藻土过滤助剂",
+      "predicted": "20750",
+      "ground_truth": "20762",
+      "ground_truth_name": "硅藻土净化材料",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 7.7,
+      "error": null
+    },
+    {
+      "product_name": "自动充绒机",
+      "predicted": "9298",
+      "ground_truth": "9298",
+      "ground_truth_name": "充绒机",
+      "confidence": 0.5853,
+      "correct": true,
+      "time_ms": 684.9,
+      "error": null
+    },
+    {
+      "product_name": "换流变",
+      "predicted": "11887",
+      "ground_truth": "22487",
+      "ground_truth_name": "智能型直流换流变压器",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 3.6,
+      "error": null
+    },
+    {
+      "product_name": "维尼纶",
+      "predicted": "5332",
+      "ground_truth": "5332",
+      "ground_truth_name": "维纶纤维",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 3.0,
+      "error": null
+    },
+    {
+      "product_name": "冰菜",
+      "predicted": "21863",
+      "ground_truth": "237",
+      "ground_truth_name": "番杏",
+      "confidence": 0.6615,
+      "correct": false,
+      "time_ms": 3751.3,
+      "error": null
+    },
+    {
+      "product_name": "麻醉机",
+      "predicted": "10761",
+      "ground_truth": "10759",
+      "ground_truth_name": "麻醉设备及附件",
+      "confidence": 0.5818,
+      "correct": false,
+      "time_ms": 561.2,
+      "error": null
+    },
+    {
+      "product_name": "筋膜枪",
+      "predicted": null,
+      "ground_truth": "10798",
+      "ground_truth_name": "电动按摩器具",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 614.1,
+      "error": null
+    },
+    {
+      "product_name": "拖车绳",
+      "predicted": "10831",
+      "ground_truth": "2011",
+      "ground_truth_name": "汽车牵引带",
+      "confidence": 0.6481,
+      "correct": false,
+      "time_ms": 3072.1,
+      "error": null
+    },
+    {
+      "product_name": "纯电动轿车",
+      "predicted": "11562",
+      "ground_truth": "24025",
+      "ground_truth_name": "新能源汽车",
+      "confidence": 0.7067,
+      "correct": false,
+      "time_ms": 2689.3,
+      "error": null
+    },
+    {
+      "product_name": "机油",
+      "predicted": "3499",
+      "ground_truth": "3499",
+      "ground_truth_name": "润滑油",
+      "confidence": 0.6913,
+      "correct": true,
+      "time_ms": 3048.4,
+      "error": null
+    },
+    {
+      "product_name": "玻璃钢船",
+      "predicted": "11687",
+      "ground_truth": "11684",
+      "ground_truth_name": "非金属船舶",
+      "confidence": 0.7111,
+      "correct": false,
+      "time_ms": 4056.6,
+      "error": null
+    },
+    {
+      "product_name": "医用氧气袋",
+      "predicted": "10921",
+      "ground_truth": "10921",
+      "ground_truth_name": "氧气袋",
+      "confidence": 0.5898,
+      "correct": true,
+      "time_ms": 920.0,
+      "error": null
+    },
+    {
+      "product_name": "氮化硅",
+      "predicted": "4876",
+      "ground_truth": "4661",
+      "ground_truth_name": "金属氮化物",
+      "confidence": 0.6778,
+      "correct": false,
+      "time_ms": 3298.8,
+      "error": null
+    },
+    {
+      "product_name": "喷气织机",
+      "predicted": "7995",
+      "ground_truth": "9171",
+      "ground_truth_name": "用纺织纱线或其他纤维纱线织造织物的纺织机",
+      "confidence": 0.6328,
+      "correct": false,
+      "time_ms": 3343.7,
+      "error": null
+    },
+    {
+      "product_name": "DFB激光器芯片",
+      "predicted": "21445",
+      "ground_truth": "21445",
+      "ground_truth_name": "半导体激光器芯片",
+      "confidence": 0.7061,
+      "correct": true,
+      "time_ms": 3584.3,
+      "error": null
+    },
+    {
+      "product_name": "零信任网关",
+      "predicted": "26482",
+      "ground_truth": "12781",
+      "ground_truth_name": "其他边界防护类设备和系统",
+      "confidence": 0.5281,
+      "correct": false,
+      "time_ms": 2596.5,
+      "error": null
+    },
+    {
+      "product_name": "积木",
+      "predicted": "3087",
+      "ground_truth": "3094",
+      "ground_truth_name": "木制玩具",
+      "confidence": 0.6183,
+      "correct": false,
+      "time_ms": 3165.8,
+      "error": null
+    },
+    {
+      "product_name": "CAR-T疗法",
+      "predicted": null,
+      "ground_truth": "27220",
+      "ground_truth_name": "可控细胞与基因治疗",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 1010.8,
+      "error": null
+    },
+    {
+      "product_name": "Kindle",
+      "predicted": null,
+      "ground_truth": "24346",
+      "ground_truth_name": "移动电子书",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 599.6,
+      "error": null
+    },
+    {
+      "product_name": "汇款单",
+      "predicted": "21655",
+      "ground_truth": "14097",
+      "ground_truth_name": "邮政汇兑",
+      "confidence": 0.5789,
+      "correct": false,
+      "time_ms": 2941.5,
+      "error": null
+    },
+    {
+      "product_name": "微晶蜡",
+      "predicted": "3513",
+      "ground_truth": "3514",
+      "ground_truth_name": "其他合成方法制类似产品",
+      "confidence": 0.6699,
+      "correct": false,
+      "time_ms": 3621.0,
+      "error": null
+    },
+    {
+      "product_name": "涤纶缝纫线",
+      "predicted": "1760",
+      "ground_truth": "1760",
+      "ground_truth_name": "缝纫线",
+      "confidence": 0.5775,
+      "correct": true,
+      "time_ms": 568.7,
+      "error": null
+    },
+    {
+      "product_name": "永磁除铁器",
+      "predicted": "7216",
+      "ground_truth": "24424",
+      "ground_truth_name": "大型永磁筒式磁选机",
+      "confidence": 0.6774,
+      "correct": false,
+      "time_ms": 3109.4,
+      "error": null
+    },
+    {
+      "product_name": "粗糙度仪",
+      "predicted": "13142",
+      "ground_truth": "13142",
+      "ground_truth_name": "表面质量量仪",
+      "confidence": 0.6644,
+      "correct": true,
+      "time_ms": 4569.2,
+      "error": null
+    },
+    {
+      "product_name": "真丝围巾",
+      "predicted": "2109",
+      "ground_truth": "1829",
+      "ground_truth_name": "丝绢纺织及精加工产品",
+      "confidence": 0.6633,
+      "correct": false,
+      "time_ms": 2734.2,
+      "error": null
+    },
+    {
+      "product_name": "纯水机",
+      "predicted": "20428",
+      "ground_truth": "7752",
+      "ground_truth_name": "反渗透制水装置",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 5.1,
+      "error": null
+    },
+    {
+      "product_name": "蓄热式加热炉",
+      "predicted": "20356",
+      "ground_truth": "20354",
+      "ground_truth_name": "高温空气燃烧技术冶金加热炉",
+      "confidence": 0.5835,
+      "correct": false,
+      "time_ms": 625.8,
+      "error": null
+    },
+    {
+      "product_name": "光场控制器",
+      "predicted": "22606",
+      "ground_truth": "22606",
+      "ground_truth_name": "聚光场控制装置",
+      "confidence": 0.6891,
+      "correct": true,
+      "time_ms": 2625.8,
+      "error": null
+    },
+    {
+      "product_name": "ERP系统定制开发",
+      "predicted": "24864",
+      "ground_truth": "14130",
+      "ground_truth_name": "软件开发服务",
+      "confidence": 0.7109,
+      "correct": false,
+      "time_ms": 4822.0,
+      "error": null
+    },
+    {
+      "product_name": "电子废弃物贵金属回收生产线",
+      "predicted": "11164",
+      "ground_truth": "23427",
+      "ground_truth_name": "含铜、重金属废弃电子产品回收提纯成套装备",
+      "confidence": 0.6267,
+      "correct": false,
+      "time_ms": 3431.0,
+      "error": null
+    },
+    {
+      "product_name": "盖格计数器",
+      "predicted": "13530",
+      "ground_truth": "13530",
+      "ground_truth_name": "盖革计数器",
+      "confidence": 0.7186,
+      "correct": true,
+      "time_ms": 5445.1,
+      "error": null
+    },
+    {
+      "product_name": "作业本",
+      "predicted": "2678",
+      "ground_truth": "2678",
+      "ground_truth_name": "练习簿",
+      "confidence": 0.6576,
+      "correct": true,
+      "time_ms": 2628.4,
+      "error": null
+    },
+    {
+      "product_name": "输送带",
+      "predicted": "5400",
+      "ground_truth": "2024",
+      "ground_truth_name": "纺织材料制传输带",
+      "confidence": 0.5739,
+      "correct": false,
+      "time_ms": 556.1,
+      "error": null
+    },
+    {
+      "product_name": "生理盐水",
+      "predicted": "1658",
+      "ground_truth": "5052",
+      "ground_truth_name": "注射液",
+      "confidence": 0.5605,
+      "correct": false,
+      "time_ms": 2897.2,
+      "error": null
+    },
+    {
+      "product_name": "真空乳化机",
+      "predicted": "7650",
+      "ground_truth": "7651",
+      "ground_truth_name": "真空均质乳化锅",
+      "confidence": 0.6971,
+      "correct": false,
+      "time_ms": 6067.5,
+      "error": null
+    },
+    {
+      "product_name": "涡旋压缩机",
+      "predicted": "7128",
+      "ground_truth": "7129",
+      "ground_truth_name": "制冷设备用压缩机",
+      "confidence": 0.6784,
+      "correct": false,
+      "time_ms": 3023.4,
+      "error": null
+    },
+    {
+      "product_name": "光纤跳线",
+      "predicted": "26087",
+      "ground_truth": "12056",
+      "ground_truth_name": "光缆",
+      "confidence": 0.6202,
+      "correct": false,
+      "time_ms": 2800.7,
+      "error": null
+    },
+    {
+      "product_name": "排线",
+      "predicted": "12033",
+      "ground_truth": "25112",
+      "ground_truth_name": "微细通讯线材",
+      "confidence": 0.6592,
+      "correct": false,
+      "time_ms": 3844.0,
+      "error": null
+    },
+    {
+      "product_name": "锡白粉",
+      "predicted": "6258",
+      "ground_truth": "3692",
+      "ground_truth_name": "氯氧化锡",
+      "confidence": 0.6916,
+      "correct": false,
+      "time_ms": 3648.3,
+      "error": null
+    },
+    {
+      "product_name": "亚硫酸钠",
+      "predicted": "3642",
+      "ground_truth": "3641",
+      "ground_truth_name": "金属亚硫酸盐",
+      "confidence": 0.5699,
+      "correct": false,
+      "time_ms": 673.8,
+      "error": null
+    },
+    {
+      "product_name": "光罩",
+      "predicted": "26137",
+      "ground_truth": "26611",
+      "ground_truth_name": "掩膜版",
+      "confidence": 0.6856,
+      "correct": false,
+      "time_ms": 2618.9,
+      "error": null
+    },
+    {
+      "product_name": "热饮贩卖机",
+      "predicted": "11260",
+      "ground_truth": "11260",
+      "ground_truth_name": "加热饮料自动销售机",
+      "confidence": 0.73,
+      "correct": true,
+      "time_ms": 3063.2,
+      "error": null
+    },
+    {
+      "product_name": "安全气囊碰撞传感器",
+      "predicted": "21734",
+      "ground_truth": "21715",
+      "ground_truth_name": "乘员区别传感器",
+      "confidence": 0.6983,
+      "correct": false,
+      "time_ms": 2780.4,
+      "error": null
+    },
+    {
+      "product_name": "数显卡尺",
+      "predicted": "13125",
+      "ground_truth": "13130",
+      "ground_truth_name": "电子数显量具",
+      "confidence": 0.6662,
+      "correct": false,
+      "time_ms": 3833.7,
+      "error": null
+    },
+    {
+      "product_name": "安全带插扣",
+      "predicted": "21586",
+      "ground_truth": "20799",
+      "ground_truth_name": "安全带锁舌",
+      "confidence": 0.6991,
+      "correct": false,
+      "time_ms": 3323.7,
+      "error": null
+    },
+    {
+      "product_name": "OCT光学相干断层扫描仪",
+      "predicted": "13425",
+      "ground_truth": "10153",
+      "ground_truth_name": "其他激光诊断仪器",
+      "confidence": 0.5712,
+      "correct": false,
+      "time_ms": 3242.7,
+      "error": null
+    },
+    {
+      "product_name": "茂金属线性低密度聚乙烯",
+      "predicted": "23999",
+      "ground_truth": "25365",
+      "ground_truth_name": "MLLDPE",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 4.8,
+      "error": null
+    },
+    {
+      "product_name": "碱式氯化铝",
+      "predicted": "3689",
+      "ground_truth": "3686",
+      "ground_truth_name": "氯氧化物及氢氧基氯化物",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 2.2,
+      "error": null
+    },
+    {
+      "product_name": "电脑裁皮机",
+      "predicted": "9225",
+      "ground_truth": "9232",
+      "ground_truth_name": "皮革制品制作机械",
+      "confidence": 0.6666,
+      "correct": false,
+      "time_ms": 2955.8,
+      "error": null
+    },
+    {
+      "product_name": "串补装置",
+      "predicted": "11946",
+      "ground_truth": "11946",
+      "ground_truth_name": "串联电容器装置",
+      "confidence": 0.6533,
+      "correct": true,
+      "time_ms": 3636.8,
+      "error": null
+    },
+    {
+      "product_name": "地下水水质自动监测站",
+      "predicted": "25000",
+      "ground_truth": "25000",
+      "ground_truth_name": "地下水采样与检测一体化移动式设备",
+      "confidence": 0.6923,
+      "correct": true,
+      "time_ms": 4178.6,
+      "error": null
+    },
+    {
+      "product_name": "海缆故障定位仪",
+      "predicted": "21792",
+      "ground_truth": "21792",
+      "ground_truth_name": "海缆故障检测设备",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 5.3,
+      "error": null
+    },
+    {
+      "product_name": "彩钢瓦成型机",
+      "predicted": "8466",
+      "ground_truth": "24386",
+      "ground_truth_name": "冷弯机",
+      "confidence": 0.6735,
+      "correct": false,
+      "time_ms": 4217.4,
+      "error": null
+    },
+    {
+      "product_name": "Low-E玻璃",
+      "predicted": "22271",
+      "ground_truth": "23360",
+      "ground_truth_name": "建筑节能玻璃",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 3.9,
+      "error": null
+    },
+    {
+      "product_name": "DR平板探测器",
+      "predicted": "22427",
+      "ground_truth": "12883",
+      "ground_truth_name": "X射线",
+      "confidence": 0.6363,
+      "correct": false,
+      "time_ms": 4961.4,
+      "error": null
+    },
+    {
+      "product_name": "绿薄荷",
+      "predicted": "244",
+      "ground_truth": "582",
+      "ground_truth_name": "留兰香",
+      "confidence": 0.6329,
+      "correct": false,
+      "time_ms": 2814.7,
+      "error": null
+    },
+    {
+      "product_name": "骨凿",
+      "predicted": "10418",
+      "ground_truth": "10441",
+      "ground_truth_name": "骨刮",
+      "confidence": 0.5652,
+      "correct": false,
+      "time_ms": 451.8,
+      "error": null
+    },
+    {
+      "product_name": "EBL",
+      "predicted": "3893",
+      "ground_truth": "9365",
+      "ground_truth_name": "电子束光刻机",
+      "confidence": 0.6181,
+      "correct": false,
+      "time_ms": 3207.6,
+      "error": null
+    },
+    {
+      "product_name": "小爱同学",
+      "predicted": null,
+      "ground_truth": "26561",
+      "ground_truth_name": "智能语音助手",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 531.9,
+      "error": null
+    },
+    {
+      "product_name": "场地平整",
+      "predicted": "9503",
+      "ground_truth": "14344",
+      "ground_truth_name": "平整土地",
+      "confidence": 0.6587,
+      "correct": false,
+      "time_ms": 2953.1,
+      "error": null
+    },
+    {
+      "product_name": "火罐",
+      "predicted": "10792",
+      "ground_truth": "10792",
+      "ground_truth_name": "拔火罐类器械",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 4.9,
+      "error": null
+    },
+    {
+      "product_name": "气动平衡吊",
+      "predicted": "7027",
+      "ground_truth": "7027",
+      "ground_truth_name": "平衡起重机",
+      "confidence": 0.6763,
+      "correct": true,
+      "time_ms": 3260.9,
+      "error": null
+    },
+    {
+      "product_name": "松香",
+      "predicted": "4902",
+      "ground_truth": "839",
+      "ground_truth_name": "其他林产品",
+      "confidence": 0.7045,
+      "correct": false,
+      "time_ms": 3986.4,
+      "error": null
+    },
+    {
+      "product_name": "LNA",
+      "predicted": "10866",
+      "ground_truth": "25064",
+      "ground_truth_name": "射频低噪声放大器",
+      "confidence": 0.6108,
+      "correct": false,
+      "time_ms": 3245.9,
+      "error": null
+    },
+    {
+      "product_name": "水喷射泵",
+      "predicted": "11723",
+      "ground_truth": "11723",
+      "ground_truth_name": "喷水推进器",
+      "confidence": 0.6853,
+      "correct": true,
+      "time_ms": 3050.2,
+      "error": null
+    },
+    {
+      "product_name": "白电油",
+      "predicted": "3494",
+      "ground_truth": "4891",
+      "ground_truth_name": "工业级混合油",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 4.9,
+      "error": null
+    },
+    {
+      "product_name": "香兰素",
+      "predicted": "5000",
+      "ground_truth": "5000",
+      "ground_truth_name": "合成香料",
+      "confidence": 0.643,
+      "correct": true,
+      "time_ms": 2688.6,
+      "error": null
+    },
+    {
+      "product_name": "CPE",
+      "predicted": "26010",
+      "ground_truth": "12609",
+      "ground_truth_name": "WiMAX设备",
+      "confidence": 0.6327,
+      "correct": false,
+      "time_ms": 3978.1,
+      "error": null
+    },
+    {
+      "product_name": "尼龙",
+      "predicted": "23943",
+      "ground_truth": "27231",
+      "ground_truth_name": "PA",
+      "confidence": 0.5646,
+      "correct": false,
+      "time_ms": 754.8,
+      "error": null
+    },
+    {
+      "product_name": "边缘AI盒子",
+      "predicted": "26478",
+      "ground_truth": "26483",
+      "ground_truth_name": "计算与存储设备",
+      "confidence": 0.6697,
+      "correct": false,
+      "time_ms": 4087.9,
+      "error": null
+    },
+    {
+      "product_name": "回转烘干机",
+      "predicted": "7636",
+      "ground_truth": "7643",
+      "ground_truth_name": "蒸汽回转干燥机",
+      "confidence": 0.95,
+      "correct": false,
+      "time_ms": 3.9,
+      "error": null
+    },
+    {
+      "product_name": "LuAc",
+      "predicted": null,
+      "ground_truth": "4478",
+      "ground_truth_name": "醋酸镥",
+      "confidence": 0.0,
+      "correct": false,
+      "time_ms": 622.0,
+      "error": null
+    },
+    {
+      "product_name": "氧化铝陶瓷基板",
+      "predicted": "22246",
+      "ground_truth": "24171",
+      "ground_truth_name": "电工陶瓷材料",
+      "confidence": 0.5811,
+      "correct": false,
+      "time_ms": 265.4,
+      "error": null
+    },
+    {
+      "product_name": "百叶轮",
+      "predicted": "26680",
+      "ground_truth": "22289",
+      "ground_truth_name": "砂带",
+      "confidence": 0.6484,
+      "correct": false,
+      "time_ms": 2875.5,
+      "error": null
+    },
+    {
+      "product_name": "TFT-LCD",
+      "predicted": "25603",
+      "ground_truth": "21691",
+      "ground_truth_name": "LCD显示模块",
+      "confidence": 0.8191,
+      "correct": false,
+      "time_ms": 2998.1,
+      "error": null
+    },
+    {
+      "product_name": "断桥铝合金型材",
+      "predicted": "20559",
+      "ground_truth": "22324",
+      "ground_truth_name": "建筑铝挤压材",
+      "confidence": 0.65,
+      "correct": false,
+      "time_ms": 3159.6,
+      "error": null
+    },
+    {
+      "product_name": "万能角度尺",
+      "predicted": "13140",
+      "ground_truth": "13140",
+      "ground_truth_name": "通用角度量仪",
+      "confidence": 0.6997,
+      "correct": true,
+      "time_ms": 3939.6,
+      "error": null
+    },
+    {
+      "product_name": "调音台",
+      "predicted": "12642",
+      "ground_truth": "20165",
+      "ground_truth_name": "数字专业音响设备",
+      "confidence": 0.5746,
+      "correct": false,
+      "time_ms": 3061.4,
+      "error": null
+    },
+    {
+      "product_name": "多效蒸馏水机",
+      "predicted": "8790",
+      "ground_truth": "7562",
+      "ground_truth_name": "制药用蒸馏水机",
+      "confidence": 0.7109,
+      "correct": false,
+      "time_ms": 4279.5,
+      "error": null
+    },
+    {
+      "product_name": "BMS芯片",
+      "predicted": "12098",
+      "ground_truth": "26960",
+      "ground_truth_name": "电池管理芯片",
+      "confidence": 0.7161,
+      "correct": false,
+      "time_ms": 5235.3,
+      "error": null
+    },
+    {
+      "product_name": "净水器",
+      "predicted": "20428",
+      "ground_truth": "7712",
+      "ground_truth_name": "液体过滤、净化机械",
+      "confidence": 0.7161,
+      "correct": false,
+      "time_ms": 9513.2,
+      "error": null
+    },
+    {
+      "product_name": "猫砂盆",
+      "predicted": "11079",
+      "ground_truth": "3465",
+      "ground_truth_name": "沙杠",
+      "confidence": 0.476,
+      "correct": false,
+      "time_ms": 4782.9,
+      "error": null
+    },
+    {
+      "product_name": "光时域反射仪",
+      "predicted": "13571",
+      "ground_truth": "13571",
+      "ground_truth_name": "光纤特性测量仪器",
+      "confidence": 0.6337,
+      "correct": true,
+      "time_ms": 4349.1,
+      "error": null
+    },
+    {
+      "product_name": "加州鲈鱼",
+      "predicted": "2979",
+      "ground_truth": "1063",
+      "ground_truth_name": "淡水鲈鱼",
+      "confidence": 0.5096,
+      "correct": false,
+      "time_ms": 2965.9,
+      "error": null
+    },
+    {
+      "product_name": "铜编织带",
+      "predicted": "6493",
+      "ground_truth": "6493",
+      "ground_truth_name": "铜丝编带",
+      "confidence": 0.95,
+      "correct": true,
+      "time_ms": 4.5,
+      "error": null
+    },
+    {
+      "product_name": "伸缩警棍",
+      "predicted": "2929",
+      "ground_truth": "11323",
+      "ground_truth_name": "警棍及类似警用器械",
+      "confidence": 0.4577,
+      "correct": false,
+      "time_ms": 5035.8,
+      "error": null
+    },
+    {
+      "product_name": "高压清洗机",
+      "predicted": "9094",
+      "ground_truth": "8006",
+      "ground_truth_name": "喷水器、喷雾器",
+      "confidence": 0.6265,
+      "correct": false,
+      "time_ms": 3727.4,
+      "error": null
+    },
+    {
+      "product_name": "液压矫平机",
+      "predicted": "6961",
+      "ground_truth": "6960",
+      "ground_truth_name": "数控矫平机",
+      "confidence": 0.6953,
+      "correct": false,
+      "time_ms": 2562.3,
+      "error": null
+    }
+  ]
+}
