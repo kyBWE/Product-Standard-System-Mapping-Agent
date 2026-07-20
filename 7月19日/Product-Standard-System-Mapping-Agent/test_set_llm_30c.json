@@ -1,0 +1,242 @@
+[
+  {
+    "product_name": "碳纤维增强复合材料",
+    "ground_truth": "4880",
+    "ground_truth_name": "碳纤维增强复合材料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 特种纤维及高功能化工产品 > 碳纤维增强复合材料",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "L-苹果酸",
+    "ground_truth": "22085",
+    "ground_truth_name": "苹果酸",
+    "path": "石油、化工、医药产品 > 医药 > 生物化学制品 > 苹果酸",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "离心泵",
+    "ground_truth": "24201",
+    "ground_truth_name": "离心泵",
+    "path": "机械、设备类产品 > 通用设备 > 泵及液体提升机 > 泵 > 离心泵",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "接线端子",
+    "ground_truth": "24036",
+    "ground_truth_name": "接线端子",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 其他电子元件 > 接线端子",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "核废料焚烧炉",
+    "ground_truth": "11199",
+    "ground_truth_name": "放射性废物焚烧炉",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 放射性污染防治和处理设备 > 放射性材料处理炉 > 放射性废物焚烧炉",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "组织氧监测仪",
+    "ground_truth": "10292",
+    "ground_truth_name": "组织氧含量测定仪",
+    "path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 临床检验分析仪器及诊断系统 > 血气分析系统 > 组织氧含量测定仪",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "地热钻机",
+    "ground_truth": "25799",
+    "ground_truth_name": "高效地热钻探设备",
+    "path": "电力、热力、水、燃气类产品 > 电力和热力、冷气 > 发电及供电 > 发电 > 地热能发电 > 高效地热钻探设备",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "干粉灭火剂",
+    "ground_truth": "11309",
+    "ground_truth_name": "灭火器用装配药及灭火弹",
+    "path": "机械、设备类产品 > 专用设备 > 社会公共安全设备及器材 > 灭火器用装配药及灭火弹",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "毛线",
+    "ground_truth": "1781",
+    "ground_truth_name": "绒线",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 毛纺织、染整加工产品 > 绒线",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "碳膜可调电阻",
+    "ground_truth": "12919",
+    "ground_truth_name": "碳膜电位器",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子元件 > 电位器 > 碳膜电位器",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "起垄机",
+    "ground_truth": "9509",
+    "ground_truth_name": "起垄机",
+    "path": "机械、设备类产品 > 专用设备 > 机械化农业及园艺机具 > 土壤耕整机械 > 整地机械 > 起垄机",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "轿车",
+    "ground_truth": "23830",
+    "ground_truth_name": "轿车",
+    "path": "机械、设备类产品 > 交通运输设备 > 汽车 > 轿车",
+    "difficulty": "easy",
+    "split": "set3"
+  },
+  {
+    "product_name": "EMI接收机",
+    "ground_truth": "12627",
+    "ground_truth_name": "接收机",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 雷达、无线电导航及无线电遥控设备 > 无线电导航设备 > 接收机",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "汽车坐垫套",
+    "ground_truth": "23599",
+    "ground_truth_name": "汽车座椅座套",
+    "path": "机械、设备类产品 > 交通运输设备 > 机动车零部件及配件 > 汽车底盘车架、车身及其零配件 > 其他车身零配件 > 汽车座椅座套",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "RG系列射频电缆",
+    "ground_truth": "12039",
+    "ground_truth_name": "高频同轴电缆",
+    "path": "机械、设备类产品 > 电气机械及器材 > 电线电缆 > 同轴电缆 > 高频同轴电缆",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "监控摄像头",
+    "ground_truth": "11341",
+    "ground_truth_name": "监控电视摄像机",
+    "path": "机械、设备类产品 > 专用设备 > 社会公共安全设备及器材 > 监控电视摄像机",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "铅锭",
+    "ground_truth": "6244",
+    "ground_truth_name": "铅材",
+    "path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 铅压延加工材 > 铅材",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "探地雷达",
+    "ground_truth": "12613",
+    "ground_truth_name": "雷达设备",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 雷达、无线电导航及无线电遥控设备 > 雷达设备",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "中和罐",
+    "ground_truth": "11121",
+    "ground_truth_name": "中和装置",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 水质污染防治设备 > 物理法处理设备 > 中和装置",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "石墨坩埚",
+    "ground_truth": "5895",
+    "ground_truth_name": "其他石墨制品",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 石墨及炭素制品 > 石墨制品 > 其他石墨制品",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "万用表",
+    "ground_truth": "13128",
+    "ground_truth_name": "量表",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 绘图、计算及测量仪器 > 量具 > 量表",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "电动病床",
+    "ground_truth": "11011",
+    "ground_truth_name": "带机械装置病床附加设施",
+    "path": "机械、设备类产品 > 专用设备 > 医疗、外科、牙科或兽医用家具 > 病床及相关医用家具 > 病床 > 带机械装置病床附加设施",
+    "difficulty": "medium",
+    "split": "set3"
+  },
+  {
+    "product_name": "LED闪烁芯片",
+    "ground_truth": "22521",
+    "ground_truth_name": "闪灯IC",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 集成电路 > 闪灯IC",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "光动力诊断仪",
+    "ground_truth": "10148",
+    "ground_truth_name": "激光荧光肿瘤诊断仪",
+    "path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 医用激光诊断、治疗仪器及设备 > 激光诊断仪器 > 激光荧光肿瘤诊断仪",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "机场助航灯光系统",
+    "ground_truth": "11394",
+    "ground_truth_name": "飞机场用电气信号装置",
+    "path": "机械、设备类产品 > 专用设备 > 交通安全及管制专用设备 > 飞机场用电气交通管理设备 > 飞机场用电气信号装置",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "元明粉",
+    "ground_truth": "1339",
+    "ground_truth_name": "芒硝矿石",
+    "path": "矿产品 > 非金属矿石 > 化学矿石 > 芒硝矿石",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "DCPD",
+    "ground_truth": "3986",
+    "ground_truth_name": "过氧化二碳酸双酯",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 有机化学原料 > 碳酸酯、过碳酸酯及其盐 > 过氧化二碳酸双酯",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "绷鞋机",
+    "ground_truth": "9249",
+    "ground_truth_name": "底工转车",
+    "path": "机械、设备类产品 > 专用设备 > 皮革、毛皮及其制品加工专用设备 > 皮革制品制作机械 > 鞋靴专用生产机械 > 底工转车",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "骨瓷碗",
+    "ground_truth": "5831",
+    "ground_truth_name": "日用瓷质餐具",
+    "path": "金属及非金属制品 > 非金属矿物制品 > 日用陶瓷制品 > 日用陶瓷餐具 > 日用瓷质餐具",
+    "difficulty": "hard",
+    "split": "set3"
+  },
+  {
+    "product_name": "变桨旋转接头",
+    "ground_truth": "26705",
+    "ground_truth_name": "变桨液压旋转耦合器",
+    "path": "产业链 > 风电产业 > 风电整机 > 叶轮系统 > 变桨系统 > 液压变桨系统 > 变桨液压旋转耦合器",
+    "difficulty": "hard",
+    "split": "set3"
+  }
+]

@@ -1,0 +1,533 @@
+{
+  "version": 1,
+  "last_cluster_time": null,
+  "entries": [
+    {
+      "id": "e_0c5e46",
+      "product_name": "T型丝锥扳手",
+      "suggested_parent_id": "8692",
+      "suggested_parent_name": "模具",
+      "suggested_category_name": "模具专用工具",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "6622",
+          "category_name": "机械、设备类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "8256",
+          "category_name": "专用设备",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "8692",
+          "category_name": "模具",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "模具专用工具",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 模具 > 模具专用工具",
+      "confidence": 0.95,
+      "llm_reason": "该分类名符合正式、通用的要求，与现有同级子类风格相近，能够覆盖T型丝锥扳手这类产品，且在现有分类中不存在相同名称。；路径决策: enter:机械、设备类产品 → enter:专用设备 → enter:模具 → enter:其他模具 → promote:模具",
+      "sibling_nodes": [
+        {
+          "category_name": "金属铸造用型箱、型模底板"
+        },
+        {
+          "category_name": "金属、硬质合金用模具"
+        },
+        {
+          "category_name": "玻璃制品用模具"
+        },
+        {
+          "category_name": "矿物材料用模具"
+        },
+        {
+          "category_name": "塑料用模具"
+        },
+        {
+          "category_name": "橡胶用模具"
+        },
+        {
+          "category_name": "其他模具"
+        },
+        {
+          "category_name": "汽车模具"
+        },
+        {
+          "category_name": "模架、模具标准件"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:10:34.475578"
+    },
+    {
+      "id": "e_008959",
+      "product_name": "万兆IPv6接入交换机",
+      "suggested_parent_id": "12536",
+      "suggested_parent_name": "通信交换设备",
+      "suggested_category_name": "万兆IPv6交换机",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "6622",
+          "category_name": "机械、设备类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "12484",
+          "category_name": "通信设备、计算机及其他电子设备",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "12536",
+          "category_name": "通信交换设备",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "万兆IPv6交换机",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 通信交换设备 > 万兆IPv6交换机",
+      "confidence": 0.85,
+      "llm_reason": "新分类名与现有子类风格相近，且未发现与该名称重复的子类，能够覆盖一类产品。；路径决策: enter:机械、设备类产品 → enter:通信设备、计算机及其他电子设备 → enter:通信交换设备 → enter:其他通信交换设备 → promote:通信交换设备",
+      "sibling_nodes": [
+        {
+          "category_name": "程控交换机"
+        },
+        {
+          "category_name": "ATM交换机"
+        },
+        {
+          "category_name": "光交换机"
+        },
+        {
+          "category_name": "通信交换设备零件"
+        },
+        {
+          "category_name": "其他通信交换设备"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:10:35.341926"
+    },
+    {
+      "id": "e_e5fd50",
+      "product_name": "雾炮机",
+      "suggested_parent_id": "11413",
+      "suggested_parent_name": "自来水生产专用设备",
+      "suggested_category_name": "雾化喷洒设备",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "6622",
+          "category_name": "机械、设备类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "8256",
+          "category_name": "专用设备",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "11397",
+          "category_name": "水资源专用机械",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": "11413",
+          "category_name": "自来水生产专用设备",
+          "is_new": false
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "雾化喷洒设备",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 水资源专用机械 > 自来水生产专用设备 > 雾化喷洒设备",
+      "confidence": 0.85,
+      "llm_reason": "该分类名符合正式、通用的要求，与现有子类风格相近，且未发现已有相同名称的子类。；路径决策: enter:机械、设备类产品 → enter:专用设备 → enter:水资源专用机械 → enter:自来水生产专用设备 → enter:其他自来水生产专用设备 → promote:自来水生产专用设备",
+      "sibling_nodes": [
+        {
+          "category_name": "自动加压给水设备"
+        },
+        {
+          "category_name": "无塔供水装置"
+        },
+        {
+          "category_name": "其他自来水生产专用设备"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:10:41.367486"
+    },
+    {
+      "id": "e_e5a3c0",
+      "product_name": "弯头",
+      "suggested_parent_id": "6308",
+      "suggested_parent_name": "金属制品",
+      "suggested_category_name": "弯头连接件",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "5567",
+          "category_name": "金属及非金属制品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "6308",
+          "category_name": "金属制品",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "弯头连接件",
+          "is_new": true
+        }
+      ],
+      "path_text": "金属及非金属制品 > 金属制品 > 弯头连接件",
+      "confidence": 0.85,
+      "llm_reason": "该分类名符合正式、通用的要求，与同级别子类风格相近，且未发现已有相同或相似分类名。；路径决策: enter:金属及非金属制品 → enter:金属制品 → enter:其他金属制品 → promote:金属制品",
+      "sibling_nodes": [
+        {
+          "category_name": "金属结构"
+        },
+        {
+          "category_name": "金属门窗及类似制品"
+        },
+        {
+          "category_name": "金属切削工具"
+        },
+        {
+          "category_name": "通用手工具"
+        },
+        {
+          "category_name": "农林、畜牧用金属工具"
+        },
+        {
+          "category_name": "专用刀具及类似器具"
+        },
+        {
+          "category_name": "刀剪及类似日用金属工具"
+        },
+        {
+          "category_name": "喷灯、台钳，相关金属手工具"
+        },
+        {
+          "category_name": "集装箱"
+        },
+        {
+          "category_name": "金属容器"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:10:52.407319"
+    },
+    {
+      "id": "e_da0bc6",
+      "product_name": "粉末包装机",
+      "suggested_parent_id": "8738",
+      "suggested_parent_name": "食品制造机械",
+      "suggested_category_name": "其他食品制造机械",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "6622",
+          "category_name": "机械、设备类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "8256",
+          "category_name": "专用设备",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "8738",
+          "category_name": "食品制造机械",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "其他食品制造机械",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 食品制造机械 > 其他食品制造机械",
+      "confidence": 0.95,
+      "llm_reason": "正式类「其他食品制造机械」已存在(#8772)，建议并入；根据提供的父节点路径和同级子类参考，'粉末包装机械'是一个正式且通用的分类名，能够覆盖粉末包装机这一类产品，且与现有子类风格相近。；路径决策: enter:机械、设备类产品 → enter:专用设备 → enter:食品制造机械 → enter:其他食品制造机械 → promote:食品制造机械｜类名规范化: 粉末包装机械→其他食品制造机械",
+      "sibling_nodes": [
+        {
+          "category_name": "烹煮、调制、腌制食品设备"
+        },
+        {
+          "category_name": "糕点、米面食品类加工专用机械"
+        },
+        {
+          "category_name": "糖果生产专用机械"
+        },
+        {
+          "category_name": "可可及巧克力生产专用机械"
+        },
+        {
+          "category_name": "调味食品加工机械"
+        },
+        {
+          "category_name": "其他食品制造机械"
+        },
+        {
+          "category_name": "食品用烤炉及烘箱"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:10:54.201021"
+    },
+    {
+      "id": "e_da3fb4",
+      "product_name": "黄饼",
+      "suggested_parent_id": "5304",
+      "suggested_parent_name": "化学纤维",
+      "suggested_category_name": "黄饼专用化学品",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "3473",
+          "category_name": "石油、化工、医药产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "5304",
+          "category_name": "化学纤维",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "黄饼专用化学品",
+          "is_new": true
+        }
+      ],
+      "path_text": "石油、化工、医药产品 > 化学纤维 > 黄饼专用化学品",
+      "confidence": 0.85,
+      "llm_reason": "根据提供的父节点路径和同级子类参考，'黄饼专用化学品'是一个正式且通用的分类名，能够覆盖黄饼这一类产品，且与同级的子类风格相近，如'化学纤维用浆粕'、'人造纤维(纤维素纤维)'等。；PageIndex停层: 黄饼在提供的分类体系中没有直接对应的子节点。根据规则，黄饼可能属于石油化工领域，但当前路径已指向化学纤维，且化学纤维的子节点中并无与黄饼直接相关的分类。因此，无法从提供的候选子节点中找到合适的分类。；路径决策: enter:石油、化工、医药产品 → enter:化学纤维 → stop:化学纤维",
+      "sibling_nodes": [
+        {
+          "category_name": "化学纤维用浆粕"
+        },
+        {
+          "category_name": "人造纤维(纤维素纤维)"
+        },
+        {
+          "category_name": "合成纤维"
+        },
+        {
+          "category_name": "化学纤维加工丝"
+        },
+        {
+          "category_name": "高性能纤维"
+        },
+        {
+          "category_name": "改性纤维"
+        },
+        {
+          "category_name": "锦纶6-DTY"
+        },
+        {
+          "category_name": "聚羟基丁酸羟基戊酸酯(PHBV)和聚乳酸(PLA)共混纤维"
+        },
+        {
+          "category_name": "聚乳酸纤维"
+        },
+        {
+          "category_name": "石墨化工设备"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:11:05.599995"
+    },
+    {
+      "id": "e_3861e3",
+      "product_name": "银铜焊料",
+      "suggested_parent_id": "23936",
+      "suggested_parent_name": "Cu-Sn合金",
+      "suggested_category_name": "Cu-Sn焊料制品",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "5567",
+          "category_name": "金属及非金属制品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "6061",
+          "category_name": "有色金属冶炼及压延产品",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "6197",
+          "category_name": "有色金属合金",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": "23936",
+          "category_name": "Cu-Sn合金",
+          "is_new": false
+        },
+        {
+          "level": 5,
+          "category_id": null,
+          "category_name": "Cu-Sn焊料制品",
+          "is_new": true
+        }
+      ],
+      "path_text": "金属及非金属制品 > 有色金属冶炼及压延产品 > 有色金属合金 > Cu-Sn合金 > Cu-Sn焊料制品",
+      "confidence": 0.95,
+      "llm_reason": "该分类名符合正式、通用的要求，与同级子类风格相近，且在现有分类中未发现相同名称。；路径决策: enter:金属及非金属制品 → enter:有色金属冶炼及压延产品 → enter:有色金属合金 → enter:Cu-Sn合金 → leaf:Cu-Sn合金",
+      "sibling_nodes": [],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:11:17.392013"
+    },
+    {
+      "id": "e_f4f1d9",
+      "product_name": "枸杞子",
+      "suggested_parent_id": "1658",
+      "suggested_parent_name": "营养、保健食品",
+      "suggested_category_name": "枸杞子营养补充品",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "1385",
+          "category_name": "食品、饮料、烟、酒类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "1551",
+          "category_name": "食品及加工盐",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": "1658",
+          "category_name": "营养、保健食品",
+          "is_new": false
+        },
+        {
+          "level": 4,
+          "category_id": null,
+          "category_name": "枸杞子营养补充品",
+          "is_new": true
+        }
+      ],
+      "path_text": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 营养、保健食品 > 枸杞子营养补充品",
+      "confidence": 0.95,
+      "llm_reason": "该分类名符合正式、通用的要求，与同级子类风格相近，且未发现已有相同或类似名称。；路径决策: enter:食品、饮料、烟、酒类产品 → enter:食品及加工盐 → enter:营养、保健食品 → enter:其他营养、保健食品 → promote:营养、保健食品",
+      "sibling_nodes": [
+        {
+          "category_name": "婴幼儿用均化食品"
+        },
+        {
+          "category_name": "营养配餐食品"
+        },
+        {
+          "category_name": "蜂蜜营养制品"
+        },
+        {
+          "category_name": "其他营养、保健食品"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:11:18.021987"
+    },
+    {
+      "id": "e_04f6e4",
+      "product_name": "鱼鳞胶原蛋白提取设备",
+      "suggested_parent_id": "8256",
+      "suggested_parent_name": "专用设备",
+      "suggested_category_name": "水产胶原蛋白提取机械",
+      "path": [
+        {
+          "level": 1,
+          "category_id": "6622",
+          "category_name": "机械、设备类产品",
+          "is_new": false
+        },
+        {
+          "level": 2,
+          "category_id": "8256",
+          "category_name": "专用设备",
+          "is_new": false
+        },
+        {
+          "level": 3,
+          "category_id": null,
+          "category_name": "水产胶原蛋白提取机械",
+          "is_new": true
+        }
+      ],
+      "path_text": "机械、设备类产品 > 专用设备 > 水产胶原蛋白提取机械",
+      "confidence": 0.85,
+      "llm_reason": "该分类名符合正式、通用的要求，与同级子类风格相近，且未发现已有相同或相似分类名。；路径决策: enter:机械、设备类产品 → enter:专用设备 → enter:其他专用设备及零部件 → promote:专用设备",
+      "sibling_nodes": [
+        {
+          "category_name": "矿山专用设备"
+        },
+        {
+          "category_name": "石油钻探、开采专用设备"
+        },
+        {
+          "category_name": "建筑工程用机械"
+        },
+        {
+          "category_name": "建筑材料及制品专用生产机械"
+        },
+        {
+          "category_name": "玻璃、陶瓷制品生产专用设备"
+        },
+        {
+          "category_name": "冶金专用设备"
+        },
+        {
+          "category_name": "炼油、化工生产专用设备"
+        },
+        {
+          "category_name": "橡胶加工专用设备"
+        },
+        {
+          "category_name": "塑料加工专用设备"
+        },
+        {
+          "category_name": "木材加工、处理机械"
+        }
+      ],
+      "source": "staging_pageindex",
+      "created_at": "2026-07-19T18:11:18.576190"
+    }
+  ]
+}

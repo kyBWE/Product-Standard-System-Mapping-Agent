@@ -119,14 +119,93 @@ def _extract_root_category(entry: dict) -> str:
     return entry.get("suggested_parent_id", "") or "UNKNOWN"
 
 
+def _path_depth(full_path: str) -> int:
+    if not full_path:
+        return 0
+    return len([p for p in full_path.replace("›", ">").split(">") if p.strip()])
+
+
+_BROAD_LEAF_NAMES = frozenset({
+    "其他", "其它", "综合", "通用", "相关产品", "相关设备", "机械设备",
+    "设备", "产品", "装置", "机械、设备类产品", "其他设备", "其他产品",
+    "机械及设备", "设备类产品", "未分类",
+})
+
+
+def _is_overly_broad_cluster(cluster: dict, root_cat: str = "") -> tuple[bool, str]:
+    """路径过浅或类名空泛的簇视为不合格，应降级为孤立条目。"""
+    full_path = (cluster.get("full_path") or "").strip()
+    group_name = (
+        cluster.get("merged_category_name")
+        or cluster.get("suggested_category_name")
+        or ""
+    ).strip()
+    parent_name = (cluster.get("suggested_parent_name") or "").strip()
+    depth = _path_depth(full_path)
+
+    if depth < 3:
+        return True, f"路径过浅({depth}级，要求≥3级): {full_path or '(空)'}"
+
+    leaf = full_path.split(">")[-1].strip() if full_path else group_name
+    if leaf in _BROAD_LEAF_NAMES or group_name in _BROAD_LEAF_NAMES:
+        return True, f"分类名过于宽泛: {leaf or group_name}"
+
+    if root_cat and (full_path == root_cat or (full_path.startswith(root_cat) and depth <= 2)):
+        return True, f"仅落在一级大类「{root_cat}」下，过宽泛"
+
+    return False, ""
+
+
+def _entries_to_outliers(entries: list[dict], reason: str) -> list[dict]:
+    out = []
+    for e in entries:
+        out.append({
+            "entry_id": e.get("id") or e.get("entry_id", ""),
+            "product_name": e.get("product_name", ""),
+            "suggested_parent_id": e.get("suggested_parent_id", ""),
+            "suggested_category_name": e.get("suggested_category_name", ""),
+            "path_text": e.get("path_text", ""),
+            "reason": reason,
+        })
+    return out
+
+
+def _precluster_by_embedding(
+    group_entries: list[dict],
+    embed_func,
+    threshold: float,
+) -> list[list[dict]]:
+    """在同一大类内先用向量相似度预分簇，避免把不相关产品塞进同一次 LLM。"""
+    if embed_func is None or len(group_entries) <= 2:
+        return [group_entries]
+
+    names = [e["product_name"] for e in group_entries]
+    try:
+        embeddings = embed_func(names)
+    except Exception as ex:
+        logger.warning(f"预聚类 embedding 失败: {ex}")
+        return [group_entries]
+
+    if not embeddings or len(embeddings) != len(group_entries):
+        return [group_entries]
+
+    arrays = [
+        np.asarray(v, dtype=np.float32) if not isinstance(v, np.ndarray) else v.astype(np.float32)
+        for v in embeddings
+    ]
+    index_groups = _single_linkage_cluster(arrays, threshold=threshold)
+    return [[group_entries[i] for i in idxs] for idxs in index_groups]
+
+
 def run_cluster(
     llm=None,
     page_tree=None,
     embed_func=None,
-    similarity_threshold: float = 0.65,
+    similarity_threshold: float = 0.72,
     min_cluster_size: int = 2,
     min_entries: int = 10,
-    batch_size: int = 15,
+    batch_size: int = 12,
+    precluster_threshold: float = 0.70,
 ) -> dict:
     pool = load_pool()
     entries = pool.get("entries", [])
@@ -157,41 +236,87 @@ def run_cluster(
 
             for root_cat, group in parent_groups.items():
                 if len(group) <= 1:
-                    for e in group:
-                        all_llm_outliers.append({
-                            "entry_id": e["id"],
-                            "product_name": e["product_name"],
-                            "suggested_parent_id": e.get("suggested_parent_id", ""),
-                            "suggested_category_name": e.get("suggested_category_name", ""),
-                            "path_text": e.get("path_text", ""),
-                            "reason": f"该大类({root_cat})下仅1条，无法聚类",
-                        })
+                    all_llm_outliers.extend(
+                        _entries_to_outliers(group, f"该大类({root_cat})下仅1条，无法聚类")
+                    )
                     continue
 
-                for batch_start in range(0, len(group), batch_size):
-                    batch = group[batch_start:batch_start + batch_size]
-                    logger.info(f"LLM聚类批次: root_category={root_cat}, 条目{len(batch)}条")
+                # 先按产品向量预分簇，再送 LLM，避免「同属机械设备」就被并成一坨
+                pre_groups = _precluster_by_embedding(
+                    group, embed_func, threshold=precluster_threshold
+                )
+                logger.info(
+                    f"大类「{root_cat}」{len(group)}条 → 向量预分 {len(pre_groups)} 组"
+                )
 
-                    try:
-                        bc, bo = llm.cluster_products(batch, taxonomy_overview)
-                        all_llm_clusters.extend(bc)
-                        all_llm_outliers.extend(bo)
-                    except Exception as ex:
-                        logger.warning(f"LLM聚类批次失败(root_category={root_cat}): {ex}")
-                        for e in batch:
-                            all_llm_outliers.append({
-                                "entry_id": e["id"],
-                                "product_name": e["product_name"],
-                                "suggested_parent_id": e.get("suggested_parent_id", ""),
-                                "suggested_category_name": e.get("suggested_category_name", ""),
-                                "path_text": e.get("path_text", ""),
-                                "reason": f"LLM聚类失败: {str(ex)[:50]}",
-                            })
+                for pre in pre_groups:
+                    if len(pre) < min_cluster_size:
+                        all_llm_outliers.extend(
+                            _entries_to_outliers(
+                                pre,
+                                "向量预聚类后组内产品不够相近，归入孤立条目",
+                            )
+                        )
+                        continue
+
+                    for batch_start in range(0, len(pre), batch_size):
+                        batch = pre[batch_start : batch_start + batch_size]
+                        logger.info(
+                            f"LLM聚类批次: root={root_cat}, 预分簇内 {len(batch)}条"
+                        )
+                        try:
+                            bc, bo = llm.cluster_products(batch, taxonomy_overview)
+                            # 过宽泛的簇打散为孤立
+                            entry_by_id = {e["id"]: e for e in batch}
+                            for lc in bc:
+                                broad, why = _is_overly_broad_cluster(lc, root_cat)
+                                if broad:
+                                    demoted = [
+                                        entry_by_id[eid]
+                                        for eid in lc.get("entries", [])
+                                        if eid in entry_by_id
+                                    ]
+                                    if not demoted:
+                                        demoted = [
+                                            e for e in batch
+                                            if e["product_name"] in set(lc.get("product_names") or [])
+                                        ]
+                                    all_llm_outliers.extend(
+                                        _entries_to_outliers(
+                                            demoted,
+                                            f"簇过宽泛已打散: {why}",
+                                        )
+                                    )
+                                    logger.info(f"打散过宽泛簇: {why}; products={lc.get('product_names')}")
+                                else:
+                                    all_llm_clusters.append(lc)
+                            all_llm_outliers.extend(bo)
+                        except Exception as ex:
+                            logger.warning(
+                                f"LLM聚类批次失败(root={root_cat}): {ex}"
+                            )
+                            all_llm_outliers.extend(
+                                _entries_to_outliers(
+                                    batch, f"LLM聚类失败: {str(ex)[:50]}"
+                                )
+                            )
 
             used_llm = True
 
             for lc in all_llm_clusters:
                 cluster_seq += 1
+                depth = _path_depth(lc.get("full_path", ""))
+                # 路径越深星级略高，避免「大杂烩大簇」显得可信
+                base_star = 3 if len(lc.get("product_names") or []) >= 5 else (
+                    2 if len(lc.get("product_names") or []) >= 3 else 1
+                )
+                if depth >= 4:
+                    star = min(3, base_star + 1)
+                elif depth < 3:
+                    star = 1
+                else:
+                    star = base_star
+
                 clusters.append({
                     "cluster_id": f"c_{cluster_seq:03d}",
                     "suggested_parent_id": lc.get("suggested_parent_id", ""),
@@ -202,7 +327,7 @@ def run_cluster(
                     "entry_count": lc.get("entry_count", 0),
                     "avg_confidence": lc.get("avg_confidence", 0.0),
                     "confidence_variance": lc.get("confidence_variance", 0.0),
-                    "star_rating": lc.get("star_rating", 1),
+                    "star_rating": star,
                     "has_divergence": lc.get("has_divergence", False),
                     "entries": lc.get("entries", []),
                     "product_names": lc.get("product_names", []),
@@ -214,8 +339,9 @@ def run_cluster(
                 })
 
             outliers = all_llm_outliers
-
-            logger.info(f"LLM聚类完成: {len(clusters)}个簇 + {len(outliers)}个孤立条目")
+            logger.info(
+                f"LLM聚类完成: {len(clusters)}个有效簇 + {len(outliers)}个孤立条目"
+            )
 
         except Exception as e:
             logger.warning(f"LLM聚类失败，退化为embedding聚类: {e}")

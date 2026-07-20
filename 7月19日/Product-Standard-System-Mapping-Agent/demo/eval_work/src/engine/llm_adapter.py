@@ -358,39 +358,108 @@ class LLMAdapter:
                     return {"root_category_id": "", "root_category_name": "", "suggested_category_name": product_name, "suggested_path": [product_name], "reason": f"分析失败: {e}", "confidence": 0}
         return {"root_category_id": "", "root_category_name": "", "suggested_category_name": product_name, "suggested_path": [product_name], "reason": "未知错误", "confidence": 0}
 
-    def layer_disambiguation(
+    def layer_pick_or_stop(
         self,
         product_name: str,
         candidates: list[str],
-        path_hints: list[str] | None = None,
-    ) -> str | None:
-        if path_hints and len(path_hints) == len(candidates):
-            candidates_text = "\n".join(
-                [f"{i + 1}. {c}（路径: {p}）" for i, (c, p) in enumerate(zip(candidates, path_hints))]
-            )
-        else:
-            candidates_text = "\n".join([f"{i + 1}. {c}" for i, c in enumerate(candidates)])
-        prompt = f"""在标准分类体系逐层匹配中，以下产品名称在当前层有多个候选子节点，请选择最相关的一个。
+        ancestry: list[str] | None = None,
+    ) -> tuple[str | None, float, str]:
+        """扩展定位专用：在当前层选子节点，或判定都不合适则停在本层。
+
+        返回 (选中的候选名或 None 表示停止, confidence, reason)。
+        """
+        if not candidates:
+            return None, 0.0, "无子节点"
+        ancestry = ancestry or []
+        path_text = " > ".join(ancestry) if ancestry else "（根层）"
+        candidates_text = "\n".join([f"{i + 1}. {c}" for i, c in enumerate(candidates)])
+        prompt = f"""你在做标准分类体系的「扩展挂载」：产品尚无精确匹配，需要自上而下找到合适的已有父节点。
 
 产品名称：{product_name}
-候选子节点：
+当前已走过的路径：{path_text}
+当前层候选子节点：
 {candidates_text}
 
-请以JSON格式返回：{{"selected_index": 1, "reason": "说明原因"}}"""
+规则：
+1. 只能从候选列表中选择；返回的 selected_name 必须与列表中某一项**完全一致**。
+2. 若某个子节点领域/用途能覆盖该产品，选最合适的一个。
+3. 若所有候选领域都不对，必须停止：selected_index=0，selected_name=""。
+4. 不要被字面「雾/烟/喷/饼/盐」误导，优先看行业真实用途：
+   - 工地/矿山降尘雾炮 → 不要进农业植保，也不要仅因「喷水」就进水利机械
+   - 手用丝锥扳手 → 优先通用手工具/钻孔攻丝工具，不要进风动电动工具零件
+   - 核工业黄饼(重铀酸铵) → 矿产品/铀相关，绝不要进食品
+5. 宁可停在较宽的正确父节点，也不要钻进错误细类或「其他…」兜底类。
+6. selected_index 与 selected_name 必须指向同一项（1..N 对应列表序号）。
+
+请以JSON返回：
+{{"selected_index": 0, "selected_name": "", "confidence": 0.8, "reason": "说明"}}"""
 
         for attempt in range(self._max_retries):
             try:
-                response = self._call_llm(prompt, method="layer_disambiguation")
+                response = self._call_llm(prompt, method="layer_pick_or_stop")
                 result = self._parse_json_response(response)
-                idx = int(result.get("selected_index", 0)) - 1
-                if 0 <= idx < len(candidates):
-                    return candidates[idx]
-                return None
+                idx = int(result.get("selected_index", 0) or 0)
+                conf = float(result.get("confidence", 0.6) or 0.6)
+                reason = str(result.get("reason", ""))
+                selected_name = str(result.get("selected_name") or "").strip()
+
+                # 优先用精确名称对齐
+                if selected_name in candidates:
+                    return selected_name, conf, reason
+                if idx == 0:
+                    return None, conf, reason or "候选均不适合，停在当前层"
+                if 1 <= idx <= len(candidates):
+                    return candidates[idx - 1], conf, reason
+                return None, conf, reason or "无效序号，停在当前层"
             except Exception as e:
-                logger.warning(f"逐层消歧失败(第{attempt + 1}次): {e}")
+                logger.warning(f"扩展逐层选择失败(第{attempt + 1}次): {e}")
                 if attempt == self._max_retries - 1:
-                    return None
-        return None
+                    return None, 0.0, f"选择失败: {e}"
+        return None, 0.0, "未知错误"
+
+    def suggest_formal_category_name(
+        self,
+        product_name: str,
+        parent_name: str,
+        parent_path: str,
+        sibling_names: list[str] | None = None,
+    ) -> dict:
+        """在已确定的父节点下，建议正式标准子分类名（禁止产品级细叶子）。"""
+        siblings = "、".join((sibling_names or [])[:20]) or "（无）"
+        prompt = f"""在标准产品分类体系中，已确定父节点，请为产品建议一个正式的标准子分类名。
+
+产品名称：{product_name}
+父节点：{parent_name}
+父节点路径：{parent_path}
+同级已有子类参考：{siblings}
+
+规则：
+1. 新分类名必须正式、通用，能覆盖一类产品，禁止使用产品名原样或型号级名称（如禁止「T型丝锥扳手」「雾炮机」这种SKU名）。
+2. 应与同级子类风格相近（…机械/…设备/…工具/…制品 等）。
+3. 若父节点下已有足够合适的子类名，可返回 already_exists=true 并给出该已有名。
+
+JSON返回：
+{{"new_node_name": "正式分类名", "already_exists": false, "confidence": 0.75, "reason": "..."}}"""
+        for attempt in range(self._max_retries):
+            try:
+                response = self._call_llm(prompt, method="suggest_formal_category_name")
+                result = self._parse_json_response(response)
+                return {
+                    "new_node_name": str(result.get("new_node_name") or "").strip(),
+                    "already_exists": bool(result.get("already_exists", False)),
+                    "confidence": float(result.get("confidence") or 0.7),
+                    "reason": str(result.get("reason") or ""),
+                }
+            except Exception as e:
+                logger.warning(f"正式类名建议失败(第{attempt + 1}次): {e}")
+                if attempt == self._max_retries - 1:
+                    return {
+                        "new_node_name": "",
+                        "already_exists": False,
+                        "confidence": 0.0,
+                        "reason": f"失败: {e}",
+                    }
+        return {"new_node_name": "", "already_exists": False, "confidence": 0.0, "reason": "未知错误"}
 
     def judge_mapping_reasonable(
         self,
@@ -611,13 +680,16 @@ class LLMAdapter:
 
         prompt = f"""你是一个标准分类体系专家。以下是一批未能匹配到现有标准分类的产品，每条都附带了之前LLM推理的建议路径。
 
-请将这些产品进行分组聚类，规则如下：
-1. 将语义相近、应归属同一新分类的产品归为一组
-2. 同一组产品应该挂载到标准体系中的同一个父节点下
-3. 如果之前建议的父节点不一致但你认为它们应该在同一父节点下，请统一选择最合适的父节点
-4. 每组给出一个完整的层级路径，从父节点开始逐级细化到最终分类
-5. 路径深度根据产品特性决定：宽泛产品1-2层，专业产品3-5层
-6. 无法归入任何组的产品单独列出
+请将这些产品进行**精细**分组聚类。核心目标：宁可多出孤立条目，也不要把不相关产品硬塞进同一个宽泛大类。
+
+强制规则：
+1. 只有「产业用途相近、可共用同一细分类名」的产品才能进同一簇（例如同属「中央空调设备」或同属「工控主板」）
+2. 禁止仅因同属一级大类（如「机械、设备类产品」）就合并；一级大类相同但细分领域不同的必须拆开或列为 outliers
+3. 反例（绝对不要并成一簇）：燃气轮机、电磁灶、列车制动配件、中央空调、工控主板、飞机光电球罩 —— 这些虽都可能挂在机械设备大类下，但细分完全不同
+4. 每个簇的 full_path 至少 3 级（大类 > 中类 > 细类），鼓励 4 级；禁止 full_path 只有「一级大类」或「一级大类 > 模糊总称」
+5. group_name 必须是可落地的细分类名，禁止使用「其他设备」「机械设备」「综合产品」等空泛名称
+6. 同一簇产品应能回答：它们是否可被同一采购目录/同一质检标准覆盖？不能则拆分
+7. 拿不准就放 outliers，不要凑簇
 
 {taxonomy_hint}
 待聚类产品列表：
@@ -627,21 +699,21 @@ class LLMAdapter:
 {{
   "clusters": [
     {{
-      "group_name": "该组的最终分类名称",
-      "parent_id": "挂载父节点ID",
+      "group_name": "细分类名（具体、可落地）",
+      "parent_id": "挂载父节点ID（尽量用已有较深节点，不要用一级根）",
       "parent_name": "挂载父节点名称",
-      "full_path": "父节点名 > 中间层级1 > 中间层级2 > 最终分类名",
+      "full_path": "一级 > 二级 > 三级 > 细类（至少3级）",
       "product_indices": [1, 3],
-      "reason": "分组理由及路径规划理由"
+      "reason": "说明为何这些产品同属该细类，以及为何路径足够细"
     }}
   ],
   "outliers": [2]
 }}
 
 注意：
-- product_indices 是上面列表中的序号（从1开始），outliers 是无法归类的产品序号
-- full_path 从父节点开始，逐级细化，每层是对上层的合理细分
-- 示例：碳纤维 → full_path: "化学原料及化学制品 > 专项化学用品 > 高功能化工产品 > 碳纤维增强复合材料" """
+- product_indices / outliers 序号从1开始
+- 若本批产品彼此都不相近，clusters 可以为空，全部放 outliers
+- full_path 必须逐级细化，末级名称应与 group_name 一致或接近"""
 
         for attempt in range(self._max_retries):
             try:

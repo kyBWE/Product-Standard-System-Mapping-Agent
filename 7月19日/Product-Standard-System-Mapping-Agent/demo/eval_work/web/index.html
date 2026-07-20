@@ -30,7 +30,7 @@ body::before{
              radial-gradient(ellipse 60% 40% at 80% 100%,rgba(168,85,247,0.05),transparent);
   pointer-events:none;z-index:0;
 }
-.app{position:relative;z-index:1;max-width:1480px;margin:0 auto;padding:20px 28px 48px}
+.app{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:20px 28px 48px}
 
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
 .header-left{display:flex;align-items:center;gap:14px}
@@ -71,6 +71,29 @@ textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed}
 .btn-ghost{background:transparent;color:var(--text-secondary)}
 .btn-ghost:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+
+.batch-table{width:100%;border-collapse:collapse;font-size:0.78rem;table-layout:fixed}
+.batch-table th,.batch-table td{
+  padding:0 8px;border-bottom:1px solid var(--border);
+  height:36px;line-height:36px;vertical-align:middle;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.batch-table th{color:var(--text-secondary);font-weight:600;height:32px;line-height:32px}
+.batch-table .col-idx{width:40px;color:var(--text-muted)}
+.batch-table .col-name{width:22%;font-weight:500}
+.batch-table .col-match{width:28%;color:var(--accent)}
+.batch-table .col-status{width:90px;text-align:center}
+.batch-table .col-conf{width:80px;text-align:center;font-variant-numeric:tabular-nums}
+.batch-table .col-time{width:70px;text-align:center;color:var(--text-secondary)}
+.batch-table .col-act{width:72px;text-align:center}
+.batch-act-slot{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:24px;line-height:1;vertical-align:middle;
+}
+.batch-act-slot .btn{
+  font-size:0.7rem;padding:0 8px;height:24px;line-height:22px;
+  min-height:24px;box-sizing:border-box;
+}
 
 .engine-btns{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .engine-btn{padding:6px 14px;border-radius:20px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all 0.2s;font-family:inherit}
@@ -116,8 +139,35 @@ textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
 .path-id{color:var(--text-muted);font-size:0.65rem}
 
 .history-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.history-grid .card.exp-wide{grid-column:1 / -1}
 .history-list{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .history-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.78rem}
+.exp-tabs{display:flex;gap:4px;margin-bottom:10px}
+.exp-tab{padding:5px 12px;border-radius:var(--radius-xs);font-size:0.72rem;font-weight:600;cursor:pointer;color:var(--text-secondary);border:1px solid var(--border);background:transparent;font-family:inherit}
+.exp-tab:hover{color:var(--text-primary);background:var(--bg-card-hover)}
+.exp-tab.active{color:var(--green);border-color:rgba(34,197,94,0.35);background:var(--green-glow)}
+.exp-review-list{max-height:420px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;border:1px solid var(--border);border-radius:var(--radius-sm)}
+.exp-review-head,.exp-review-row{display:grid;grid-template-columns:minmax(110px,0.9fr) minmax(180px,1.2fr) minmax(220px,1.6fr) 120px;gap:10px;align-items:center;padding:7px 12px;font-size:0.72rem}
+.exp-review-head.new-node,.exp-review-row.new-node{grid-template-columns:minmax(100px,0.85fr) minmax(140px,1fr) minmax(200px,1.5fr) 230px}
+.exp-review-head{position:sticky;top:0;z-index:1;background:var(--bg-card);color:var(--text-muted);font-weight:600;border-bottom:1px solid var(--border);letter-spacing:0.02em}
+.exp-review-row{border-bottom:1px solid var(--border);background:var(--bg-canvas)}
+.exp-review-row:last-child{border-bottom:none}
+.exp-review-row:hover{background:var(--bg-card-hover)}
+.exp-review-row .name{font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exp-review-row .rec{color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exp-review-row .path{color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exp-review-row .meta{color:var(--text-muted);font-size:0.65rem}
+.exp-review-row .actions{display:flex;gap:6px;justify-content:flex-end}
+.exp-btn{padding:3px 10px;border-radius:var(--radius-xs);font-size:0.68rem;font-weight:600;cursor:pointer;border:1px solid var(--border);font-family:inherit;background:transparent}
+.exp-btn.ok{color:var(--green);border-color:rgba(34,197,94,0.35)}
+.exp-btn.ok:hover{background:var(--green-glow)}
+.exp-btn.no{color:var(--red);border-color:rgba(239,68,68,0.35)}
+.exp-btn.no:hover{background:var(--red-glow)}
+.exp-btn:disabled{opacity:0.45;cursor:not-allowed}
+.exp-status-pill{font-size:0.65rem;font-weight:600;padding:1px 7px;border-radius:10px;white-space:nowrap}
+.exp-status-pill.warn{color:var(--amber);background:var(--amber-glow)}
+.exp-status-pill.info{color:var(--cyan);background:var(--cyan-glow)}
+.exp-status-pill.bad{color:var(--red);background:var(--red-glow)}
 .history-item:last-child{border-bottom:none}
 .history-product{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .history-category{color:var(--accent);font-weight:500;min-width:40px}
@@ -251,7 +301,7 @@ textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
     </div>
   </div>
 
-  <div class="history-grid" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="history-grid">
     <div class="card">
       <div class="card-title"><span class="dot"></span>匹配历史</div>
       <div class="history-list" id="historyList"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无记录</div></div>
@@ -264,7 +314,7 @@ textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
         <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber-glow)"></span>暂存箱 <span id="stagingBadgeTop" style="font-size:0.7rem;color:var(--amber)">0</span></div>
         <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--purple)" onclick="stagingBatchSuggest()">&#x1F916; 批量智能扩展</button>
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--purple)" onclick="prepareNewNodesFromStaging()">&#x1F4C1; 生成新节点建议</button>
           <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--red)" onclick="stagingClear()">&#x1F5D1;</button>
           <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px" onclick="loadStaging()">&#x1F504;</button>
         </div>
@@ -272,26 +322,46 @@ textarea.match-input{resize:vertical;min-height:80px;line-height:1.5}
       <div id="stagingBarTop" style="font-size:0.68rem;color:var(--text-muted);margin-bottom:8px"></div>
       <div class="history-list" id="stagingListTop" style="max-height:300px"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂存箱为空</div></div>
     </div>
-    <div class="card" style="grid-column:span 2">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-        <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green-glow)"></span>体系扩展 <span id="expGroupBadge" style="font-size:0.7rem;color:var(--green)">0</span></div>
-        <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px" onclick="loadExpGrouped()">&#x1F504;</button>
+
+    <div class="card exp-wide">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px;flex-wrap:wrap">
+        <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green-glow)"></span>同义词扩展 <span id="expGroupBadge" style="font-size:0.7rem;color:var(--green)">0</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <span id="expReviewHint" style="font-size:0.68rem;color:var(--text-muted)"></span>
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--green)" id="expApproveAllBtn" onclick="approveAllExpSuggests()" disabled>全部通过可推荐</button>
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px" onclick="refreshExpPanel()">&#x1F504;</button>
+        </div>
       </div>
-      <div id="expGroupBar" style="font-size:0.68rem;color:var(--text-muted);margin-bottom:8px"></div>
-      <div class="history-list" id="expGroupList" style="max-height:500px"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无扩展数据</div></div>
+      <div class="exp-tabs">
+        <button class="exp-tab active" id="expTabReview" onclick="switchExpTab('review')">待复核建议 <span id="expReviewBadge" style="opacity:0.85">0</span></button>
+        <button class="exp-tab" id="expTabGrouped" onclick="switchExpTab('grouped')">已挂同义词</button>
+      </div>
+      <div id="expReviewPane">
+        <div id="expGroupBar" style="font-size:0.68rem;color:var(--text-muted);margin-bottom:8px">从已匹配结果中筛选可追加的同义词；通过后写入对应节点。未匹配产品请走下方「新节点扩展」</div>
+        <div class="exp-review-list" id="expReviewList">
+          <div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0">暂无待复核建议</div>
+        </div>
+      </div>
+      <div id="expGroupedPane" style="display:none">
+        <div id="expGroupedBar" style="font-size:0.68rem;color:var(--text-muted);margin-bottom:8px"></div>
+        <div class="history-list exp-review-list" id="expGroupList" style="max-height:420px"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无扩展数据</div></div>
+      </div>
     </div>
   </div>
 
-  <div class="card" style="margin-top:16px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-
-      <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber-glow)"></span>体系扩展审核</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--cyan)" onclick="doCluster()">&#x1F52C; 执行聚类分析</button>
-        <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px" onclick="loadClusterReport()">&#x1F504; 刷新报告</button>
+  <div class="card exp-wide" style="margin-top:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px;flex-wrap:wrap">
+      <div class="card-title" style="margin-bottom:0"><span class="dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber-glow)"></span>新节点扩展 <span id="newNodeBadge" style="font-size:0.7rem;color:var(--amber)">0</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <span id="newNodeHint" style="font-size:0.68rem;color:var(--text-muted)"></span>
+        <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--purple)" onclick="prepareNewNodesFromStaging()">从暂存箱生成建议</button>
+        <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px" onclick="loadNewNodeReviews()">&#x1F504;</button>
       </div>
     </div>
-    <div id="clusterPanel"><div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">执行聚类分析后查看结果</div></div>
+    <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:8px">未匹配产品经 LLM 规划分类路径后在此人工复核：批准则新建子分类节点，拒绝则移出扩展池</div>
+    <div class="exp-review-list" id="newNodeReviewList">
+      <div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0">暂无待审核的新节点建议</div>
+    </div>
   </div>
 </div>
 
@@ -504,6 +574,9 @@ async function doCompare() {
   } finally { btn.disabled = false; btn.innerHTML = '&#x2699; 对比匹配'; }
 }
 
+let batchPage = 1;
+const BATCH_PAGE_SIZE = 10;
+
 async function doBatchMatch() {
   const text = document.getElementById('batchInput').value.trim();
   if (!text) return;
@@ -514,6 +587,7 @@ async function doBatchMatch() {
   document.getElementById('statusBadge').innerHTML = '&#x25CF; 批量匹配中';
   document.getElementById('statusBadge').className = 'badge badge-purple';
   batchResults = [];
+  batchPage = 1;
   const div = document.getElementById('batchResult');
   div.innerHTML = `<div style="color:var(--text-muted);font-size:0.82rem;margin-bottom:8px">正在匹配 ${names.length} 条 (RAG向量)...</div>`;
   try {
@@ -523,35 +597,195 @@ async function doBatchMatch() {
       const pct = ((i + 1) / names.length * 100).toFixed(0);
       div.innerHTML = `<div style="color:var(--text-muted);font-size:0.82rem;margin-bottom:8px">进度: ${i+1}/${names.length} (${pct}%)</div>`;
     }
-    const noMatchNames = batchResults.filter(r => r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE').map(r => r.input);
-    let html = '';
-    if (noMatchNames.length > 0) {
-      html += `<div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
-        <span style="color:var(--amber);font-size:0.82rem">${noMatchNames.length} 条未匹配/低置信</span>
-        <button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px;color:var(--amber)" onclick="batchAddToStaging()">全部加入暂存箱</button>
-      </div>`;
-    }
-    html += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.78rem">';
-    html += '<tr style="border-bottom:1px solid var(--border);color:var(--text-secondary)"><th style="text-align:left;padding:6px 8px">产品名</th><th style="text-align:left;padding:6px 8px">匹配ID</th><th style="padding:6px 8px">状态</th><th style="padding:6px 8px">置信度</th><th style="padding:6px 8px">耗时</th><th style="padding:6px 8px">操作</th></tr>';
-    batchResults.forEach(r => {
-      const isNoMatch = r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE';
-      html += `<tr style="border-bottom:1px solid var(--border)">
-        <td style="padding:6px 8px;font-weight:500">${esc(r.input)}</td>
-        <td style="padding:6px 8px;color:var(--accent)">${r.matched_category_id ? esc(r.matched_category_id) + ' ' + esc(getMatchedName(r)) : '-'}</td>
-        <td style="padding:6px 8px">${statusTag(r.match_status)}</td>
-        <td style="padding:6px 8px;font-variant-numeric:tabular-nums;color:${confColor(r.confidence)}">${(r.confidence||0).toFixed(4)}</td>
-        <td style="padding:6px 8px;color:var(--text-secondary)">${fmtMs(r.elapsed_ms)}</td>
-        <td style="padding:6px 8px">${isNoMatch ? `<button class="btn btn-ghost" style="font-size:0.7rem;padding:3px 8px;color:var(--cyan)" onclick="stashExpansion('${esc(r.input)}','${esc(r.candidates && r.candidates[0] ? r.candidates[0].category_id : '')}')">暂存</button>` : ''}</td>
-      </tr>`;
-    });
-    html += '</table></div>';
-    div.innerHTML = html;
+    renderBatchResultPage();
+    document.getElementById('statusBadge').innerHTML = '&#x25CF; 灌入扩展中';
+    document.getElementById('statusBadge').className = 'badge badge-purple';
+    loadHistory(); loadStats();
+    // 匹配完成后自动灌入：未匹配→暂存箱；已匹配→同义词待复核（新节点需手动生成）
+    const pipe = await runPostBatchPipeline();
+    renderBatchResultPage(pipe);
     document.getElementById('statusBadge').innerHTML = '&#x25CF; 就绪';
     document.getElementById('statusBadge').className = 'badge badge-green';
-    loadHistory(); loadStats();
   } catch(e) {
     div.innerHTML = `<div style="color:var(--red)">&#x26A0; ${esc(e.message)}</div>`;
   } finally { btn.disabled = false; btn.innerHTML = '&#x1F4E4; RAG向量批量匹配'; }
+}
+
+async function runPostBatchPipeline() {
+  const summary = { stagingAdded: 0, stagingExists: 0, synAdded: 0, synSkipped: 0, newNodes: 0, errors: [] };
+  const noMatchNames = batchResults
+    .filter(r => r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE')
+    .map(r => r.input);
+  const matchedForSyn = batchResults.filter(r => r.match_status === 'MATCHED' && r.matched_category_id);
+
+  // 1) 未匹配/低置信 → 仅入暂存箱（新节点建议由用户手动点「生成新节点建议」）
+  for (const name of noMatchNames) {
+    try {
+      const r = await fetch('/api/staging/add', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ product_name: name, source: 'batch_match' }),
+      });
+      const d = await r.json();
+      if (d.status === 'ok') summary.stagingAdded++;
+      else if (d.status === 'already_exists') summary.stagingExists++;
+      else summary.errors.push(`${name}: ${d.error || d.message || '暂存失败'}`);
+    } catch (e) {
+      summary.errors.push(`${name}: ${e.message}`);
+    }
+  }
+  await loadStaging();
+
+  // 2) 已匹配 → 同义词扩展待复核（低门槛，便于测试集看到候选）
+  if (matchedForSyn.length > 0) {
+    try {
+      const syn = await importMatchedToSynonymReviews(true);
+      summary.synAdded = (syn && syn.suggestion_count) || 0;
+      summary.synSkipped = (syn && syn.skipped_count) || 0;
+    } catch (e) {
+      summary.errors.push('同义词导入: ' + (e.message || '失败'));
+    }
+  }
+  return summary;
+}
+
+function renderBatchResultPage(pipeSummary) {
+  const div = document.getElementById('batchResult');
+  if (!div) return;
+  const noMatchNames = batchResults.filter(r => r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE');
+  const matchedForSyn = batchResults.filter(r => r.match_status === 'MATCHED' && r.matched_category_id);
+  const total = batchResults.length;
+  const pages = Math.max(1, Math.ceil(total / BATCH_PAGE_SIZE));
+  if (batchPage > pages) batchPage = pages;
+  if (batchPage < 1) batchPage = 1;
+  const start = (batchPage - 1) * BATCH_PAGE_SIZE;
+  const pageRows = batchResults.slice(start, start + BATCH_PAGE_SIZE);
+
+  let html = '';
+  html += `<div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+    <span style="color:var(--text-secondary);font-size:0.82rem">共 ${total} 条 · 已匹配 ${matchedForSyn.length} · 未匹配/低置信 ${noMatchNames.length}</span>
+    ${noMatchNames.length ? `<button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px;color:var(--amber)" onclick="batchAddToStaging()">再同步暂存箱</button>` : ''}
+    ${matchedForSyn.length ? `<button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 12px;color:var(--green)" onclick="importMatchedToSynonymReviews()">再导入同义词</button>` : ''}
+  </div>`;
+  if (pipeSummary) {
+    html += `<div style="margin-bottom:10px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--text-secondary)">
+      自动灌入：暂存 +${pipeSummary.stagingAdded || 0}` +
+      ((pipeSummary.stagingExists) ? `（已有 ${pipeSummary.stagingExists}）` : '') +
+      ` · 同义词待复核 +${pipeSummary.synAdded || 0}` +
+      ((pipeSummary.synSkipped) ? `（跳过 ${pipeSummary.synSkipped}）` : '') +
+      ` · 新节点请点「生成新节点建议」` +
+      ((pipeSummary.errors && pipeSummary.errors.length) ? `<div style="color:var(--amber);margin-top:4px">${esc(pipeSummary.errors.slice(0,3).join('；'))}</div>` : '') +
+    `</div>`;
+  }
+  html += '<div style="overflow-x:auto"><table class="batch-table">';
+  html += '<tr><th class="col-idx">#</th><th class="col-name">产品名</th><th class="col-match">匹配ID</th><th class="col-status">状态</th><th class="col-conf">置信度</th><th class="col-time">耗时</th><th class="col-act">操作</th></tr>';
+  pageRows.forEach((r, i) => {
+    const idx = start + i + 1;
+    const isNoMatch = r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE';
+    const act = isNoMatch
+      ? `<span class="batch-act-slot"><button class="btn btn-ghost" style="color:var(--cyan)" onclick="stashExpansion('${esc(r.input)}','${esc(r.candidates && r.candidates[0] ? r.candidates[0].category_id : '')}')">暂存</button></span>`
+      : `<span class="batch-act-slot" aria-hidden="true"></span>`;
+    html += `<tr>
+      <td class="col-idx">${idx}</td>
+      <td class="col-name" title="${esc(r.input)}">${esc(r.input)}</td>
+      <td class="col-match" title="${r.matched_category_id ? esc(r.matched_category_id) + ' ' + esc(getMatchedName(r)) : ''}">${r.matched_category_id ? esc(r.matched_category_id) + ' ' + esc(getMatchedName(r)) : '-'}</td>
+      <td class="col-status">${statusTag(r.match_status)}</td>
+      <td class="col-conf" style="color:${confColor(r.confidence)}">${(r.confidence||0).toFixed(4)}</td>
+      <td class="col-time">${fmtMs(r.elapsed_ms)}</td>
+      <td class="col-act">${act}</td>
+    </tr>`;
+  });
+  html += '</table></div>';
+  html += `<div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:8px;flex-wrap:wrap">
+    <span style="font-size:0.75rem;color:var(--text-muted)">第 ${batchPage}/${pages} 页 · 每页 ${BATCH_PAGE_SIZE} 条</span>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-ghost" style="font-size:0.75rem;padding:4px 10px" ${batchPage<=1?'disabled':''} onclick="gotoBatchPage(${batchPage-1})">上一页</button>
+      <button class="btn btn-ghost" style="font-size:0.75rem;padding:4px 10px" ${batchPage>=pages?'disabled':''} onclick="gotoBatchPage(${batchPage+1})">下一页</button>
+    </div>
+  </div>`;
+  div.innerHTML = html;
+}
+
+function gotoBatchPage(p) {
+  batchPage = p;
+  renderBatchResultPage();
+}
+
+async function importMatchedToSynonymReviews(silent) {
+  if (!batchResults || batchResults.length === 0) {
+    if (!silent) alert('暂无批量匹配结果');
+    return null;
+  }
+  const items = batchResults
+    .filter(r => r.match_status === 'MATCHED' && r.matched_category_id)
+    .map(r => ({
+      product_name: r.input || r.product_name,
+      matched_category_id: r.matched_category_id,
+      confidence: r.confidence || 0,
+      match_status: r.match_status,
+    }));
+  if (items.length === 0) {
+    if (!silent) alert('没有已匹配结果可导入');
+    return null;
+  }
+  try {
+    const r = await fetch('/api/synonym/suggest_from_matches', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        items,
+        use_llm: false,
+        auto_strict: false,
+        min_confidence: 0,
+        text_threshold: 0.92,
+      }),
+    });
+    const d = await r.json();
+    if (d.error) {
+      if (!silent) alert(d.error);
+      return d;
+    }
+    const incoming = d.suggestions || [];
+    const byName = {};
+    (_pendingExpReviews || []).forEach(s => {
+      if (s && s._state === 'pending') byName[s.product_name] = s;
+    });
+    incoming.forEach((s) => {
+      byName[s.product_name] = {
+        ...s,
+        _key: `syn__${s.product_name}`,
+        _state: 'pending',
+        source: 'matched',
+      };
+    });
+    _pendingExpReviews = Object.values(byName);
+    persistPendingExpReviews();
+    renderExpReviewList();
+    switchExpTab('review');
+    const hint = document.getElementById('expReviewHint');
+    if (hint) {
+      const rules = d.rules || {};
+      hint.textContent = `同义词筛选：新增 ${incoming.length} 条 · 跳过 ${d.skipped_count || 0}` +
+        (rules.syn_confidence_threshold != null || rules.syn_text_threshold != null
+          ? `（conf≥${rules.syn_confidence_threshold}, text_sim<${rules.syn_text_threshold}）`
+          : '');
+    }
+    if (!silent) {
+      let msg = `同义词扩展：通过筛选 ${incoming.length} 条`;
+      if (d.skipped_count) msg += `，跳过 ${d.skipped_count} 条`;
+      const samples = (d.score_samples || []).slice(0, 5).map(x =>
+        `· ${x.product_name}→${x.category_name}: text=${x.text_similarity}, pg_trgm=${x.pg_trgm}`
+      );
+      if (samples.length) msg += '\n\n分数样例：\n' + samples.join('\n');
+      const skips = (d.skipped || []).slice(0, 5).map(x => `· ${x.product_name}: ${x.reason}`);
+      if (skips.length) msg += '\n\n跳过示例：\n' + skips.join('\n');
+      alert(msg);
+    }
+    return d;
+  } catch (e) {
+    if (!silent) alert('导入同义词建议失败');
+    return null;
+  }
 }
 
 function handleTxtImport(input) {
@@ -963,164 +1197,292 @@ async function stagingClear() {
 
 async function stagingBatchSuggest() {
   const list = document.getElementById('stagingListTop');
+  const reviewList = document.getElementById('expReviewList');
   if (!list) return;
-  list.innerHTML = '<div style="text-align:center;padding:20px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.85rem">LLM批量聚类分析中...</span></div>';
+  list.innerHTML = '<div style="text-align:center;padding:20px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.85rem">智能扩展分析中...</span></div>';
+  if (reviewList) {
+    reviewList.innerHTML = '<div style="text-align:center;padding:24px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.85rem">生成待复核建议...</span></div>';
+  }
+  switchExpTab('review');
   try {
     const r = await fetch('/api/staging/batch_suggest', { method: 'POST', headers: {'Content-Type':'application/json'} });
     const d = await r.json();
-    if (d.error) { list.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`; return; }
-    showStagingSuggestModal(d);
+    if (d.error) {
+      list.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`;
+      if (reviewList) reviewList.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`;
+      return;
+    }
+    setPendingExpReviews(d.suggestions || []);
+    renderExpReviewList();
     loadStaging();
   } catch(e) {
     list.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px">批量分析失败</div>';
+    if (reviewList) reviewList.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px">批量分析失败</div>';
   }
 }
 
-function showStagingSuggestModal(data) {
-  const modal = document.createElement('div');
-  modal.id = 'stagingSuggestModal';
-  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+let _pendingExpReviews = [];
+let _expTab = 'review';
 
-  const suggestions = data.suggestions || [];
-  
-  let suggestHtml = suggestions.map((s, i) => {
+function setPendingExpReviews(suggestions) {
+  _pendingExpReviews = (suggestions || []).map((s, i) => ({
+    ...s,
+    _key: `${i}__${s.product_name || ''}`,
+    _state: 'pending',
+  }));
+  try { sessionStorage.setItem('pendingExpReviews', JSON.stringify(_pendingExpReviews)); } catch (e) {}
+}
+
+function loadPendingExpReviewsFromStorage() {
+  try {
+    const raw = sessionStorage.getItem('pendingExpReviews');
+    if (!raw) return;
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr)) _pendingExpReviews = arr.filter(x => x && x._state === 'pending');
+  } catch (e) {}
+}
+
+function persistPendingExpReviews() {
+  try { sessionStorage.setItem('pendingExpReviews', JSON.stringify(_pendingExpReviews)); } catch (e) {}
+}
+
+function switchExpTab(tab) {
+  _expTab = tab;
+  const reviewTab = document.getElementById('expTabReview');
+  const groupedTab = document.getElementById('expTabGrouped');
+  const reviewPane = document.getElementById('expReviewPane');
+  const groupedPane = document.getElementById('expGroupedPane');
+  if (reviewTab) reviewTab.classList.toggle('active', tab === 'review');
+  if (groupedTab) groupedTab.classList.toggle('active', tab === 'grouped');
+  if (reviewPane) reviewPane.style.display = tab === 'review' ? '' : 'none';
+  if (groupedPane) groupedPane.style.display = tab === 'grouped' ? '' : 'none';
+  if (tab === 'grouped') loadExpGrouped();
+}
+
+function refreshExpPanel() {
+  if (_expTab === 'grouped') loadExpGrouped();
+  else renderExpReviewList();
+}
+
+function _reviewPathText(s) {
+  const rec = s.recommendation || {};
+  if (rec.full_path) return rec.full_path;
+  const segs = (s.llm_path_validation && s.llm_path_validation.path_segments) || [];
+  if (segs.length) return segs.map(x => x.name).join(' > ');
+  const llm = s.llm_reasoning || {};
+  return llm.full_path || '';
+}
+
+function _reviewRecText(s) {
+  if (s.status === 'already_matched') {
+    return `#${s.matched_category_id || ''} ${s.matched_category_name || ''}`.trim();
+  }
+  if (s.status === 'error') return s.error || '处理失败';
+  const rec = s.recommendation;
+  if (!rec || !rec.parent_id) return '无法推荐';
+  let t = `#${rec.parent_id} ${rec.parent_name || ''}`;
+  if (rec.should_create_new_node && rec.new_node_name) t += ` · 新建 ${rec.new_node_name}`;
+  return t.trim();
+}
+
+function _reviewReasonText(s) {
+  const llm = s.llm_reasoning || {};
+  const rec = s.recommendation || {};
+  return llm.product_analysis || rec.reason || rec.decision_reason || '';
+}
+
+function renderExpReviewList() {
+  const list = document.getElementById('expReviewList');
+  const badge = document.getElementById('expReviewBadge');
+  const hint = document.getElementById('expReviewHint');
+  const allBtn = document.getElementById('expApproveAllBtn');
+  const pending = _pendingExpReviews.filter(s => s._state === 'pending');
+  if (badge) badge.textContent = String(pending.length);
+  const actionable = pending.filter(s => s.status !== 'already_matched' && s.status !== 'error' && s.recommendation && s.recommendation.parent_id);
+  if (allBtn) allBtn.disabled = actionable.length === 0;
+  if (hint) {
+    hint.textContent = pending.length
+      ? `待复核 ${pending.length} 条 · 可直接通过 ${actionable.length} 条`
+      : '';
+  }
+  if (!list) return;
+  if (pending.length === 0) {
+    list.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0">暂无待复核建议</div>';
+    return;
+  }
+
+  const rows = pending.map((s) => {
+    const idx = _pendingExpReviews.indexOf(s);
+    const name = esc(s.product_name || '');
+    const path = esc(_reviewPathText(s));
+    const recText = esc(_reviewRecText(s));
+    const reason = esc(_reviewReasonText(s));
+    let pill = '';
+    let actions = '';
     if (s.status === 'already_matched') {
-      return `<div style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;background:var(--bg-canvas)">
-        <div style="font-size:0.82rem;font-weight:600;margin-bottom:6px">${esc(s.product_name)}</div>
-        <div style="font-size:0.72rem;color:var(--green)">&#x2705; 已匹配到 #${esc(s.matched_category_id)} ${esc(s.matched_category_name)} (${(s.confidence*100).toFixed(0)}%)</div>
-      </div>`;
+      pill = '<span class="exp-status-pill info">已匹配</span>';
+      actions = `<button class="exp-btn no" onclick="rejectExpSuggest(${idx})">移出</button>`;
+    } else if (s.status === 'error' || !(s.recommendation && s.recommendation.parent_id)) {
+      pill = `<span class="exp-status-pill bad">${s.status === 'error' ? '失败' : '无推荐'}</span>`;
+      actions = `<button class="exp-btn no" onclick="rejectExpSuggest(${idx})">拒绝</button>`;
+    } else {
+      const conf = s.recommendation.confidence != null ? `${(s.recommendation.confidence * 100).toFixed(0)}%` : '';
+      const llmOk = s.recommendation && s.recommendation.trust_llm;
+      pill = conf
+        ? `<span class="exp-status-pill ${llmOk ? 'info' : 'warn'}">${llmOk ? 'LLM' : '待确认'} ${conf}</span>`
+        : '';
+      actions = `<button class="exp-btn ok" onclick="approveExpSuggest(${idx})">通过</button><button class="exp-btn no" onclick="rejectExpSuggest(${idx})">拒绝</button>`;
     }
-
-    const vecCands = s.vector_candidates || [];
-    const llm = s.llm_reasoning || {};
-    const pathValidation = s.llm_path_validation || {};
-    const rec = s.recommendation;
-
-    let vecHtml = vecCands.slice(0, 3).map(c => {
-      const path = (c.path || '').replace(/,/g, ' > ') || c.category_name;
-      return `<div style="padding:4px 0;font-size:0.68rem">
-        <span style="color:var(--cyan)">${(c.similarity*100).toFixed(1)}%</span>
-        <span style="color:var(--text-secondary)"> #${esc(c.category_id)} ${esc(c.category_name)}</span>
-      </div>`;
-    }).join('');
-
-    let llmHtml = '';
-    if (llm.product_analysis) {
-      let pathDisplay = '';
-      if (pathValidation.path_segments && pathValidation.path_segments.length > 0) {
-        pathDisplay = pathValidation.path_segments.map((seg, i) => {
-          const color = seg.exists ? 'var(--green)' : 'var(--red)';
-          const icon = seg.exists ? '✓' : '✗';
-          return `<span style="color:${color};font-size:0.68rem">${icon}${esc(seg.name)}</span>`;
-        }).join('<span style="color:var(--text-muted)"> › </span>');
-        
-        if (pathValidation.has_missing_nodes) {
-          pathDisplay = `<div style="font-size:0.68rem;color:var(--text-muted)">路径: ${pathDisplay}</div><div style="font-size:0.62rem;color:var(--amber);margin-top:2px">⚠️ 包含不存在的节点</div>`;
-        } else {
-          pathDisplay = `<div style="font-size:0.68rem;color:var(--text-muted)">路径: ${pathDisplay}</div>`;
-        }
-      } else {
-        pathDisplay = `<div style="font-size:0.68rem;color:var(--text-muted)">路径: ${esc(llm.full_path || '')}</div>`;
-      }
-      
-      llmHtml = `<div style="padding:8px;background:var(--bg-card);border-radius:6px;margin-top:8px">
-        <div style="font-size:0.7rem;color:var(--purple);margin-bottom:4px">&#x1F916; ${esc(llm.product_analysis || '').substring(0, 80)}...</div>
-        ${pathDisplay}
-      </div>`;
-    }
-
-    let recHtml = '';
-    if (rec) {
-      recHtml = `<div style="padding:10px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(168,85,247,0.1));border:1px solid var(--accent);border-radius:6px;margin-top:8px">
-        <div style="font-size:0.75rem;font-weight:600;color:var(--accent)">&#x2728; 推荐: #${esc(rec.parent_id)} ${esc(rec.parent_name)}</div>
-        <div style="font-size:0.68rem;color:var(--text-secondary);margin-top:2px">${esc(rec.full_path)}</div>
-        ${rec.should_create_new_node ? `<div style="font-size:0.65rem;color:var(--green);margin-top:2px">&#x1F195; 新建: ${esc(rec.new_node_name)}</div>` : ''}
-      </div>`;
-    }
-
-    return `<div style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;background:var(--bg-canvas)">
-      <div style="font-size:0.82rem;font-weight:600;margin-bottom:8px">${esc(s.product_name)}</div>
-      ${vecHtml}
-      ${llmHtml}
-      ${recHtml}
-      ${rec ? `<button class="btn btn-ghost" style="font-size:0.7rem;padding:4px 10px;margin-top:8px" onclick="acceptSingleSuggest('${esc(s.product_name)}','${esc(rec.parent_id)}')">确认扩展</button>` : '<div style="font-size:0.68rem;color:var(--red);margin-top:8px">无法推荐</div>'}
+    return `<div class="exp-review-row">
+      <div class="name" title="${name}">${name}</div>
+      <div class="rec" title="${recText}">${pill} ${recText}</div>
+      <div class="path" title="${reason || path}">${reason || path || '<span class="meta">—</span>'}</div>
+      <div class="actions">${actions}</div>
     </div>`;
   }).join('');
 
-  modal.innerHTML = `<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);max-width:700px;max-height:80vh;overflow-y:auto;padding:20px;width:100%">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div style="font-size:1rem;font-weight:700">&#x1F916; 批量智能扩展建议 <span style="font-size:0.75rem;color:var(--text-muted)">${data.total_products}个产品</span></div>
-      <button onclick="document.getElementById('stagingSuggestModal').remove()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem">&times;</button>
-    </div>
-    ${suggestHtml}
-    <div style="display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-      <button class="btn btn-primary" style="font-size:0.75rem;padding:8px 16px" onclick="stagingBatchExecute()">&#x2705; 批量确认所有推荐</button>
-      <button class="btn btn-ghost" style="font-size:0.75rem;padding:8px 16px;color:var(--red)" onclick="document.getElementById('stagingSuggestModal').remove()">取消</button>
-    </div>
-  </div>`;
-
-  document.body.appendChild(modal);
-  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
-
-  window._stagingSuggestData = data;
+  list.innerHTML = `<div class="exp-review-head"><div>产品</div><div>挂载分类</div><div>筛选理由</div><div style="text-align:right">复核</div></div>${rows}`;
 }
 
-async function acceptSingleSuggest(productName, parentId) {
+async function approveExpSuggest(idx) {
+  const s = _pendingExpReviews[idx];
+  if (!s || s._state !== 'pending') return;
+  const rec = s.recommendation;
+  if (!rec || !rec.parent_id) return;
   try {
-    const r = await fetch('/api/staging/batch_execute', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({items: [{product_name: productName, parent_id: parentId}]}) });
+    // 同义词扩展：写入 syn_list（/api/confirm）；勿走暂存箱扩展同义词接口
+    const r = await fetch('/api/confirm', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ product_name: s.product_name, category_id: rec.parent_id }),
+    });
     const d = await r.json();
-    if (d.error) { alert('扩展失败: ' + d.error); return; }
-    alert(`已扩展: ${productName} → #${parentId}`);
-    loadStaging();
-    loadExpGrouped();
+    if (d.error) { alert('通过失败: ' + d.error); return; }
+    if (d.status === 'already_exists') {
+      alert(d.message || '已是同义词');
+      s._state = 'approved';
+    } else if (d.status === 'rejected') {
+      alert(d.message || '被清洗规则拒绝');
+      return;
+    } else {
+      s._state = 'approved';
+    }
+    persistPendingExpReviews();
+    renderExpReviewList();
+    loadHistory();
     loadStats();
-    const modal = document.getElementById('stagingSuggestModal');
-    if (modal) modal.remove();
-  } catch(e) { alert('扩展请求失败'); }
+    loadExpGrouped();
+  } catch (e) {
+    alert('通过请求失败');
+  }
 }
 
-async function stagingBatchExecute() {
-  const data = window._stagingSuggestData;
-  if (!data || !data.suggestions) { alert('无扩展建议数据'); return; }
+async function rejectExpSuggest(idx) {
+  const s = _pendingExpReviews[idx];
+  if (!s || s._state !== 'pending') return;
+  s._state = 'rejected';
+  persistPendingExpReviews();
+  renderExpReviewList();
+}
 
-  const items = [];
-  for (const s of data.suggestions) {
-    if (s.status === 'already_matched') continue;
-    if (s.recommendation && s.recommendation.parent_id) {
-      items.push({ product_name: s.product_name, parent_id: s.recommendation.parent_id });
+async function approveAllExpSuggests() {
+  const pending = _pendingExpReviews.filter(
+    s => s._state === 'pending' && s.recommendation && s.recommendation.parent_id && s.status !== 'already_matched' && s.status !== 'error'
+  );
+  if (!pending.length) return;
+  if (!confirm(`确认通过 ${pending.length} 条同义词建议？将写入 syn_list`)) return;
+  let ok = 0, skipped = 0, failed = 0;
+  const failMsgs = [];
+  for (const s of pending) {
+    try {
+      const r = await fetch('/api/confirm', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ product_name: s.product_name, category_id: s.recommendation.parent_id }),
+      });
+      const d = await r.json();
+      if (d.error) {
+        failed += 1;
+        failMsgs.push(`${s.product_name}: ${d.error}`);
+      } else if (d.status === 'rejected') {
+        skipped += 1;
+        failMsgs.push(`${s.product_name}: ${d.message || '被清洗规则拒绝'}`);
+      } else {
+        // ok / already_exists
+        ok += 1;
+        s._state = 'approved';
+      }
+    } catch (e) {
+      failed += 1;
+      failMsgs.push(`${s.product_name}: 请求失败`);
     }
   }
-
-  if (items.length === 0) { alert('无有效的扩展项'); return; }
-
-  const modal = document.getElementById('stagingSuggestModal');
-  if (modal) modal.remove();
-
-  try {
-    const r = await fetch('/api/staging/batch_execute', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({items}) });
-    const d = await r.json();
-    if (d.error) { alert('批量扩展失败: ' + d.error); return; }
-    alert(`批量扩展完成：成功 ${d.stashed} 条${d.skipped > 0 ? '，跳过 ' + d.skipped + ' 条' : ''}${d.failed > 0 ? '，失败 ' + d.failed + ' 条' : ''}`);
-    loadStaging();
-    loadExpGrouped();
-    loadStats();
-  } catch(e) { alert('批量扩展请求失败: ' + e.message); }
+  persistPendingExpReviews();
+  renderExpReviewList();
+  let msg = `批量通过：成功 ${ok} 条`;
+  if (skipped) msg += `，跳过 ${skipped} 条`;
+  if (failed) msg += `，失败 ${failed} 条`;
+  if (failMsgs.length) msg += '\n' + failMsgs.slice(0, 5).join('\n');
+  alert(msg);
+  loadHistory();
+  loadExpGrouped();
+  loadStats();
 }
 
+async function loadExpGrouped() {
+  try {
+    const r = await fetch('/api/expansion/grouped'); const d = await r.json();
+    if (d.error) return;
+    const badge = document.getElementById('expGroupBadge');
+    if (badge) badge.textContent = d.total_products || '0';
+    const bar = document.getElementById('expGroupedBar') || document.getElementById('expGroupBar');
+    if (bar && bar.id === 'expGroupedBar') {
+      bar.textContent = `${d.total_groups || 0}个节点 | ${d.total_products || 0}条扩展同义词 | 阈值${d.threshold}条可聚类`;
+    }
+    const list = document.getElementById('expGroupList');
+    if (!list) return;
+    if (!d.groups || d.groups.length === 0) {
+      list.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无扩展数据</div>';
+      return;
+    }
+    list.innerHTML = d.groups.map(g => {
+      const pathText = (g.path || []).join(' > ');
+      const ready = g.threshold_reached;
+      const countColor = ready ? 'var(--green)' : 'var(--cyan)';
+      const products = (g.products || []).map(p =>
+        `<span style="display:inline-flex;align-items:center;gap:3px;background:var(--bg-card);border:1px solid var(--border);padding:1px 6px;border-radius:10px;font-size:0.65rem"><span>${esc(p)}</span><button onclick="removeExpansion('${esc(g.category_id)}','${esc(p)}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:0 2px;font-size:0.7rem;opacity:0.6" title="删除">×</button></span>`
+      ).join(' ');
+      return `<div class="exp-review-row" style="grid-template-columns:minmax(160px,1.1fr) 1fr auto;margin:0;border-radius:0">
+        <div>
+          <div class="rec">#${esc(g.category_id)} ${esc(g.category_name)} <span style="color:${countColor};font-weight:700;margin-left:4px">${g.count}/${d.threshold}</span></div>
+          <div class="path" title="${esc(pathText)}">${esc(pathText)}</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">${products}</div>
+        <div class="actions">${ready ? `<button class="exp-btn ok" onclick="clusterExpNode('${esc(g.category_id)}','${esc(g.category_name)}')">聚类分裂</button>` : ''}</div>
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
 
 async function batchAddToStaging() {
   if (!batchResults || batchResults.length === 0) { alert('暂无匹配结果'); return; }
   const noMatchNames = batchResults.filter(r => r.match_status === 'NO_MATCH' || r.match_status === 'LOW_CONFIDENCE').map(r => r.input);
   if (noMatchNames.length === 0) { alert('没有未匹配/低置信的结果'); return; }
-  let added = 0, skipped = 0;
+  let added = 0, exists = 0, failed = 0;
+  const failReasons = [];
   for (const name of noMatchNames) {
     try {
       const r = await fetch('/api/staging/add', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({product_name: name}) });
       const d = await r.json();
-      if (d.status === 'ok') added++; else skipped++;
-    } catch(e) { skipped++; }
+      if (d.status === 'ok') added++;
+      else if (d.status === 'already_exists') exists++;
+      else { failed++; failReasons.push(`${name}: ${d.error || d.message || '未知错误'}`); }
+    } catch(e) { failed++; failReasons.push(`${name}: ${e.message}`); }
   }
-  alert(`已加入暂存箱：${added}条${skipped > 0 ? '，跳过：' + skipped + '条' : ''}`);
+  let msg = `已加入暂存箱：${added}条`;
+  if (exists > 0) msg += `，已在箱中：${exists}条`;
+  if (failed > 0) msg += `，失败：${failed}条` + (failReasons.length ? '\n' + failReasons.slice(0, 5).join('\n') : '');
+  alert(msg);
   loadStaging();
 }
 
@@ -1172,47 +1534,6 @@ async function removePoolEntry(entryId) {
   } catch(e) {}
 }
 
-async function loadExpGrouped() {
-  try {
-    const r = await fetch('/api/expansion/grouped'); const d = await r.json();
-    if (d.error) return;
-    const badge = document.getElementById('expGroupBadge');
-    if (badge) badge.textContent = d.total_products || '0';
-    const bar = document.getElementById('expGroupBar');
-    if (bar) bar.textContent = `${d.total_groups || 0}个节点 | ${d.total_products || 0}条扩展同义词 | 阈值${d.threshold}条可聚类`;
-    const list = document.getElementById('expGroupList');
-    if (!d.groups || d.groups.length === 0) {
-      list.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">暂无扩展数据</div>';
-      return;
-    }
-    list.innerHTML = d.groups.map(g => {
-      const pathParts = g.path || [];
-      const pathHtml = pathParts.map((s,i) => {
-        const isLast = i === pathParts.length - 1;
-        const indent = i * 14;
-        const dotCls = i === 0 ? 'root' : isLast ? 'leaf' : 'mid';
-        const nameCls = isLast ? 'leaf' : '';
-        return `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;padding-left:${indent}px;font-size:0.72rem">
-          <span class="path-dot ${dotCls}"></span>
-          <span class="path-name ${nameCls}">${esc(s)}</span>
-        </div>`;
-      }).join('');
-      const ready = g.threshold_reached;
-      const countColor = ready ? 'var(--green)' : 'var(--cyan)';
-      const products = (g.products || []).map(p => `<span style="display:inline-flex;align-items:center;gap:3px;background:var(--bg-card);border:1px solid var(--border);padding:1px 6px;border-radius:10px;font-size:0.65rem"><span>${esc(p)}</span><button onclick="removeExpansion('${esc(g.category_id)}','${esc(p)}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:0 2px;font-size:0.7rem;opacity:0.6" title="删除">×</button></span>`).join(' ');
-      return `<div style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px;background:var(--bg-canvas)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span style="font-size:0.78rem;font-weight:600;color:var(--accent)">#${esc(g.category_id)} ${esc(g.category_name)}</span>
-          <span style="font-size:0.68rem;color:${countColor};font-weight:700">${g.count}/${d.threshold}</span>
-          ${ready ? `<button class="btn btn-ghost" style="font-size:0.65rem;padding:2px 8px;color:var(--green)" onclick="clusterExpNode('${esc(g.category_id)}','${esc(g.category_name)}')">&#x1F52C; 聚类分裂</button>` : ''}
-        </div>
-        <div style="margin-bottom:6px">${pathHtml}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px">${products}</div>
-      </div>`;
-    }).join('');
-  } catch(e) {}
-}
-
 async function clusterExpNode(categoryId, categoryName) {
   if (!confirm(`确认对 #${categoryId}(${categoryName}) 的扩展同义词进行聚类分裂？`)) return;
   try {
@@ -1238,154 +1559,182 @@ async function removeExpansion(categoryId, productName) {
   } catch(e) { alert('删除请求失败'); }
 }
 
-async function doCluster() {
-  const panel = document.getElementById('clusterPanel');
-  panel.innerHTML = '<div style="text-align:center;padding:20px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.85rem">聚类分析中...</span></div>';
+async function prepareNewNodesFromStaging() {
+  const list = document.getElementById('newNodeReviewList');
+  const stagingList = document.getElementById('stagingListTop');
+  if (list) {
+    list.innerHTML = '<div style="text-align:center;padding:24px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.85rem">正在为暂存箱产品生成新节点建议...</span></div>';
+  }
+  if (stagingList) {
+    stagingList.innerHTML = '<div style="text-align:center;padding:16px"><span class="spinner"></span> <span style="color:var(--text-muted);font-size:0.8rem">生成建议中...</span></div>';
+  }
   try {
-    const r = await fetch('/api/expansion/cluster', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({threshold: 0.75}) });
+    const r = await fetch('/api/staging/prepare_new_nodes', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: '{}',
+    });
     const d = await r.json();
-    if (d.error) { panel.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`; return; }
-    if (d.status === 'insufficient') { panel.innerHTML = `<div style="color:var(--amber);text-align:center;padding:20px">${esc(d.message)}</div>`; return; }
-    renderClusterReport(d);
-    loadPoolEntries();
-    loadPoolStats();
-  } catch(e) { panel.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">聚类失败</div>`; }
-}
-
-async function loadClusterReport() {
-  try {
-    const r = await fetch('/api/expansion/cluster_report'); const d = await r.json();
-    if (d.error || !d.cluster_time) {
-      document.getElementById('clusterPanel').innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:16px 0">执行聚类分析后查看结果</div>';
+    if (d.error) {
+      if (list) list.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`;
+      loadStaging();
       return;
     }
-    renderClusterReport(d);
-  } catch(e) {}
+    await loadNewNodeReviews();
+    loadStaging();
+    const hint = document.getElementById('newNodeHint');
+    if (hint) hint.textContent = `本次生成 ${d.ok_count || 0} 条，失败 ${d.error_count || 0} 条`;
+  } catch (e) {
+    if (list) list.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px">生成建议失败</div>';
+    loadStaging();
+  }
 }
 
-function renderClusterReport(d) {
-  const panel = document.getElementById('clusterPanel');
-  let html = `<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:12px">
-    聚类时间: ${esc(d.cluster_time)} | ${d.total_entries}条暂存 → <span style="color:var(--green);font-weight:600">${d.cluster_count||0}个簇</span> + <span style="color:var(--amber)">${d.outlier_count||0}个孤立条目</span>
-  </div>`;
-
-  if (d.clusters && d.clusters.length > 0) {
-    d.clusters.forEach(c => {
-      const stars = '&#x2605;'.repeat(c.star_rating || 1);
-      const statusColor = c.status === 'APPROVED' ? 'var(--green)' : c.status === 'REJECTED' ? 'var(--red)' : 'var(--amber)';
-      const statusText = c.status === 'APPROVED' ? '已批准' : c.status === 'REJECTED' ? '已拒绝' : '待审核';
-      const divergenceTag = c.has_divergence ? '<span style="color:var(--red);font-size:0.62rem;margin-left:4px">存在分歧</span>' : '';
-      html += `<div style="padding:12px;margin-bottom:8px;background:var(--bg-canvas);border:1px solid var(--border);border-radius:var(--radius-sm);border-left:3px solid ${statusColor}" class="fade-in">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
-          <span style="font-weight:700;font-size:0.85rem">${esc(c.cluster_id)}</span>
-          <span style="color:var(--amber);font-size:0.72rem">${stars}</span>
-          <span style="font-size:0.72rem;color:var(--text-muted)">${c.entry_count}条</span>
-          <span style="font-size:0.72rem;color:${confColor(c.avg_confidence)}">置信度${(c.avg_confidence||0).toFixed(2)}</span>
-          ${divergenceTag}
-          <span style="margin-left:auto;font-size:0.68rem;color:${statusColor}">${statusText}</span>
-        </div>
-        ${c.full_path ? `<div style="font-size:0.85rem;margin-bottom:6px;line-height:1.6;padding:6px 10px;background:var(--bg-card);border-radius:6px;border:1px solid rgba(99,102,241,0.15)">${c.full_path.split('>').map((s,i,a) => i === a.length - 1 ? `<span style="color:var(--green);font-weight:700">${esc(s.trim())}</span>` : `<span style="color:var(--text-secondary)">${esc(s.trim())}</span>`).join(' <span style="color:var(--text-muted)">&#x203A;</span> ')}</div>` : `<div style="font-size:0.82rem;margin-bottom:4px"><span style="color:var(--text-muted)">父节点:</span> <span style="color:var(--accent)">${esc(c.suggested_parent_name)}(#${esc(c.suggested_parent_id)})</span> <span style="color:var(--text-muted);margin-left:12px">建议分类:</span> <span style="color:var(--green);font-weight:600">${esc(c.merged_category_name || c.suggested_category_name)}</span></div>`}
-        <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:6px">
-          涉及产品: ${c.product_names.map(n => `<span style="background:var(--bg-card);padding:1px 5px;border-radius:3px;margin:0 2px;border:1px solid var(--border)">${esc(n)}</span>`).join('')}
-        </div>
-        ${c.llm_reason ? `<div style="font-size:0.7rem;color:var(--cyan);margin-bottom:4px;padding:4px 8px;background:var(--cyan-glow);border-radius:4px;border:1px solid rgba(56,189,248,0.2)">&#x1F9E0; ${esc(c.llm_reason)}</div>` : ''}
-        ${c.is_llm_clustered ? '<div style="font-size:0.62rem;color:var(--purple);margin-bottom:4px">LLM聚类</div>' : ''}`;
-      if (c.status === 'PENDING_REVIEW') {
-        html += `<div style="display:flex;gap:6px;align-items:center;margin-top:8px">
-          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--green)" onclick="approveCluster('${esc(c.cluster_id)}')">&#x2705; 批准入体系</button>
-          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--amber)" onclick="editClusterName(this,'${esc(c.cluster_id)}','${esc(c.merged_category_name || c.suggested_category_name)}')">&#x270F; 修改分类名</button>
-          <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 10px;color:var(--red)" onclick="rejectCluster('${esc(c.cluster_id)}')">&#x274C; 拒绝</button>
-          <span id="cmsg_${c.cluster_id.replace(/[^a-zA-Z0-9_]/g,'_')}" style="font-size:0.7rem;display:none"></span>
-        </div>`;
-      }
-      html += '</div>';
-    });
-  } else {
-    html += '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:12px 0">无聚类结果</div>';
-  }
-
-  if (d.outliers && d.outliers.length > 0) {
-    html += `<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-      <div style="font-size:0.75rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px">孤立条目 (${d.outliers.length})</div>`;
-    d.outliers.forEach(o => {
-      const pathDisplay = o.path_text
-        ? o.path_text.split('>').map((s,i,a) => i === a.length - 1 ? `<span style="color:var(--green);font-weight:700">${esc(s.trim())}</span>` : `<span style="color:var(--text-secondary)">${esc(s.trim())}</span>`).join(' <span style="color:var(--text-muted)">&#x203A;</span> ')
-        : `<span style="color:var(--text-muted)">${esc(o.suggested_parent_id)}/${esc(o.suggested_category_name)}</span>`;
-      html += `<div style="padding:8px 0;font-size:0.78rem;border-bottom:1px solid var(--border)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span style="font-weight:500">${esc(o.product_name)}</span>
-          <span style="color:var(--text-muted);font-size:0.65rem;margin-left:auto">${esc(o.reason)}</span>
-        </div>
-        <div style="font-size:0.78rem;line-height:1.6;padding:4px 8px;background:var(--bg-card);border-radius:4px;border:1px solid rgba(99,102,241,0.1)">${pathDisplay}</div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
-          <button class="btn btn-ghost" style="font-size:0.62rem;padding:2px 6px;color:var(--green)" onclick="approveSingleEntry('${esc(o.entry_id)}','${esc(o.suggested_category_name)}')">&#x2705; 单独批准</button>
+async function loadNewNodeReviews() {
+  const list = document.getElementById('newNodeReviewList');
+  const badge = document.getElementById('newNodeBadge');
+  const hint = document.getElementById('newNodeHint');
+  if (!list) return;
+  try {
+    const r = await fetch('/api/expansion/pool?limit=200');
+    const d = await r.json();
+    if (d.error) {
+      list.innerHTML = `<div style="color:var(--red);text-align:center;padding:20px">${esc(d.error)}</div>`;
+      return;
+    }
+    const entries = d.entries || [];
+    if (badge) badge.textContent = String(entries.length);
+    if (hint && !hint.textContent) hint.textContent = entries.length ? `待审核 ${entries.length} 条` : '';
+    if (entries.length === 0) {
+      list.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0">暂无待审核的新节点建议</div>';
+      return;
+    }
+    const rows = entries.map(e => {
+      const id = esc(e.id);
+      const name = esc(e.product_name || '');
+      const cat = esc(e.suggested_category_name || '');
+      const path = esc(e.path_text || '');
+      const reason = esc(e.llm_reason || '');
+      const parent = e.suggested_parent_id
+        ? `#${esc(e.suggested_parent_id)} ${esc(e.suggested_parent_name || '')}`
+        : '未确定父节点';
+      const conf = e.confidence != null ? `${(e.confidence * 100).toFixed(0)}%` : '';
+      const pathTitle = reason ? `${path}\n${reason}` : path;
+      return `<div class="exp-review-row new-node">
+        <div class="name" title="${name}">${name}</div>
+        <div class="rec" title="${cat} · ${parent}"><span class="exp-status-pill warn">${conf || '—'}</span> ${cat || '—'} <span class="meta" style="font-size:0.65rem;color:var(--text-muted)">挂 #${esc(e.suggested_parent_id||'')}</span></div>
+        <div class="path" title="${pathTitle}">${path || parent}</div>
+        <div class="actions">
+          <button class="exp-btn ok" onclick="approveNewNode('${id}')">&#x2705; 批准入体系</button>
+          <button class="exp-btn" style="color:var(--amber);border-color:rgba(245,158,11,0.35)" onclick="editNewNodeName('${id}','${cat}')">&#x270F; 修改分类名</button>
+          <button class="exp-btn no" onclick="rejectNewNode('${id}')">&#x274C; 拒绝</button>
         </div>
       </div>`;
-    });
-    html += '</div>';
+    }).join('');
+    list.innerHTML = `<div class="exp-review-head new-node"><div>产品</div><div>拟建分类</div><div>建议路径</div><div style="text-align:right">复核</div></div>${rows}`;
+  } catch (e) {
+    list.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px">加载失败</div>';
   }
-
-  panel.innerHTML = html;
 }
 
-function editClusterName(btn, clusterId, currentName) {
-  const card = btn.closest('div[style*="border-left"]');
-  const existing = card.querySelector('.edit-cluster-row');
-  if (existing) { existing.remove(); return; }
-  const row = document.createElement('div');
-  row.className = 'edit-cluster-row';
-  row.style.cssText = 'display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap';
-  row.innerHTML = `<input class="match-input" id="editClusterName_${clusterId}" placeholder="分类名称" value="${esc(currentName)}" style="flex:1;font-size:0.78rem;padding:4px 8px">
-    <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 8px;color:var(--green)" onclick="approveCluster('${esc(clusterId)}',document.getElementById('editClusterName_${clusterId}').value)">&#x2705; 确认并通过</button>
-    <button class="btn btn-ghost" style="font-size:0.72rem;padding:4px 8px;color:var(--text-muted)" onclick="this.parentElement.remove()">&#x2716; 取消</button>`;
-  card.appendChild(row);
-}
-
-async function approveCluster(clusterId, categoryName) {
-  const msgId = `cmsg_${clusterId.replace(/[^a-zA-Z0-9_]/g,'_')}`;
-  const msg = document.getElementById(msgId);
-  if (msg) { msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '写入中...'; }
+async function approveNewNode(entryId) {
+  if (!confirm('确认批准并新建分类节点入体系？')) return;
   try {
-    const body = {cluster_id: clusterId};
-    if (categoryName) body.category_name = categoryName;
-    const r = await fetch('/api/expansion/approve_cluster', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
-    const d = await r.json();
-    if (d.error) { if (msg) { msg.style.color = 'var(--red)'; msg.textContent = d.error; } return; }
-    if (msg) { msg.style.color = 'var(--green)'; msg.textContent = d.message || '已批准'; }
-    setTimeout(() => { loadClusterReport(); loadStats(); loadPoolEntries(); }, 1000);
-  } catch(e) { if (msg) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; } }
-}
-
-async function rejectCluster(clusterId) {
-  const msgId = `cmsg_${clusterId.replace(/[^a-zA-Z0-9_]/g,'_')}`;
-  const msg = document.getElementById(msgId);
-  if (msg) { msg.style.display = 'inline'; msg.style.color = 'var(--amber)'; msg.textContent = '拒绝中...'; }
-  try {
-    const r = await fetch('/api/expansion/reject_cluster', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({cluster_id: clusterId}) });
-    const d = await r.json();
-    if (d.error) { if (msg) { msg.style.color = 'var(--red)'; msg.textContent = d.error; } return; }
-    if (msg) { msg.style.color = 'var(--text-muted)'; msg.textContent = '已拒绝'; }
-    setTimeout(() => { loadClusterReport(); loadPoolEntries(); }, 500);
-  } catch(e) { if (msg) { msg.style.color = 'var(--red)'; msg.textContent = '请求失败'; } }
-}
-
-async function approveSingleEntry(entryId, categoryName) {
-  if (!confirm('确认单独批准此条目入体系？')) return;
-  try {
-    const body = {entry_id: entryId};
-    if (categoryName) body.category_name = categoryName;
-    const r = await fetch('/api/expansion/approve_single', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    let productName = '';
+    try {
+      const pr = await fetch('/api/expansion/pool?limit=200');
+      const pd = await pr.json();
+      const hit = (pd.entries || []).find(e => e.id === entryId);
+      if (hit) productName = hit.product_name || '';
+    } catch (e) {}
+    const r = await fetch('/api/expansion/approve_single', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ entry_id: entryId }),
+    });
     const d = await r.json();
     if (d.error) { alert(d.error); return; }
-    alert(d.message || '已批准');
-    loadClusterReport(); loadStats(); loadPoolEntries();
-  } catch(e) { alert('请求失败'); }
+    if (productName) {
+      try {
+        await fetch('/api/staging/remove', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ product_name: productName }),
+        });
+      } catch (e) {}
+    }
+    await loadNewNodeReviews();
+    loadStaging();
+    loadStats();
+    alert(d.message || '已批准入体系');
+  } catch (e) {
+    alert('批准失败');
+  }
+}
+
+async function editNewNodeName(entryId, currentName) {
+  const name = prompt('修改拟建分类名：', currentName || '');
+  if (name == null) return;
+  const trimmed = name.trim();
+  if (!trimmed) { alert('分类名不能为空'); return; }
+  try {
+    const r = await fetch('/api/expansion/pool_update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ entry_id: entryId, category_name: trimmed }),
+    });
+    const d = await r.json();
+    if (d.error) { alert(d.error); return; }
+    await loadNewNodeReviews();
+  } catch (e) {
+    alert('修改失败');
+  }
+}
+
+async function rejectNewNode(entryId) {
+  try {
+    // 先取条目名以便出暂存箱
+    let productName = '';
+    try {
+      const pr = await fetch('/api/expansion/pool?limit=200');
+      const pd = await pr.json();
+      const hit = (pd.entries || []).find(e => e.id === entryId);
+      if (hit) productName = hit.product_name || '';
+    } catch (e) {}
+    await fetch('/api/expansion/pool_remove', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ entry_id: entryId }),
+    });
+    if (productName) {
+      await fetch('/api/staging/remove', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ product_name: productName }),
+      });
+    }
+    await loadNewNodeReviews();
+    loadStaging();
+  } catch (e) {
+    alert('拒绝失败');
+  }
 }
 
 loadStats();
 loadPoolStats();
+try {
+  // 一次性清空此前错误写入 session 的同义词待复核缓存
+  if (sessionStorage.getItem('pendingExpReviews_cleared_v1') !== '1') {
+    sessionStorage.removeItem('pendingExpReviews');
+    sessionStorage.setItem('pendingExpReviews_cleared_v1', '1');
+  }
+} catch (e) {}
+_pendingExpReviews = [];
+loadPendingExpReviewsFromStorage();
+renderExpReviewList();
 loadExpGrouped();
 loadStaging();
+loadNewNodeReviews();
 </script>
 </body>
 </html>

@@ -1,0 +1,242 @@
+[
+  {
+    "product_name": "真空蒸发器",
+    "ground_truth": "7602",
+    "ground_truth_name": "真空蒸发器",
+    "path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 浓缩设备 > 蒸发器 > 真空蒸发器",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "风力发电机组",
+    "ground_truth": "24794",
+    "ground_truth_name": "风力发电机组",
+    "path": "机械、设备类产品 > 电气机械及器材 > 发电机组、内燃发电机组及旋转式变流机 > 发电机组 > 风力发电机组",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "硒鼓",
+    "ground_truth": "12767",
+    "ground_truth_name": "硒鼓",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 电子计算机配套产品及耗材 > 其他电子计算机配套产品及耗材 > 硒鼓",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "红萝卜",
+    "ground_truth": "169",
+    "ground_truth_name": "胡萝卜",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 蔬菜及食用菌 > 萝卜等根菜类蔬菜 > 胡萝卜",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "网络分析仪",
+    "ground_truth": "13589",
+    "ground_truth_name": "网络分析仪",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 光学、电子测量仪器 > 通用电子测量仪器 > 网络分析仪",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "激光切割机",
+    "ground_truth": "26646",
+    "ground_truth_name": "激光切割机",
+    "path": "产业链 > 新型显示 > 激光设备 > 激光切割机",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "煤制油",
+    "ground_truth": "24573",
+    "ground_truth_name": "煤制油",
+    "path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 焦炭及其副产品 > 煤制油",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "桕子",
+    "ground_truth": "804",
+    "ground_truth_name": "乌桕子",
+    "path": "农、林、牧、渔业类产品 > 林业产品 > 林产品 > 非直接食用果类 > 乌桕子",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "体操球",
+    "ground_truth": "3015",
+    "ground_truth_name": "艺术体操用球",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 文教体育用品 > 体育用品 > 休闲运动器材和用品 > 艺术体操用球",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "缝纫线",
+    "ground_truth": "1760",
+    "ground_truth_name": "缝纫线",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 棉、化纤纺织及印染产品 > 缝纫线",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "膀胱镜手术床",
+    "ground_truth": "10996",
+    "ground_truth_name": "泌尿科、膀胱镜检查或手术用床",
+    "path": "机械、设备类产品 > 专用设备 > 医疗、外科、牙科或兽医用家具 > 手术台床 > 电动、液压手术台床 > 其他电动、液压手术台床 > 泌尿科、膀胱镜检查或手术用床",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "订书机",
+    "ground_truth": "13900",
+    "ground_truth_name": "订书机",
+    "path": "机械、设备类产品 > 仪器仪表及文化、办公用机械 > 文化、办公用设备或器具 > 文件装订用机械 > 订书机",
+    "difficulty": "easy",
+    "split": "set2"
+  },
+  {
+    "product_name": "大苏打",
+    "ground_truth": "3643",
+    "ground_truth_name": "硫代硫酸盐",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 无机基础化学原料 > 金属硫化物及硫酸盐 > 硫代硫酸盐",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "自行车外胎",
+    "ground_truth": "5374",
+    "ground_truth_name": "橡胶轮胎外胎",
+    "path": "石油、化工、医药产品 > 橡胶制品 > 橡胶轮胎及内胎 > 橡胶轮胎外胎",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "无人机遥控器",
+    "ground_truth": "12631",
+    "ground_truth_name": "无人驾驶飞机无线电遥控设备",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 雷达、无线电导航及无线电遥控设备 > 无线电遥控设备 > 无人驾驶飞机无线电遥控设备",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "织带",
+    "ground_truth": "2044",
+    "ground_truth_name": "狭幅机织物",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 狭幅机织物",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "止裂钢板",
+    "ground_truth": "25033",
+    "ground_truth_name": "大厚度高止裂钢板",
+    "path": "金属及非金属制品 > 金属材料及工具 > 优特钢 > 大厚度高止裂钢板",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "百叶帘",
+    "ground_truth": "2023",
+    "ground_truth_name": "其他帘子布",
+    "path": "纺织、服装、皮革类产品 > 纺织产品 > 浸渍、涂布或包覆处理纺织物 > 帘子布 > 其他帘子布",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "钢板网",
+    "ground_truth": "6506",
+    "ground_truth_name": "钢铁丝篱及格栅",
+    "path": "金属及非金属制品 > 金属制品 > 金属丝绳制品 > 钢铁丝制品 > 钢铁丝篱及格栅",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "汽车电子控制单元(ECU)主控芯片",
+    "ground_truth": "21409",
+    "ground_truth_name": "车载芯片",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 微电子组件 > 芯片 > 车载芯片",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "二硫化钼涂层",
+    "ground_truth": "21932",
+    "ground_truth_name": "表面涂镀材料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 涂料 > 表面涂镀材料",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "电磁炉",
+    "ground_truth": "12200",
+    "ground_truth_name": "电磁灶",
+    "path": "机械、设备类产品 > 电气机械及器材 > 家用厨房电器具 > 家用电炉灶 > 电磁灶",
+    "difficulty": "medium",
+    "split": "set2"
+  },
+  {
+    "product_name": "PMT",
+    "ground_truth": "12872",
+    "ground_truth_name": "光电倍增管",
+    "path": "产业链 > 集成电路半导体 > 集成电路制造 > 分立器件 > 光电器件 > 光电倍增管",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "雷达罩",
+    "ground_truth": "23588",
+    "ground_truth_name": "隐身雷达天线罩",
+    "path": "机械、设备类产品 > 专用设备 > 海洋工程设备 > 海洋工程设备零部件 > 隐身雷达天线罩",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "OCT",
+    "ground_truth": "10145",
+    "ground_truth_name": "激光白内障诊断装置",
+    "path": "机械、设备类产品 > 专用设备 > 医疗仪器设备及器械 > 医用激光诊断、治疗仪器及设备 > 激光诊断仪器 > 激光白内障诊断装置",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "转鼓",
+    "ground_truth": "9221",
+    "ground_truth_name": "鞣革机",
+    "path": "机械、设备类产品 > 专用设备 > 皮革、毛皮及其制品加工专用设备 > 皮革鞣制加工机械 > 鞣革机",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "植物腊叶标本",
+    "ground_truth": "2852",
+    "ground_truth_name": "教学用标本",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 文教体育用品 > 教具及类似用具 > 教学用标本",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "鲫瓜子",
+    "ground_truth": "1051",
+    "ground_truth_name": "淡水鲫鱼",
+    "path": "农、林、牧、渔业类产品 > 淡水养殖产品、捕捞产品 > 淡水鱼 > 淡水鲫鱼",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "钒铁",
+    "ground_truth": "22335",
+    "ground_truth_name": "金属钒",
+    "path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 稀有稀土金属 > 稀有金属 > 金属钒",
+    "difficulty": "hard",
+    "split": "set2"
+  },
+  {
+    "product_name": "雨靴",
+    "ground_truth": "5426",
+    "ground_truth_name": "橡胶制衣着用品及附件",
+    "path": "石油、化工、医药产品 > 橡胶制品 > 日用及医用橡胶制品 > 橡胶制衣着用品及附件",
+    "difficulty": "hard",
+    "split": "set2"
+  }
+]

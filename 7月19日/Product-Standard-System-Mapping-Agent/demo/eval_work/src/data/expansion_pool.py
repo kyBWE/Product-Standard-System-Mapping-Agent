@@ -66,6 +66,10 @@ def save_pool(pool: dict, path: str | None = None) -> None:
             json.dump(pool, f, ensure_ascii=False, indent=2)
 
 
+def clear_pool(path: str | None = None) -> None:
+    save_pool(_init_pool(), path)
+
+
 def add_entry(
     product_name: str,
     suggested_parent_id: str,
@@ -119,6 +123,42 @@ def remove_entry(entry_id: str) -> dict:
 
     save_pool(pool)
     return {"status": "ok", "removed": entry_id}
+
+
+def update_entry(entry_id: str, **fields) -> dict:
+    """更新暂存池条目字段（如 suggested_category_name / path_text / parent）。"""
+    allowed = {
+        "suggested_category_name",
+        "suggested_parent_id",
+        "suggested_parent_name",
+        "path_text",
+        "llm_reason",
+        "confidence",
+    }
+    pool = load_pool()
+    for e in pool["entries"]:
+        if e["id"] != entry_id:
+            continue
+        for k, v in fields.items():
+            if k in allowed and v is not None:
+                e[k] = v
+        # 同步 path 末级名称
+        if "suggested_category_name" in fields and fields["suggested_category_name"]:
+            name = str(fields["suggested_category_name"]).strip()
+            path = e.get("path") or []
+            if path and isinstance(path[-1], dict):
+                path[-1]["category_name"] = name
+                path[-1]["is_new"] = True
+            path_text = e.get("path_text") or ""
+            if path_text:
+                parts = [p.strip() for p in path_text.split(">") if p.strip()]
+                if parts:
+                    parts[-1] = name
+                    e["path_text"] = " > ".join(parts)
+            e["suggested_category_name"] = name
+        save_pool(pool)
+        return {"status": "ok", "entry": e}
+    return {"status": "not_found", "entry_id": entry_id}
 
 
 def remove_entries(entry_ids: list[str]) -> dict:

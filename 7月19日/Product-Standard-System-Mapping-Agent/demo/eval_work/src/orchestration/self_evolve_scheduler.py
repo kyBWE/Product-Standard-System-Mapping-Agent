@@ -68,18 +68,25 @@ class SelfEvolveScheduler:
             return None
         if result.confidence < self._config.syn_confidence_threshold:
             return None
-        if trgm_similarity >= self._config.syn_trgm_threshold:
+
+        category_name = self._get_category_name(result.matched_category_id)
+        if not category_name:
+            return None
+
+        # pg_trgm 对纯中文常恒为 0；优先用中文字面相似度判断「是否近重复」
+        from src.data.text_similarity import chinese_text_similarity
+        text_sim = chinese_text_similarity(result.product_name, category_name)
+        # 兼容调用方传入的 trgm：取更大者（ASCII 场景 trgm 仍可用）
+        effective_text_sim = max(float(trgm_similarity or 0), text_sim)
+        if effective_text_sim >= self._config.syn_trgm_threshold:
             return None
 
         logger.info(
             f"触发同义词发现: product_name={result.product_name}, "
             f"category_id={result.matched_category_id}, "
-            f"confidence={result.confidence:.4f}, trgm_sim={trgm_similarity:.4f}"
+            f"confidence={result.confidence:.4f}, "
+            f"text_sim={text_sim:.4f}, trgm={trgm_similarity:.4f}"
         )
-
-        category_name = self._get_category_name(result.matched_category_id)
-        if not category_name:
-            return None
 
         verify = self._llm.synonym_verification(result.product_name, category_name)
 

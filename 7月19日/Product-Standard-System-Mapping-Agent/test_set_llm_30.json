@@ -1,0 +1,242 @@
+[
+  {
+    "product_name": "罗茨风机",
+    "ground_truth": "25558",
+    "ground_truth_name": "罗茨风机",
+    "path": "机械、设备类产品 > 通用设备 > 风机、风扇及类似设备 > 风机 > 其他风机 > 罗茨风机",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "杀毒软件",
+    "ground_truth": "25212",
+    "ground_truth_name": "杀毒软件",
+    "path": "纸、印刷品、软件、文教、工艺品类产品 > 软件、电子出版物 > 软件产品 > 应用软件产品 > 网络与信息安全软件 > 杀毒软件",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "万兆IPv6接入交换机",
+    "ground_truth": "21682",
+    "ground_truth_name": "IPv6交换机",
+    "path": "机械、设备类产品 > 通信设备、计算机及其他电子设备 > 计算机网络设备 > 网络连接设备 > 交换机 > IPv6交换机",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "黄桃果冻罐头",
+    "ground_truth": "1570",
+    "ground_truth_name": "果冻罐头",
+    "path": "食品、饮料、烟、酒类产品 > 食品及加工盐 > 糖果、巧克力、蜜饯及类似食品 > 果冻及果冻罐头 > 果冻罐头",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "T型丝锥扳手",
+    "ground_truth": "6344",
+    "ground_truth_name": "丝锥扳手",
+    "path": "金属及非金属制品 > 金属制品 > 通用手工具 > 钻孔或攻丝工具 > 丝锥扳手",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "牙科手机",
+    "ground_truth": "10379",
+    "ground_truth_name": "牙科手机",
+    "path": "机械、设备类产品 > 专用设备 > 口腔科用设备及器具 > 牙科手机",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "智能音箱",
+    "ground_truth": "26552",
+    "ground_truth_name": "智能音箱",
+    "path": "产业链 > 人工智能 > 智能语音设备 > 智能音箱",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "白枇杷",
+    "ground_truth": "482",
+    "ground_truth_name": "枇杷",
+    "path": "农、林、牧、渔业类产品 > 农业产品 > 水果及坚果 > 水果（园林水果） > 枇杷",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "数控插齿机",
+    "ground_truth": "6923",
+    "ground_truth_name": "数控插齿机",
+    "path": "机械、设备类产品 > 通用设备 > 数控机床及加工机械 > 数控金属切削机床 > 数控刨床 > 数控插齿机",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "高压无气喷涂机",
+    "ground_truth": "7990",
+    "ground_truth_name": "高压无气喷涂机",
+    "path": "机械、设备类产品 > 通用设备 > 喷枪及类似器具 > 喷涂机 > 高压无气喷涂机",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "硝酸钕六水合物",
+    "ground_truth": "4393",
+    "ground_truth_name": "硝酸钕",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 贵金属化合物、相关基础化学品 > 稀土化合物 > 硝酸稀土 > 硝酸钕",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "酒精回收塔",
+    "ground_truth": "7576",
+    "ground_truth_name": "酒精回收塔",
+    "path": "机械、设备类产品 > 通用设备 > 利用温度变化加工机械 > 蒸馏或精馏设备 > 酒精回收设备 > 酒精回收塔",
+    "difficulty": "easy",
+    "split": "set1"
+  },
+  {
+    "product_name": "环氧底漆",
+    "ground_truth": "21948",
+    "ground_truth_name": "环氧涂料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 涂料 > 环氧涂料",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "碳纤维复合材料船体",
+    "ground_truth": "4880",
+    "ground_truth_name": "碳纤维增强复合材料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 专项化学用品 > 特种纤维及高功能化工产品 > 碳纤维增强复合材料",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "玻璃钢装饰板",
+    "ground_truth": "21220",
+    "ground_truth_name": "装饰复合材料",
+    "path": "石油、化工、医药产品 > 化学原料及化学制品 > 化学合成材料 > 复合材料 > 装饰复合材料",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "硅铬合金",
+    "ground_truth": "24471",
+    "ground_truth_name": "铬系铁合金",
+    "path": "金属及非金属制品 > 有色金属冶炼及压延产品 > 有色金属合金 > 铬系铁合金",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "一氯乙酸",
+    "ground_truth": "25233",
+    "ground_truth_name": "氯乙酸",
+    "path": "石油、化工、医药产品 > 石油加工、炼焦及核燃料 > 焦炭及其副产品 > 氯乙酸",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "PSA制氧装置",
+    "ground_truth": "7544",
+    "ground_truth_name": "变压吸附制氧设备",
+    "path": "机械、设备类产品 > 通用设备 > 气体分离及液化设备 > 制氧设备 > 变压吸附制氧设备",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "沙发套",
+    "ground_truth": "2510",
+    "ground_truth_name": "沙发",
+    "path": "木制品、家具类产品 > 家具及配件 > 家具 > 软体家具 > 沙发",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "卧螺离心机",
+    "ground_truth": "7815",
+    "ground_truth_name": "螺旋卸料过滤离心机",
+    "path": "机械、设备类产品 > 通用设备 > 液体气体过滤、净化机械 > 离心机 > 过滤离心机 > 螺旋卸料过滤离心机",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "燃气燃烧器",
+    "ground_truth": "7381",
+    "ground_truth_name": "气体燃烧器",
+    "path": "机械、设备类产品 > 通用设备 > 窑炉、熔炉及电炉 > 炉用燃烧器 > 气体燃烧器",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "辅酶Q10",
+    "ground_truth": "5185",
+    "ground_truth_name": "辅酶Q10制剂",
+    "path": "石油、化工、医药产品 > 医药 > 生物化学药品 > 酶类生化制剂 > 辅酶Q10制剂",
+    "difficulty": "medium",
+    "split": "set1"
+  },
+  {
+    "product_name": "雾炮机",
+    "ground_truth": "25519",
+    "ground_truth_name": "粉尘重污染场所和行业抑尘技术设备",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 大气污染防治设备 > 其他大气污染防治设备 > 粉尘重污染场所和行业抑尘技术设备",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "粉末包装机",
+    "ground_truth": "8035",
+    "ground_truth_name": "固体产品灌装机、包装机",
+    "path": "机械、设备类产品 > 通用设备 > 包装专用设备 > 灌装、装填容器用机械 > 固体产品灌装机、包装机",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "弯头",
+    "ground_truth": "5988",
+    "ground_truth_name": "铸铁管附件",
+    "path": "金属及非金属制品 > 黑色金属冶炼及压延产品 > 铸铁管及其附件 > 铸铁管附件",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "黄饼",
+    "ground_truth": "1252",
+    "ground_truth_name": "铀矿石",
+    "path": "矿产品 > 有色金属矿石 > 放射性金属矿石 > 铀矿石",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "银铜焊料",
+    "ground_truth": "20958",
+    "ground_truth_name": "含银无氧铜",
+    "path": "金属及非金属制品 > 金属材料及工具 > 不锈钢 > 含银无氧铜",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "枸杞子",
+    "ground_truth": "5122",
+    "ground_truth_name": "果实、种子类饮片",
+    "path": "石油、化工、医药产品 > 医药 > 中药饮片 > 植物类饮片 > 果实、种子类饮片",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "挂机",
+    "ground_truth": "7881",
+    "ground_truth_name": "壁挂式空调器",
+    "path": "机械、设备类产品 > 通用设备 > 工商用制冷、空调设备 > 工商用空调设备 > 壁挂式空调器",
+    "difficulty": "hard",
+    "split": "set1"
+  },
+  {
+    "product_name": "鱼鳞胶原蛋白提取设备",
+    "ground_truth": "24432",
+    "ground_truth_name": "水产加工废弃物综合利用技术及装置",
+    "path": "机械、设备类产品 > 专用设备 > 环境污染防治专用设备 > 固体废弃物处理设备 > 资源再利用设备 > 其他资源再利用设备 > 水产加工废弃物综合利用技术及装置",
+    "difficulty": "hard",
+    "split": "set1"
+  }
+]

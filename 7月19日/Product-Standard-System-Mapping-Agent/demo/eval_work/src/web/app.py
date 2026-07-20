@@ -50,6 +50,161 @@ _evolve_scheduler = None
 _initialized = False
 
 
+def _load_category_nodes_from_db(db=None) -> list:
+    """从 category_texts 加载分类节点，供 PageIndex 建树（Excel 不可用时的兜底）。"""
+    from src.models.category_node import CategoryNode
+    conn = db or _db
+    if conn is None:
+        return []
+    rows = conn.execute(
+        """
+        SELECT category_id, category_name, category_pids, category_group_name, syn_list
+        FROM category_texts
+        """
+    )
+    nodes = []
+    for r in rows or []:
+        pids = r.get("category_pids") or []
+        if isinstance(pids, str):
+            pids = [p for p in pids.strip("{}").split(",") if p]
+        syn = r.get("syn_list") or []
+        if isinstance(syn, str):
+            syn = [s for s in syn.strip("{}").split(",") if s]
+        nodes.append(
+            CategoryNode(
+                category_id=str(r["category_id"]),
+                category_name=r["category_name"] or "",
+                category_pids=[str(p) for p in pids if str(p) not in ("", "-1")],
+                category_group_name=r.get("category_group_name") or "",
+                syn_list=list(syn),
+            )
+        )
+    return nodes
+
+
+def _ensure_page_tree_ready() -> bool:
+    """确保 PageIndex 树可用；空树则从 DB 重建。"""
+    global _page_tree, _page_engine, _page_engine_force_llm
+    if _page_tree is not None and getattr(_page_tree, "_node_map", None) and _page_tree.get_root_nodes():
+        return True
+    if _db is None or _page_tree is None:
+        return False
+    nodes = _load_category_nodes_from_db(_db)
+    if not nodes:
+        return False
+    _page_tree.build_tree(nodes)
+    logging.getLogger("WebAPI").info(
+        f"PageIndex树已从DB重建: 根={len(_page_tree.get_root_nodes())}, 总={len(_page_tree._node_map)}"
+    )
+    return bool(_page_tree.get_root_nodes())
+
+
+def _pageindex_locate_expansion_parent(product_name: str) -> dict:
+    """用 PageIndex 自上而下定位扩展父节点：某层无合适子类则停在该层。"""
+    if not _ensure_page_tree_ready() or not _llm:
+        return {"ok": False, "error": "PageIndex树或LLM不可用"}
+
+    roots = list(_page_tree.get_root_nodes())
+    if not roots:
+        return {"ok": False, "error": "无根节点"}
+
+    # 根层必须选一个大类（不允许 stop）
+    root_names = [r.category_name for r in roots]
+    picked_name, conf, reason = _llm.layer_pick_or_stop(product_name, root_names, [])
+    if picked_name is None:
+        # 根层强制选置信最高的表述：再问一次仅选择
+        picked_name = _llm.layer_disambiguation(product_name, root_names)
+        conf = max(conf, 0.5)
+        reason = reason or "根层强制选择大类"
+    current = next((r for r in roots if r.category_name == picked_name), roots[0])
+    path = [current]
+    steps = [{"level": 0, "choice": current.category_name, "action": "enter", "reason": reason, "confidence": conf}]
+
+    for depth in range(1, 10):
+        children = list(current.children or [])
+        if not children:
+            steps.append({"level": depth, "action": "leaf", "choice": current.category_name})
+            break
+        # 子节点过多时只送名称；若>40则截断并提示（避免 prompt 爆炸）
+        child_names = [c.category_name for c in children]
+        if len(child_names) > 40:
+            # 优先用向量/名称粗筛 Top40 再交给 LLM
+            child_names = _rank_children_for_expansion(product_name, children)[:40]
+            children = [c for c in children if c.category_name in set(child_names)]
+            # 保持 child_names 顺序
+            name_to_child = {c.category_name: c for c in children}
+            children = [name_to_child[n] for n in child_names if n in name_to_child]
+
+        ancestry = [n.category_name for n in path]
+        picked_name, conf, reason = _llm.layer_pick_or_stop(
+            product_name, [c.category_name for c in children], ancestry
+        )
+        if picked_name is None:
+            steps.append({
+                "level": depth,
+                "action": "stop",
+                "choice": current.category_name,
+                "reason": reason,
+                "confidence": conf,
+            })
+            break
+        nxt = next((c for c in children if c.category_name == picked_name), None)
+        if nxt is None:
+            steps.append({"level": depth, "action": "stop", "choice": current.category_name, "reason": "未匹配到子节点"})
+            break
+        current = nxt
+        path.append(current)
+        steps.append({
+            "level": depth,
+            "action": "enter",
+            "choice": current.category_name,
+            "reason": reason,
+            "confidence": conf,
+        })
+        # 「其他…」兜底叶子 / 与产品近同名：上提或停止
+        from src.data.text_similarity import chinese_text_similarity
+        if current.category_name.startswith("其他") and current.parent:
+            current = current.parent
+            path = path[:-1]
+            steps.append({"level": depth, "action": "promote", "choice": current.category_name, "reason": "避开「其他」兜底类"})
+            break
+        if chinese_text_similarity(current.category_name, product_name) >= 0.85 and current.parent:
+            current = current.parent
+            path = path[:-1]
+            steps.append({"level": depth, "action": "promote", "choice": current.category_name, "reason": "近同名叶子上提"})
+            break
+
+    path_text = " > ".join(n.category_name for n in path)
+    sibling_names = [c.category_name for c in (current.children or [])][:30]
+    return {
+        "ok": True,
+        "parent_id": str(current.category_id),
+        "parent_name": current.category_name,
+        "path_nodes": path,
+        "path_text": path_text,
+        "sibling_names": sibling_names,
+        "steps": steps,
+        "confidence": float(steps[-1].get("confidence") or conf or 0.6),
+    }
+
+
+def _rank_children_for_expansion(product_name: str, children: list) -> list[str]:
+    """子节点过多时按中文字面相关度粗排，供扩展层 LLM 选择。"""
+    try:
+        from src.data.text_similarity import chinese_text_similarity
+        scored = []
+        for c in children:
+            name = c.category_name or ""
+            score = chinese_text_similarity(product_name, name)
+            if name and (name in product_name or product_name in name):
+                score += 0.2
+            scored.append((score, name))
+        scored.sort(key=lambda x: x[0], reverse=True)
+        return [n for _, n in scored if n]
+    except Exception:
+        return [c.category_name for c in children if c.category_name]
+
+
 def _init_components():
     global _config, _db, _llm, _trgm_mgr, _vec_mgr, _rag_engine, _rag_rerank_engine, _page_engine, _page_engine_force_llm, _page_tree, _excel_reader, _evolve_scheduler, _initialized
     if _initialized:
@@ -61,6 +216,46 @@ def _init_components():
 
     db = DBConnectionManager(db_config)
     db.initialize()
+    try:
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS staging_box (
+                id SERIAL PRIMARY KEY,
+                product_name TEXT NOT NULL UNIQUE,
+                status TEXT DEFAULT 'pending',
+                source TEXT DEFAULT 'web',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """
+        )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS expansion_log (
+                id SERIAL PRIMARY KEY,
+                product_name TEXT NOT NULL,
+                category_id TEXT,
+                category_name TEXT,
+                match_path TEXT,
+                match_status TEXT,
+                source TEXT DEFAULT 'web',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """
+        )
+        db.execute(
+            "ALTER TABLE category_texts ADD COLUMN IF NOT EXISTS expansion_syn_list TEXT[] DEFAULT '{}'"
+        )
+        db.execute(
+            "ALTER TABLE category_vectors ADD COLUMN IF NOT EXISTS expansion_syn_list TEXT[] DEFAULT '{}'"
+        )
+        try:
+            db.execute(
+                "ALTER TABLE category_vectors ADD COLUMN IF NOT EXISTS vec_bgem3 vector(1024)"
+            )
+        except Exception as vec_e:
+            logging.getLogger("WebAPI").warning(f"确保 vec_bgem3 列失败(可忽略): {vec_e}")
+    except Exception as e:
+        logging.getLogger("WebAPI").warning(f"确保扩展相关表/列失败: {e}")
     llm = LLMAdapter(llm_config)
 
     embedding_config = config.get_embedding_config()
@@ -107,13 +302,25 @@ def _init_components():
         nodes, _ = excel_reader.load_standard_system(standard_file)
         page_tree.build_tree(nodes)
         logging.getLogger("WebAPI").info(
-            f"PageIndex树构建完成: {len(page_tree.get_root_nodes())}个根节点, "
+            f"PageIndex树构建完成(Excel): {len(page_tree.get_root_nodes())}个根节点, "
             f"共{len(page_tree._node_map)}个节点"
         )
     except Exception as e:
-        logging.getLogger("WebAPI").error(f"PageIndex树构建失败: {e}")
-        import traceback
-        traceback.print_exc()
+        logging.getLogger("WebAPI").warning(f"Excel构建PageIndex失败，尝试从数据库加载: {e}")
+        try:
+            nodes = _load_category_nodes_from_db(db)
+            if nodes:
+                page_tree.build_tree(nodes)
+                logging.getLogger("WebAPI").info(
+                    f"PageIndex树构建完成(DB): {len(page_tree.get_root_nodes())}个根节点, "
+                    f"共{len(page_tree._node_map)}个节点"
+                )
+            else:
+                logging.getLogger("WebAPI").error("数据库无分类节点，PageIndex树为空")
+        except Exception as e2:
+            logging.getLogger("WebAPI").error(f"DB构建PageIndex失败: {e2}")
+            import traceback
+            traceback.print_exc()
 
     rerank_adapter = RerankAdapter(
         rerank_config) if rerank_config.api_key else None
@@ -166,15 +373,15 @@ def _trigram_fallback_match(product_name: str, top_k: int = 3, trgm_threshold: f
             continue
 
         vec_sim = 0.0
-        if query_vec:
+        if not _vec_is_empty(query_vec):
             try:
                 cat_vec_row = _db.execute_one(
                     "SELECT embedding FROM category_vectors WHERE category_id = %s",
                     (row["category_id"],),
                 )
-                if cat_vec_row and cat_vec_row.get("embedding"):
-                    cat_vec = cat_vec_row["embedding"]
-                    if len(query_vec) == len(cat_vec):
+                if cat_vec_row:
+                    cat_vec = _normalize_embedding(cat_vec_row.get("embedding"))
+                    if cat_vec is not None and len(query_vec) == len(cat_vec):
                         import numpy as np
                         q = np.array(query_vec)
                         c = np.array(cat_vec)
@@ -228,21 +435,8 @@ def _vector_semantic_locate(product_name: str, top_k: int = 10):
 
     scored = []
     for row in rows:
-        emb = row.get("embedding")
-        if not emb:
-            continue
-        try:
-            if isinstance(emb, memoryview):
-                vec = pickle.loads(bytes(emb))
-            elif isinstance(emb, bytes):
-                vec = pickle.loads(emb)
-            elif isinstance(emb, str) and emb.startswith("["):
-                vec = [float(v) for v in emb.strip("[]").split(",")]
-            elif isinstance(emb, (list, np.ndarray)):
-                vec = list(emb) if isinstance(emb, list) else emb.tolist()
-            else:
-                continue
-        except Exception:
+        vec = _normalize_embedding(row.get("embedding"))
+        if vec is None:
             continue
 
         if len(vec) != len(query_vec):
@@ -298,9 +492,335 @@ def _vector_semantic_locate(product_name: str, top_k: int = 10):
             for c in top_candidates
         ],
         "path_analysis": {
-            "depth_distribution": path_depth_count,
             "common_ancestor": common_ancestor,
+            "path_depth_distribution": path_depth_count,
         },
+    }
+
+
+# 批量扩展用的向量缓存，避免每个产品扫一遍全库
+_locate_matrix_cache: dict | None = None
+
+
+def _invalidate_locate_matrix_cache() -> None:
+    global _locate_matrix_cache
+    _locate_matrix_cache = None
+
+
+def _ensure_locate_matrix_cache() -> dict:
+    """一次性加载 category embedding 矩阵（供批量扩展复用）。"""
+    global _locate_matrix_cache
+    if _locate_matrix_cache is not None:
+        return _locate_matrix_cache
+
+    import pickle
+    import numpy as np
+
+    rows = _db.execute(
+        """
+        SELECT cv.category_id, ct.category_name, ct.category_group_name, cv.embedding
+        FROM category_vectors cv
+        JOIN category_texts ct ON cv.category_id = ct.category_id
+        WHERE cv.embedding IS NOT NULL
+        """
+    )
+    ids: list[str] = []
+    names: list[str] = []
+    paths: list[str] = []
+    vecs: list[list[float]] = []
+    for row in rows:
+        vec = _normalize_embedding(row.get("embedding"))
+        if vec is None:
+            continue
+        ids.append(str(row["category_id"]))
+        names.append(row["category_name"])
+        paths.append(row.get("category_group_name") or "")
+        vecs.append(vec)
+
+    if not vecs:
+        _locate_matrix_cache = {
+            "ids": [],
+            "names": [],
+            "paths": [],
+            "matrix": None,
+            "norms": None,
+        }
+        return _locate_matrix_cache
+
+    matrix = np.asarray(vecs, dtype=np.float32)
+    norms = np.linalg.norm(matrix, axis=1)
+    norms[norms == 0] = 1.0
+    _locate_matrix_cache = {
+        "ids": ids,
+        "names": names,
+        "paths": paths,
+        "matrix": matrix,
+        "norms": norms,
+    }
+    return _locate_matrix_cache
+
+
+def _top_k_from_query_vec(query_vec: list[float], top_k: int = 5) -> dict:
+    """用缓存矩阵做 TopK，不再每次扫库。"""
+    import numpy as np
+
+    cache = _ensure_locate_matrix_cache()
+    matrix = cache.get("matrix")
+    if matrix is None or len(cache["ids"]) == 0:
+        return {"candidates": [], "path_analysis": {}}
+
+    q = np.asarray(query_vec, dtype=np.float32)
+    if q.ndim != 1 or q.shape[0] != matrix.shape[1]:
+        return {"candidates": [], "path_analysis": {}}
+    qn = float(np.linalg.norm(q))
+    if qn == 0:
+        return {"candidates": [], "path_analysis": {}}
+
+    sims = (matrix @ q) / (cache["norms"] * qn)
+    k = min(top_k, len(sims))
+    if k <= 0:
+        return {"candidates": [], "path_analysis": {}}
+    # argpartition 比全排序更快
+    if k < len(sims):
+        idx = np.argpartition(-sims, k - 1)[:k]
+        idx = idx[np.argsort(-sims[idx])]
+    else:
+        idx = np.argsort(-sims)
+
+    top_candidates = []
+    for i in idx:
+        top_candidates.append({
+            "category_id": cache["ids"][int(i)],
+            "category_name": cache["names"][int(i)],
+            "category_group_name": cache["paths"][int(i)],
+            "similarity": float(sims[int(i)]),
+        })
+
+    path_depth_count: dict[int, int] = {}
+    for c in top_candidates:
+        group_name = c.get("category_group_name", "")
+        if group_name:
+            depth = len([p for p in group_name.split(",") if p.strip()])
+            path_depth_count[depth] = path_depth_count.get(depth, 0) + 1
+
+    common_ancestor = None
+    paths = []
+    for c in top_candidates[:5]:
+        group_name = c.get("category_group_name", "")
+        if group_name:
+            paths.append([p.strip() for p in group_name.split(",") if p.strip()])
+    if paths:
+        min_len = min(len(p) for p in paths)
+        for i in range(min_len):
+            at_i = [p[i] for p in paths if len(p) > i]
+            if len(set(at_i)) == 1:
+                common_ancestor = at_i[0]
+            else:
+                break
+
+    return {
+        "candidates": [
+            {
+                "category_id": c["category_id"],
+                "category_name": c["category_name"],
+                "similarity": round(c["similarity"], 4),
+                "path": c.get("category_group_name", ""),
+            }
+            for c in top_candidates
+        ],
+        "path_analysis": {
+            "common_ancestor": common_ancestor,
+            "path_depth_distribution": path_depth_count,
+        },
+    }
+
+
+def _embed_queries_batch(texts: list[str]) -> list[list[float]]:
+    if not texts:
+        return []
+
+    def _to_list(a) -> list[float]:
+        if a is None:
+            return []
+        if hasattr(a, "tolist"):
+            a = a.tolist()
+        try:
+            return [float(x) for x in a]
+        except Exception:
+            return []
+
+    if _vec_mgr and getattr(_vec_mgr, "_api_embedder", None):
+        arrs = _vec_mgr._api_embedder.embed_batch(texts)
+        return [_to_list(a) for a in arrs]
+    if _vec_mgr and getattr(_vec_mgr, "_onnx_embedder", None) and hasattr(_vec_mgr._onnx_embedder, "embed_batch"):
+        arrs = _vec_mgr._onnx_embedder.embed_batch(texts)
+        return [_to_list(a) for a in arrs]
+    if _vec_mgr:
+        return [_to_list(_vec_mgr.embed_query(t)) for t in texts]
+    return [[] for _ in texts]
+
+
+def _vec_is_empty(qvec) -> bool:
+    """安全判断向量是否为空（避免 numpy 数组触发 truth-value 歧义）。"""
+    if qvec is None:
+        return True
+    try:
+        import numpy as np
+        if isinstance(qvec, np.ndarray):
+            return qvec.size == 0
+    except Exception:
+        pass
+    try:
+        return len(qvec) == 0
+    except Exception:
+        return True
+
+
+def _normalize_embedding(emb) -> list[float] | None:
+    """把 DB/pickle/ndarray 等形态的 embedding 统一成 list[float]；失败返回 None。"""
+    if emb is None:
+        return None
+    import pickle
+    import numpy as np
+
+    vec = None
+    try:
+        if isinstance(emb, memoryview):
+            vec = pickle.loads(bytes(emb))
+        elif isinstance(emb, (bytes, bytearray)):
+            vec = pickle.loads(bytes(emb))
+        elif isinstance(emb, str):
+            s = emb.strip()
+            if s.startswith("["):
+                vec = [float(v) for v in s.strip("[]").split(",") if v.strip()]
+            else:
+                return None
+        elif isinstance(emb, np.ndarray):
+            vec = emb.tolist()
+        elif isinstance(emb, list):
+            vec = emb
+        else:
+            # 某些驱动可能直接给出 array-like
+            if hasattr(emb, "tolist"):
+                vec = emb.tolist()
+            else:
+                return None
+    except Exception:
+        return None
+
+    if isinstance(vec, np.ndarray):
+        vec = vec.tolist()
+    if _vec_is_empty(vec):
+        return None
+    try:
+        return [float(x) for x in vec]
+    except Exception:
+        return None
+
+
+def _build_expansion_suggestion(product_name: str, vector_candidates: list, path_analysis: dict, llm_result) -> dict:
+    llm_path_validation = None
+    if llm_result:
+        llm_full_path = llm_result.get("full_path", "")
+        if llm_full_path:
+            llm_path_validation = _validate_path_nodes(llm_full_path)
+
+    recommendation = None
+    decision_reason = ""
+    candidate_ids = {
+        str(c.get("category_id", "")) for c in vector_candidates if c.get("category_id")
+    }
+
+    def _names_compatible(a: str, b: str) -> bool:
+        a, b = (a or "").strip(), (b or "").strip()
+        if not a or not b:
+            return True
+        return a == b or a in b or b in a
+
+    if llm_result:
+        llm_confidence = float(llm_result.get("confidence") or 0.0)
+        llm_parent_id = str(llm_result.get("suggested_parent_id") or "")
+        llm_parent_name = str(llm_result.get("suggested_parent_name") or "")
+        llm_should_create = bool(llm_result.get("should_create_new_node", False))
+        decision_reason = f"LLM置信度{llm_confidence:.2f}"
+        if llm_confidence >= 0.85:
+            decision_reason = f"LLM置信度{llm_confidence:.2f}≥0.85，采纳LLM建议"
+        elif llm_should_create:
+            decision_reason = "LLM建议创建新节点，优先采纳"
+        elif llm_confidence >= 0.7:
+            decision_reason = f"LLM置信度{llm_confidence:.2f}≥0.7，采纳LLM建议"
+
+        pid = llm_parent_id[1:] if llm_parent_id.startswith("#") else llm_parent_id
+        if pid and pid in candidate_ids:
+            recommendation = _lookup_category_recommendation(
+                parent_id=pid,
+                parent_name=llm_parent_name,
+                should_create_new_node=llm_should_create,
+                new_node_name=llm_result.get("new_node_name", ""),
+                confidence=llm_confidence,
+                reason=llm_result.get("reasoning", ""),
+                decision_reason=decision_reason + "（父节点来自向量候选）",
+                trust_llm=True,
+                llm_weight="high" if llm_confidence >= 0.85 else "medium",
+            )
+        elif llm_parent_name:
+            by_name = _lookup_category_recommendation(
+                parent_id="",
+                parent_name=llm_parent_name,
+                should_create_new_node=llm_should_create,
+                new_node_name=llm_result.get("new_node_name", ""),
+                confidence=llm_confidence,
+                reason=llm_result.get("reasoning", ""),
+                decision_reason=decision_reason + "（按父节点名称解析）",
+                trust_llm=True,
+                llm_weight="medium",
+            )
+            if by_name:
+                recommendation = by_name
+            elif pid:
+                by_id = _lookup_category_recommendation(
+                    parent_id=pid,
+                    parent_name="",
+                    should_create_new_node=llm_should_create,
+                    new_node_name=llm_result.get("new_node_name", ""),
+                    confidence=llm_confidence,
+                    reason=llm_result.get("reasoning", ""),
+                    decision_reason=decision_reason,
+                    trust_llm=True,
+                    llm_weight="medium",
+                )
+                if by_id and _names_compatible(llm_parent_name, by_id["parent_name"]):
+                    recommendation = by_id
+
+        if not recommendation and llm_path_validation:
+            for seg in reversed(llm_path_validation.get("path_segments") or []):
+                if seg.get("exists") and seg.get("node_id"):
+                    recommendation = _lookup_category_recommendation(
+                        parent_id=str(seg["node_id"]),
+                        parent_name=seg.get("name", ""),
+                        should_create_new_node=True,
+                        new_node_name=llm_result.get("new_node_name") or product_name,
+                        confidence=llm_confidence,
+                        reason=llm_result.get("reasoning", ""),
+                        decision_reason="LLM父节点无效，挂到路径中最近的已存在节点",
+                        trust_llm=True,
+                        llm_weight="medium",
+                    )
+                    break
+
+    if not recommendation and vector_candidates:
+        recommendation = _recommendation_from_vector(
+            vector_candidates, decision_reason=decision_reason
+        )
+
+    return {
+        "product_name": product_name,
+        "status": "no_match",
+        "vector_candidates": vector_candidates,
+        "path_analysis": path_analysis,
+        "llm_reasoning": llm_result,
+        "llm_path_validation": llm_path_validation,
+        "recommendation": recommendation,
     }
 
 
@@ -346,8 +866,83 @@ def _validate_path_nodes(full_path: str):
     }
 
 
+def _lookup_category_recommendation(
+    parent_id: str = "",
+    parent_name: str = "",
+    *,
+    should_create_new_node: bool = False,
+    new_node_name: str = "",
+    confidence: float = 0.0,
+    reason: str = "",
+    decision_reason: str = "",
+    trust_llm: bool = False,
+    llm_weight: str = "low",
+) -> dict | None:
+    """将父节点 id/名称解析为可执行的 recommendation；节点不存在则返回 None。"""
+    pid = str(parent_id or "").strip()
+    if pid.startswith("#"):
+        pid = pid[1:]
+    pname = (parent_name or "").strip()
+
+    row = None
+    if pid and pid.isdigit():
+        row = _db.execute_one(
+            "SELECT category_id, category_name, category_group_name FROM category_texts WHERE category_id = %s",
+            (pid,),
+        )
+    if not row and pname:
+        row = _db.execute_one(
+            "SELECT category_id, category_name, category_group_name FROM category_texts WHERE category_name = %s LIMIT 1",
+            (pname,),
+        )
+    if not row and pid and not pid.isdigit():
+        row = _db.execute_one(
+            "SELECT category_id, category_name, category_group_name FROM category_texts WHERE category_name = %s LIMIT 1",
+            (pid,),
+        )
+    if not row:
+        return None
+
+    path = row.get("category_group_name") or ""
+    full_path = (
+        path.replace(",", " > ") + " > " + row["category_name"]
+        if path
+        else row["category_name"]
+    )
+    return {
+        "parent_id": str(row["category_id"]),
+        "parent_name": row["category_name"],
+        "full_path": full_path,
+        "should_create_new_node": should_create_new_node,
+        "new_node_name": new_node_name,
+        "confidence": confidence,
+        "reason": reason,
+        "decision_reason": decision_reason,
+        "trust_llm": trust_llm,
+        "llm_weight": llm_weight,
+    }
+
+
+def _recommendation_from_vector(
+    vector_candidates: list,
+    decision_reason: str = "",
+) -> dict | None:
+    if not vector_candidates:
+        return None
+    top = vector_candidates[0]
+    return _lookup_category_recommendation(
+        parent_id=str(top.get("category_id", "")),
+        parent_name=top.get("category_name", ""),
+        confidence=float(top.get("similarity") or 0),
+        reason="基于向量相似度定位（LLM未给出可用父节点）",
+        decision_reason=decision_reason or "回退到向量Top1",
+        trust_llm=False,
+        llm_weight="low",
+    )
+
+
 def _llm_path_reasoning(product_name: str, vector_candidates: list):
-    """LLM路径推理：让LLM分析产品应该放在哪个位置"""
+    """LLM路径推理：必须锚定向量召回的真实节点，禁止自由编造体系路径。"""
     if not _llm:
         return None
 
@@ -355,44 +950,45 @@ def _llm_path_reasoning(product_name: str, vector_candidates: list):
     taxonomy_overview = ", ".join([r["category_name"] for r in root_rows]) if root_rows else ""
 
     candidate_info = ""
-    for i, c in enumerate(vector_candidates[:5], 1):
+    for i, c in enumerate(vector_candidates[:8], 1):
         path = c.get("path", "")
         path_display = path.replace(",", " > ") if path else c["category_name"]
-        candidate_info += f"{i}. #{c['category_id']} {c['category_name']} (相似度{c['similarity']:.2f})\n   路径: {path_display}\n"
+        candidate_info += (
+            f"{i}. #{c['category_id']} {c['category_name']} "
+            f"(向量相似度{c['similarity']:.3f})\n   真实路径: {path_display}\n"
+        )
 
-    prompt = f"""你是一个标准分类体系专家。现在有一个产品无法匹配到现有标准分类，需要你推理它应该放在什么位置。
+    prompt = f"""你是标准产品分类体系的编纂助手。产品未能精确匹配现有分类，请建议「挂到哪个已有父节点下、新建一个正式的标准子分类名」。
 
 产品名称: {product_name}
 
-标准体系一级分类概览:
+体系一级分类（对照用）:
 {taxonomy_overview}
 
-向量语义匹配找到的相似节点:
+向量召回的真实节点（唯一可信证据）:
 {candidate_info}
 
-请分析这个产品的特征，推理它在标准体系中的合理位置。要求:
-1. 分析产品的本质属性和用途
-2. 判断它属于哪个一级分类
-3. 在该一级分类下，找到最合适的父节点（可以是叶子节点，也可以是中间节点）
-4. 如果是新兴产品或现有分类不够精确，判断是否需要在某个节点下创建新的子分类
-5. 给出推理理由
+命名与挂载硬性规则：
+1. suggested_parent_id 必须来自候选 ID（可写 #数字），禁止编造。
+2. new_node_name 必须是正式、通用的标准分类名，能覆盖一类产品，而不是单个SKU/型号/款式。
+3. 严禁把产品名原样、或仅加前缀/后缀的产品级名称当作 new_node_name。
+   反例：产品「T型丝锥扳手」→ 禁止新建「T型丝锥扳手」；应新建「丝锥扳手」，父节点选「钻孔或攻丝工具」等更上位已有节点。
+   反例：产品「304不锈钢弯头」→ 禁止「304不锈钢弯头」；宜「管件弯头」或「不锈钢管件」。
+4. 去掉型号/规格/材质牌号/形状代号后再抽象：T型/L型/U型、十字/梅花、内六角、数字规格、牌号等都不进入分类名。
+5. 若候选里已有足够合适的正式类名（如已有「丝锥扳手」），不要再在其下建更细的产品叶子；父节点应选其上一级，new_node_name 用同级正式类名；若该类已存在则 should_create_new_node=false。
+6. 对黑话/多义词禁止望文生义，以向量近邻行业域为准；近邻冲突时 confidence≤0.55。
+7. full_path = 父节点真实路径 > new_node_name（仅末级允许新建）。
 
-**重要提示**：
-- suggested_parent_id必须从上面的向量候选中选择一个实际存在的节点ID（如#21447）
-- 如果你认为应该放在一个不存在的分类下（如"其他有机化学原料"），请设置should_create_new_node=true
-- 此时suggested_parent_id应该是新节点的父节点ID（从向量候选中选择），new_node_name填写要创建的新节点名称
-- 不要返回节点名称作为suggested_parent_id，必须是数字ID或留空
-
-请以JSON格式返回:
+请以JSON返回:
 {{
-  "product_analysis": "对产品特征的分析",
-  "primary_category": "产品属于的一级分类名称",
-  "suggested_parent_id": "推荐的父节点ID（必须从上面的候选中选择，如#21447）",
-  "suggested_parent_name": "推荐的父节点名称",
-  "should_create_new_node": true/false,
-  "new_node_name": "如果需要新建，新节点的名称（如'其他有机化学原料'）",
-  "full_path": "完整路径，从一级分类到最终位置",
-  "reasoning": "推理理由",
+  "product_analysis": "产品行业属性；若名称歧义请写明",
+  "primary_category": "一级分类",
+  "suggested_parent_id": "#候选ID",
+  "suggested_parent_name": "父节点名",
+  "should_create_new_node": true,
+  "new_node_name": "正式标准分类名（禁止等于产品名）",
+  "full_path": "真实父路径 > 正式分类名",
+  "reasoning": "为何该正式类名可覆盖同类产品",
   "confidence": 0.0-1.0
 }}"""
 
@@ -403,6 +999,146 @@ def _llm_path_reasoning(product_name: str, vector_candidates: list):
     except Exception as e:
         logging.getLogger("app").warning(f"LLM路径推理失败: {e}")
         return None
+
+
+def _strip_product_modifiers(name: str) -> str:
+    """去掉型号/形状/规格等产品级修饰，得到更接近标准类名的主干。"""
+    import re
+    s = (name or "").strip()
+    if not s:
+        return ""
+    # 先去牌号/数字规格前缀（如 304不锈钢…）
+    s = re.sub(r"^\d{2,4}(?=[\u4e00-\u9fff])", "", s)
+    s = re.sub(
+        r"^(?:[A-Za-z0-9]{1,4}型|十字|梅花|内六角|外六角|双向|单向|电动|手动|气动|液压|"
+        r"不锈钢|镀锌|碳钢|合金|精密|微型|小型|大型|重型|轻型|便携式|固定式|移动式)+",
+        "",
+        s,
+    )
+    s = re.sub(r"(?:^|[\-_/])\d+(?:\.\d+)?(?:mm|cm|MM|CM|号|#)?(?=$|[\-_/])", "", s)
+    s = re.sub(r"^[\d\-_.]+", "", s)
+    s = re.sub(r"[\d\-_.]+$", "", s)
+    return re.sub(r"\s+", "", s).strip("-_/ ")
+
+
+def _formalize_new_category_name(
+    product_name: str,
+    proposed: str,
+    parent_name: str,
+) -> str:
+    """将拟新建名规范为正式分类名：不得等于产品名，避免过细叶子。"""
+    from src.data.text_similarity import chinese_text_similarity
+    import re
+
+    product_name = (product_name or "").strip()
+    parent_name = (parent_name or "").strip()
+    name = (proposed or "").strip()
+
+    def _too_specific(n: str) -> bool:
+        if not n:
+            return True
+        if n == product_name:
+            return True
+        if re.match(r"^[A-Za-z0-9]{1,4}型", n):
+            return True
+        if chinese_text_similarity(n, product_name) >= 0.92:
+            return True
+        # 与产品几乎同长且高度相似 → 产品级叶子
+        if (
+            product_name
+            and abs(len(n) - len(product_name)) <= 1
+            and chinese_text_similarity(n, product_name) >= 0.85
+        ):
+            return True
+        return False
+
+    for candidate in (name, _strip_product_modifiers(name), _strip_product_modifiers(product_name)):
+        c = (candidate or "").strip()
+        if not c or c == parent_name:
+            continue
+        if _too_specific(c):
+            c2 = _strip_product_modifiers(c)
+            if c2 and c2 != parent_name and not _too_specific(c2):
+                return c2
+            continue
+        return c
+
+    if parent_name:
+        fallback = f"其他{parent_name}"
+        if fallback != product_name:
+            return fallback
+    return "其他专用制品"
+
+
+def _choose_expansion_parent(
+    product_name: str,
+    vector_candidates: list,
+    preferred_parent_id: str = "",
+) -> tuple[str, str]:
+    """选择挂载父节点：若近邻已是产品细类/近同名，则上提到更上位正式节点。"""
+    from src.data.text_similarity import chinese_text_similarity
+
+    def _lookup(pid: str) -> tuple[str, str] | None:
+        pid = str(pid or "").strip().lstrip("#")
+        if not pid:
+            return None
+        row = _db.execute_one(
+            "SELECT category_id, category_name FROM category_texts WHERE category_id = %s",
+            (pid,),
+        )
+        if not row:
+            return None
+        return str(row["category_id"]), row["category_name"] or ""
+
+    def _should_promote(cat_name: str) -> bool:
+        if not cat_name or not product_name:
+            return False
+        if cat_name == product_name:
+            return True
+        if cat_name in product_name or product_name in cat_name:
+            return True
+        return chinese_text_similarity(cat_name, product_name) >= 0.75
+
+    def _parent_from_group(category_id: str, group_name: str, self_name: str) -> tuple[str, str] | None:
+        segs = [p.strip() for p in (group_name or "").split(",") if p.strip()]
+        while segs and segs[-1] == self_name:
+            segs.pop()
+        if not segs:
+            return None
+        up_name = segs[-1]
+        row = _db.execute_one(
+            "SELECT category_id, category_name FROM category_texts WHERE category_name = %s LIMIT 1",
+            (up_name,),
+        )
+        if row and str(row["category_id"]) != str(category_id):
+            return str(row["category_id"]), row["category_name"]
+        return None
+
+    hit = _lookup(preferred_parent_id)
+    cands = vector_candidates or []
+    top = cands[0] if cands else None
+
+    if hit and _should_promote(hit[1]):
+        row = _db.execute_one(
+            "SELECT category_group_name FROM category_texts WHERE category_id = %s",
+            (hit[0],),
+        )
+        promoted = _parent_from_group(hit[0], (row or {}).get("category_group_name") or "", hit[1])
+        if promoted:
+            return promoted
+    if hit:
+        return hit
+
+    if top:
+        tid, tname = str(top["category_id"]), top.get("category_name") or ""
+        if _should_promote(tname):
+            promoted = _parent_from_group(tid, top.get("path") or "", tname)
+            if promoted:
+                return promoted
+        looked = _lookup(tid)
+        if looked:
+            return looked
+    return "", ""
 
 
 @app.route("/")
@@ -679,6 +1415,270 @@ def api_synonym_history():
         return jsonify(results)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/synonym/suggest_from_matches", methods=["POST"])
+def api_synonym_suggest_from_matches():
+    """从批量 MATCHED 结果筛同义词候选（对齐 SelfEvolveScheduler 意图）。
+
+    准入条件：
+    1. MATCHED 且置信度 >= syn_confidence_threshold
+    2. 产品名 ≠ 分类名、不在 syn_list、通过清洗
+    3. 字面相似度 < syn_trgm_threshold（中文 SequenceMatcher/bigram，
+       非 pg_trgm——后者对纯中文恒为 0）
+    4. 可选：产品名↔分类名向量余弦作参考（不过度用于硬过滤，
+       因真正同义词向量也往往很高）
+    5. LLM 同义校验：≥0.7 强候选；≥0.5 进人工；否则丢弃
+    """
+    try:
+        _init_components()
+        data = request.get_json(force=True) or {}
+        items = data.get("items") or []
+        if not items:
+            return jsonify({"error": "items required"}), 400
+
+        from src.data.synonym_sanitizer import sanitize_syn_list, GENERIC_SHORT_SYNONYMS
+        from src.data.text_similarity import chinese_text_similarity, cosine_similarity
+
+        match_cfg = _config.get_match_config()
+        # 人工复核默认用 MATCHED 线（low_confidence）；auto_strict 才用 0.95
+        auto_strict = bool(data.get("auto_strict", False))
+        if data.get("min_confidence") is not None:
+            conf_th = float(data.get("min_confidence"))
+        elif auto_strict:
+            conf_th = float(getattr(match_cfg, "syn_confidence_threshold", 0.95) or 0.95)
+        else:
+            # 测试/复核：只要 MATCHED 即可进列表（默认 0）
+            conf_th = 0.0
+        # 字面近重复上限；复核模式默认放宽到 0.92，便于测试集看到候选
+        if data.get("text_threshold") is not None:
+            text_th = float(data.get("text_threshold"))
+        elif auto_strict:
+            text_th = float(getattr(match_cfg, "syn_trgm_threshold", 0.65) or 0.65)
+        else:
+            text_th = float(data.get("text_threshold", 0.92))
+        # 批量导入待复核默认不做 LLM（快、且不会被 LLM 全滤掉）；需要时传 use_llm=true
+        use_llm = bool(data.get("use_llm", False)) and _llm is not None
+        use_vec = bool(data.get("use_vec", False)) and _vec_mgr is not None
+
+        suggestions = []
+        skipped = []
+        llm_candidates = []
+        score_samples = []  # 便于前端/调试看分数分布
+
+        for item in items:
+            product_name = (item.get("product_name") or item.get("input") or "").strip()
+            category_id = str(item.get("matched_category_id") or item.get("category_id") or "").strip()
+            confidence = float(item.get("confidence") or 0)
+            match_status = (item.get("match_status") or "MATCHED").strip().upper()
+            if not product_name or not category_id:
+                continue
+
+            if match_status != "MATCHED":
+                skipped.append({"product_name": product_name, "reason": f"状态={match_status}（仅 MATCHED）"})
+                continue
+
+            if confidence < conf_th:
+                skipped.append({
+                    "product_name": product_name,
+                    "reason": f"置信度 {confidence:.4f} < 阈值 {conf_th}",
+                })
+                continue
+
+            row = _db.execute_one(
+                "SELECT category_id, category_name, category_group_name, syn_list "
+                "FROM category_texts WHERE category_id = %s",
+                (category_id,),
+            )
+            if not row:
+                skipped.append({"product_name": product_name, "reason": f"分类#{category_id}不存在"})
+                continue
+
+            cat_name = row["category_name"] or ""
+            syn_list = row.get("syn_list") or []
+
+            if product_name == cat_name:
+                skipped.append({"product_name": product_name, "reason": "与分类名相同"})
+                continue
+            if product_name in syn_list:
+                skipped.append({"product_name": product_name, "reason": "已是同义词"})
+                continue
+            if product_name in GENERIC_SHORT_SYNONYMS:
+                skipped.append({"product_name": product_name, "reason": "泛词短同义词"})
+                continue
+
+            # pg_trgm 对纯中文无效（show_trgm=[] → sim=0）；改用中文字面相似度
+            text_sim = chinese_text_similarity(product_name, cat_name)
+            pg_trgm = 0.0
+            if _trgm_mgr is not None:
+                try:
+                    pg_trgm = float(_trgm_mgr.get_trgm_similarity(product_name, cat_name) or 0)
+                except Exception:
+                    pg_trgm = 0.0
+
+            score_samples.append({
+                "product_name": product_name,
+                "category_name": cat_name,
+                "text_similarity": round(text_sim, 4),
+                "pg_trgm": round(pg_trgm, 4),
+                "match_confidence": round(confidence, 4),
+            })
+
+            if text_sim >= text_th:
+                skipped.append({
+                    "product_name": product_name,
+                    "reason": (
+                        f"与分类名字面过像 text_sim={text_sim:.3f}≥{text_th}"
+                        f"（pg_trgm={pg_trgm:.3f}，中文通常为0）"
+                    ),
+                })
+                continue
+
+            cleaned, removed = sanitize_syn_list([product_name], cat_name)
+            if removed or not cleaned:
+                skipped.append({"product_name": product_name, "reason": "被清洗规则拒绝"})
+                continue
+
+            path = row.get("category_group_name") or ""
+            full_path = (
+                path.replace(",", " > ") + " > " + cat_name if path else cat_name
+            )
+            llm_candidates.append({
+                "product_name": product_name,
+                "category_id": category_id,
+                "cat_name": cat_name,
+                "full_path": full_path,
+                "confidence": confidence,
+                "text_sim": text_sim,
+                "pg_trgm": pg_trgm,
+                "vec_sim": None,
+            })
+
+        # 批量算产品名↔分类名向量余弦（参考分，不作为硬过滤）
+        if use_vec and llm_candidates:
+            try:
+                flat = []
+                for c in llm_candidates:
+                    flat.append(c["product_name"])
+                    flat.append(c["cat_name"])
+                vecs = _embed_queries_batch(flat)
+                for i, c in enumerate(llm_candidates):
+                    v1 = vecs[2 * i] if 2 * i < len(vecs) else None
+                    v2 = vecs[2 * i + 1] if 2 * i + 1 < len(vecs) else None
+                    c["vec_sim"] = cosine_similarity(v1, v2)
+                    if i < len(score_samples):
+                        # 对齐到仍在 hard-pass 的样本较难，直接挂在 candidate 上即可
+                        pass
+            except Exception as ve:
+                logging.getLogger("WebAPI").warning(f"同义词向量相似度计算失败: {ve}")
+
+        def _pack_suggestion(c: dict, llm_ok: bool, llm_conf: float, llm_reason: str) -> dict:
+            vec_s = c.get("vec_sim")
+            vec_part = f", vec={vec_s:.3f}" if isinstance(vec_s, (int, float)) else ""
+            default_reason = (
+                f"高置信匹配「{c['cat_name']}」，字面差异大"
+                f"(text_sim={c['text_sim']:.3f}{vec_part})，适合作同义词候选"
+            )
+            return {
+                "product_name": c["product_name"],
+                "status": "synonym_candidate",
+                "source": "matched",
+                "matched_category_id": c["category_id"],
+                "matched_category_name": c["cat_name"],
+                "confidence": round(c["confidence"], 4),
+                "text_similarity": round(c["text_sim"], 4),
+                "trgm_similarity": round(c["pg_trgm"], 4),  # 兼容旧字段；中文多为 0
+                "vec_similarity": round(c["vec_sim"], 4) if c.get("vec_sim") is not None else None,
+                "vector_candidates": [],
+                "path_analysis": {},
+                "llm_reasoning": {
+                    "product_analysis": llm_reason or default_reason,
+                    "full_path": c["full_path"],
+                    "confidence": llm_conf if llm_conf else c["confidence"],
+                    "is_synonym": llm_ok,
+                    "text_similarity": c["text_sim"],
+                    "pg_trgm": c["pg_trgm"],
+                    "vec_similarity": c.get("vec_sim"),
+                },
+                "llm_path_validation": None,
+                "recommendation": {
+                    "parent_id": str(c["category_id"]),
+                    "parent_name": c["cat_name"],
+                    "full_path": c["full_path"],
+                    "should_create_new_node": False,
+                    "new_node_name": "",
+                    "confidence": float(llm_conf) if llm_conf else float(c["confidence"]),
+                    "reason": llm_reason or "高置信+低字面相似度 → 同义词候选",
+                    "decision_reason": (
+                        f"MATCHED conf≥{conf_th}, text_sim<{text_th}"
+                        + (", LLM通过" if llm_ok else (", LLM待人工" if use_llm else ""))
+                    ),
+                    "trust_llm": bool(llm_ok),
+                    "llm_weight": "high" if llm_ok else "medium",
+                },
+            }
+
+        if not use_llm:
+            for c in llm_candidates:
+                suggestions.append(_pack_suggestion(c, False, 0.0, ""))
+        else:
+            def _verify_one(c: dict):
+                try:
+                    verify = _llm.synonym_verification(c["product_name"], c["cat_name"])
+                    return c, verify
+                except Exception as e:
+                    from src.models.evolve_models import SynonymVerifyResult
+                    return c, SynonymVerifyResult(
+                        is_synonym=False, confidence=0, reason=f"校验失败: {e}"
+                    )
+
+            workers = min(8, max(len(llm_candidates), 1))
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                futures = [executor.submit(_verify_one, c) for c in llm_candidates]
+                for fut in as_completed(futures):
+                    c, verify = fut.result()
+                    if verify.is_synonym and verify.confidence >= 0.7:
+                        suggestions.append(
+                            _pack_suggestion(c, True, verify.confidence, verify.reason)
+                        )
+                    elif verify.confidence >= 0.5:
+                        suggestions.append(
+                            _pack_suggestion(
+                                c, False, verify.confidence,
+                                verify.reason or "LLM不确定，需人工确认",
+                            )
+                        )
+                    else:
+                        skipped.append({
+                            "product_name": c["product_name"],
+                            "reason": (
+                                f"LLM判定非同义 conf={verify.confidence:.2f}"
+                                + (f"：{verify.reason}" if verify.reason else "")
+                            ),
+                        })
+
+        return jsonify({
+            "status": "ok",
+            "total_input": len(items),
+            "suggestion_count": len(suggestions),
+            "skipped_count": len(skipped),
+            "hard_pass_count": len(llm_candidates),
+            "rules": {
+                "syn_confidence_threshold": conf_th,
+                "syn_text_threshold": text_th,
+                "syn_trgm_threshold": text_th,
+                "text_metric": "chinese_text_similarity",
+                "pg_trgm_note": "纯中文 pg_trgm 恒为0，已弃用为过滤依据",
+                "auto_strict": auto_strict,
+                "use_llm": use_llm,
+                "use_vec": use_vec,
+            },
+            "score_samples": score_samples[:40],
+            "suggestions": suggestions,
+            "skipped": skipped[:80],
+        })
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 
 @app.route("/api/expansion_history", methods=["GET"])
@@ -1482,7 +2482,11 @@ def api_staging_clear():
 
 @app.route("/api/staging/batch_suggest", methods=["POST"])
 def api_staging_batch_suggest():
-    """对暂存箱中所有产品批量获取智能扩展建议（优化版：并行向量计算 + 批量LLM推理）"""
+    """暂存箱批量智能扩展建议。
+
+    暂存项默认已是 RAG+Rerank 未匹配结果，不再重复完整匹配。
+    流程：批量 embedding → 缓存矩阵 TopK → LLM 小批并行推理（默认每批3条）。
+    """
     try:
         _init_components()
         rows = _db.execute(
@@ -1493,214 +2497,113 @@ def api_staging_batch_suggest():
 
         product_names = [r["product_name"] for r in rows]
         logger = logging.getLogger("app")
-        logger.info(f"批量智能扩展开始: {len(product_names)}个产品")
+        logger.info(f"批量智能扩展开始: {len(product_names)}个产品（跳过RAG+Rerank，单条多路并发LLM）")
         start_time = time.time()
 
-        def process_product(product_name):
+        # 1) 一次加载向量缓存 + 批量 embed
+        _ensure_locate_matrix_cache()
+        try:
+            query_vecs = _embed_queries_batch(product_names)
+        except Exception as e:
+            logger.warning(f"批量embedding失败，回退逐条: {e}")
+            query_vecs = []
+            for name in product_names:
+                try:
+                    query_vecs.append(_vec_mgr.embed_query(name) if _vec_mgr else [])
+                except Exception:
+                    query_vecs.append([])
+
+        need_llm_products = []
+        suggestions_by_name: dict[str, dict] = {}
+        for name, qvec in zip(product_names, query_vecs):
             try:
-                match_result = _rag_rerank_engine.match(product_name)
-                if match_result.match_status.value == "MATCHED":
-                    return {
-                        "product_name": product_name,
-                        "type": "already_matched",
-                        "matched_category_id": match_result.matched_category_id,
-                        "matched_category_name": match_result.matched_category_name,
-                        "confidence": round(match_result.confidence, 4),
+                if _vec_is_empty(qvec):
+                    suggestions_by_name[name] = {
+                        "product_name": name,
+                        "status": "error",
+                        "error": "embedding失败",
                     }
-                
-                vector_result = _vector_semantic_locate(product_name, top_k=5)
-                return {
-                    "product_name": product_name,
-                    "type": "need_llm",
-                    "vector_candidates": vector_result.get("candidates", []),
-                    "path_analysis": vector_result.get("path_analysis", {}),
-                }
+                    continue
+                located = _top_k_from_query_vec(qvec, top_k=5)
+                need_llm_products.append({
+                    "product_name": name,
+                    "vector_candidates": located.get("candidates", []),
+                    "path_analysis": located.get("path_analysis", {}),
+                })
             except Exception as e:
-                logger.warning(f"处理产品失败 {product_name}: {e}")
-                return {
-                    "product_name": product_name,
-                    "type": "error",
+                logger.warning(f"向量定位失败 {name}: {e}")
+                suggestions_by_name[name] = {
+                    "product_name": name,
+                    "status": "error",
                     "error": str(e),
                 }
 
-        with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = {executor.submit(process_product, name): name for name in product_names}
-            parallel_results = []
-            for future in as_completed(futures):
-                parallel_results.append(future.result())
-        
-        parallel_results.sort(key=lambda x: product_names.index(x["product_name"]))
-        
         vector_time = time.time()
-        logger.info(f"向量计算完成，耗时: {vector_time - start_time:.2f}秒")
+        logger.info(
+            f"向量定位完成: {len(need_llm_products)}条待LLM，耗时 {vector_time - start_time:.2f}秒"
+        )
 
-        suggestions = []
-        need_llm_products = []
-        
-        for result in parallel_results:
-            if result["type"] == "already_matched":
-                suggestions.append({
-                    "product_name": result["product_name"],
-                    "status": "already_matched",
-                    "matched_category_id": result["matched_category_id"],
-                    "matched_category_name": result["matched_category_name"],
-                    "confidence": result["confidence"],
-                })
-            elif result["type"] == "need_llm":
-                need_llm_products.append(result)
-            else:
-                suggestions.append({
-                    "product_name": result["product_name"],
-                    "status": "error",
-                    "error": result.get("error", "未知错误"),
-                })
+        # 2) LLM 单条多路并发（每条产品独立一轮，降低幻觉；多路并行提速）
+        llm_workers = 8
+        llm_results_map: dict[str, dict | None] = {
+            p["product_name"]: None for p in need_llm_products
+        }
+        llm_time = vector_time
 
-        llm_results = []
         if need_llm_products and _llm:
-            root_rows = _db.execute("SELECT category_name FROM category_texts WHERE category_pids = '{}' LIMIT 30")
-            taxonomy_overview = ", ".join([r["category_name"] for r in root_rows]) if root_rows else ""
-            
-            llm_input = [
-                {
-                    "product_name": p["product_name"],
-                    "vector_candidates": p["vector_candidates"],
-                }
-                for p in need_llm_products
-            ]
-            
-            llm_results = _llm.batch_path_reasoning(llm_input, taxonomy_overview)
-            llm_time = time.time()
-            logger.info(f"LLM批量推理完成，耗时: {llm_time - vector_time:.2f}秒")
+            root_rows = _db.execute(
+                "SELECT category_name FROM category_texts WHERE category_pids = '{}' LIMIT 30"
+            )
+            taxonomy_overview = (
+                ", ".join([r["category_name"] for r in root_rows]) if root_rows else ""
+            )
 
-        for idx, product_info in enumerate(need_llm_products):
-            product_name = product_info["product_name"]
-            vector_candidates = product_info["vector_candidates"]
-            path_analysis = product_info["path_analysis"]
-            
-            llm_result = llm_results[idx] if idx < len(llm_results) else None
-            llm_path_validation = None
-            
-            if llm_result:
-                llm_full_path = llm_result.get("full_path", "")
-                if llm_full_path:
-                    llm_path_validation = _validate_path_nodes(llm_full_path)
-            
-            recommendation = None
-            if llm_result:
-                llm_confidence = llm_result.get("confidence", 0.0)
-                llm_parent_id = llm_result.get("suggested_parent_id", "")
-                llm_parent_name = llm_result.get("suggested_parent_name", "")
-                llm_should_create = llm_result.get("should_create_new_node", False)
-                
-                if llm_parent_id:
-                    llm_parent_id = str(llm_parent_id)
-                    if llm_parent_id.startswith("#"):
-                        llm_parent_id = llm_parent_id[1:]
-                
-                parent_id = ""
-                parent_name = ""
-                decision_reason = ""
-                trust_llm = False
-                
-                if llm_confidence >= 0.85:
-                    trust_llm = True
-                    decision_reason = f"LLM置信度{llm_confidence:.2f}≥0.85，完全采纳LLM建议"
-                elif llm_should_create:
-                    trust_llm = True
-                    decision_reason = f"LLM建议创建新节点，优先采纳"
-                elif llm_confidence >= 0.7:
-                    trust_llm = True
-                    decision_reason = f"LLM置信度{llm_confidence:.2f}≥0.7，采纳LLM建议"
-                else:
-                    if vector_candidates:
-                        top_vector_candidate = vector_candidates[0]
-                        vector_sim = top_vector_candidate.get("similarity", 0)
-                        if llm_confidence >= vector_sim:
-                            trust_llm = True
-                            decision_reason = f"LLM置信度{llm_confidence:.2f}≥向量相似度{vector_sim:.2f}，采纳LLM建议"
-                        else:
-                            trust_llm = False
-                            decision_reason = f"向量相似度{vector_sim:.2f}>LLM置信度{llm_confidence:.2f}，但LLM推理更合理，仍采纳LLM建议"
-                            trust_llm = True
-                    else:
-                        trust_llm = True
-                        decision_reason = f"无向量候选，采纳LLM建议"
-                
-                if trust_llm and llm_parent_id:
-                    parent_id = llm_parent_id
-                    parent_name = llm_parent_name
-                    
-                    if parent_id and not parent_id.isdigit():
-                        name_row = _db.execute_one(
-                            "SELECT category_id, category_name, category_group_name FROM category_texts WHERE category_name = %s LIMIT 1",
-                            (parent_id,),
-                        )
-                        if name_row:
-                            parent_id = name_row["category_id"]
-                            parent_name = name_row["category_name"]
-                    
-                    if parent_id and parent_id.isdigit():
-                        parent_row = _db.execute_one(
-                            "SELECT category_name, category_group_name FROM category_texts WHERE category_id = %s",
-                            (parent_id,),
-                        )
-                        if parent_row:
-                            if not parent_name:
-                                parent_name = parent_row["category_name"]
-                            path = parent_row.get("category_group_name", "")
-                            full_path = (path.replace(",", " > ") + " > " + parent_row["category_name"]) if path else parent_row["category_name"]
-                            recommendation = {
-                                "parent_id": parent_id,
-                                "parent_name": parent_name,
-                                "full_path": full_path,
-                                "should_create_new_node": llm_should_create,
-                                "new_node_name": llm_result.get("new_node_name", ""),
-                                "confidence": llm_confidence,
-                                "reason": llm_result.get("reasoning", ""),
-                                "decision_reason": decision_reason,
-                                "trust_llm": True,
-                                "llm_weight": "high" if llm_confidence >= 0.85 else "medium",
-                            }
-                elif not trust_llm and vector_candidates:
-                    top_candidate = vector_candidates[0]
-                    parent_id = top_candidate.get("category_id", "")
-                    parent_name = top_candidate.get("category_name", "")
-                    path = top_candidate.get("path", "")
-                    full_path = path.replace(",", " > ") if path else parent_name
-                    
-                    parent_row = _db.execute_one(
-                        "SELECT category_name, category_group_name FROM category_texts WHERE category_id = %s",
-                        (parent_id,),
+            def _run_one_llm(product_info: dict) -> tuple[str, dict | None]:
+                pname = product_info["product_name"]
+                try:
+                    results = _llm.batch_path_reasoning(
+                        [{
+                            "product_name": pname,
+                            "vector_candidates": product_info["vector_candidates"],
+                        }],
+                        taxonomy_overview,
                     )
-                    if parent_row:
-                        path = parent_row.get("category_group_name", "")
-                        full_path = (path.replace(",", " > ") + " > " + parent_row["category_name"]) if path else parent_row["category_name"]
-                    
-                    recommendation = {
-                        "parent_id": parent_id,
-                        "parent_name": parent_name,
-                        "full_path": full_path,
-                        "should_create_new_node": False,
-                        "new_node_name": "",
-                        "confidence": top_candidate.get("similarity", 0),
-                        "reason": "基于向量相似度定位（LLM置信度较低）",
-                        "decision_reason": decision_reason,
-                        "trust_llm": False,
-                        "llm_weight": "low",
-                    }
+                    return pname, (results[0] if results else None)
+                except Exception as e:
+                    logger.warning(f"单条LLM失败 {pname}: {e}")
+                    return pname, None
 
-            suggestions.append({
-                "product_name": product_name,
-                "status": "no_match",
-                "vector_candidates": vector_candidates,
-                "path_analysis": path_analysis,
-                "llm_reasoning": llm_result,
-                "llm_path_validation": llm_path_validation,
-                "recommendation": recommendation,
-            })
+            with ThreadPoolExecutor(
+                max_workers=min(llm_workers, max(len(need_llm_products), 1))
+            ) as executor:
+                futures = [
+                    executor.submit(_run_one_llm, p) for p in need_llm_products
+                ]
+                for fut in as_completed(futures):
+                    pname, res = fut.result()
+                    llm_results_map[pname] = res
+
+            llm_time = time.time()
+            logger.info(
+                f"LLM单条并发完成: {len(need_llm_products)}条 × workers≤{llm_workers}，"
+                f"耗时 {llm_time - vector_time:.2f}秒"
+            )
+
+        for product_info in need_llm_products:
+            pname = product_info["product_name"]
+            suggestions_by_name[pname] = _build_expansion_suggestion(
+                pname,
+                product_info["vector_candidates"],
+                product_info["path_analysis"],
+                llm_results_map.get(pname),
+            )
+
+        suggestions = [suggestions_by_name[n] for n in product_names if n in suggestions_by_name]
 
         total_time = time.time() - start_time
-        logger.info(f"批量智能扩展完成，总耗时: {total_time:.2f}秒，平均每个产品: {total_time/len(product_names):.2f}秒")
+        logger.info(
+            f"批量智能扩展完成，总耗时: {total_time:.2f}秒，平均每个产品: {total_time / max(len(product_names), 1):.2f}秒"
+        )
 
         return jsonify({
             "status": "ok",
@@ -1708,9 +2611,12 @@ def api_staging_batch_suggest():
             "suggestions": suggestions,
             "performance": {
                 "total_time": round(total_time, 2),
-                "avg_time_per_product": round(total_time / len(product_names), 2),
+                "avg_time_per_product": round(total_time / max(len(product_names), 1), 2),
                 "vector_time": round(vector_time - start_time, 2),
                 "llm_time": round(llm_time - vector_time, 2) if need_llm_products and _llm else 0,
+                "llm_workers": llm_workers,
+                "llm_mode": "one_product_per_call",
+                "skipped_rag_rerank": True,
             },
         })
     except Exception as e:
@@ -1728,7 +2634,7 @@ def api_staging_batch_execute():
         if not items:
             return jsonify({"error": "没有有效的扩展项（可能所有产品已在对应节点中，或LLM建议的父节点不存在）"}), 400
 
-        from src.data.synonym_sanitizer import sanitize_syn_list
+        from src.data.synonym_sanitizer import GENERIC_SHORT_SYNONYMS
 
         stashed = []
         skipped = []
@@ -1755,9 +2661,12 @@ def api_staging_batch_execute():
                 skipped.append({"product_name": product_name, "reason": f"已是 #{parent_id} 的同义词"})
                 continue
 
-            cleaned, removed = sanitize_syn_list([product_name], cat_name)
-            if removed or not cleaned:
-                skipped.append({"product_name": product_name, "reason": "被清洗规则拒绝"})
+            # 暂存扩展是用户确认的产品名：只拦截泛词短同义词，允许「弯头」「黄饼」等具体短名
+            if product_name in GENERIC_SHORT_SYNONYMS:
+                skipped.append({
+                    "product_name": product_name,
+                    "reason": f"泛词短同义词被拒绝（相对分类「{cat_name}」）",
+                })
                 continue
 
             _db.execute(
@@ -1788,6 +2697,9 @@ def api_staging_batch_execute():
                 "parent_name": cat_name,
             })
 
+        if stashed:
+            _invalidate_locate_matrix_cache()
+
         return jsonify({
             "status": "ok",
             "stashed": len(stashed),
@@ -1799,7 +2711,8 @@ def api_staging_batch_execute():
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 
-
+@app.route("/api/staging/batch_smart", methods=["POST"])
+def api_staging_batch_smart():
     """批量智能暂存：先对批次内产品聚类，同簇产品挂到同一父节点"""
     try:
         _init_components()
@@ -2257,6 +3170,221 @@ def api_expansion_pool():
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/expansion/pool_update", methods=["POST"])
+def api_expansion_pool_update():
+    """修改暂存池条目的分类名/挂载父节点等。"""
+    try:
+        _init_components()
+        data = request.get_json(force=True)
+        entry_id = data.get("entry_id", "").strip()
+        if not entry_id:
+            return jsonify({"error": "entry_id required"}), 400
+        from src.data.expansion_pool import update_entry
+        result = update_entry(
+            entry_id,
+            suggested_category_name=data.get("category_name"),
+            suggested_parent_id=data.get("parent_id"),
+            suggested_parent_name=data.get("parent_name"),
+            path_text=data.get("path_text"),
+            llm_reason=data.get("llm_reason"),
+        )
+        if result.get("status") == "not_found":
+            return jsonify({"error": f"entry_id={entry_id} not found"}), 404
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+
+@app.route("/api/staging/prepare_new_nodes", methods=["POST"])
+def api_staging_prepare_new_nodes():
+    """从暂存箱生成新节点扩展建议（PageIndex 定父节点 + 正式类名）。
+
+    1) PageIndex 自上而下选路，某层无合适子类则停在该层作父节点
+    2) 在父节点下建议正式标准分类名（禁止产品级细叶子）
+    3) 父节点必须落库存在
+    """
+    try:
+        _init_components()
+        from src.data.expansion_pool import add_entry, load_pool, clear_pool
+
+        # 前端按钮可能不带 body；空 body + application/json 会导致 get_json 抛 400
+        data = request.get_json(silent=True) or {}
+        # 可选：只跑指定产品（便于演示），否则跑整个暂存箱
+        only_names = data.get("product_names") or []
+        clear_first = bool(data.get("clear_pool", False))
+        if clear_first:
+            try:
+                clear_pool()
+            except Exception:
+                pass
+
+        if only_names:
+            product_names = [str(n).strip() for n in only_names if str(n).strip()]
+        else:
+            rows = _db.execute(
+                "SELECT product_name FROM staging_box WHERE status = 'pending' ORDER BY created_at"
+            )
+            if not rows:
+                return jsonify({"error": "暂存箱中没有待处理的产品"}), 400
+            product_names = [r["product_name"] for r in rows]
+
+        if not _llm:
+            return jsonify({"error": "LLM未初始化"}), 500
+        if not _ensure_page_tree_ready():
+            return jsonify({"error": "PageIndex树不可用（Excel/DB均未能建树）"}), 500
+
+        logger = logging.getLogger("app")
+        logger.info(f"新节点建议(PageIndex): {len(product_names)} 条")
+
+        def _prepare_one(product_name: str) -> dict:
+            try:
+                located = _pageindex_locate_expansion_parent(product_name)
+                if not located.get("ok"):
+                    return {
+                        "product_name": product_name,
+                        "status": "error",
+                        "error": located.get("error") or "PageIndex定位失败",
+                    }
+
+                parent_id = str(located["parent_id"])
+                parent_name = located["parent_name"]
+                parent_path = located["path_text"]
+                siblings = located.get("sibling_names") or []
+                steps = located.get("steps") or []
+
+                formal = _llm.suggest_formal_category_name(
+                    product_name, parent_name, parent_path, siblings
+                )
+                raw_name = (formal.get("new_node_name") or "").strip()
+                new_node_name = _formalize_new_category_name(
+                    product_name, raw_name, parent_name
+                )
+
+                # 若正式类已存在：挂到该类的父级，提示并入
+                reason_prefix = ""
+                existing_formal = _db.execute_one(
+                    "SELECT category_id, category_name, category_group_name FROM category_texts WHERE category_name = %s LIMIT 1",
+                    (new_node_name,),
+                )
+                if existing_formal:
+                    group = existing_formal.get("category_group_name") or ""
+                    segs = [p.strip() for p in group.split(",") if p.strip()]
+                    if segs:
+                        up = _db.execute_one(
+                            "SELECT category_id, category_name FROM category_texts WHERE category_name = %s LIMIT 1",
+                            (segs[-1],),
+                        )
+                        if up:
+                            parent_id = str(up["category_id"])
+                            parent_name = up["category_name"]
+                            parent_path_row = _db.execute_one(
+                                "SELECT category_group_name, category_name FROM category_texts WHERE category_id = %s",
+                                (parent_id,),
+                            )
+                            if parent_path_row:
+                                g = (parent_path_row.get("category_group_name") or "").replace(",", " > ")
+                                parent_path = (g + " > " if g else "") + (
+                                    parent_path_row.get("category_name") or parent_name
+                                )
+                    reason_prefix = (
+                        f"正式类「{new_node_name}」已存在(#{existing_formal['category_id']})，建议并入；"
+                    )
+
+                path_text = f"{parent_path} > {new_node_name}" if parent_path else new_node_name
+                conf = float(formal.get("confidence") or located.get("confidence") or 0.6)
+                if new_node_name == product_name:
+                    conf = min(conf, 0.5)
+
+                step_summary = " → ".join(
+                    f"{s.get('action')}:{s.get('choice')}" for s in steps if s.get("choice")
+                )
+                reason = reason_prefix + (formal.get("reason") or "")
+                stop_reason = next(
+                    (s.get("reason") for s in reversed(steps) if s.get("action") == "stop"),
+                    "",
+                )
+                if stop_reason:
+                    reason = (reason + "；" if reason else "") + f"PageIndex停层: {stop_reason}"
+                reason = (reason + "；" if reason else "") + f"路径决策: {step_summary}"
+                if raw_name and raw_name != new_node_name:
+                    reason += f"｜类名规范化: {raw_name}→{new_node_name}"
+
+                path_nodes = []
+                for i, node in enumerate(located.get("path_nodes") or []):
+                    path_nodes.append({
+                        "level": i + 1,
+                        "category_id": str(getattr(node, "category_id", "") or ""),
+                        "category_name": getattr(node, "category_name", ""),
+                        "is_new": False,
+                    })
+                # 若父节点因已存在正式类被调整，保证末级真实父在 path 中
+                if not path_nodes or str(path_nodes[-1].get("category_id")) != parent_id:
+                    path_nodes.append({
+                        "level": len(path_nodes) + 1,
+                        "category_id": parent_id,
+                        "category_name": parent_name,
+                        "is_new": False,
+                    })
+                path_nodes.append({
+                    "level": len(path_nodes) + 1,
+                    "category_id": None,
+                    "category_name": new_node_name,
+                    "is_new": True,
+                })
+
+                result = add_entry(
+                    product_name=product_name,
+                    suggested_parent_id=parent_id,
+                    suggested_parent_name=parent_name,
+                    suggested_category_name=new_node_name,
+                    path=path_nodes,
+                    confidence=conf,
+                    llm_reason=reason,
+                    sibling_nodes=[{"category_name": s} for s in siblings[:10]],
+                    source="staging_pageindex",
+                    path_text=path_text,
+                )
+                return {
+                    "product_name": product_name,
+                    "status": result.get("status"),
+                    "entry_id": result.get("entry_id"),
+                    "path_text": path_text,
+                    "category_name": new_node_name,
+                    "parent_id": parent_id,
+                    "parent_name": parent_name,
+                    "confidence": conf,
+                    "method": "pageindex",
+                    "steps": steps,
+                }
+            except Exception as ex:
+                logger.warning(f"新节点建议失败 {product_name}: {ex}\n{traceback.format_exc()}")
+                return {"product_name": product_name, "status": "error", "error": str(ex)}
+
+        prepared = []
+        # PageIndex 逐层 LLM，并发不宜过高
+        with ThreadPoolExecutor(max_workers=min(3, max(len(product_names), 1))) as executor:
+            futures = {executor.submit(_prepare_one, n): n for n in product_names}
+            for fut in as_completed(futures):
+                prepared.append(fut.result())
+
+        prepared.sort(
+            key=lambda x: product_names.index(x["product_name"])
+            if x.get("product_name") in product_names else 0
+        )
+        pool = load_pool()
+        return jsonify({
+            "status": "ok",
+            "method": "pageindex",
+            "total": len(product_names),
+            "prepared": prepared,
+            "pool_total": len(pool.get("entries", [])),
+            "ok_count": sum(1 for p in prepared if p.get("status") in ("ok", "already_exists")),
+            "error_count": sum(1 for p in prepared if p.get("status") == "error"),
+        })
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 
 @app.route("/api/expansion/pool_stats", methods=["GET"])

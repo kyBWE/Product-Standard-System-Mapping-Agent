@@ -1,0 +1,40 @@
+{
+  "source": "test_set_llm_200_refined.json",
+  "note": "三份 30 条小集，产品名互不重合；各约 easy12/medium10/hard8",
+  "files": [
+    {
+      "json": "test_set_llm_30.json",
+      "names": "test_set_llm_30_names.txt",
+      "count": 30,
+      "difficulties": {
+        "easy": 12,
+        "medium": 10,
+        "hard": 8
+      }
+    },
+    {
+      "json": "test_set_llm_30b.json",
+      "names": "test_set_llm_30b_names.txt",
+      "count": 30,
+      "difficulties": {
+        "easy": 12,
+        "medium": 10,
+        "hard": 8
+      }
+    },
+    {
+      "json": "test_set_llm_30c.json",
+      "names": "test_set_llm_30c_names.txt",
+      "count": 30,
+      "difficulties": {
+        "easy": 12,
+        "medium": 10,
+        "hard": 8
+      }
+    }
+  ],
+  "paths": {
+    "jul17": "C:\\Users\\hp\\Desktop\\课设3\\7月17日\\Product-Standard-System-Mapping-Agent",
+    "jul14": "c:\\Users\\hp\\Desktop\\课设3\\7月14日\\Product-Standard-System-Mapping-Agent"
+  }
+}

@@ -32,7 +32,9 @@ match:
   coarse_top_k: 50
   trgm_threshold: 0.1
   syn_confidence_threshold: 0.95
-  syn_trgm_threshold: 0.3
+  # 字面相似度上限：≥此值视为近重复、不做同义词扩展
+  # （原 pg_trgm 对纯中文恒为 0，已改为 chinese_text_similarity）
+  syn_trgm_threshold: 0.65
   expand_confidence_threshold: 0.3
   low_confidence_threshold: 0.5
   enable_llm: true
